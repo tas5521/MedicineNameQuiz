@@ -10,21 +10,23 @@ import SwiftUI
 struct TabSwitchView: View {
     // タブの選択項目を保持する変数
     @State private var selection: SelectedTab = .study
-    // シートの表示を管理する変数
-    @State private var isShowSheet: Bool = false
+    // 初回のユーザー名設定画面の表示を管理する変数
+    @State private var isFirst: Bool = true
     // signInしているかどうかの引数
     @State var isSignIn: Bool = false
     // ユーザー名
     @State var userName: String = ""
     // サインイン画面の表示を管理する変数
     @State var isShowSignInView: Bool = false
+    // ユーザー名設定画面の表示を管理する変数
+    @State var isShowUserNameSetttingView: Bool = false
     // 友達追加画面への遷移を管理する変数
     @State var isShowFriendAdditionView: Bool = false
-
+    
     var body: some View {
         NavigationStack {
             TabView(selection: $selection) {
-                StudyView(isSignIn: $isSignIn, userName: $userName)
+                StudyView(isSignIn: $isSignIn, isFirst: $isFirst, userName: $userName)
                     .tabItem {
                         Label("学習", systemImage: "book.fill")
                     }
@@ -46,7 +48,7 @@ struct TabSwitchView: View {
                         Label("薬リスト", systemImage: "list.bullet.rectangle.portrait.fill")
                     }
                     .tag(SelectedTab.medicineList)
-                OthersView(isSignIn: $isSignIn, userName: $userName)
+                OthersView(isSignIn: $isSignIn, userName: $userName, isFirst: $isFirst)
                     .tabItem {
                         Label("その他", systemImage: "gearshape.fill")
                     }
@@ -60,9 +62,7 @@ struct TabSwitchView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         // 友達追加ボタン
                         Button {
-                            if userName.isEmpty {
-                                isShowSheet.toggle()
-                            } else if !isSignIn {
+                            if !isSignIn {
                                 isShowSignInView.toggle()
                             } else {
                                 isShowFriendAdditionView.toggle()
@@ -74,22 +74,24 @@ struct TabSwitchView: View {
                             } // HStack ここまで
                         } // Button ここまで
                         .foregroundColor(Color.blue)
-                        .sheet(isPresented: $isShowSheet) {
-                            // ユーザー登録画面を表示
-                            RegistrationView(userName: $userName)
-                                .onDisappear {
-                                    if isSignIn == false && !userName.isEmpty {
-                                        isShowSignInView.toggle()
-                                    } // if ここまで
-                                } // onDisappear ここまで
-                        } // sheet ここまで
                         .sheet(isPresented: $isShowSignInView) {
-                            // ユーザー登録画面を表示
-                            SignInView(isSignIn: $isSignIn)
+                            // サインイン画面を表示
+                            SignInView(isSignIn: $isSignIn, userName: $userName)
                                 .onDisappear {
-                                    if isSignIn == true && !userName.isEmpty {
+                                    guard isSignIn else { return }
+                                    if isFirst {
+                                        isShowUserNameSetttingView.toggle()
+                                    } else {
                                         isShowFriendAdditionView.toggle()
-                                    } // if ここまで
+                                    }
+                                }
+                        } // sheet ここまで
+                        .sheet(isPresented: $isShowUserNameSetttingView) {
+                            // ユーザー名設定画面を表示
+                            UserNameSetttingView(userName: $userName, fromAccountView: false)
+                                .onDisappear {
+                                    isFirst = false
+                                    isShowFriendAdditionView.toggle()
                                 } // onDisappear ここまで
                         } // sheet ここまで
                         Spacer()
@@ -97,7 +99,7 @@ struct TabSwitchView: View {
                 } // if ここまで
             } // toolbarここまで
             .navigationDestination(isPresented: $isShowFriendAdditionView) {
-                FriendAdditionView()
+                FriendAdditionView(userName: $userName)
             } // navigationDestination ここまで
         } // NavigationStack ここまで
     } // body ここまで

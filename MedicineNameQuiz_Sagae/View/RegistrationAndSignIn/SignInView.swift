@@ -10,6 +10,8 @@ import SwiftUI
 struct SignInView: View {
     @Environment(\.presentationMode) var presentation
     @Binding var isSignIn: Bool
+    // ユーザー名
+    @Binding var userName: String
     
     var body: some View {
         VStack {
@@ -19,7 +21,10 @@ struct SignInView: View {
             // FirebaseAuthでのログインを実装予定
             Button {
                 isSignIn = true
-                print("サインインしました")
+                if userName == "" {
+                    userName = "sagae"
+                }
+                print("サインインしました: \(userName)")
                 presentation.wrappedValue.dismiss()
             } label: {
                 Text("Sign in with Apple")
@@ -28,7 +33,10 @@ struct SignInView: View {
 
             Button {
                 isSignIn = true
-                print("サインインしました")
+                if userName == "" {
+                    userName = "sagae"
+                }
+                print("サインインしました: \(userName)")
                 presentation.wrappedValue.dismiss()
             } label: {
                 Text("Sign in with Google")
@@ -39,5 +47,5 @@ struct SignInView: View {
 } // SignInView ここまで
 
 #Preview {
-    SignInView(isSignIn: .constant(true))
+    SignInView(isSignIn: .constant(true), userName: .constant(""))
 }

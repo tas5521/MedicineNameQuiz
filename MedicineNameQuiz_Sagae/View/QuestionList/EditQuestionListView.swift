@@ -46,9 +46,10 @@ struct EditQuestionListView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 // 編集ボタン
                 Button {
-                    
+                    // 保存処理
+                    presentation.wrappedValue.dismiss()
                 } label: {
-                    Text("編集")
+                    Text("保存")
                 } // Button ここまで
                 .foregroundColor(Color.white)
             } // 編集ボタン ここまで

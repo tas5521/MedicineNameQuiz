@@ -12,12 +12,13 @@ struct FriendAdditionView: View {
     @State private var isShowAlert: Bool = false
     @State private var isShowSheet: Bool = false
     @State private var userID: String = ""
+    @Binding var userName: String
 
     var body: some View {
         VStack {
             // 垂直方向にレイアウト
             VStack(alignment: .leading) {
-                Text("自分のユーザー名")
+                Text("\(userName)")
                     .font(.title)
                     .bold()
                 Text("ユーザーID: qawsedrftgyhujikolp1234")
@@ -95,5 +96,5 @@ struct FriendAdditionView: View {
 } // FriendAdditionView ここまで
 
 #Preview {
-    FriendAdditionView()
+    FriendAdditionView(userName: .constant("sagae"))
 }

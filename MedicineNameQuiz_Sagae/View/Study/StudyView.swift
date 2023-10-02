@@ -16,8 +16,10 @@ struct StudyView: View {
     } // selectedModeここまで
     // signInしているかどうかの引数
     @Binding var isSignIn: Bool
-    // シートの表示を管理する変数
-    @State private var isShowSheet: Bool = false
+    // 初回のユーザー名設定画面の表示を管理する変数
+    @Binding var isFirst: Bool
+    // ユーザー名設定画面の表示を管理する変数
+    @State var isShowUserNameSetttingView: Bool = false
     // サインイン画面の表示を管理する変数
     @State var isShowSignInView: Bool = false
     // 学習の開始を管理する変数
@@ -37,7 +39,6 @@ struct StudyView: View {
                 Text("モード選択")
                     .bold()
                 switch selectedMode {
-                    
                 case .actual:
                     // 区分選択
                     Text("区分")
@@ -55,9 +56,7 @@ struct StudyView: View {
             Button {
                 switch selectedMode {
                 case .actual:
-                    if userName.isEmpty {
-                        isShowSheet.toggle()
-                    } else if !isSignIn {
+                    if !isSignIn {
                         isShowSignInView.toggle()
                     } else {
                         isStartStudy.toggle()
@@ -68,18 +67,21 @@ struct StudyView: View {
             } label: {
                 Text("スタート")
             } // Button ここまで
-            .sheet(isPresented: $isShowSheet) {
-                // ユーザー登録画面を表示
-                RegistrationView(userName: $userName)
+            .sheet(isPresented: $isShowSignInView) {
+                // サインイン画面を表示
+                SignInView(isSignIn: $isSignIn, userName: $userName)
                     .onDisappear {
-                        if isSignIn == false && !userName.isEmpty {
-                            isShowSignInView.toggle()
+                        if isSignIn && isFirst {
+                            isShowUserNameSetttingView.toggle()
                         }
                     }
             } // sheet ここまで
-            .sheet(isPresented: $isShowSignInView) {
-                // ユーザー登録画面を表示
-                SignInView(isSignIn: $isSignIn)
+            .sheet(isPresented: $isShowUserNameSetttingView) {
+                // ユーザー名設定画面を表示
+                UserNameSetttingView(userName: $userName, fromAccountView: false)
+                    .onDisappear {
+                        isFirst = false
+                    }
             } // sheet ここまで
             Spacer()
         } // VStack ここまで
@@ -90,5 +92,5 @@ struct StudyView: View {
 } // StudyView ここまで
 
 #Preview {
-    StudyView(isSignIn: .constant(true), userName: .constant("sagae"))
+    StudyView(isSignIn: .constant(false), isFirst: .constant(true), userName: .constant(""))
 }

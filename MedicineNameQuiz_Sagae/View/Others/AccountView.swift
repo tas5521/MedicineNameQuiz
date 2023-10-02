@@ -13,12 +13,16 @@ struct AccountView: View {
     @State private var isShowAlert = false
     @State private var isShowAlertAlreadySignedInMessage = false
     @State private var isShowAlertAlreadySignedOutMessage = false
-    @State private var isShowAlertWithTextField = false
+    @State private var isShowUserNameSettingView = false
     @State var isShowSignInView: Bool = false
+    @State var isShowUserNameSetttingView: Bool = false
+    
     // signInしているかどうかの引数
     @Binding var isSignIn: Bool
     // ユーザー名
     @Binding var userName: String
+    // 初回のユーザー名設定画面の表示を管理する変数
+    @Binding var isFirst: Bool
 
     var body: some View {
         VStack {
@@ -27,20 +31,38 @@ struct AccountView: View {
                 .bold()
                 .padding()
             Button {
-                if userName.isEmpty {
-                    isShowSheet.toggle()
-                } else if !isSignIn {
-                    isShowSignInView.toggle()
-                } else {
+                if isSignIn {
                     isShowAlertAlreadySignedInMessage.toggle()
+                } else {
+                    isShowSignInView.toggle()
                 } // if ここまで
             } label: {
                 Text("サインイン")
                     .padding()
             }
+            
+            .sheet(isPresented: $isShowSignInView) {
+                // サインイン画面を表示
+                SignInView(isSignIn: $isSignIn, userName: $userName)
+                    .onDisappear {
+                        if isSignIn && isFirst == true {
+                            isShowUserNameSetttingView.toggle()
+                        }
+                    }
+            } // sheet ここまで
+            .sheet(isPresented: $isShowUserNameSetttingView) {
+                // ユーザー名設定画面を表示
+                UserNameSetttingView(userName: $userName, fromAccountView: false)
+                    .onDisappear {
+                        isFirst = false
+                    } // onDisappear ここまで
+            } // sheet ここまで
+            
+            
+            
             .sheet(isPresented: $isShowSheet) {
                 // ユーザー登録画面を表示
-                RegistrationView(userName: $userName)
+                UserNameSetttingView(userName: $userName, fromAccountView: false)
                     .onDisappear {
                         if isSignIn == false && !userName.isEmpty {
                             isShowSignInView.toggle()
@@ -49,7 +71,7 @@ struct AccountView: View {
             } // sheet ここまで
             .sheet(isPresented: $isShowSignInView) {
                 // ユーザー登録画面を表示
-                SignInView(isSignIn: $isSignIn)
+                SignInView(isSignIn: $isSignIn, userName: $userName)
             } // sheet ここまで
             .alert("サインイン済み", isPresented: $isShowAlertAlreadySignedInMessage) {
                 Button {
@@ -85,26 +107,18 @@ struct AccountView: View {
             } // alert ここまで
 
             Button {
-                isShowAlertWithTextField.toggle()
+                if !isSignIn {
+                    isShowSignInView.toggle()
+                } else {
+                    isShowUserNameSettingView.toggle()
+                } // if ここまで
             } label: {
                 Text("ユーザー名を設定")
                     .padding()
             }
-            .alert("ユーザー名の設定", isPresented: $isShowAlertWithTextField) {
-                TextField("ユーザー名", text: $userName)
-                Button {
-                    // ユーザー名設定処理
-                } label: {
-                    Text("決定")
-                }
-                Button(role: .cancel) {
-                    // 何もしない
-                } label: {
-                    Text("やめる")
-                }
-            } message: {
-                Text("ユーザー名を入力してください")
-            } // alert ここまで
+            .sheet(isPresented: $isShowUserNameSettingView) {
+                UserNameSetttingView(userName: $userName, fromAccountView: true)
+            } // sheet ここまで
             
             Spacer()
             
@@ -148,5 +162,5 @@ struct AccountView: View {
 } // AccountView
 
 #Preview {
-    AccountView(isSignIn: .constant(true), userName: .constant("sagae"))
+    AccountView(isSignIn: .constant(true), userName: .constant("sagae"), isFirst: .constant(false))
 }

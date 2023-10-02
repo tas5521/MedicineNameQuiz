@@ -20,7 +20,7 @@
 		4A9671752AC825E4006F7157 /* StudyingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671742AC825E4006F7157 /* StudyingView.swift */; };
 		4A9671772AC82CBC006F7157 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671762AC82CBC006F7157 /* ResultView.swift */; };
 		4A9671792AC8578E006F7157 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671782AC8578E006F7157 /* SignInView.swift */; };
-		4A96717B2AC85A35006F7157 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96717A2AC85A35006F7157 /* RegistrationView.swift */; };
+		4A96717B2AC85A35006F7157 /* UserNameSettting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96717A2AC85A35006F7157 /* UserNameSettting.swift */; };
 		4A96717E2AC87E55006F7157 /* QuestionListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96717D2AC87E55006F7157 /* QuestionListItem.swift */; };
 		4A9671802AC886B9006F7157 /* QuestionListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96717F2AC886B9006F7157 /* QuestionListRowView.swift */; };
 		4A9671822AC888B7006F7157 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671812AC888B7006F7157 /* Question.swift */; };
@@ -61,7 +61,7 @@
 		4A9671742AC825E4006F7157 /* StudyingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyingView.swift; sourceTree = "<group>"; };
 		4A9671762AC82CBC006F7157 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		4A9671782AC8578E006F7157 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
-		4A96717A2AC85A35006F7157 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		4A96717A2AC85A35006F7157 /* UserNameSettting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameSettting.swift; sourceTree = "<group>"; };
 		4A96717D2AC87E55006F7157 /* QuestionListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListItem.swift; sourceTree = "<group>"; };
 		4A96717F2AC886B9006F7157 /* QuestionListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListRowView.swift; sourceTree = "<group>"; };
 		4A9671812AC888B7006F7157 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
@@ -189,8 +189,8 @@
 		4AA0882D2AC93674005BD8C2 /* RegistrationAndSignIn */ = {
 			isa = PBXGroup;
 			children = (
-				4A96717A2AC85A35006F7157 /* RegistrationView.swift */,
 				4A9671782AC8578E006F7157 /* SignInView.swift */,
+				4A96717A2AC85A35006F7157 /* UserNameSettting.swift */,
 			);
 			path = RegistrationAndSignIn;
 			sourceTree = "<group>";
@@ -324,7 +324,7 @@
 				4AA0883A2AC97DCC005BD8C2 /* ReferenceView.swift in Sources */,
 				4AADB2CD2AC5588300C5A40E /* MedicineNameQuiz_SagaeApp.swift in Sources */,
 				4AA088462AC9886D005BD8C2 /* HowToUseQuestionListView.swift in Sources */,
-				4A96717B2AC85A35006F7157 /* RegistrationView.swift in Sources */,
+				4A96717B2AC85A35006F7157 /* UserNameSettting.swift in Sources */,
 				4AA088442AC98855005BD8C2 /* HowToUseStudyView.swift in Sources */,
 				4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */,
 				4AA088482AC98887005BD8C2 /* HowToUseRankingView.swift in Sources */,

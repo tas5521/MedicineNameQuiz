@@ -13,6 +13,8 @@ struct OthersView: View {
     @Binding var isSignIn: Bool
     // ユーザー名
     @Binding var userName: String
+    // 初回のユーザー名設定画面の表示を管理する変数
+    @Binding var isFirst: Bool
     
     var body: some View {
         List {
@@ -26,7 +28,7 @@ struct OthersView: View {
                     case .advertisement:
                         AdvertisementView()
                     case .account:
-                        AccountView(isSignIn: $isSignIn, userName: $userName)
+                        AccountView(isSignIn: $isSignIn, userName: $userName, isFirst: $isFirst)
                     }
                 } label: {
                     Text(item.rawValue)
@@ -37,5 +39,5 @@ struct OthersView: View {
 } // OthersView ここまで
 
 #Preview {
-    OthersView(isSignIn: .constant(true), userName: .constant("sagae"))
+    OthersView(isSignIn: .constant(true), userName: .constant("sagae"), isFirst: .constant(false))
 }
