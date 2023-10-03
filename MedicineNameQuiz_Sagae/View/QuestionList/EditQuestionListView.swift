@@ -8,53 +8,60 @@
 import SwiftUI
 
 struct EditQuestionListView: View {
-    @Environment(\.presentationMode) var presentation
+    // 画面を閉じるために用いる環境変数
+    @Environment(\.dismiss) private var dismiss
     // タブの選択項目を保持する変数
     @State private var selectedTab: Int = 0
 
     var body: some View {
+        // 垂直右方向にレイアウト
         VStack {
-            TopTabView(tabNameList: SelectedClassification.classificationList, selectedTab: $selectedTab)
-            Text("リスト名編集用テキストフィールド")
-            Text("検索バー")
+            // タブを上に配置
+            topTabView
+            // リスト名編集用テキストフィールド
+            textFieldToEditNameOfList
+            // 薬を検索するためのテキストフィールド
+            textFieldToSearchMedicine
             Spacer()
-            Text("薬リスト")
+            // 薬リスト
+            medicineList
             Spacer()
         } // VStack ここまで
-        // ナビゲーションバーにタイトルを表示
+        // ナビゲーションバータイトルを指定
         .navigationBarTitle("問題リスト", displayMode: .inline)
-        // デフォルトの戻るボタンを隠す
-        .navigationBarBackButtonHidden(true)
-        // ツールバー設定
-        .toolbar {
-            // カスタムの戻るボタンを左に配置
-            ToolbarItem(placement: .navigationBarLeading) {
-                // 戻るボタン
-                Button {
-                    // 前の画面に戻る
-                    presentation.wrappedValue.dismiss()
-                } label: {
-                    // 水平方向に配置
-                    HStack {
-                        Image(systemName: "chevron.left")
-                        Text("戻る")
-                    } // HStack ここまで
-                } // Button ここまで
-                .foregroundColor(Color.white)
-            } // 戻るボタン ここまで
-            // 編集画面に遷移するボタンを右に配置
-            ToolbarItem(placement: .navigationBarTrailing) {
-                // 編集ボタン
-                Button {
-                    // 保存処理
-                    presentation.wrappedValue.dismiss()
-                } label: {
-                    Text("保存")
-                } // Button ここまで
-                .foregroundColor(Color.white)
-            } // 編集ボタン ここまで
-        } // toolbar ここまで
+        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
+        .placeCustomBackButton {
+            // 戻るボタンの処理
+            // 画面を閉じる
+            dismiss()
+        } // placeCustomBackButton ここまで
+        // ナビゲーションバーの右側にカスタムの保存ボタンを配置
+        .placeCustomButtonTrailing(label: "保存") {
+            // 保存処理
+            // 画面を閉じる
+            dismiss()
+        } // placeCustomNavigationLinkTrailing ここまで
     } // body ここまで
+    
+    // 上部につけるタブ
+    private var topTabView: some View {
+        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTab: $selectedTab)
+    } // topTabView ここまで
+    
+    // リスト名編集用テキストフィールド
+    private var textFieldToEditNameOfList: some View {
+        Text("リスト名編集用テキストフィールド")
+    } // textFieldToEdit ここまで
+    
+    // 薬を検索するためのテキストフィールド
+    private var textFieldToSearchMedicine: some View {
+        Text("薬の検索バー")
+    } // textFieldToSearchMedicine ここまで
+
+    // 薬のリスト
+    private var medicineList: some View {
+        Text("薬リスト")
+    } // medicineList ここまで
 } // EditQuestionListViewここまで
 
 #Preview {

@@ -8,36 +8,47 @@
 import SwiftUI
 
 struct OthersView: View {
+    // その他のタブで扱う項目のリスト
     private let othersList: [Others] = [.howToUse, .reference, .advertisement, .account]
-    // signInしているかどうかの引数
+    // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
-    // ユーザー名
+    // ユーザー名を管理する変数
     @Binding var userName: String
     // 初回のユーザー名設定画面の表示を管理する変数
-    @Binding var isFirst: Bool
+    @Binding var isFirstUserNameSetting: Bool
     
     var body: some View {
+        // 項目をリスト表示
         List {
             ForEach(othersList, id: \.self) { item in
+                // 各項目ごとのタイトルを取得
+                let title = item.rawValue
+                // 項目ごとに異なる画面に遷移
                 NavigationLink {
                     switch item {
                     case .howToUse:
-                        HowToUseView()
+                        // アプリの使い方画面
+                        HowToUseView(title: title)
                     case .reference:
-                        ReferenceView()
+                        // 医薬品名の引用元画面
+                        ReferenceView(title: title)
                     case .advertisement:
-                        AdvertisementView()
+                        // 広告の表示について画面
+                        AdvertisementView(title: title)
                     case .account:
-                        AccountView(isSignIn: $isSignIn, userName: $userName, isFirst: $isFirst)
-                    }
+                        // アカウント画面
+                        AccountView(isSignIn: $isSignIn, userName: $userName, isFirstUserNameSetting: $isFirstUserNameSetting, title: title)
+                    } // switch ここまで
                 } label: {
-                    Text(item.rawValue)
+                    // 項目ごとに異なるテキストを表示
+                    Text(title)
                 } // NavigationLink ここまで
-            } // ForEach ここまで
+            }
+ // ForEach ここまで
         } // List ここまで
     } // body ここまで
 } // OthersView ここまで
 
 #Preview {
-    OthersView(isSignIn: .constant(true), userName: .constant("sagae"), isFirst: .constant(false))
+    OthersView(isSignIn: .constant(true), userName: .constant("sagae"), isFirstUserNameSetting: .constant(false))
 }

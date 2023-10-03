@@ -13,7 +13,7 @@ enum SelectedClassification: String {
     case externalMedicine
     case customMedicine
     
-    // 区分リスト
+    // 薬の区分のリスト
     static var classificationList: [String] {
         ["内用薬", "注射薬", "外用薬", "カスタム"]
     } // classificationList ここまで

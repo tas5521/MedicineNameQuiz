@@ -8,29 +8,24 @@
 import SwiftUI
 
 struct HowToUseMedicineListView: View {
-    @Environment(\.presentationMode) var presentation
+    // 画面を閉じるために用いる環境変数
+    @Environment(\.dismiss) private var dismiss
+    // タイトル
+    let title: String
 
     var body: some View {
         Text("HowToUseMedicineListView")
-            .navigationBarTitle("アプリの使い方 -薬リスト-", displayMode: .inline)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        presentation.wrappedValue.dismiss()
-                    } label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                            Text("戻る")
-                        }
-                    }
-                    .foregroundColor(Color.blue)
-                }
-            }
-
-    }
-}
+        // ナビゲーションバータイトルを指定
+        .navigationBarTitle(title, displayMode: .inline)
+        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
+        .placeCustomBackButton {
+            // 戻るボタンの処理
+            // 画面を閉じる
+            dismiss()
+        } // placeCustomBackButton ここまで
+    } // bodyここまで
+} // HowToUseMedicineListView ここまで
 
 #Preview {
-    HowToUseMedicineListView()
+    HowToUseMedicineListView(title: "アプリの使い方-薬リスト-")
 }

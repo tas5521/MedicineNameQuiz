@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct QuestionListView: View {
-    var dummyList: [QuestionListItem] = [
+    // ダミーのリスト
+    private var dummyList: [QuestionListItem] = [
         QuestionListItem(listName: "さがえ薬局リスト",
                          date: Date(),
                          questions: [Question(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
@@ -27,51 +28,89 @@ struct QuestionListView: View {
                                      Question(originalName: "ウリトス", genericName: "イミダフェナシン"),
                                      Question(originalName: "ケフラール", genericName: "セファクロル")]
                         )
-    ]
+    ] // dummyList ここまで
     
     var body: some View {
+        // 奥から手前方向にレイアウト
         ZStack {
+            // 垂直方向にレイアウト
             VStack {
-                Text("問題リスト検索")
-                List {
-                    ForEach(dummyList) { item in
-                        NavigationLink {
-                            QuestionListRowView(listName: item.listName, questions: item.questions)
-                        } label: {
-                            VStack(alignment: .leading) {
-                                Text(item.listName)
-                                HStack {
-                                    Text("\(item.date.formatted(date: .long, time: .omitted))")
-                                    Spacer()
-                                    Text("問題数: \(item.questions.count)")
-                                } // HStack ここまで
-                            } // VStack ここまで
-                            .bold()
-                        } // NavigationLink ここまで
-                    } // ForEach ここまで
-                } // List ここまで
-                .listStyle(.grouped)
+                // 問題リストの検索バー
+                textFieldTosearchQuestionList
+                // 問題リスト
+                questionList
             } // VStack ここまで
+            // 垂直方向にレイアウト
             VStack {
+                // スペースを空ける
                 Spacer()
+                // 水平方向にレイアウト
                 HStack {
+                    // スペースを空ける
                     Spacer()
-                    NavigationLink {
-                        CreateQuestionListView()
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 65, height: 65)
-                            .foregroundStyle(Color.customOrange)
-                            .background(Color.white)
-                            .clipShape(Circle())
-                    } // Button ここまで
-                    .padding()
+                    // リスト追加ボタン
+                    buttonToAddList
+                        .padding()
                 } // HStack ここまで
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
+    
+    private var textFieldTosearchQuestionList: some View {
+        Text("問題リスト検索バー")
+    } // questionListSearchBar
+
+    private var questionList: some View {
+        List {
+            ForEach(dummyList) { item in
+                // 各行に対応した画面へ遷移
+                NavigationLink {
+                    QuestionListRowView(listName: item.listName, questions: item.questions)
+                } label: {
+                    // 垂直方向にレイアウト
+                    VStack(alignment: .leading) {
+                        // リストの名前
+                        Text(item.listName)
+                        // 水平方向にレイアウト
+                        HStack {
+                            // リスト作成日時
+                            Text("\(item.date.formatted(date: .long, time: .omitted))")
+                            // スペースを空ける
+                            Spacer()
+                            // 問題数を表示
+                            Text("問題数: \(item.questions.count)")
+                        } // HStack ここまで
+                    } // VStack ここまで
+                    // 太字にする
+                    .bold()
+                } // NavigationLink ここまで
+            } // ForEach ここまで
+        } // List ここまで
+        // リストのスタイルを.groupedに変更
+        .listStyle(.grouped)
+    } // questionList ここまで
+
+    // リスト追加ボタン
+    private var buttonToAddList: some View {
+        NavigationLink {
+            // 問題リスト作成画面へ遷移
+            CreateQuestionListView()
+        } label: {
+            Image(systemName: "plus.circle.fill")
+            // リサイズする
+                .resizable()
+            // アスペクト比を保ったまま枠いっぱいに表示
+                .scaledToFit()
+            // 幅高さ65に指定
+                .frame(width: 65, height: 65)
+            // 色をカスタムのボタンの色に指定
+                .foregroundStyle(Color.customButtonColor)
+            // 背景を白に指定
+                .background(Color.white)
+            // 丸くクリッピング
+                .clipShape(Circle())
+        } // Button ここまで
+    } // buttonToAddList ここまで
 } // QuestionListView ここまで
 
 #Preview {

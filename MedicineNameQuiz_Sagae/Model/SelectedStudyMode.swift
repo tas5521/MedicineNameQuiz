@@ -12,9 +12,9 @@ enum SelectedStudyMode {
     // 出題モードリスト
     static var modeList: [String] {
         ["本番", "練習"]
-    }
+    } // modeList ここまで
     
-    static func dicideMode(by selectedTab: Int) -> SelectedStudyMode {
+    static func dicideStudyMode(by selectedTab: Int) -> SelectedStudyMode {
         if selectedTab == 0 {
             return SelectedStudyMode.actual
         } else {

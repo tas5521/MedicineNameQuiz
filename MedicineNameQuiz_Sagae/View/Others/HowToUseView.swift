@@ -8,46 +8,50 @@
 import SwiftUI
 
 struct HowToUseView: View {
-    @Environment(\.presentationMode) var presentation
+    // 画面を閉じるために用いる環境変数
+    @Environment(\.dismiss) private var dismiss
+    // 項目のタイトル
+    let title: String
+    // 遷移先の種類
     private let tabList: [HowToUse] = [.study, .questionList, .ranking, .medicineList]
     
     var body: some View {
+        // リスト表示
         List {
             ForEach(tabList, id: \.self) { item in
+                // 各項目ごとのタイトル（サブ）を取得
+                let subtitle = item.rawValue
+                // 遷移先のビューに渡すタイトルを作成
+                let titleWithSubtitle = "\(title)-\(subtitle)-"
+                // 画面遷移
                 NavigationLink {
                     switch item {
                     case .study:
-                        HowToUseStudyView()
+                        HowToUseStudyView(title: titleWithSubtitle)
                     case .questionList:
-                        HowToUseQuestionListView()
+                        HowToUseQuestionListView(title: titleWithSubtitle)
                     case .ranking:
-                        HowToUseRankingView()
+                        HowToUseRankingView(title: titleWithSubtitle)
                     case .medicineList:
-                        HowToUseMedicineListView()
+                        HowToUseMedicineListView(title: titleWithSubtitle)
                     } // switch ここまで
                 } label: {
-                    Text(item.rawValue)
+                    // 項目ごとに異なるテキストを表示
+                    Text(subtitle)
                 } // NavigationLink ここまで
             } // ForEach ここまで
         } // List ここまで
-        .navigationBarTitle("アプリの使い方", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    presentation.wrappedValue.dismiss()
-                } label: {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                        Text("戻る")
-                    }
-                }
-                .foregroundColor(Color.blue)
-            }
-        }
+        // ナビゲーションバータイトルを指定
+        .navigationBarTitle(title, displayMode: .inline)
+        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
+        .placeCustomBackButton {
+            // 戻るボタンの処理
+            // 画面を閉じる
+            dismiss()
+        } // placeCustomBackButton ここまで
     } // body ここまで
 } // HowToUseView ここまで
 
 #Preview {
-    HowToUseView()
+    HowToUseView(title: "アプリの使い方")
 }

@@ -8,66 +8,83 @@
 import SwiftUI
 
 struct QuestionListRowView: View {
-    @Environment(\.presentationMode) var presentation
+    // 画面を閉じるために用いる環境変数
+    @Environment(\.dismiss) private var dismiss
+    // リストの名前を保持する変数
     let listName: String
+    // 問題を保持する変数
     let questions: [Question]
     
     var body: some View {
+        // 垂直方向にレイアウト
         VStack {
-            Text(listName)
-                .bold()
-            Text("検索バー")
-            VStack(alignment: .leading) {
-                Text("総問題数: \(questions.count)")
-                    .bold()
-                    .padding(.leading)
-                List {
-                    ForEach(questions) { question in
-                        VStack(alignment: .leading) {
-                            Text(question.originalName)
-                                .foregroundStyle(Color.blue)
-                            Text(question.genericName)
-                                .foregroundStyle(Color.red)
-                        } // VStack ここまで
-                        .bold()
-                    } // ForEach ここまで
-                } // List ここまで
-                .listStyle(.grouped)
-            } // VStack ここまで
+            // リストの名前
+            nameOfList
+            // 薬の名前の検索バー
+            textFieldToSearchNameOfMedicine
+            // 出題される薬の名前のリスト
+            ListOfMedicineNameAsked
         } // VStack ここまで
-        // ナビゲーションバーにタイトルを表示
+        // ナビゲーションバータイトルを指定
         .navigationBarTitle("問題リスト", displayMode: .inline)
-        // デフォルトの戻るボタンを隠す
-        .navigationBarBackButtonHidden(true)
-        // ツールバー設定
-        .toolbar {
-            // カスタムの戻るボタンを左に配置
-            ToolbarItem(placement: .navigationBarLeading) {
-                // 戻るボタン
-                Button {
-                    // 前の画面に戻る
-                    presentation.wrappedValue.dismiss()
-                } label: {
-                    // 水平方向に配置
-                    HStack {
-                        Image(systemName: "chevron.left")
-                        Text("戻る")
-                    } // HStack ここまで
-                } // Button ここまで
-                .foregroundColor(Color.blue)
-            } // 戻るボタン ここまで
-            // 編集画面に遷移するボタンを右に配置
-            ToolbarItem(placement: .navigationBarTrailing) {
-                // 編集ボタン
-                NavigationLink {
-                    EditQuestionListView()
-                } label: {
-                    Text("編集")
-                } // Button ここまで
-                .foregroundColor(Color.blue)
-            } // 編集ボタン ここまで
-        } // toolbar ここまで
+        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
+        .placeCustomBackButton {
+            // 戻るボタンの処理
+            // 画面を閉じる
+            dismiss()
+        } // placeCustomBackButton ここまで
+        // ナビゲーションバーの右側にカスタムの編集ボタンを配置
+        .placeCustomNavigationLinkTrailing(label: "編集") {
+            // 編集画面へ遷移
+            EditQuestionListView()
+        } // placeCustomNavigationLinkTrailing ここまで
     } // body ここまで
+    
+    // リストの名前
+    private var nameOfList: some View {
+        // リストの名前を表示
+        Text(listName)
+        // 太字にする
+            .bold()
+    } // nameOfList ここまで
+    
+    // 薬の名前の検索バー
+    private var textFieldToSearchNameOfMedicine: some View {
+        // 薬の名前を検索するバー
+        Text("検索バー")
+    } // nameOfList ここまで
+    
+    // 出題される薬の名前のリスト
+    private var ListOfMedicineNameAsked: some View {
+        VStack(alignment: .leading) {
+            // そう問題数を表示
+            Text("総問題数: \(questions.count)")
+            // 太字にする
+                .bold()
+            // 左に余白を追加
+                .padding(.leading)
+            // リスト表示
+            List {
+                ForEach(questions) { question in
+                    // 垂直方向にレイアウト
+                    VStack(alignment: .leading) {
+                        // 先発品名を表示
+                        Text(question.originalName)
+                        // 文字の色を青に変更
+                            .foregroundStyle(Color.blue)
+                        // 一般名を表示
+                        Text(question.genericName)
+                        // 文字の色を赤に変更
+                            .foregroundStyle(Color.red)
+                    } // VStack ここまで
+                    // 太字にする
+                    .bold()
+                } // ForEach ここまで
+            } // List ここまで
+            // リストのスタイルを.groupedに変更
+            .listStyle(.grouped)
+        } // VStack ここまで
+    } // ListOfMedicineNameAsked ここまで
 } // QuestionListRowView ここまで
 
 #Preview {

@@ -10,87 +10,133 @@ import SwiftUI
 struct StudyView: View {
     // タブの選択項目を保持する変数
     @State private var selectedTab: Int = 0
-    // 選択されているモードを保持する変数
-    private var selectedMode: SelectedStudyMode {
-        SelectedStudyMode.dicideMode(by: selectedTab)
+    // 選択されている学習モードを保持する変数
+    private var selectedStudyMode: SelectedStudyMode {
+        SelectedStudyMode.dicideStudyMode(by: selectedTab)
     } // selectedModeここまで
-    // signInしているかどうかの引数
+    // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
     // 初回のユーザー名設定画面の表示を管理する変数
-    @Binding var isFirst: Bool
+    @Binding var isFirstUserNameSetting: Bool
     // ユーザー名設定画面の表示を管理する変数
     @State var isShowUserNameSetttingView: Bool = false
     // サインイン画面の表示を管理する変数
     @State var isShowSignInView: Bool = false
     // 学習の開始を管理する変数
     @State private var isStartStudy: Bool = false
-    // ユーザー名
+    // ユーザー名を管理する変数
     @Binding var userName: String
     
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
             // タブを上に配置
-            TopTabView(tabNameList: SelectedStudyMode.modeList, selectedTab: $selectedTab)
+            topTabView
             Spacer()
-            // 垂直方向にレイアウト
-            VStack(alignment: .leading) {
-                // モード選択
-                Text("モード選択")
-                    .bold()
-                switch selectedMode {
-                case .actual:
-                    // 区分選択
-                    Text("区分")
-                        .bold()
-                case .practice:
-                    Text("制限時間")
-                        .bold()
-                    Text("記録の表示")
-                        .bold()
-                    Text("問題リスト選択")
-                        .bold()
-                } // switch ここまで
-            } // VStack ここまで
-            // スタートボタン
-            Button {
-                switch selectedMode {
-                case .actual:
-                    if !isSignIn {
-                        isShowSignInView.toggle()
-                    } else {
-                        isStartStudy.toggle()
-                    }
-                case .practice:
-                    isStartStudy.toggle()
-                } // switch ここまで
-            } label: {
-                Text("スタート")
-            } // Button ここまで
-            .sheet(isPresented: $isShowSignInView) {
-                // サインイン画面を表示
-                SignInView(isSignIn: $isSignIn, userName: $userName)
-                    .onDisappear {
-                        if isSignIn && isFirst {
-                            isShowUserNameSetttingView.toggle()
-                        }
-                    }
-            } // sheet ここまで
-            .sheet(isPresented: $isShowUserNameSetttingView) {
-                // ユーザー名設定画面を表示
-                UserNameSetttingView(userName: $userName, fromAccountView: false)
-                    .onDisappear {
-                        isFirst = false
-                    }
-            } // sheet ここまで
+            // 選択された学習モードにより画面を分けて表示
+            switch selectedStudyMode {
+                // 本番モードの場合
+            case .actual:
+                // 本番モードのViewを配置
+                actualView
+                // 練習モードの場合
+            case .practice:
+                // 練習モードのViewを配置
+                practiceView
+            } // switch ここまで
+            Spacer()
+            // スタートボタンを配置
+            startButton
             Spacer()
         } // VStack ここまで
+        // 学習中の画面へ遷移
         .navigationDestination(isPresented: $isStartStudy) {
-            StudyingView(isStartStudy: $isStartStudy)
-        }
+            StudyingView(isStartStudy: $isStartStudy, selectedStudyMode: selectedStudyMode)
+        } // navigationDestination ここまで
     } // body ここまで
+    
+    // 上部につけるタブ
+    private var topTabView: some View {
+        TopTabView(tabNameList: SelectedStudyMode.modeList, selectedTab: $selectedTab)
+    } // topTabView ここまで
+
+    
+    // 本番モードの画面
+    private var actualView: some View {
+        // 垂直方向にレイアウト
+        VStack(alignment: .leading) {
+            Text("モード選択")
+            // 太字にする
+                .bold()
+            Text("区分")
+            // 太字にする
+                .bold()
+        } // VStack ここまで
+    } // actualView ここまで
+    
+    // 　練習モードの画面
+    private var practiceView: some View {
+        // 垂直方向にレイアウト
+        VStack(alignment: .leading) {
+            Text("制限時間")
+            // 太字にする
+                .bold()
+            Text("記録の表示")
+            // 太字にする
+                .bold()
+            Text("問題リスト選択")
+            // 太字にする
+                .bold()
+        } // VStack ここまで
+    } // practiceView ここまで
+    
+    // スタートボタン
+    private var startButton: some View {
+        Button {
+            // 選択された学習モードにより異なる処理をする
+            switch selectedStudyMode {
+                // 本番モードの場合
+            case .actual:
+                //
+                if !isSignIn {
+                    isShowSignInView.toggle()
+                } else {
+                    isStartStudy.toggle()
+                }
+            case .practice:
+                isStartStudy.toggle()
+            } // switch ここまで
+        } label: {
+            Text("スタート")
+        } // Button ここまで
+        // サインイン画面のシート
+        .sheet(isPresented: $isShowSignInView) {
+            // サインイン画面を表示
+            SignInView(isSignIn: $isSignIn, userName: $userName)
+            // サインイン画面が閉じた時、実行
+                .onDisappear {
+                    // サインインしていているかチェック。サインインしていなかったら、何もしない
+                    guard isSignIn else { return }
+                    // 初回のユーザー名設定の場合
+                    if isFirstUserNameSetting {
+                        // ユーザー名設定画面を表示
+                        isShowUserNameSetttingView.toggle()
+                    } // if ここまで
+                } // onDisappear ここまで
+        } // sheet ここまで
+        // ユーザー名設定画面のシート
+        .sheet(isPresented: $isShowUserNameSetttingView) {
+            // ユーザー名設定画面を表示
+            UserNameSetttingView(userName: $userName, fromAccountView: false)
+            // ユーザー名設定画面が閉じた時、実行
+                .onDisappear {
+                    // 初回のユーザー名設定画面の表示を管理する変数をfalseにする
+                    isFirstUserNameSetting = false
+                } // onDisappear ここまで
+        } // sheet ここまで
+    } // startButton ここまで
 } // StudyView ここまで
 
 #Preview {
-    StudyView(isSignIn: .constant(false), isFirst: .constant(true), userName: .constant(""))
+    StudyView(isSignIn: .constant(false), isFirstUserNameSetting: .constant(true), userName: .constant(""))
 }

@@ -8,28 +8,24 @@
 import SwiftUI
 
 struct AdvertisementView: View {
-    @Environment(\.presentationMode) var presentation
-    
+    // 画面を閉じるために用いる環境変数
+    @Environment(\.dismiss) private var dismiss
+    // 項目のタイトル
+    let title: String
+
     var body: some View {
         Text("Advertisement")
-            .navigationBarTitle("広告の表示について", displayMode: .inline)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        presentation.wrappedValue.dismiss()
-                    } label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                            Text("戻る")
-                        }
-                    }
-                    .foregroundColor(Color.blue)
-                }
-            } // toolbar ここまで
+        // ナビゲーションバータイトルを指定
+        .navigationBarTitle(title, displayMode: .inline)
+        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
+        .placeCustomBackButton {
+            // 戻るボタンの処理
+            // 画面を閉じる
+            dismiss()
+        } // placeCustomBackButton ここまで
     } // body ここまで
-} // AdvertisementView
+} // AdvertisementView ここまで
 
 #Preview {
-    AdvertisementView()
+    AdvertisementView(title: "広告の表示について")
 }
