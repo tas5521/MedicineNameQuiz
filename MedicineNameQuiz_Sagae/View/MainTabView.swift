@@ -96,7 +96,7 @@ struct MainTabView: View {
     // その他画面
     private var othersView: some View {
         OthersView(userName: $userName, isSignIn: $isSignIn,
-                   isFirstUserNameSetting: $isFirstTimeUserNameSetting)
+                   isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
             .tabItem {
                 Label("その他", systemImage: "gearshape.fill")
             } // tabItem ここまで

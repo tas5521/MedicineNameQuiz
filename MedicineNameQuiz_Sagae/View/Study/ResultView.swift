@@ -17,7 +17,6 @@ struct ResultView: View {
     // 警告の表示を管理する変数
     @State private var isShowAlert = false
 
-
     var body: some View {
         // 垂直方向にレイアウト
         VStack {

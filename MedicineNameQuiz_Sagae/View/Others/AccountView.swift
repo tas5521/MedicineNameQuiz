@@ -15,7 +15,7 @@ struct AccountView: View {
     // ユーザー名を管理する変数
     @Binding var userName: String
     // 初回のユーザー名設定画面の表示を管理する変数
-    @Binding var isFirstUserNameSetting: Bool
+    @Binding var isFirstTimeUserNameSetting: Bool
     // ユーザー名設定ボタンが押されたかを管理する変数
     @State private var isTappedButtonToSetUserName: Bool = false
     // シートの表示を管理する変数
@@ -70,7 +70,7 @@ struct AccountView: View {
                     // サインインしているかチェック。サインインしていなければ、何もしない。
                     guard isSignIn else { return }
                     // ユーザー名設定を行なっていない場合、もしくは、ユーザー名を設定ボタンが押されていた場合
-                    if isFirstUserNameSetting || isTappedButtonToSetUserName {
+                    if isFirstTimeUserNameSetting || isTappedButtonToSetUserName {
                         // ユーザー名設定画面を表示
                         isShowUserNameSettingView.toggle()
                         // ユーザー名設定ボタンが押されたかを管理する変数をfalseにする
@@ -85,7 +85,7 @@ struct AccountView: View {
             // ユーザー名設定画面が消えた時に実行
                 .onDisappear {
                     // 初回のユーザー名設定画面の表示を管理する変数をfalseに指定
-                    isFirstUserNameSetting = false
+                    isFirstTimeUserNameSetting = false
                 } // onDisappear ここまで
         } // sheet ここまで
         // ナビゲーションバータイトルを指定
@@ -221,5 +221,5 @@ struct AccountView: View {
 
 #Preview {
     AccountView(isSignIn: .constant(false), userName: .constant("sagae"),
-                isFirstUserNameSetting: .constant(false), title: "アカウント")
+                isFirstTimeUserNameSetting: .constant(false), title: "アカウント")
 }

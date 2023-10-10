@@ -15,7 +15,7 @@ struct OthersView: View {
     // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
     // 初回のユーザー名設定画面の表示を管理する変数
-    @Binding var isFirstUserNameSetting: Bool
+    @Binding var isFirstTimeUserNameSetting: Bool
     
     var body: some View {
         // 項目をリスト表示
@@ -37,7 +37,7 @@ struct OthersView: View {
                         AdvertisementView(title: title)
                     case .account:
                         // アカウント画面
-                        AccountView(isSignIn: $isSignIn, userName: $userName, isFirstUserNameSetting: $isFirstUserNameSetting, title: title)
+                        AccountView(isSignIn: $isSignIn, userName: $userName, isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting, title: title)
                     } // switch ここまで
                 } label: {
                     // 項目ごとに異なるテキストを表示
@@ -49,5 +49,5 @@ struct OthersView: View {
 } // OthersView ここまで
 
 #Preview {
-    OthersView(userName: .constant("sagae"), isSignIn: .constant(true), isFirstUserNameSetting: .constant(false))
+    OthersView(userName: .constant("sagae"), isSignIn: .constant(true), isFirstTimeUserNameSetting: .constant(false))
 }
