@@ -29,7 +29,7 @@ struct AccountView: View {
     // ユーザー名設定画面の表示を管理する変数
     @State private var isShowUserNameSettingView = false
     // サインイン画面の表示を管理する変数
-    @State var isShowSignInView: Bool = false
+    @State private var isShowSignInView: Bool = false
     // 項目のタイトル
     let title: String
     

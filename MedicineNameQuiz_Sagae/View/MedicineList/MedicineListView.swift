@@ -10,12 +10,12 @@ import SwiftUI
 struct MedicineListView: View {
     // タブの選択項目を保持する変数
     @State private var selectedTab: Int = 0
+    // シートの表示を管理する変数
+    @State private var isShowSheet: Bool = false
     // 選択された区分を管理する変数
     private var selectedClassification: SelectedClassification {
         SelectedClassification.classify(by: selectedTab)
     } // selectedClassification ここまで
-    // シートの表示を管理する変数
-    @State private var isShowSheet: Bool = false
     
     var body: some View {
         // 奥から手前方向にレイアウト

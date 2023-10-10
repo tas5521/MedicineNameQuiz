@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct OthersView: View {
-    // その他のタブで扱う項目のリスト
-    private let othersList: [Others] = [.howToUse, .reference, .advertisement, .account]
     // ユーザー名を管理する変数
     @Binding var userName: String
     // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
     // 初回のユーザー名設定画面の表示を管理する変数
     @Binding var isFirstTimeUserNameSetting: Bool
-    
+    // その他のタブで扱う項目のリスト
+    private let othersList: [Others] = [.howToUse, .reference, .advertisement, .account]
+
     var body: some View {
         // 項目をリスト表示
         List {

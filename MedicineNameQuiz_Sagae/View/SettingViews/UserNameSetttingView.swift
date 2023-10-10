@@ -13,7 +13,7 @@ struct UserNameSetttingView: View {
     // ユーザー名を管理する変数
     @Binding var userName: String
     // アカウント画面から開いているかどうかを指定するための変数
-    var fromAccountView: Bool
+    let fromAccountView: Bool
     
     var body: some View {
         // 垂直方向にレイアウト

@@ -8,12 +8,6 @@
 import SwiftUI
 
 struct StudyView: View {
-    // タブの選択項目を保持する変数
-    @State private var selectedTabIndex: Int = 0
-    // 選択されている学習モードを保持する変数
-    private var selectedMode: SelectedMode {
-        SelectedMode.dicideMode(by: selectedTabIndex)
-    } // selectedModeここまで
     // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
     // ユーザー名を管理する変数
@@ -23,11 +17,16 @@ struct StudyView: View {
     // ユーザー名設定画面の表示を管理する変数
     @State var isShowUserNameSetttingView: Bool = false
     // サインイン画面の表示を管理する変数
-    @State var isShowSignInView: Bool = false
+    @State private var isShowSignInView: Bool = false
+    // タブの選択項目を保持する変数
+    @State private var selectedTabIndex: Int = 0
     // 学習の開始を管理する変数
     @State private var isStartStudy: Bool = false
+    // 選択されている学習モードを保持する変数
+    private var selectedMode: SelectedMode {
+        SelectedMode.dicideMode(by: selectedTabIndex)
+    } // selectedModeここまで
 
-    
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
