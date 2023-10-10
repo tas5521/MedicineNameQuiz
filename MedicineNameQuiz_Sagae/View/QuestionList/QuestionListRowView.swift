@@ -57,10 +57,8 @@ struct QuestionListRowView: View {
     // 出題される薬の名前のリスト
     private var askedMedicineList: some View {
         VStack(alignment: .leading) {
-            // そう問題数を表示
+            // 総問題数を表示
             Text("総問題数: \(questions.count)")
-            // 太字にする
-                .bold()
             // 左に余白を追加
                 .padding(.leading)
             // リスト表示
@@ -77,13 +75,13 @@ struct QuestionListRowView: View {
                         // 文字の色を赤に変更
                             .foregroundStyle(Color.red)
                     } // VStack ここまで
-                    // 太字にする
-                    .bold()
                 } // ForEach ここまで
             } // List ここまで
             // リストのスタイルを.groupedに変更
             .listStyle(.grouped)
         } // VStack ここまで
+        // 太字にする
+            .bold()
     } // ListOfMedicineNameAsked ここまで
 } // QuestionListRowView ここまで
 

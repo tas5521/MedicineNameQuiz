@@ -65,12 +65,10 @@ struct StudyView: View {
         // 垂直方向にレイアウト
         VStack(alignment: .leading) {
             Text("モード選択")
-            // 太字にする
-                .bold()
             Text("区分")
-            // 太字にする
-                .bold()
         } // VStack ここまで
+        // 太字にする
+        .bold()
     } // actualView ここまで
     
     // 　練習モードの画面
