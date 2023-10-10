@@ -8,8 +8,8 @@
 import SwiftUI
 
 extension View {
-    // 本アプリでよく使うカスタムのナビゲーションバーモディファイアの大元
-    private func customNavigationBarModifier(place: ToolbarItemPlacement, button: () -> some View) -> some View {
+    // デフォルトのバックボタンを隠すモディファイア
+    private func hideDefaultBackButton(place: ToolbarItemPlacement, button: () -> some View) -> some View {
         self
         // デフォルトのバックボタンを隠す
             .navigationBarBackButtonHidden(true)
@@ -22,12 +22,12 @@ extension View {
                         .foregroundColor(Color.black)
                 } // ToolbarItem ここまで
             } // toolbarここまで
-    } // customNavigationBarModifier
+    } // hideDefaultBackButton
     
     // ナビゲーションバーの左に戻るボタンを配置するModifier
-    func placeCustomBackButton(action: @escaping () -> ()) -> some View {
+    func backButton(action: @escaping () -> ()) -> some View {
         self
-            .customNavigationBarModifier(place: .navigationBarLeading) {
+            .hideDefaultBackButton(place: .navigationBarLeading) {
                 Button {
                     // 渡されたアクションを呼び出す
                     action()
@@ -39,12 +39,12 @@ extension View {
                     } // HStack ここまで
                 } // Button ここまで
             } // customNavigationBarModifier ここまで
-    } // placeCustomBackButton ここまで
+    } // backButton ここまで
     
     // ナビゲーションバーの右にボタンを配置するModifier
-    func placeCustomButtonTrailing(label: String, action: @escaping () -> ()) -> some View {
+    func buttonTrailing(label: String, action: @escaping () -> ()) -> some View {
         self
-            .customNavigationBarModifier(place: .navigationBarTrailing) {
+            .hideDefaultBackButton(place: .navigationBarTrailing) {
                 Button {
                     // 渡されたアクションを呼び出す
                     action()
@@ -53,12 +53,12 @@ extension View {
                     Text(label)
                 } // Button ここまで
             } // customNavigationBarModifier ここまで
-    } // placeCustomButtonTrailing ここまで
+    } // buttonTrailing ここまで
     
     // ナビゲーションバーの右にナビゲーションリンクを配置するModifier
-    func placeCustomNavigationLinkTrailing(label: String, transitionTo: () -> some View) -> some View {
+    func navigationLinkTrailing(label: String, transitionTo: () -> some View) -> some View {
         self
-            .customNavigationBarModifier(place: .navigationBarTrailing) {
+            .hideDefaultBackButton(place: .navigationBarTrailing) {
                 NavigationLink {
                     // 遷移先
                     transitionTo()
@@ -67,7 +67,7 @@ extension View {
                     Text(label)
                 } // Button ここまで
             } // customNavigationBarModifier ここまで
-    } // placeCustomNavigationLinkTrailing ここまで
+    } // navigationLinkTrailing ここまで
 } // View拡張ここまで
 
 

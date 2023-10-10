@@ -55,7 +55,7 @@ struct AddFriendView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("友達追加", displayMode: .inline)
         // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .placeCustomBackButton {
+        .backButton {
             // 戻るボタンの処理
             // 画面を閉じる
             dismiss()

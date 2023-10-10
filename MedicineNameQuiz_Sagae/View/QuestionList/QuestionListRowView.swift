@@ -28,13 +28,13 @@ struct QuestionListRowView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("問題リスト", displayMode: .inline)
         // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .placeCustomBackButton {
+        .backButton {
             // 戻るボタンの処理
             // 画面を閉じる
             dismiss()
         } // placeCustomBackButton ここまで
         // ナビゲーションバーの右側にカスタムの編集ボタンを配置
-        .placeCustomNavigationLinkTrailing(label: "編集") {
+        .navigationLinkTrailing(label: "編集") {
             // 編集画面へ遷移
             EditQuestionListView()
         } // placeCustomNavigationLinkTrailing ここまで

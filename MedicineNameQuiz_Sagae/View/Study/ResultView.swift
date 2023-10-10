@@ -39,7 +39,7 @@ struct ResultView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習", displayMode: .inline)
         // ナビゲーションバーの右側にカスタムの終了ボタンを配置
-        .placeCustomButtonTrailing(label: "終了") {
+        .buttonTrailing(label: "終了") {
             // ResultViewを閉じてStudyingViewも閉じる
             isStartStudy = false
         } // placeCustomButtonTrailing

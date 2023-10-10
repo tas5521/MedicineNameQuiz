@@ -18,7 +18,7 @@ struct AdvertisementView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
         // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .placeCustomBackButton {
+        .backButton {
             // 戻るボタンの処理
             // 画面を閉じる
             dismiss()

@@ -91,7 +91,7 @@ struct AccountView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
         // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .placeCustomBackButton {
+        .backButton {
             // 画面を閉じる
             dismiss()
         } // placeCustomBackButtonここまで

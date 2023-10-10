@@ -33,13 +33,13 @@ struct CreateQuestionListView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("問題リスト", displayMode: .inline)
         // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .placeCustomBackButton {
+        .backButton {
             // 戻るボタンの処理
             // 画面を閉じる
             dismiss()
         } // placeCustomBackButton ここまで
         // ナビゲーションバーの右側にカスタムの保存ボタンを配置
-        .placeCustomButtonTrailing(label: "保存") {
+        .buttonTrailing(label: "保存") {
             // アラートを表示
             isShowAlert.toggle()
         } // placeCustomNavigationLinkTrailing ここまで
