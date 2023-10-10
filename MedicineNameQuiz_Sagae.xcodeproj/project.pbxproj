@@ -105,6 +105,7 @@
 		4A96715A2AC7B711006F7157 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4AAB711E2AD54B14001B9714 /* Extension */,
 				4A9671582AC7B531006F7157 /* MainTabView.swift */,
 				4AA088272AC935B3005BD8C2 /* Study */,
 				4AA088282AC935E4005BD8C2 /* QuestionList */,
@@ -125,10 +126,8 @@
 				4A9671812AC888B7006F7157 /* Question.swift */,
 				4A96716E2AC7C7BC006F7157 /* SelectedMode.swift */,
 				4AA088312AC9409D005BD8C2 /* SelectedClassification.swift */,
-				4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */,
 				4AA088352AC96FCB005BD8C2 /* Others.swift */,
 				4AA088412AC98796005BD8C2 /* HowToUse.swift */,
-				4A82AE052ACAB6960093A693 /* ViewExtension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +203,15 @@
 				4A9671722AC80BDD006F7157 /* TopTabView.swift */,
 			);
 			path = ViewParts;
+			sourceTree = "<group>";
+		};
+		4AAB711E2AD54B14001B9714 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4A82AE052ACAB6960093A693 /* ViewExtension.swift */,
+				4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		4AADB2C02AC5588300C5A40E = {
