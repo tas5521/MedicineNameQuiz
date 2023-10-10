@@ -76,7 +76,7 @@ struct StudyingView: View {
             // 選択肢を作成
             ForEach(dummyQuestion.1, id: \.self) { item in
                 NavigationLink {
-                    ResultView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
+                    ResultView(selectedMode: selectedMode, isStartStudy: $isStartStudy)
                 } label: {
                     Text(item)
                         .foregroundColor(Color.blue)
@@ -85,7 +85,7 @@ struct StudyingView: View {
             } // ForEach ここまで
             // パスボタン
             NavigationLink {
-                ResultView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
+                ResultView(selectedMode: selectedMode, isStartStudy: $isStartStudy)
             } label: {
                 Text("パス")
                     .foregroundColor(Color.blue)

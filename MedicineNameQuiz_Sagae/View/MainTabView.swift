@@ -59,8 +59,7 @@ struct MainTabView: View {
     // 学習画面
     private var studyView: some View {
         StudyView(isSignIn: $isSignIn, 
-                  isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting,
-                  userName: $userName)
+                  userName: $userName, isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
             .tabItem {
                 Label("学習", systemImage: "book.fill")
             } // tabItem ここまで
@@ -96,8 +95,7 @@ struct MainTabView: View {
     
     // その他画面
     private var othersView: some View {
-        OthersView(isSignIn: $isSignIn, 
-                   userName: $userName,
+        OthersView(userName: $userName, isSignIn: $isSignIn,
                    isFirstUserNameSetting: $isFirstTimeUserNameSetting)
             .tabItem {
                 Label("その他", systemImage: "gearshape.fill")
