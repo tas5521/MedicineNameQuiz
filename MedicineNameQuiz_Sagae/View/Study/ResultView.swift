@@ -15,23 +15,23 @@ struct ResultView: View {
     // 問題リストの名前を保持する変数
     @State private var questionListName: String = ""
     // 選択されている学習モード
-    let selectedStudyMode: SelectedStudyMode
+    let selectedMode: SelectedMode
 
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
             // 結果表示
-            result
+            studyResults
             // 上下左右に余白を追加
                 .padding()
             // 間違えた問題をリストに保存するボタン
-            buttonToSaveIncorrectQuestionsToList
+            saveMistakesButton
             // 上下左右に余白を追加
                 .padding()
             // 練習モードでは、学習結果を表示
-            if selectedStudyMode == .practice {
+            if selectedMode == .practice {
                 // 結果のリスト
-                resultList
+                studyResultsList
                 // 上下左右に余白を追加
                     .padding()
             } // if ここまで
@@ -46,12 +46,12 @@ struct ResultView: View {
     } // bodyここまで
     
     // 結果表示
-    private var result: some View {
+    private var studyResults: some View {
         Text("結果表示")
     } // result ここまで
     
     // 間違えた問題をリストに保存するボタン
-    private var buttonToSaveIncorrectQuestionsToList: some View {
+    private var saveMistakesButton: some View {
         Button {
             // 警告を表示
             isShowAlert.toggle()
@@ -80,11 +80,11 @@ struct ResultView: View {
     } // buttonToSaveIncorrectQuestionsToList ここまで
     
     // 結果のリスト
-    private var resultList: some View {
+    private var studyResultsList: some View {
         Text("結果のリスト")
     } // resultList
 } // ResultView ここまで
 
 #Preview {
-    ResultView(isStartStudy: .constant(true), selectedStudyMode: .practice)
+    ResultView(isStartStudy: .constant(true), selectedMode: .practice)
 }

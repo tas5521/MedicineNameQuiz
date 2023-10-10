@@ -1,11 +1,11 @@
 //
-//  SelectedStudyMode.swift
+//  SelectedMode.swift
 //  MedicineNameQuiz_Sagae
 //
 //  Created by 寒河江彪流 on 2023/09/30.
 //
 
-enum SelectedStudyMode {
+enum SelectedMode {
     case actual
     case practice
     
@@ -14,11 +14,11 @@ enum SelectedStudyMode {
         ["本番", "練習"]
     } // modeList ここまで
     
-    static func dicideStudyMode(by selectedTab: Int) -> SelectedStudyMode {
+    static func dicideMode(by selectedTab: Int) -> SelectedMode {
         if selectedTab == 0 {
-            return SelectedStudyMode.actual
+            return SelectedMode.actual
         } else {
-            return SelectedStudyMode.practice
+            return SelectedMode.practice
         } // if ここまで
     } // dicideMode ここまで
 } // SelectedStudyModeここまで

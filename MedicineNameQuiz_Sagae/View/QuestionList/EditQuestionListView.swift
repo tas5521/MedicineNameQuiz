@@ -19,12 +19,12 @@ struct EditQuestionListView: View {
             // タブを上に配置
             topTabView
             // リスト名編集用テキストフィールド
-            textFieldToEditNameOfList
+            listNameEditTextField
             // 薬を検索するためのテキストフィールド
-            textFieldToSearchMedicine
+            medicineSearchBar
             Spacer()
             // 薬リスト
-            medicineList
+            medicineListView
             Spacer()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
@@ -49,17 +49,17 @@ struct EditQuestionListView: View {
     } // topTabView ここまで
     
     // リスト名編集用テキストフィールド
-    private var textFieldToEditNameOfList: some View {
+    private var listNameEditTextField: some View {
         Text("リスト名編集用テキストフィールド")
     } // textFieldToEdit ここまで
     
     // 薬を検索するためのテキストフィールド
-    private var textFieldToSearchMedicine: some View {
+    private var medicineSearchBar: some View {
         Text("薬の検索バー")
     } // textFieldToSearchMedicine ここまで
 
     // 薬のリスト
-    private var medicineList: some View {
+    private var medicineListView: some View {
         Text("薬リスト")
     } // medicineList ここまで
 } // EditQuestionListViewここまで

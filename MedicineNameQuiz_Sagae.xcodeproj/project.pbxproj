@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A3937872AD53F8D00BA5CE7 /* SelectedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3937862AD53F8D00BA5CE7 /* SelectedTab.swift */; };
 		4A82AE062ACAB6960093A693 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A82AE052ACAB6960093A693 /* ViewExtension.swift */; };
-		4A9671592AC7B531006F7157 /* TabSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671582AC7B531006F7157 /* TabSwitchView.swift */; };
+		4A9671592AC7B531006F7157 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671582AC7B531006F7157 /* MainTabView.swift */; };
 		4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715D2AC7B73E006F7157 /* QuestionListView.swift */; };
 		4A9671602AC7B768006F7157 /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715F2AC7B768006F7157 /* StudyView.swift */; };
 		4A9671622AC7B77A006F7157 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671612AC7B77A006F7157 /* RankingView.swift */; };
 		4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671632AC7B787006F7157 /* MedicineListView.swift */; };
 		4A9671662AC7B795006F7157 /* OthersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671652AC7B795006F7157 /* OthersView.swift */; };
-		4A9671692AC7B83A006F7157 /* SelectedTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671682AC7B83A006F7157 /* SelectedTab.swift */; };
 		4A96716B2AC7BB2E006F7157 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */; };
-		4A96716F2AC7C7BC006F7157 /* SelectedStudyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716E2AC7C7BC006F7157 /* SelectedStudyMode.swift */; };
+		4A96716F2AC7C7BC006F7157 /* SelectedMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716E2AC7C7BC006F7157 /* SelectedMode.swift */; };
 		4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671722AC80BDD006F7157 /* TopTabView.swift */; };
 		4A9671752AC825E4006F7157 /* StudyingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671742AC825E4006F7157 /* StudyingView.swift */; };
 		4A9671772AC82CBC006F7157 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671762AC82CBC006F7157 /* ResultView.swift */; };
@@ -49,16 +49,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A3937862AD53F8D00BA5CE7 /* SelectedTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTab.swift; sourceTree = "<group>"; };
 		4A82AE052ACAB6960093A693 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
-		4A9671582AC7B531006F7157 /* TabSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitchView.swift; sourceTree = "<group>"; };
+		4A9671582AC7B531006F7157 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4A96715D2AC7B73E006F7157 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
 		4A96715F2AC7B768006F7157 /* StudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyView.swift; sourceTree = "<group>"; };
 		4A9671612AC7B77A006F7157 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		4A9671632AC7B787006F7157 /* MedicineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListView.swift; sourceTree = "<group>"; };
 		4A9671652AC7B795006F7157 /* OthersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersView.swift; sourceTree = "<group>"; };
-		4A9671682AC7B83A006F7157 /* SelectedTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedTab.swift; sourceTree = "<group>"; };
 		4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		4A96716E2AC7C7BC006F7157 /* SelectedStudyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedStudyMode.swift; sourceTree = "<group>"; };
+		4A96716E2AC7C7BC006F7157 /* SelectedMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMode.swift; sourceTree = "<group>"; };
 		4A9671722AC80BDD006F7157 /* TopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabView.swift; sourceTree = "<group>"; };
 		4A9671742AC825E4006F7157 /* StudyingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyingView.swift; sourceTree = "<group>"; };
 		4A9671762AC82CBC006F7157 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		4A96715A2AC7B711006F7157 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4A9671582AC7B531006F7157 /* TabSwitchView.swift */,
+				4A9671582AC7B531006F7157 /* MainTabView.swift */,
 				4AA088272AC935B3005BD8C2 /* Study */,
 				4AA088282AC935E4005BD8C2 /* QuestionList */,
 				4AA088292AC93608005BD8C2 /* Ranking */,
@@ -120,10 +120,10 @@
 		4A9671672AC7B810006F7157 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4A9671682AC7B83A006F7157 /* SelectedTab.swift */,
 				4A96717D2AC87E55006F7157 /* QuestionListItem.swift */,
+				4A3937862AD53F8D00BA5CE7 /* SelectedTab.swift */,
 				4A9671812AC888B7006F7157 /* Question.swift */,
-				4A96716E2AC7C7BC006F7157 /* SelectedStudyMode.swift */,
+				4A96716E2AC7C7BC006F7157 /* SelectedMode.swift */,
 				4AA088312AC9409D005BD8C2 /* SelectedClassification.swift */,
 				4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */,
 				4AA088352AC96FCB005BD8C2 /* Others.swift */,
@@ -319,12 +319,13 @@
 				4AADB2D62AC5588500C5A40E /* Persistence.swift in Sources */,
 				4AA088362AC96FCB005BD8C2 /* Others.swift in Sources */,
 				4AA088262AC92CF2005BD8C2 /* AddFriendView.swift in Sources */,
+				4A3937872AD53F8D00BA5CE7 /* SelectedTab.swift in Sources */,
 				4A96717E2AC87E55006F7157 /* QuestionListItem.swift in Sources */,
 				4A9671802AC886B9006F7157 /* QuestionListRowView.swift in Sources */,
 				4A9671772AC82CBC006F7157 /* ResultView.swift in Sources */,
 				4AA088422AC98796005BD8C2 /* HowToUse.swift in Sources */,
 				4A9671822AC888B7006F7157 /* Question.swift in Sources */,
-				4A9671592AC7B531006F7157 /* TabSwitchView.swift in Sources */,
+				4A9671592AC7B531006F7157 /* MainTabView.swift in Sources */,
 				4AA0883A2AC97DCC005BD8C2 /* ReferenceView.swift in Sources */,
 				4AADB2CD2AC5588300C5A40E /* MedicineNameQuiz_SagaeApp.swift in Sources */,
 				4AA088462AC9886D005BD8C2 /* HowToUseQuestionListView.swift in Sources */,
@@ -333,10 +334,9 @@
 				4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */,
 				4AA088482AC98887005BD8C2 /* HowToUseRankingView.swift in Sources */,
 				4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */,
-				4A96716F2AC7C7BC006F7157 /* SelectedStudyMode.swift in Sources */,
+				4A96716F2AC7C7BC006F7157 /* SelectedMode.swift in Sources */,
 				4A9671862AC92309006F7157 /* EditQuestionListView.swift in Sources */,
 				4AA088302AC93A3C005BD8C2 /* QRCodeView.swift in Sources */,
-				4A9671692AC7B83A006F7157 /* SelectedTab.swift in Sources */,
 				4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */,
 				4AA088322AC9409D005BD8C2 /* SelectedClassification.swift in Sources */,
 				4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */,

@@ -43,8 +43,7 @@ struct OthersView: View {
                     // 項目ごとに異なるテキストを表示
                     Text(title)
                 } // NavigationLink ここまで
-            }
- // ForEach ここまで
+            } // ForEach ここまで
         } // List ここまで
     } // body ここまで
 } // OthersView ここまで

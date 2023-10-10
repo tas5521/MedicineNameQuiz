@@ -21,9 +21,9 @@ struct QuestionListRowView: View {
             // リストの名前
             nameOfList
             // 薬の名前の検索バー
-            textFieldToSearchNameOfMedicine
+            medicineNameSearchBar
             // 出題される薬の名前のリスト
-            ListOfMedicineNameAsked
+            askedMedicineList
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("問題リスト", displayMode: .inline)
@@ -49,13 +49,13 @@ struct QuestionListRowView: View {
     } // nameOfList ここまで
     
     // 薬の名前の検索バー
-    private var textFieldToSearchNameOfMedicine: some View {
+    private var medicineNameSearchBar: some View {
         // 薬の名前を検索するバー
         Text("検索バー")
     } // nameOfList ここまで
     
     // 出題される薬の名前のリスト
-    private var ListOfMedicineNameAsked: some View {
+    private var askedMedicineList: some View {
         VStack(alignment: .leading) {
             // そう問題数を表示
             Text("総問題数: \(questions.count)")

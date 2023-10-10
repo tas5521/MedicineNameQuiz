@@ -11,7 +11,7 @@ struct StudyingView: View {
     // 学習の開始を管理する変数
     @Binding var isStartStudy: Bool
     // 選択されている学習モード
-    let selectedStudyMode: SelectedStudyMode
+    let selectedMode: SelectedMode
     // ダミーの問題
     let dummyQuestion: (String, [String]) = ("アムロジン", ["アムロジピンベシル酸塩", "イミダフェナシン", "エバスチン", "プランルカスト水和物"])
     
@@ -76,7 +76,7 @@ struct StudyingView: View {
             // 選択肢を作成
             ForEach(dummyQuestion.1, id: \.self) { item in
                 NavigationLink {
-                    ResultView(isStartStudy: $isStartStudy, selectedStudyMode: selectedStudyMode)
+                    ResultView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
                 } label: {
                     Text(item)
                         .foregroundColor(Color.blue)
@@ -85,7 +85,7 @@ struct StudyingView: View {
             } // ForEach ここまで
             // パスボタン
             NavigationLink {
-                ResultView(isStartStudy: $isStartStudy, selectedStudyMode: selectedStudyMode)
+                ResultView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
             } label: {
                 Text("パス")
                     .foregroundColor(Color.blue)
@@ -95,5 +95,5 @@ struct StudyingView: View {
 } // StudyingView ここまで
 
 #Preview {
-    StudyingView(isStartStudy: .constant(true), selectedStudyMode: .actual)
+    StudyingView(isStartStudy: .constant(true), selectedMode: .actual)
 }

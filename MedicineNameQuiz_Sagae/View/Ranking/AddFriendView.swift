@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddFriendViewView: View {
+struct AddFriendView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // 警告の表示を管理する変数
@@ -160,5 +160,5 @@ struct AddFriendViewView: View {
 } // FriendAdditionView ここまで
 
 #Preview {
-    AddFriendViewView(userName: .constant("sagae"))
+    AddFriendView(userName: .constant("sagae"))
 }

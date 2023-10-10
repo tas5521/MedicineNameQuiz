@@ -2,7 +2,7 @@
 //  SelectedTab.swift
 //  MedicineNameQuiz_Sagae
 //
-//  Created by 寒河江彪流 on 2023/09/30.
+//  Created by 寒河江彪流 on 2023/10/10.
 //
 
 enum SelectedTab: String {

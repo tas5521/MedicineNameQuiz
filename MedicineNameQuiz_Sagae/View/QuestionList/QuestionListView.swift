@@ -36,7 +36,7 @@ struct QuestionListView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 問題リストの検索バー
-                textFieldTosearchQuestionList
+                searchBarForQuestionList
                 // 問題リスト
                 questionList
             } // VStack ここまで
@@ -49,14 +49,14 @@ struct QuestionListView: View {
                     // スペースを空ける
                     Spacer()
                     // リスト追加ボタン
-                    buttonToAddList
+                    addListButton
                         .padding()
                 } // HStack ここまで
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
     
-    private var textFieldTosearchQuestionList: some View {
+    private var searchBarForQuestionList: some View {
         Text("問題リスト検索バー")
     } // questionListSearchBar
 
@@ -91,7 +91,7 @@ struct QuestionListView: View {
     } // questionList ここまで
 
     // リスト追加ボタン
-    private var buttonToAddList: some View {
+    private var addListButton: some View {
         NavigationLink {
             // 問題リスト作成画面へ遷移
             CreateQuestionListView()

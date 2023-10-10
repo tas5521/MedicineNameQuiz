@@ -9,15 +9,15 @@ import SwiftUI
 
 struct StudyView: View {
     // タブの選択項目を保持する変数
-    @State private var selectedTab: Int = 0
+    @State private var selectedTabIndex: Int = 0
     // 選択されている学習モードを保持する変数
-    private var selectedStudyMode: SelectedStudyMode {
-        SelectedStudyMode.dicideStudyMode(by: selectedTab)
+    private var selectedMode: SelectedMode {
+        SelectedMode.dicideMode(by: selectedTabIndex)
     } // selectedModeここまで
     // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
     // 初回のユーザー名設定画面の表示を管理する変数
-    @Binding var isFirstUserNameSetting: Bool
+    @Binding var isFirstTimeUserNameSetting: Bool
     // ユーザー名設定画面の表示を管理する変数
     @State var isShowUserNameSetttingView: Bool = false
     // サインイン画面の表示を管理する変数
@@ -31,10 +31,10 @@ struct StudyView: View {
         // 垂直方向にレイアウト
         VStack {
             // タブを上に配置
-            topTabView
+            tabView
             Spacer()
             // 選択された学習モードにより画面を分けて表示
-            switch selectedStudyMode {
+            switch selectedMode {
                 // 本番モードの場合
             case .actual:
                 // 本番モードのViewを配置
@@ -51,15 +51,14 @@ struct StudyView: View {
         } // VStack ここまで
         // 学習中の画面へ遷移
         .navigationDestination(isPresented: $isStartStudy) {
-            StudyingView(isStartStudy: $isStartStudy, selectedStudyMode: selectedStudyMode)
+            StudyingView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
         } // navigationDestination ここまで
     } // body ここまで
     
     // 上部につけるタブ
-    private var topTabView: some View {
-        TopTabView(tabNameList: SelectedStudyMode.modeList, selectedTab: $selectedTab)
+    private var tabView: some View {
+        TopTabView(tabNameList: SelectedMode.modeList, selectedTab: $selectedTabIndex)
     } // topTabView ここまで
-
     
     // 本番モードの画面
     private var actualView: some View {
@@ -94,7 +93,7 @@ struct StudyView: View {
     private var startButton: some View {
         Button {
             // 選択された学習モードにより異なる処理をする
-            switch selectedStudyMode {
+            switch selectedMode {
                 // 本番モードの場合
             case .actual:
                 //
@@ -118,7 +117,7 @@ struct StudyView: View {
                     // サインインしていているかチェック。サインインしていなかったら、何もしない
                     guard isSignIn else { return }
                     // 初回のユーザー名設定の場合
-                    if isFirstUserNameSetting {
+                    if isFirstTimeUserNameSetting {
                         // ユーザー名設定画面を表示
                         isShowUserNameSetttingView.toggle()
                     } // if ここまで
@@ -131,12 +130,12 @@ struct StudyView: View {
             // ユーザー名設定画面が閉じた時、実行
                 .onDisappear {
                     // 初回のユーザー名設定画面の表示を管理する変数をfalseにする
-                    isFirstUserNameSetting = false
+                    isFirstTimeUserNameSetting = false
                 } // onDisappear ここまで
         } // sheet ここまで
     } // startButton ここまで
 } // StudyView ここまで
 
 #Preview {
-    StudyView(isSignIn: .constant(false), isFirstUserNameSetting: .constant(true), userName: .constant(""))
+    StudyView(isSignIn: .constant(false), isFirstTimeUserNameSetting: .constant(true), userName: .constant(""))
 }

@@ -13,7 +13,7 @@ struct MedicineNameQuiz_SagaeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TabSwitchView()
+            MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
