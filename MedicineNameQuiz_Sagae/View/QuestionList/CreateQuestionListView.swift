@@ -10,12 +10,12 @@ import SwiftUI
 struct CreateQuestionListView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
-    // 警告の表示を管理する変数
-    @State private var isShowAlert = false
     // 問題リストの名前を保持する変数
     @State private var questionListName: String = ""
     // タブの選択項目を保持する変数
     @State private var selectedTab: Int = 0
+    // 警告の表示を管理する変数
+    @State private var isShowAlert = false
     
     var body: some View {
         // 垂直方向にレイアウト

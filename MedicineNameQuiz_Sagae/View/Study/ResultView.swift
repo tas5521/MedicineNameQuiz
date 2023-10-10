@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ResultView: View {
-    // 学習の開始を管理する変数
-    @Binding var isStartStudy: Bool
-    // 警告の表示を管理する変数
-    @State private var isShowAlert = false
     // 問題リストの名前を保持する変数
     @State private var questionListName: String = ""
     // 選択されている学習モード
     let selectedMode: SelectedMode
+    // 学習の開始を管理する変数
+    @Binding var isStartStudy: Bool
+    // 警告の表示を管理する変数
+    @State private var isShowAlert = false
+
 
     var body: some View {
         // 垂直方向にレイアウト
@@ -86,5 +87,5 @@ struct ResultView: View {
 } // ResultView ここまで
 
 #Preview {
-    ResultView(isStartStudy: .constant(true), selectedMode: .practice)
+    ResultView(selectedMode: .practice, isStartStudy: .constant(true))
 }

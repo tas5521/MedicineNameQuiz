@@ -16,6 +16,8 @@ struct StudyView: View {
     } // selectedModeここまで
     // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
+    // ユーザー名を管理する変数
+    @Binding var userName: String
     // 初回のユーザー名設定画面の表示を管理する変数
     @Binding var isFirstTimeUserNameSetting: Bool
     // ユーザー名設定画面の表示を管理する変数
@@ -24,8 +26,7 @@ struct StudyView: View {
     @State var isShowSignInView: Bool = false
     // 学習の開始を管理する変数
     @State private var isStartStudy: Bool = false
-    // ユーザー名を管理する変数
-    @Binding var userName: String
+
     
     var body: some View {
         // 垂直方向にレイアウト
@@ -137,5 +138,5 @@ struct StudyView: View {
 } // StudyView ここまで
 
 #Preview {
-    StudyView(isSignIn: .constant(false), isFirstTimeUserNameSetting: .constant(true), userName: .constant(""))
+    StudyView(isSignIn: .constant(false), userName: .constant(""), isFirstTimeUserNameSetting: .constant(true))
 }

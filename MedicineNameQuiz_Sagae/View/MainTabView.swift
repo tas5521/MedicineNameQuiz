@@ -10,10 +10,10 @@ import SwiftUI
 struct MainTabView: View {
     // タブの選択項目を保持する変数
     @State private var selectedTab: SelectedTab = .study
-    // 友達追加画面への遷移を管理する変数
-    @State private var isShowingAddFriendView: Bool = false
     // ユーザー名を管理する変数
     @State private var userName: String = ""
+    // 友達追加画面への遷移を管理する変数
+    @State private var isShowingAddFriendView: Bool = false
     // サインインしているかどうかを管理する変数
     @State private var isSignIn: Bool = false
     // 初回のユーザー名設定画面の表示を管理する変数

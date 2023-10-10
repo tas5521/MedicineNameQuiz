@@ -10,14 +10,14 @@ import SwiftUI
 struct AddFriendView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
-    // 警告の表示を管理する変数
-    @State private var isShowAlert: Bool = false
-    // シートの表示を管理する変数
-    @State private var isShowSheet: Bool = false
     // 友達のユーザーIDを格納する変数
     @State private var userID: String = ""
     // ユーザー名を管理する変数
     @Binding var userName: String
+    // 警告の表示を管理する変数
+    @State private var isShowAlert: Bool = false
+    // シートの表示を管理する変数
+    @State private var isShowSheet: Bool = false
 
     var body: some View {
         // 垂直方向にレイアウト

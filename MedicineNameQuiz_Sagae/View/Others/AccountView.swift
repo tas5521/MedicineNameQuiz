@@ -10,6 +10,14 @@ import SwiftUI
 struct AccountView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
+    // サインインしているかどうかを管理する変数
+    @Binding var isSignIn: Bool
+    // ユーザー名を管理する変数
+    @Binding var userName: String
+    // 初回のユーザー名設定画面の表示を管理する変数
+    @Binding var isFirstUserNameSetting: Bool
+    // ユーザー名設定ボタンが押されたかを管理する変数
+    @State private var isTappedButtonToSetUserName: Bool = false
     // シートの表示を管理する変数
     @State private var isShowSheet = false
     // アカウント削除時の警告を表示
@@ -22,14 +30,6 @@ struct AccountView: View {
     @State private var isShowUserNameSettingView = false
     // サインイン画面の表示を管理する変数
     @State var isShowSignInView: Bool = false
-    // サインインしているかどうかを管理する変数
-    @Binding var isSignIn: Bool
-    // ユーザー名を管理する変数
-    @Binding var userName: String
-    // 初回のユーザー名設定画面の表示を管理する変数
-    @Binding var isFirstUserNameSetting: Bool
-    // ユーザー名設定ボタンが押されたかを管理する変数
-    @State private var isTappedButtonToSetUserName: Bool = false
     // 項目のタイトル
     let title: String
     

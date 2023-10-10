@@ -10,10 +10,10 @@ import SwiftUI
 struct OthersView: View {
     // その他のタブで扱う項目のリスト
     private let othersList: [Others] = [.howToUse, .reference, .advertisement, .account]
-    // サインインしているかどうかを管理する変数
-    @Binding var isSignIn: Bool
     // ユーザー名を管理する変数
     @Binding var userName: String
+    // サインインしているかどうかを管理する変数
+    @Binding var isSignIn: Bool
     // 初回のユーザー名設定画面の表示を管理する変数
     @Binding var isFirstUserNameSetting: Bool
     
@@ -49,5 +49,5 @@ struct OthersView: View {
 } // OthersView ここまで
 
 #Preview {
-    OthersView(isSignIn: .constant(true), userName: .constant("sagae"), isFirstUserNameSetting: .constant(false))
+    OthersView(userName: .constant("sagae"), isSignIn: .constant(true), isFirstUserNameSetting: .constant(false))
 }
