@@ -9,12 +9,12 @@ import SwiftUI
 
 struct MedicineListView: View {
     // タブの選択項目を保持する変数
-    @State private var selectedTab: Int = 0
+    @State private var selectedTabIndex: Int = 0
     // シートの表示を管理する変数
     @State private var isShowSheet: Bool = false
     // 選択された区分を管理する変数
     private var selectedClassification: SelectedClassification {
-        SelectedClassification.classify(by: selectedTab)
+        SelectedClassification.classify(by: selectedTabIndex)
     } // selectedClassification ここまで
     
     var body: some View {
@@ -52,7 +52,7 @@ struct MedicineListView: View {
     } // body ここまで
     
     private var toptTabView: some View {
-        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTab: $selectedTab)
+        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTabIndex: $selectedTabIndex)
     } // toptTabView ここまで
     
     private var textFieldToSearchMedicine: some View {

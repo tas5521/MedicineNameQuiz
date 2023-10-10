@@ -13,7 +13,7 @@ struct CreateQuestionListView: View {
     // 問題リストの名前を保持する変数
     @State private var questionListName: String = ""
     // タブの選択項目を保持する変数
-    @State private var selectedTab: Int = 0
+    @State private var selectedTabIndex: Int = 0
     // 警告の表示を管理する変数
     @State private var isShowAlert = false
     
@@ -55,7 +55,7 @@ struct CreateQuestionListView: View {
 
     // 上部につけるタブ
     private var topTabView: some View {
-        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTab: $selectedTab)
+        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTabIndex: $selectedTabIndex)
     } // topTabView ここまで
     
     // 薬を検索するためのテキストフィールド

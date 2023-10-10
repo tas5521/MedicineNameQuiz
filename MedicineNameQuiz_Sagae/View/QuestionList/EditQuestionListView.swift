@@ -11,7 +11,7 @@ struct EditQuestionListView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // タブの選択項目を保持する変数
-    @State private var selectedTab: Int = 0
+    @State private var selectedTabIndex: Int = 0
 
     var body: some View {
         // 垂直右方向にレイアウト
@@ -45,7 +45,7 @@ struct EditQuestionListView: View {
     
     // 上部につけるタブ
     private var topTabView: some View {
-        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTab: $selectedTab)
+        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTabIndex: $selectedTabIndex)
     } // topTabView ここまで
     
     // リスト名編集用テキストフィールド

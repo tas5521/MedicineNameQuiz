@@ -57,7 +57,7 @@ struct StudyView: View {
     
     // 上部につけるタブ
     private var tabView: some View {
-        TopTabView(tabNameList: SelectedMode.modeList, selectedTab: $selectedTabIndex)
+        TopTabView(tabNameList: SelectedMode.modeList, selectedTabIndex: $selectedTabIndex)
     } // topTabView ここまで
     
     // 本番モードの画面
