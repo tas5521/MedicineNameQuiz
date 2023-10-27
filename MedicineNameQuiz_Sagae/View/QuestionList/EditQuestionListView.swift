@@ -11,55 +11,55 @@ struct EditQuestionListView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // タブの選択項目を保持する変数
-    @State private var selectedTabIndex: Int = 0
+    @State private var tabIndex: Int = 0
 
     var body: some View {
         // 垂直右方向にレイアウト
         VStack {
-            // タブを上に配置
-            topTabView
+            // 薬の区分を選択するタブを配置
+            classificationTab
             // リスト名編集用テキストフィールド
             listNameEditTextField
             // 薬を検索するためのテキストフィールド
             medicineSearchBar
             Spacer()
             // 薬リスト
-            medicineListView
+            medicineList
             Spacer()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("問題リスト", displayMode: .inline)
-        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .backButton {
+        // ナビゲーションバーの左側に戻るボタンを配置
+        .navigationBarWithBackButton {
             // 戻るボタンの処理
             // 画面を閉じる
             dismiss()
-        } // placeCustomBackButton ここまで
-        // ナビゲーションバーの右側にカスタムの保存ボタンを配置
-        .buttonTrailing(label: "保存") {
+        } // navigationBarWithBackButton ここまで
+        // ナビゲーションバーの右側に保存ボタンを配置
+        .navigationBarWithButtonTrailing(label: "保存") {
             // 保存処理
             // 画面を閉じる
             dismiss()
-        } // placeCustomNavigationLinkTrailing ここまで
+        } // navigationBarWithButtonTrailing ここまで
     } // body ここまで
     
-    // 上部につけるタブ
-    private var topTabView: some View {
-        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTabIndex: $selectedTabIndex)
-    } // topTabView ここまで
+    // 薬の区分を選択するタブ
+    private var classificationTab: some View {
+        TopTabView(tabNameList: MedicineClassification.classificationList, tabIndex: $tabIndex)
+    } // classificationTab ここまで
     
     // リスト名編集用テキストフィールド
     private var listNameEditTextField: some View {
         Text("リスト名編集用テキストフィールド")
-    } // textFieldToEdit ここまで
+    } // listNameEditTextField ここまで
     
     // 薬を検索するためのテキストフィールド
     private var medicineSearchBar: some View {
         Text("薬の検索バー")
-    } // textFieldToSearchMedicine ここまで
+    } // medicineSearchBar ここまで
 
     // 薬のリスト
-    private var medicineListView: some View {
+    private var medicineList: some View {
         Text("薬リスト")
     } // medicineList ここまで
 } // EditQuestionListViewここまで

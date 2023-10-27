@@ -12,8 +12,8 @@ struct AddMedicineView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        // メッセージ
-        enterMedicineNameMessage
+        // 追加する薬の名前を入力するようユーザーに促すためのテキスト
+        enterMedicineNameText
             .padding()
         // 先発品名を入力するためのテキストフィールド
         originalMedicineTextField
@@ -22,31 +22,30 @@ struct AddMedicineView: View {
         genericMedicineTextField
             .padding()
         // 追加ボタン
-        addMedicineButton
+        addButton
             .padding()
-        
         // やめるボタン
-        dismissButton
+        cancelButton
             .padding()
     } // body ここまで
     
-    // メッセージ
-    private var enterMedicineNameMessage: some View {
+    // 追加する薬の名前を入力するようユーザーに促すためのテキスト
+    private var enterMedicineNameText: some View {
         Text("追加する薬の名前を入力してください")
-    } // message ここまで
+    } // enterMedicineNameText ここまで
     
     // 先発品名を入力するためのテキストフィールド
     private var originalMedicineTextField: some View {
         Text("先発品名")
-    } // textFieldToInputNameOfOriginalMedicine ここまで
+    } // originalMedicineTextField ここまで
     
     // 一般名を入力するためのテキストフィールド
     private var genericMedicineTextField: some View {
         Text("一般名")
-    } // textFieldToInputNameOfOriginalMedicine ここまで
+    } // genericMedicineTextField ここまで
     
     // 追加ボタン
-    private var addMedicineButton: some View {
+    private var addButton: some View {
         Button {
             // 薬の名前をカスタムに追加する処理
             dismiss()
@@ -56,8 +55,8 @@ struct AddMedicineView: View {
         } // Button ここまで
     } // addButton ここまで
     
-    // シートを閉じるボタン
-    private var dismissButton: some View {
+    // やめるボタン
+    private var cancelButton: some View {
         Button {
             // シートを閉じる
             dismiss()
@@ -65,7 +64,7 @@ struct AddMedicineView: View {
             // ラベル
             Text("やめる")
         } // Button ここまで
-    } // addButton ここまで
+    } // cancelButton ここまで
 } // AddMedicineView
 
 #Preview {

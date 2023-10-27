@@ -9,23 +9,23 @@ import SwiftUI
 
 struct MedicineListView: View {
     // タブの選択項目を保持する変数
-    @State private var selectedTabIndex: Int = 0
-    // シートの表示を管理する変数
-    @State private var isShowSheet: Bool = false
-    // 選択された区分を管理する変数
-    private var selectedClassification: SelectedClassification {
-        SelectedClassification.classify(by: selectedTabIndex)
-    } // selectedClassification ここまで
-    
+    @State private var tabIndex: Int = 0
+    // 薬名追加ビューの表示を管理する変数
+    @State private var isAddMedicineView: Bool = false
+    // タブで選択された薬の区分を管理する変数
+    private var classification: MedicineClassification {
+        MedicineClassification.classify(by: tabIndex)
+    } // classification ここまで
+
     var body: some View {
         // 奥から手前方向にレイアウト
         ZStack {
             // 垂直方向にレイアウト
             VStack {
-                // タブを上に配置
-                toptTabView
-                // 薬名を検索するためのテキストフィールド
-                textFieldToSearchMedicine
+                // 薬の区分を選択するタブを上に配置
+                classificationTab
+                // 薬の検索バー
+                medicineSearchBar
                 // スペースを空ける
                 Spacer()
                 // 薬リスト
@@ -42,32 +42,35 @@ struct MedicineListView: View {
                     // スペースを空ける
                     Spacer()
                     // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                    if selectedClassification == .customMedicine {
-                        buttonToAddMedicine
+                    if classification == .customMedicine {
+                        addMedicineButton
                             .padding()
                     } // if ここまで
                 } // HStack ここまで
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
-    
-    private var toptTabView: some View {
-        TopTabView(tabNameList: SelectedClassification.classificationList, selectedTabIndex: $selectedTabIndex)
-    } // toptTabView ここまで
-    
-    private var textFieldToSearchMedicine: some View {
+
+    // 薬の区分を選択するタブ
+    private var classificationTab: some View {
+        TopTabView(tabNameList: MedicineClassification.classificationList, tabIndex: $tabIndex)
+    } // classificationTab ここまで
+
+    // 薬の検索バー
+    private var medicineSearchBar: some View {
         Text("検索バー")
-    } // textFieldToSearchMedicine ここまで
-    
+    } // medicineSearchBar ここまで
+
+    // 薬リスト
     private var medicineList: some View {
         Text("薬リスト")
     } // medicineList ここまで
-    
-    // buttonToAddMedicineここまで
-    private var buttonToAddMedicine: some View {
+
+    // カスタムで薬名を追加するボタン
+    private var addMedicineButton: some View {
         Button {
-            // シートを表示
-            isShowSheet.toggle()
+            // 薬名追加ビューを表示
+            isAddMedicineView.toggle()
         } label: {
             // ラベル
             Image(systemName: "plus.circle.fill")
@@ -78,17 +81,17 @@ struct MedicineListView: View {
             // 幅高さ65に指定
                 .frame(width: 65, height: 65)
             // 色をカスタムのボタンの色に指定
-                .foregroundStyle(Color.customButtonColor)
+                .foregroundStyle(Color.regularButtonColor)
             // 背景を白に指定
                 .background(Color.white)
             // 丸くクリッピング
                 .clipShape(Circle())
         } // Button ここまで
         // 薬名追加ビューのシート
-        .sheet(isPresented: $isShowSheet) {
+        .sheet(isPresented: $isAddMedicineView) {
             AddMedicineView()
         }  // sheet ここまで
-    } // buttonToAddMedicine
+    } // addMedicineButton ここまで
 } // MedicineListView ここまで
 
 #Preview {

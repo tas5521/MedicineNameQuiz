@@ -7,27 +7,27 @@
 
 import SwiftUI
 
+// Viewを拡張し、オリジナルのTabBarModifierを作成
 extension View {
-    // デフォルトのバックボタンを隠すモディファイア
-    private func hideDefaultBackButton(place: ToolbarItemPlacement, button: () -> some View) -> some View {
+    // ナビゲーションバーにオリジナルのボタンを指定するためのModifier
+    private func navigationBarWithOriginalButton(place: ToolbarItemPlacement, button: () -> some View) -> some View {
         self
         // デフォルトのバックボタンを隠す
             .navigationBarBackButtonHidden(true)
             .toolbar {
-                // カスタムのボタンの位置を指定
+                // ボタンの位置を指定
                 ToolbarItem(placement: place) {
-                    // カスタムのボタン
                     button()
                     // 色を指定
                         .foregroundColor(Color.black)
                 } // ToolbarItem ここまで
             } // toolbarここまで
-    } // hideDefaultBackButton
+    } // navigationBarWithOriginalButton ここまで
     
     // ナビゲーションバーの左に戻るボタンを配置するModifier
-    func backButton(action: @escaping () -> ()) -> some View {
+    func navigationBarWithBackButton(action: @escaping () -> ()) -> some View {
         self
-            .hideDefaultBackButton(place: .navigationBarLeading) {
+            .navigationBarWithOriginalButton(place: .navigationBarLeading) {
                 Button {
                     // 渡されたアクションを呼び出す
                     action()
@@ -38,13 +38,13 @@ extension View {
                         Text("戻る")
                     } // HStack ここまで
                 } // Button ここまで
-            } // customNavigationBarModifier ここまで
-    } // backButton ここまで
+            } // navigationBarWithOriginalButton ここまで
+    } // navigationBarWithBackButton ここまで
     
     // ナビゲーションバーの右にボタンを配置するModifier
-    func buttonTrailing(label: String, action: @escaping () -> ()) -> some View {
+    func navigationBarWithButtonTrailing(label: String, action: @escaping () -> ()) -> some View {
         self
-            .hideDefaultBackButton(place: .navigationBarTrailing) {
+            .navigationBarWithOriginalButton(place: .navigationBarTrailing) {
                 Button {
                     // 渡されたアクションを呼び出す
                     action()
@@ -52,22 +52,20 @@ extension View {
                     // ラベル
                     Text(label)
                 } // Button ここまで
-            } // customNavigationBarModifier ここまで
-    } // buttonTrailing ここまで
+            } // navigationBarWithOriginalButton ここまで
+    } // navigationBarWithButtonTrailing ここまで
     
     // ナビゲーションバーの右にナビゲーションリンクを配置するModifier
-    func navigationLinkTrailing(label: String, transitionTo: () -> some View) -> some View {
+    func navigationBarWithNavigationLinkTrailing(label: String, destination: () -> some View) -> some View {
         self
-            .hideDefaultBackButton(place: .navigationBarTrailing) {
+            .navigationBarWithOriginalButton(place: .navigationBarTrailing) {
                 NavigationLink {
                     // 遷移先
-                    transitionTo()
+                    destination()
                 } label: {
                     // ラベル
                     Text(label)
                 } // Button ここまで
-            } // customNavigationBarModifier ここまで
-    } // navigationLinkTrailing ここまで
+            } // navigationBarWithOriginalButton ここまで
+    } // navigationBarWithNavigationLinkTrailing ここまで
 } // View拡張ここまで
-
-

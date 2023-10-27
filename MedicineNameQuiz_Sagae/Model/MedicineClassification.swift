@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SelectedClassification: String {
+enum MedicineClassification {
     case internalMedicine
     case injectionMedicine
     case externalMedicine
@@ -18,8 +18,8 @@ enum SelectedClassification: String {
         ["内用薬", "注射薬", "外用薬", "カスタム"]
     } // classificationList ここまで
     
-    static func classify(by selectedTab: Int) -> SelectedClassification {
-        switch selectedTab {
+    static func classify(by tabIndex: Int) -> MedicineClassification {
+        switch tabIndex {
         case 0 :
                 .internalMedicine
         case 1 :

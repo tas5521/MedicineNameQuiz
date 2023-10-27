@@ -14,10 +14,10 @@ struct AddFriendView: View {
     @Binding var userName: String
     // 友達のユーザーIDを格納する変数
     @State private var userID: String = ""
-    // 警告の表示を管理する変数
-    @State private var isShowAlert: Bool = false
-    // シートの表示を管理する変数
-    @State private var isShowSheet: Bool = false
+    // 友達になるユーザーIDを入力するためのポップアップの表示を管理する変数
+    @State private var isShowPopUp: Bool = false
+    // QRCodeViewの表示を管理する変数
+    @State private var isShowQRCodeView: Bool = false
 
     var body: some View {
         // 垂直方向にレイアウト
@@ -34,13 +34,13 @@ struct AddFriendView: View {
                     .padding(.leading)
                 // 水平方向にレイアウト
                 HStack {
-                    labalSayingFriendList
+                    friendListText
                     // 左に余白を追加
                         .padding(.leading)
                     // スペースを空ける
                     Spacer()
                     // ユーザーID入力ボタン
-                    buttonToInputUserID
+                    inputIDButton
                     // QRコードボタン
                     qrCodeButton
                 } // HStack ここまで
@@ -54,18 +54,18 @@ struct AddFriendView: View {
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("友達追加", displayMode: .inline)
-        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .backButton {
+        // ナビゲーションバーの左側に戻るボタンを配置
+        .navigationBarWithBackButton {
             // 戻るボタンの処理
             // 画面を閉じる
             dismiss()
-        } // placeCustomBackButton ここまで
+        } // navigationBarWithBackButton ここまで
     } // body ここまで
     
     // ユーザー名のテキスト
     private var userNameText: some View {
         // 自分のユーザー名を表示
-        Text("\(userName)")
+        Text(userName)
         // フォントを.titleに変更
             .font(.title)
         // 太字にする
@@ -81,17 +81,17 @@ struct AddFriendView: View {
     } // myUserIDText ここまで
     
     // 友達リストのラベル
-    private var labalSayingFriendList: some View {
+    private var friendListText: some View {
         Text("友達リスト")
         // 太字にする
             .bold()
-    } // labalSayingFriendList
+    } // friendListText ここまで
     
     // ID入力ボタン
-    private var buttonToInputUserID: some View {
+    private var inputIDButton: some View {
         Button {
             // テキストボックス付きアラートを表示
-            isShowAlert.toggle()
+            isShowPopUp.toggle()
         } label: {
             //ラベル
             // 垂直方向にレイアウト
@@ -105,7 +105,7 @@ struct AddFriendView: View {
             } // VStack ここまで
         } // Button ここまで
         // 友達になるユーザーIDを入力
-        .alert("ユーザーIDを入力", isPresented: $isShowAlert) {
+        .alert("ユーザーIDを入力", isPresented: $isShowPopUp) {
             // 友達のユーザーIDを入力するテキストフィールド
             TextField("ユーザーID", text: $userID)
             // 追加ボタン
@@ -126,13 +126,13 @@ struct AddFriendView: View {
             // メッセージ
             Text("友達になるユーザーのIDを入力してください")
         } // alert ここまで
-    } // buttonToInputUserID ここまで
+    } // inputIDButton ここまで
     
     // QRコードボタン
     private var qrCodeButton: some View {
         Button {
             // シートを表示
-            isShowSheet.toggle()
+            isShowQRCodeView.toggle()
         } label: {
             // ラベル
             // 垂直方向にレイアウト
@@ -148,7 +148,7 @@ struct AddFriendView: View {
             } // VStack ここまで
         } // Button ここまで
         // QRコードビューのシート
-        .sheet(isPresented: $isShowSheet) {
+        .sheet(isPresented: $isShowQRCodeView) {
             QRCodeView()
         } // sheetここまで
     } // qrCodeButton ここまで

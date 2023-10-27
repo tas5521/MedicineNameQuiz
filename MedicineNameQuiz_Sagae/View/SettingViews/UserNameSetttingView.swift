@@ -13,31 +13,31 @@ struct UserNameSetttingView: View {
     // ユーザー名を管理する変数
     @Binding var userName: String
     // アカウント画面から開いているかどうかを指定するための変数
-    let fromAccountView: Bool
-    
+    let isCalledFromAccountView: Bool
+
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
             // スペースを空ける
             Spacer()
             // ユーザー名の設定というテキスト
-            titleOfView
+            userNameSettingText
             // 上下左右に余白を追加
                 .padding()
-            // メッセージ
-            message
+            // アプリ内で使用するユーザー名の入力をユーザーに促すためのテキスト
+            inputUserNameText
             // 上下左右に余白を追加
                 .padding()
             //ユーザー名を入力するためのテキストフィールド
-            textFieldToInputUserName
+            inputUserNameTextField
             // 上下左右に余白を追加
                 .padding()
             // アカウント画面外から開かれた場合に表示するメッセージ
             // このViewがアカウント画面以外から開かれている場合
-            if !fromAccountView {
-                // 次のメッセージを表示
-                messageOpenedFromOtherThanAccountView
-                // 上下左右に余白を追加
+            if !isCalledFromAccountView {
+                // ユーザー名が変更できることをユーザーに伝えるためのテキスト
+                userNameCanBeChangedText
+                    // 上下左右に余白を追加
                     .padding()
             } // if ここまで
             // スペースを空ける
@@ -48,28 +48,29 @@ struct UserNameSetttingView: View {
             Spacer()
         } // VStack ここまで
     } // body ここまで
-    
+
     // ユーザー名の設定というテキスト
-    private var titleOfView: some View {
+    private var userNameSettingText: some View {
         Text("ユーザー名の設定")
     } // titleOfView
-    
-    // メッセージ
-    private var message: some View {
+
+    // アプリ内で使用するユーザー名の入力をユーザーに促すためのテキスト
+    private var inputUserNameText: some View {
         Text("アプリ内で使用するユーザー名を入力してください")
-    } // message ここまで
-    
+    } // inputUserNameText ここまで
+
     // ユーザー名を入力するためのテキストフィールド
-    private var textFieldToInputUserName: some View {
+    private var inputUserNameTextField: some View {
         TextField("ユーザー名", text: $userName)
         // 縁をつける
             .textFieldStyle(.roundedBorder)
-    } // textFieldToInputUserName ここまで
-    
-    private var messageOpenedFromOtherThanAccountView: some View {
+    } // inputUserNameTextField ここまで
+
+    // ユーザー名が変更できることをユーザーに伝えるためのテキスト
+    private var userNameCanBeChangedText: some View {
         Text("ユーザー名は「その他」の「アカウント」からでも変更できます")
-    } // messageOpenedFromOtherThanAccountView ここまで
-    
+    } // userNameCanBeChangedText ここまで
+
     // 決定ボタン
     private var decisionButton: some View {
         Button {
@@ -82,9 +83,8 @@ struct UserNameSetttingView: View {
             Text("決定")
         } // Button ここまで
     } // decisionButton ここまで
-} // RegistrationView ここまで
-
+} // UserNameSetttingView ここまで
 
 #Preview {
-    UserNameSetttingView(userName: .constant(""), fromAccountView: false)
+    UserNameSetttingView(userName: .constant(""), isCalledFromAccountView: false)
 }

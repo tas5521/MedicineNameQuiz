@@ -17,29 +17,27 @@ struct AccountView: View {
     // 初回のユーザー名設定画面の表示を管理する変数
     @Binding var isFirstTimeUserNameSetting: Bool
     // ユーザー名設定ボタンが押されたかを管理する変数
-    @State private var isTappedButtonToSetUserName: Bool = false
-    // シートの表示を管理する変数
-    @State private var isShowSheet = false
+    @State private var isTappedUserNameSettingButton: Bool = false
     // アカウント削除時の警告を表示
-    @State private var isShowAlertForAccountDeletion = false
-    // 既にサインインしている場合にポップアップを表示
-    @State private var isShowAlertAlreadySignedInMessage = false
+    @State private var isShowAccountDeletionAlert: Bool = false
+    // 既にサインインしている場合にメッセージを表示
+    @State private var isShowAlreadySignedIn: Bool = false
     // 既にサインアウトしている場合にポップアップを表示
-    @State private var isShowAlertAlreadySignedOutMessage = false
+    @State private var isShowAlreadySignedOut: Bool = false
     // ユーザー名設定画面の表示を管理する変数
-    @State private var isShowUserNameSettingView = false
+    @State private var isShowUserNameSettingView: Bool = false
     // サインイン画面の表示を管理する変数
     @State private var isShowSignInView: Bool = false
     // 項目のタイトル
     let title: String
-    
+
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
             // スペースを空ける
             Spacer()
             // サインイン状態を表示するテキスト
-            textToShowSignedInStatus
+            signedInStatusText
             // 上下左右に余白を追加
                 .padding()
             // サインインボタン
@@ -51,13 +49,13 @@ struct AccountView: View {
             // 上下左右に余白を追加
                 .padding()
             // ユーザー名設定ボタン
-            buttonToSetUserName
+            userNameSettingButton
             // 上下左右に余白を追加
                 .padding()
             // スペースを空ける
             Spacer()
             // アカウント削除ボタン
-            buttonToDeleteAccount
+            deleteAccountButton
             // 上下左右に余白を追加
                 .padding()
         } // VStack ここまで
@@ -70,18 +68,18 @@ struct AccountView: View {
                     // サインインしているかチェック。サインインしていなければ、何もしない。
                     guard isSignIn else { return }
                     // ユーザー名設定を行なっていない場合、もしくは、ユーザー名を設定ボタンが押されていた場合
-                    if isFirstTimeUserNameSetting || isTappedButtonToSetUserName {
+                    if isFirstTimeUserNameSetting || isTappedUserNameSettingButton {
                         // ユーザー名設定画面を表示
                         isShowUserNameSettingView.toggle()
                         // ユーザー名設定ボタンが押されたかを管理する変数をfalseにする
-                        isTappedButtonToSetUserName = false
+                        isTappedUserNameSettingButton = false
                     } // if ここまで
                 } // onDisappear ここまで
         } // sheet ここまで
         // ユーザー名設定画面のシート
         .sheet(isPresented: $isShowUserNameSettingView) {
             // ユーザー名設定画面を表示
-            UserNameSetttingView(userName: $userName, fromAccountView: true)
+            UserNameSetttingView(userName: $userName, isCalledFromAccountView: true)
             // ユーザー名設定画面が消えた時に実行
                 .onDisappear {
                     // 初回のユーザー名設定画面の表示を管理する変数をfalseに指定
@@ -90,26 +88,26 @@ struct AccountView: View {
         } // sheet ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
-        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .backButton {
+        // ナビゲーションバーの左側に戻るボタンを配置
+        .navigationBarWithBackButton {
             // 画面を閉じる
             dismiss()
-        } // placeCustomBackButtonここまで
+        } // navigationBarWithBackButtonここまで
     } // body ここまで
-    
+
     // サインイン状態を表示するテキスト
-    private var textToShowSignedInStatus: some View {
+    private var signedInStatusText: some View {
         Text("現在の状態: \(isSignIn ? "サインイン" : "サインアウト")")
             .bold()
-    } // textToShowSignedInStatus
-    
+    } // signedInStatusText ここまで
+
     // サインインボタン
     private var signInButton: some View {
         Button {
             // サインイン済みの場合
             if isSignIn {
                 // サインイン済みであることを示すアラートを表示
-                isShowAlertAlreadySignedInMessage.toggle()
+                isShowAlreadySignedIn.toggle()
                 // サインインしていない場合
             } else {
                 // サインイン画面を表示
@@ -120,7 +118,7 @@ struct AccountView: View {
             Text("サインイン")
         } // サインイン画面のシート
         // サインイン済みである時に表示するアラート
-        .alert("サインイン済み", isPresented: $isShowAlertAlreadySignedInMessage) {
+        .alert("サインイン済み", isPresented: $isShowAlreadySignedIn) {
             // OKボタン
             Button {
                 // 何もしない
@@ -133,27 +131,27 @@ struct AccountView: View {
             Text("すでにサインインしています")
         } // alert ここまで
     } // signInButton ここまで
-    
+
     // サインアウトボタン
     private var signOutButton: some View {
         Button {
-            // サインインしていない場合
-            if !isSignIn {
-                // サインインしていないを示すアラートを表示
-                isShowAlertAlreadySignedOutMessage.toggle()
-                // サインインしている場合
-            } else {
+            // サインインしている場合
+            if isSignIn {
                 // サインアウトする
                 isSignIn = false
                 // デバッグエリアにメッセージを表示
                 print("サインアウトしました")
+                // サインインしていない場合
+            } else {
+                // サインアウトしていることを示すアラートを表示
+                isShowAlreadySignedOut.toggle()
             } // if ここまで
         } label: {
             // ラベル
             Text("サインアウト")
         } // Button ここまで
         // サインアウト済みである時に表示するアラート
-        .alert("サインアウト済み", isPresented: $isShowAlertAlreadySignedOutMessage) {
+        .alert("サインアウト済み", isPresented: $isShowAlreadySignedOut) {
             // OKボタン
             Button {
                 // 何もしない
@@ -166,38 +164,38 @@ struct AccountView: View {
             Text("すでにサインアウトしています")
         } // alert ここまで
     } // signOutButton ここまで
-    
+
     // ユーザー名設定ボタン
-    private var buttonToSetUserName: some View {
+    private var userNameSettingButton: some View {
         Button {
             // ユーザー名設定ボタンがタップされたことを記録
-            isTappedButtonToSetUserName = true
-            // サインインしていない場合
-            if !isSignIn {
-                // サインイン画面を表示
-                isShowSignInView.toggle()
-                // サインインしている場合
-            } else {
+            isTappedUserNameSettingButton = true
+            // サインインしている場合
+            if isSignIn {
                 // ユーザー名設定画面を表示
                 isShowUserNameSettingView.toggle()
+                // サインインしていない場合
+            } else {
+                // サインイン画面を表示
+                isShowSignInView.toggle()
             } // if ここまで
         } label: {
             // ラベル
             Text("ユーザー名を設定")
         } // Button ここまで
-    } // buttonToSetUserName ここまで
-    
+    } // userNameSettingButton ここまで
+
     // アカウント削除ボタン
-    private var buttonToDeleteAccount: some View {
+    private var deleteAccountButton: some View {
         Button {
             // アカウント削除のアラートを表示
-            isShowAlertForAccountDeletion.toggle()
+            isShowAccountDeletionAlert.toggle()
         } label: {
             // ラベル
             Text("アカウント削除")
         } // Button ここまで
         // アカウント削除のアラート
-        .alert("アカウント削除", isPresented: $isShowAlertForAccountDeletion) {
+        .alert("アカウント削除", isPresented: $isShowAccountDeletionAlert) {
             // 削除ボタン
             Button(role: .destructive) {
                 // アカウント削除の処理
@@ -216,7 +214,7 @@ struct AccountView: View {
             // メッセージ
             Text("データは失われます\n本当によろしいですか？")
         } // alert ここまで
-    } // buttonToDeleteAccount ここまで
+    } // deleteAccountButton ここまで
 } // AccountView ここまで
 
 #Preview {

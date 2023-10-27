@@ -36,7 +36,7 @@ struct QuestionListView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 問題リストの検索バー
-                searchBarForQuestionList
+                listSearchBar
                 // 問題リスト
                 questionList
             } // VStack ここまで
@@ -56,16 +56,18 @@ struct QuestionListView: View {
         } // ZStack ここまで
     } // body ここまで
     
-    private var searchBarForQuestionList: some View {
+    // 問題リスト検索バー
+    private var listSearchBar: some View {
         Text("問題リスト検索バー")
-    } // questionListSearchBar
+    } // listSearchBar ここまで
 
+    // 問題リスト
     private var questionList: some View {
         List {
             ForEach(dummyList) { item in
                 // 各行に対応した画面へ遷移
                 NavigationLink {
-                    QuestionListRowView(listName: item.listName, questions: item.questions)
+                    QuestionsView(listName: item.listName, questions: item.questions)
                 } label: {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
@@ -104,13 +106,13 @@ struct QuestionListView: View {
             // 幅高さ65に指定
                 .frame(width: 65, height: 65)
             // 色をカスタムのボタンの色に指定
-                .foregroundStyle(Color.customButtonColor)
+                .foregroundStyle(Color.regularButtonColor)
             // 背景を白に指定
                 .background(Color.white)
             // 丸くクリッピング
                 .clipShape(Circle())
         } // Button ここまで
-    } // buttonToAddList ここまで
+    } // addListButton ここまで
 } // QuestionListView ここまで
 
 #Preview {

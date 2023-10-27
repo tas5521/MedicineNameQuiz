@@ -18,50 +18,50 @@ struct StudyView: View {
     @State var isShowUserNameSetttingView: Bool = false
     // サインイン画面の表示を管理する変数
     @State private var isShowSignInView: Bool = false
-    // タブの選択項目を保持する変数
-    @State private var selectedTabIndex: Int = 0
-    // 学習の開始を管理する変数
-    @State private var isStartStudy: Bool = false
+    // 学習中であるかを管理する変数
+    @State private var isStudying: Bool = false
+    // タブの選択項目番号を保持する変数
+    @State private var tabIndex: Int = 0
     // 選択されている学習モードを保持する変数
-    private var selectedMode: SelectedMode {
-        SelectedMode.dicideMode(by: selectedTabIndex)
-    } // selectedModeここまで
+    private var studyMode: StudyMode {
+        StudyMode.dicideMode(by: tabIndex)
+    } // studyModeここまで
 
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
-            // タブを上に配置
-            tabView
+            // 学習モード選択タブを上に配置
+            studyModeTab
             Spacer()
             // 選択された学習モードにより画面を分けて表示
-            switch selectedMode {
+            switch studyMode {
                 // 本番モードの場合
             case .actual:
                 // 本番モードのViewを配置
-                actualView
+                actualModeView
                 // 練習モードの場合
             case .practice:
                 // 練習モードのViewを配置
-                practiceView
+                practiceModeView
             } // switch ここまで
             Spacer()
             // スタートボタンを配置
             startButton
             Spacer()
         } // VStack ここまで
-        // 学習中の画面へ遷移
-        .navigationDestination(isPresented: $isStartStudy) {
-            StudyingView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
+        // 問題を解く画面へ遷移
+        .navigationDestination(isPresented: $isStudying) {
+            QuestionView(isStudying: $isStudying, studyMode: studyMode)
         } // navigationDestination ここまで
     } // body ここまで
-    
-    // 上部につけるタブ
-    private var tabView: some View {
-        TopTabView(tabNameList: SelectedMode.modeList, selectedTabIndex: $selectedTabIndex)
-    } // topTabView ここまで
-    
+
+    // 学習モード選択タブ
+    private var studyModeTab: some View {
+        TopTabView(tabNameList: StudyMode.modeList, tabIndex: $tabIndex)
+    } // studyModeTab ここまで
+
     // 本番モードの画面
-    private var actualView: some View {
+    private var actualModeView: some View {
         // 垂直方向にレイアウト
         VStack(alignment: .leading) {
             Text("モード選択")
@@ -69,10 +69,10 @@ struct StudyView: View {
         } // VStack ここまで
         // 太字にする
         .bold()
-    } // actualView ここまで
-    
+    } // actualModeView ここまで
+
     // 　練習モードの画面
-    private var practiceView: some View {
+    private var practiceModeView: some View {
         // 垂直方向にレイアウト
         VStack(alignment: .leading) {
             Text("制限時間")
@@ -85,23 +85,28 @@ struct StudyView: View {
             // 太字にする
                 .bold()
         } // VStack ここまで
-    } // practiceView ここまで
-    
+    } // practiceModeView ここまで
+
     // スタートボタン
     private var startButton: some View {
         Button {
             // 選択された学習モードにより異なる処理をする
-            switch selectedMode {
+            switch studyMode {
                 // 本番モードの場合
             case .actual:
-                //
+                // サインインしていない場合
                 if !isSignIn {
+                    // サインイン画面を表示
                     isShowSignInView.toggle()
+                    // サインインしている場合
                 } else {
-                    isStartStudy.toggle()
-                }
+                    // 学習開始
+                    isStudying.toggle()
+                } // if ここまで
+                // 練習モードの場合
             case .practice:
-                isStartStudy.toggle()
+                // 学習開始
+                isStudying.toggle()
             } // switch ここまで
         } label: {
             Text("スタート")
@@ -124,7 +129,7 @@ struct StudyView: View {
         // ユーザー名設定画面のシート
         .sheet(isPresented: $isShowUserNameSetttingView) {
             // ユーザー名設定画面を表示
-            UserNameSetttingView(userName: $userName, fromAccountView: false)
+            UserNameSetttingView(userName: $userName, isCalledFromAccountView: false)
             // ユーザー名設定画面が閉じた時、実行
                 .onDisappear {
                     // 初回のユーザー名設定画面の表示を管理する変数をfalseにする

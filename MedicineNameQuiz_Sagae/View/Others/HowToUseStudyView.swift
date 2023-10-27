@@ -10,20 +10,20 @@ import SwiftUI
 struct HowToUseStudyView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
-    // タイトル
+    // 項目のタイトル
     let title: String
 
     var body: some View {
         Text("HowToUseStudyView")
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
-        // ナビゲーションバーの左側にカスタムの戻るボタンを配置
-        .backButton {
+        // ナビゲーションバーの左側に戻るボタンを配置
+        .navigationBarWithBackButton {
             // 戻るボタンの処理
             // 画面を閉じる
             dismiss()
-        } // placeCustomBackButton ここまで
-    } // body ここまで
+        } // navigationBarWithBackButton ここまで
+    } // bodyここまで
 } // HowToUseStudyView ここまで
 
 #Preview {

@@ -1,5 +1,5 @@
 //
-//  StudyingView.swift
+//  QuestionView.swift
 //  MedicineNameQuiz_Sagae
 //
 //  Created by 寒河江彪流 on 2023/09/30.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct StudyingView: View {
-    // 学習の開始を管理する変数
-    @Binding var isStartStudy: Bool
+struct QuestionView: View {
+    // 学習中であるかを管理する変数
+    @Binding var isStudying: Bool
     // 選択されている学習モード
-    let selectedMode: SelectedMode
+    let studyMode: StudyMode
     // ダミーの問題
     let dummyQuestion: (String, [String]) = ("アムロジン", ["アムロジピンベシル酸塩", "イミダフェナシン", "エバスチン", "プランルカスト水和物"])
     
@@ -22,7 +22,7 @@ struct StudyingView: View {
             VStack(alignment: .leading) {
                 // 水平方向にレイアウト
                 HStack {
-                    // 経過時間
+                    // スコアタイム
                     scoreTime
                         .padding()
                     Spacer()
@@ -34,7 +34,7 @@ struct StudyingView: View {
                 timeLimit
                     .padding()
                 // 問題文
-                examinationSentence
+                questionText
                     .padding()
             } // VStackここまで
             // 選択肢を配置
@@ -43,11 +43,11 @@ struct StudyingView: View {
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習", displayMode: .inline)
-        // ナビゲーションバーの右側にカスタムの終了ボタンを配置
-        .buttonTrailing(label: "終了") {
-            // StudyingViewを閉じる
-            isStartStudy = false
-        } // placeCustomButtonTrailing
+        // ナビゲーションバーの右側に終了ボタンを配置
+        .navigationBarWithButtonTrailing(label: "終了") {
+            // QuestionViewを閉じる
+            isStudying = false
+        } // navigationBarWithButtonTrailing ここまで
     } // body ここまで
     
     // スコアタイム
@@ -66,9 +66,9 @@ struct StudyingView: View {
     } // timeLimitView ここまで
     
     // 問題文
-    private var examinationSentence: some View {
+    private var questionText: some View {
         Text("一般名を答えてください\nQ1. \(dummyQuestion.0)")
-    } // examinationSentence ここまで
+    } // sentence ここまで
     
     // 選択肢
     private var choices: some View {
@@ -76,7 +76,7 @@ struct StudyingView: View {
             // 選択肢を作成
             ForEach(dummyQuestion.1, id: \.self) { item in
                 NavigationLink {
-                    ResultView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
+                    ResultView(isStudying: $isStudying, studyMode: studyMode)
                 } label: {
                     Text(item)
                         .foregroundColor(Color.blue)
@@ -85,7 +85,7 @@ struct StudyingView: View {
             } // ForEach ここまで
             // パスボタン
             NavigationLink {
-                ResultView(isStartStudy: $isStartStudy, selectedMode: selectedMode)
+                ResultView(isStudying: $isStudying, studyMode: studyMode)
             } label: {
                 Text("パス")
                     .foregroundColor(Color.blue)
@@ -95,5 +95,5 @@ struct StudyingView: View {
 } // StudyingView ここまで
 
 #Preview {
-    StudyingView(isStartStudy: .constant(true), selectedMode: .actual)
+    QuestionView(isStudying: .constant(true), studyMode: .actual)
 }

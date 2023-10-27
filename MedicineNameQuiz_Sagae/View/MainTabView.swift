@@ -9,23 +9,23 @@ import SwiftUI
 
 struct MainTabView: View {
     // タブの選択項目を保持する変数
-    @State private var selectedTab: SelectedTab = .study
+    @State private var tabSelection: TabSelection = .study
     // ユーザー名を管理する変数
     @State private var userName: String = ""
     // 友達追加画面への遷移を管理する変数
-    @State private var isShowingAddFriendView: Bool = false
+    @State private var isShowAddFriendView: Bool = false
     // サインインしているかどうかを管理する変数
     @State private var isSignIn: Bool = false
     // 初回のユーザー名設定画面の表示を管理する変数
     @State private var isFirstTimeUserNameSetting: Bool = true
     // サインイン画面の表示を管理する変数
-    @State private var showingSignInView: Bool = false
+    @State private var isShowSignInView: Bool = false
     // ユーザー名設定画面の表示を管理する変数
-    @State private var showingUserNameSetttingView: Bool = false
+    @State private var isShowUserNameSetttingView: Bool = false
 
     var body: some View {
         NavigationStack {
-            TabView(selection: $selectedTab) {
+            TabView(selection: $tabSelection) {
                 // 学習画面のViewを配置
                 studyView
                 // 問題リスト画面のViewを配置
@@ -38,11 +38,11 @@ struct MainTabView: View {
                 othersView
             } // TabView ここまで
             // ナビゲーションバーのタイトルを設定
-            .navigationBarTitle(selectedTab.rawValue, displayMode: .inline)
+            .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
             // ツールバー設定
             .toolbar {
                 // ランキングのタブでは、右に友達追加ボタンを配置する
-                if selectedTab == .ranking {
+                if tabSelection == .ranking {
                     // 友達追加ボタンを右に配置
                     ToolbarItem(placement: .topBarTrailing) {
                         addFriendButton
@@ -50,7 +50,7 @@ struct MainTabView: View {
                 } // if ここまで
             } // toolbarここまで
             // 友達追加画面へ遷移
-            .navigationDestination(isPresented: $isShowingAddFriendView) {
+            .navigationDestination(isPresented: $isShowAddFriendView) {
                 AddFriendView(userName: $userName)
             } // navigationDestination ここまで
         } // NavigationStack ここまで
@@ -63,7 +63,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("学習", systemImage: "book.fill")
             } // tabItem ここまで
-            .tag(SelectedTab.study)
+            .tag(TabSelection.study)
     } // studyView ここまで
 
     // 問題リスト画面
@@ -72,7 +72,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("問題リスト", systemImage: "square.and.pencil")
             } // tabItem ここまで
-            .tag(SelectedTab.questionList)
+            .tag(TabSelection.questionList)
     } // questionListView ここまで
     
     // ランキング画面
@@ -81,7 +81,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("ランキング", systemImage: "crown.fill")
             } // tabItem ここまで
-            .tag(SelectedTab.ranking)
+            .tag(TabSelection.ranking)
     } // rankingView ここまで
     
     // 薬リスト画面
@@ -90,7 +90,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("薬リスト", systemImage: "list.bullet.rectangle.portrait.fill")
             } // tabItem ここまで
-            .tag(SelectedTab.medicineList)
+            .tag(TabSelection.medicineList)
     } // medicineListView ここまで
     
     // その他画面
@@ -100,7 +100,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("その他", systemImage: "gearshape.fill")
             } // tabItem ここまで
-            .tag(SelectedTab.others)
+            .tag(TabSelection.others)
     } // othersView ここまで
     
     // 友達追加ボタン
@@ -110,11 +110,11 @@ struct MainTabView: View {
             // サインインしていない場合
             if !isSignIn {
                 // サインイン画面を表示
-                showingSignInView.toggle()
+                isShowSignInView.toggle()
                 // サインインしている場合
             } else {
                 // 友達追加画面を表示
-                isShowingAddFriendView.toggle()
+                isShowAddFriendView.toggle()
             } // if ここまで
         } label: {
             // 水平方向に配置
@@ -125,7 +125,7 @@ struct MainTabView: View {
         // 色を青に指定
         .foregroundColor(Color.blue)
         // サインイン画面のシート
-        .sheet(isPresented: $showingSignInView) {
+        .sheet(isPresented: $isShowSignInView) {
             // サインイン画面を表示
             SignInView(isSignIn: $isSignIn, userName: $userName)
             // サインイン画面が閉じた時に実行
@@ -135,24 +135,24 @@ struct MainTabView: View {
                     // 初回のユーザー名設定の場合
                     if isFirstTimeUserNameSetting {
                         // ユーザー名設定画面を表示
-                        showingUserNameSetttingView.toggle()
+                        isShowUserNameSetttingView.toggle()
                         // 初回のユーザー名設定でない場合
                     } else {
                         // 友達追加画面を表示
-                        isShowingAddFriendView.toggle()
+                        isShowAddFriendView.toggle()
                     } // if ここまで
                 } // onDisappear ここまで
         } // sheet ここまで
         // ユーザー名設定画面のシート
-        .sheet(isPresented: $showingUserNameSetttingView) {
+        .sheet(isPresented: $isShowUserNameSetttingView) {
             // ユーザー名設定画面を表示
-            UserNameSetttingView(userName: $userName, fromAccountView: false)
+            UserNameSetttingView(userName: $userName, isCalledFromAccountView: false)
             // ユーザー名設定画面が閉じた時に実行
                 .onDisappear {
                     // 初回のユーザー名設定画面の表示を管理する変数をfalseにする
                     isFirstTimeUserNameSetting = false
                     // 友達追加画面を表示
-                    isShowingAddFriendView.toggle()
+                    isShowAddFriendView.toggle()
                 } // onDisappear ここまで
         } // sheet ここまで
     } // addFriendButtonここまで
