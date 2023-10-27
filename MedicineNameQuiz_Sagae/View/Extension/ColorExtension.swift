@@ -8,9 +8,9 @@
 import SwiftUI
 
 extension Color {
-    static let backgroundColor: Color = Color("CustomSkyBlue")
-    static let tabColor: Color = Color("CustomBlue")
-    static let regularButtonColor: Color = Color("CustomOrange")
-    static let greenButtonColor: Color = Color("CustomGreen")
-    static let redButtonColor: Color = Color("CustomRed")
+    static let backgroundColor: Color = Color("BackgroundSkyBlue")
+    static let tabColor: Color = Color("TabBlue")
+    static let orangeButtonColor: Color = Color("ButtonOrange")
+    static let greenButtonColor: Color = Color("ButtonGreen")
+    static let redButtonColor: Color = Color("ButtonRed")
 } // Color拡張ここまで
