@@ -45,7 +45,10 @@ struct EditQuestionListView: View {
     
     // 薬の区分を選択するタブ
     private var classificationTab: some View {
-        TopTabView(tabNameList: MedicineClassification.classificationList, tabIndex: $tabIndex)
+        // 薬の区分の配列を取得
+        let classificationArray = MedicineClassification.allValues.map({classification in classification.rawValue})
+        // 薬の区分を選択するタブを返す
+        return TopTabView(tabNameList: classificationArray, tabIndex: $tabIndex)
     } // classificationTab ここまで
     
     // リスト名編集用テキストフィールド

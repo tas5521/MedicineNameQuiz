@@ -14,11 +14,11 @@ struct CreateQuestionListView: View {
     @State private var questionListName: String = ""
     // タブの選択項目を保持する変数
     @State private var tabIndex: Int = 0
-    
+
     // View Presentation State
     // リストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
-    
+
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
@@ -60,9 +60,12 @@ struct CreateQuestionListView: View {
 
     // 薬の区分を選択するタブ
     private var classificationTab: some View {
-        TopTabView(tabNameList: MedicineClassification.classificationList, tabIndex: $tabIndex)
+        // 薬の区分の配列を取得
+        let classificationArray = MedicineClassification.allValues.map({classification in classification.rawValue})
+        // 薬の区分を選択するタブを返す
+        return TopTabView(tabNameList: classificationArray, tabIndex: $tabIndex)
     } // classificationTab ここまで
-    
+
     // 薬を検索するためのテキストフィールド
     private var searchMedicineTextField: some View {
         Text("薬の検索バー")
@@ -72,13 +75,13 @@ struct CreateQuestionListView: View {
     private var medicineList: some View {
         Text("薬リスト")
     } // medicineList ここまで
-    
+
     // リスト名を取得するためのテキストフィールド
     private var listNameTextField: some View {
         // リストの名前を取得するためのテキストフィールド
         TextField("リストの名前", text: $questionListName)
     } // listNameTextField ここまで
-    
+
     // 名前が付けられたリストを保存するボタン
     private var saveButton: some View {
         Button {
@@ -90,7 +93,7 @@ struct CreateQuestionListView: View {
             Text("保存")
         } // Button ここまで
     } // saveButton ここまで
-    
+
     // やめるボタン
     private var cancelButton: some View {
         Button(role: .cancel) {

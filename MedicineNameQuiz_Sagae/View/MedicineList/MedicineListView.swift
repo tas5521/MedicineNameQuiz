@@ -12,11 +12,7 @@ struct MedicineListView: View {
     @State private var tabIndex: Int = 0
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
-    // タブで選択された薬の区分を管理する変数
-    private var classification: MedicineClassification {
-        MedicineClassification.classify(by: tabIndex)
-    } // classification ここまで
-
+    
     var body: some View {
         // 奥から手前方向にレイアウト
         ZStack {
@@ -42,7 +38,7 @@ struct MedicineListView: View {
                     // スペースを空ける
                     Spacer()
                     // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                    if classification == .customMedicine {
+                    if MedicineClassification.allValues[tabIndex] == .customMedicine {
                         addMedicineButton
                             .padding()
                     } // if ここまで
@@ -50,22 +46,25 @@ struct MedicineListView: View {
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
-
+    
     // 薬の区分を選択するタブ
     private var classificationTab: some View {
-        TopTabView(tabNameList: MedicineClassification.classificationList, tabIndex: $tabIndex)
+        // 薬の区分の配列を取得
+        let classificationArray = MedicineClassification.allValues.map({classification in classification.rawValue})
+        // 薬の区分を選択するタブを返す
+        return TopTabView(tabNameList: classificationArray, tabIndex: $tabIndex)
     } // classificationTab ここまで
-
+    
     // 薬の検索バー
     private var medicineSearchBar: some View {
         Text("検索バー")
     } // medicineSearchBar ここまで
-
+    
     // 薬リスト
     private var medicineList: some View {
         Text("薬リスト")
     } // medicineList ここまで
-
+    
     // カスタムで薬名を追加するボタン
     private var addMedicineButton: some View {
         Button {
