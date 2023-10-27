@@ -11,7 +11,7 @@ struct MedicineListView: View {
     // タブの選択項目を保持する変数
     @State private var tabIndex: Int = 0
     // 薬名追加ビューの表示を管理する変数
-    @State private var isAddMedicineView: Bool = false
+    @State private var isShowAddMedicineView: Bool = false
     // タブで選択された薬の区分を管理する変数
     private var classification: MedicineClassification {
         MedicineClassification.classify(by: tabIndex)
@@ -70,7 +70,7 @@ struct MedicineListView: View {
     private var addMedicineButton: some View {
         Button {
             // 薬名追加ビューを表示
-            isAddMedicineView.toggle()
+            isShowAddMedicineView.toggle()
         } label: {
             // ラベル
             Image(systemName: "plus.circle.fill")
@@ -88,7 +88,7 @@ struct MedicineListView: View {
                 .clipShape(Circle())
         } // Button ここまで
         // 薬名追加ビューのシート
-        .sheet(isPresented: $isAddMedicineView) {
+        .sheet(isPresented: $isShowAddMedicineView) {
             AddMedicineView()
         }  // sheet ここまで
     } // addMedicineButton ここまで

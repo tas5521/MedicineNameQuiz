@@ -14,6 +14,8 @@ struct CreateQuestionListView: View {
     @State private var questionListName: String = ""
     // タブの選択項目を保持する変数
     @State private var tabIndex: Int = 0
+    
+    // View Presentation State
     // リストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
     

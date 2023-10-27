@@ -10,10 +10,13 @@ import SwiftUI
 struct ResultView: View {
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
-    // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
-    @State private var isShowPopUp = false
     // 問題リストの名前を保持する変数
     @State private var questionListName: String = ""
+    
+    // View Presentation State
+    // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
+    @State private var isShowPopUp = false
+    
     // 選択されている学習モード
     let studyMode: StudyMode
 

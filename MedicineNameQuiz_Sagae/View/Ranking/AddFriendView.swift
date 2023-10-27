@@ -14,6 +14,8 @@ struct AddFriendView: View {
     @Binding var userName: String
     // 友達のユーザーIDを格納する変数
     @State private var userID: String = ""
+    
+    // View Presentation States
     // 友達になるユーザーIDを入力するためのポップアップの表示を管理する変数
     @State private var isShowPopUp: Bool = false
     // QRCodeViewの表示を管理する変数

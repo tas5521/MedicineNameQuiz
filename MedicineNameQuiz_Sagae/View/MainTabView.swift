@@ -12,12 +12,14 @@ struct MainTabView: View {
     @State private var tabSelection: TabSelection = .study
     // ユーザー名を管理する変数
     @State private var userName: String = ""
-    // 友達追加画面への遷移を管理する変数
-    @State private var isShowAddFriendView: Bool = false
     // サインインしているかどうかを管理する変数
     @State private var isSignIn: Bool = false
     // 初回のユーザー名設定画面の表示を管理する変数
     @State private var isFirstTimeUserNameSetting: Bool = true
+    
+    // View Presentation States
+    // 友達追加画面への遷移を管理する変数
+    @State private var isShowAddFriendView: Bool = false
     // サインイン画面の表示を管理する変数
     @State private var isShowSignInView: Bool = false
     // ユーザー名設定画面の表示を管理する変数

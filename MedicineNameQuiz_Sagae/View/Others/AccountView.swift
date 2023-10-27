@@ -18,6 +18,8 @@ struct AccountView: View {
     @Binding var isFirstTimeUserNameSetting: Bool
     // ユーザー名設定ボタンが押されたかを管理する変数
     @State private var isTappedUserNameSettingButton: Bool = false
+    
+    // View Presentation States
     // アカウント削除時の警告を表示
     @State private var isShowAccountDeletionAlert: Bool = false
     // 既にサインインしている場合にメッセージを表示
@@ -28,6 +30,7 @@ struct AccountView: View {
     @State private var isShowUserNameSettingView: Bool = false
     // サインイン画面の表示を管理する変数
     @State private var isShowSignInView: Bool = false
+    
     // 項目のタイトル
     let title: String
 

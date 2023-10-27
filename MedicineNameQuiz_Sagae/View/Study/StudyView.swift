@@ -14,14 +14,17 @@ struct StudyView: View {
     @Binding var userName: String
     // 初回のユーザー名設定画面の表示を管理する変数
     @Binding var isFirstTimeUserNameSetting: Bool
-    // ユーザー名設定画面の表示を管理する変数
-    @State var isShowUserNameSetttingView: Bool = false
-    // サインイン画面の表示を管理する変数
-    @State private var isShowSignInView: Bool = false
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
     // タブの選択項目番号を保持する変数
     @State private var tabIndex: Int = 0
+    
+    // View Presentation States
+    // ユーザー名設定画面の表示を管理する変数
+    @State var isShowUserNameSetttingView: Bool = false
+    // サインイン画面の表示を管理する変数
+    @State private var isShowSignInView: Bool = false
+    
     // 選択されている学習モードを保持する変数
     private var studyMode: StudyMode {
         StudyMode.dicideMode(by: tabIndex)
