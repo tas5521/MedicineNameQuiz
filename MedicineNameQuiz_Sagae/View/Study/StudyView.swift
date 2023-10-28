@@ -100,14 +100,14 @@ struct StudyView: View {
             switch studyMode {
                 // 本番モードの場合
             case .actual:
-                // サインインしていない場合
-                if !isSignIn {
-                    // サインイン画面を表示
-                    isShowSignInView.toggle()
-                    // サインインしている場合
-                } else {
+                // サインインしている場合
+                if isSignIn {
                     // 学習開始
                     isStudying.toggle()
+                    // サインインしていない場合
+                } else {
+                    // サインイン画面を表示
+                    isShowSignInView.toggle()
                 } // if ここまで
                 // 練習モードの場合
             case .practice:

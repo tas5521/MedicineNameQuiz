@@ -109,14 +109,14 @@ struct MainTabView: View {
     private var addFriendButton: some View {
         // 友達追加ボタン
         Button {
-            // サインインしていない場合
-            if !isSignIn {
-                // サインイン画面を表示
-                isShowSignInView.toggle()
-                // サインインしている場合
-            } else {
+            // サインインしている場合
+            if isSignIn {
                 // 友達追加画面を表示
                 isShowAddFriendView.toggle()
+                // サインインしていない場合
+            } else {
+                // サインイン画面を表示
+                isShowSignInView.toggle()
             } // if ここまで
         } label: {
             // 水平方向に配置
