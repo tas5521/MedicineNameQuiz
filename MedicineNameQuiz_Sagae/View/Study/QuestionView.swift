@@ -53,22 +53,22 @@ struct QuestionView: View {
     // スコアタイム
     private var scoreTime: some View {
         Text("時間")
-    } // scoreTimerView ここまで
+    } // scoreTime ここまで
     
     // これまでの解答結果
     private var resultsSoFar: some View {
         Text("まるばつパス")
-    } // resultsSoFarView ここまで
+    } // resultsSoFar ここまで
     
     // 制限時間
     private var timeLimit: some View {
         Text("制限時間")
-    } // timeLimitView ここまで
+    } // timeLimit ここまで
     
     // 問題文
     private var questionText: some View {
         Text("一般名を答えてください\nQ1. \(dummyQuestion.0)")
-    } // sentence ここまで
+    } // questionText ここまで
     
     // 選択肢
     private var choices: some View {
