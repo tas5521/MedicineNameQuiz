@@ -289,11 +289,12 @@
 			};
 			buildConfigurationList = 4AADB2C42AC5588300C5A40E /* Build configuration list for PBXProject "MedicineNameQuiz_Sagae" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 4AADB2C02AC5588300C5A40E;
 			productRefGroup = 4AADB2CA2AC5588300C5A40E /* Products */;

@@ -42,7 +42,7 @@ struct EditQuestionListView: View {
             dismiss()
         } // navigationBarWithButtonTrailing ここまで
     } // body ここまで
-    
+
     // 薬の区分を選択するタブ
     private var classificationTab: some View {
         // 薬の区分の配列を取得

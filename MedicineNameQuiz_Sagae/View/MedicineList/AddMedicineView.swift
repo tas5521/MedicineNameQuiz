@@ -13,7 +13,7 @@ struct AddMedicineView: View {
     
     var body: some View {
         // 追加する薬の名前を入力するようユーザーに促すためのテキスト
-        enterMedicineNameText
+        Text("追加する薬の名前を入力してください")
             .padding()
         // 先発品名を入力するためのテキストフィールド
         originalMedicineTextField
@@ -28,12 +28,7 @@ struct AddMedicineView: View {
         cancelButton
             .padding()
     } // body ここまで
-    
-    // 追加する薬の名前を入力するようユーザーに促すためのテキスト
-    private var enterMedicineNameText: some View {
-        Text("追加する薬の名前を入力してください")
-    } // enterMedicineNameText ここまで
-    
+
     // 先発品名を入力するためのテキストフィールド
     private var originalMedicineTextField: some View {
         Text("先発品名")

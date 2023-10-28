@@ -19,7 +19,11 @@ struct SignInView: View {
         // 垂直方向にレイアウト
         VStack {
             // サインインと表示するテキスト
-            signInText
+            Text("サインイン")
+            // フォントを.titleに指定
+                .font(.title)
+            // 太字にする
+                .bold()
             // 上下左右に余白を追加
                 .padding()
             // 下の二つのサインインボタンは、FirebaseAuthで実装予定
@@ -31,16 +35,7 @@ struct SignInView: View {
                 .padding()
         } // VStack ここまで
     } // body ここまで
-    
-    // サインインと表示するテキスト
-    var signInText: some View {
-        Text("サインイン")
-        // フォントを.titleに指定
-            .font(.title)
-        // 太字にする
-            .bold()
-    } // signInText
-    
+
     // Appleサインインボタン
     var appleSingInButton: some View {
         Button {

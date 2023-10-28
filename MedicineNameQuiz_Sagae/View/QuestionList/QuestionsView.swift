@@ -18,8 +18,10 @@ struct QuestionsView: View {
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
-            // リストの名前のビュー
-            listNameView
+            // リストの名前を表示
+            Text(listName)
+            // 太字にする
+                .bold()
             // 薬の検索バー
             medicineSearchBar
             // 出題される薬の名前のリスト
@@ -39,15 +41,7 @@ struct QuestionsView: View {
             EditQuestionListView()
         } // navigationBarWithNavigationLinkTrailing ここまで
     } // body ここまで
-    
-    // リストの名前
-    private var listNameView: some View {
-        // リストの名前を表示
-        Text(listName)
-        // 太字にする
-            .bold()
-    } // listNameView ここまで
-    
+
     // 薬の名前の検索バー
     private var medicineSearchBar: some View {
         // 薬の名前を検索するバー
