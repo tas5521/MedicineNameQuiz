@@ -10,5 +10,5 @@ enum StudyMode: String {
     case practice = "練習"
     
     // すべてのケース
-    static let allValues: [StudyMode] = [.actual, .practice]
+    static let allCases: [StudyMode] = [.actual, .practice]
 } // StudyModeここまで

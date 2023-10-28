@@ -38,7 +38,7 @@ struct MedicineListView: View {
                     // スペースを空ける
                     Spacer()
                     // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                    if MedicineClassification.allValues[tabIndex] == .customMedicine {
+                    if MedicineClassification.allCases[tabIndex] == .customMedicine {
                         addMedicineButton
                             .padding()
                     } // if ここまで
@@ -50,7 +50,7 @@ struct MedicineListView: View {
     // 薬の区分を選択するタブ
     private var classificationTab: some View {
         // 薬の区分の配列を取得
-        let classificationArray = MedicineClassification.allValues.map({classification in classification.rawValue})
+        let classificationArray = MedicineClassification.allCases.map({classification in classification.rawValue})
         // 薬の区分を選択するタブを返す
         return TopTabView(tabNameList: classificationArray, tabIndex: $tabIndex)
     } // classificationTab ここまで

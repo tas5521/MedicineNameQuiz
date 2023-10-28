@@ -14,10 +14,10 @@ enum MedicineClassification: String {
     case customMedicine = "カスタム"
 
     // すべてのケース
-    static let allValues: [MedicineClassification] = [
+    static let allCases: [MedicineClassification] = [
         .internalMedicine,
         .injectionMedicine,
         .externalMedicine,
         .customMedicine
-    ] // allValues ここまで
+    ] // allCases ここまで
 } // SelectedClassificationここまで

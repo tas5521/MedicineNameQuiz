@@ -27,7 +27,7 @@ struct StudyView: View {
     
     // 選択されている学習モードを保持する変数
     private var studyMode: StudyMode {
-        StudyMode.allValues[tabIndex]
+        StudyMode.allCases[tabIndex]
     } // studyModeここまで
 
     var body: some View {
@@ -61,7 +61,7 @@ struct StudyView: View {
     // 学習モード選択タブ
     private var studyModeTab: some View {
         // 学習モードの配列を取得
-        let modeArray = StudyMode.allValues.map({mode in mode.rawValue})
+        let modeArray = StudyMode.allCases.map({mode in mode.rawValue})
         // 学習モードを選択するタブを返す
         return TopTabView(tabNameList: modeArray, tabIndex: $tabIndex)
     } // studyModeTab ここまで
