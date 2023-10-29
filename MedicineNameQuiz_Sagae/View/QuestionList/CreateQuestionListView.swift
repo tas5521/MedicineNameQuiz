@@ -33,18 +33,22 @@ struct CreateQuestionListView: View {
             Spacer()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("問題リスト", displayMode: .inline)
-        // ナビゲーションバーの左側に戻るボタンを配置
-        .navigationBarWithBackButton {
-            // 戻るボタンの処理
-            // 画面を閉じる
-            dismiss()
-        } // placeCustomBackButton ここまで
+        .navigationBarTitle("リスト作成", displayMode: .inline)
         // ナビゲーションバーの右側に保存ボタンを配置
-        .navigationBarWithButtonTrailing(label: "保存") {
-            // アラートを表示
-            isShowPopUp.toggle()
-        } // placeCustomNavigationLinkTrailing ここまで
+        .toolbar {
+            // ボタンの位置を指定
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    // アラートを表示
+                    isShowPopUp.toggle()
+                } label: {
+                    // ラベル
+                    Text("保存")
+                    // 色を指定
+                        .foregroundColor(Color.black)
+                } // Button ここまで
+            } // ToolbarItem ここまで
+        } // toolbar ここまで
         // リストに保存するためのポップアップ
         .alert("リストに保存", isPresented: $isShowPopUp) {
             // リスト名を取得するためのテキストフィールド

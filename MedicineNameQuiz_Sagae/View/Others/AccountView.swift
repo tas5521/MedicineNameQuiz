@@ -91,11 +91,6 @@ struct AccountView: View {
         } // sheet ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
-        // ナビゲーションバーの左側に戻るボタンを配置
-        .navigationBarWithBackButton {
-            // 画面を閉じる
-            dismiss()
-        } // navigationBarWithBackButtonここまで
     } // body ここまで
 
     // サインイン状態を表示するテキスト

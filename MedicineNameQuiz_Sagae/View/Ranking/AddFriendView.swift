@@ -56,12 +56,6 @@ struct AddFriendView: View {
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("友達追加", displayMode: .inline)
-        // ナビゲーションバーの左側に戻るボタンを配置
-        .navigationBarWithBackButton {
-            // 戻るボタンの処理
-            // 画面を閉じる
-            dismiss()
-        } // navigationBarWithBackButton ここまで
     } // body ここまで
     
     // ユーザー名のテキスト

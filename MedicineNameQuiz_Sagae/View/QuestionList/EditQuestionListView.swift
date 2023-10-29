@@ -28,19 +28,23 @@ struct EditQuestionListView: View {
             Spacer()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("問題リスト", displayMode: .inline)
-        // ナビゲーションバーの左側に戻るボタンを配置
-        .navigationBarWithBackButton {
-            // 戻るボタンの処理
-            // 画面を閉じる
-            dismiss()
-        } // navigationBarWithBackButton ここまで
+        .navigationBarTitle("リスト編集", displayMode: .inline)
         // ナビゲーションバーの右側に保存ボタンを配置
-        .navigationBarWithButtonTrailing(label: "保存") {
-            // 保存処理
-            // 画面を閉じる
-            dismiss()
-        } // navigationBarWithButtonTrailing ここまで
+        .toolbar {
+            // ボタンの位置を指定
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    // 保存処理
+                    // 画面を閉じる
+                    dismiss()
+                } label: {
+                    // ラベル
+                    Text("保存")
+                    // 色を指定
+                        .foregroundColor(Color.black)
+                } // Button ここまで
+            } // ToolbarItem ここまで
+        } // toolbar ここまで
     } // body ここまで
 
     // 薬の区分を選択するタブ

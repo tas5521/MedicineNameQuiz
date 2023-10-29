@@ -17,12 +17,6 @@ struct HowToUseStudyView: View {
         Text("HowToUseStudyView")
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
-        // ナビゲーションバーの左側に戻るボタンを配置
-        .navigationBarWithBackButton {
-            // 戻るボタンの処理
-            // 画面を閉じる
-            dismiss()
-        } // navigationBarWithBackButton ここまで
     } // bodyここまで
 } // HowToUseStudyView ここまで
 

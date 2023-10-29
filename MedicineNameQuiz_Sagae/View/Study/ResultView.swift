@@ -19,7 +19,7 @@ struct ResultView: View {
     
     // 選択されている学習モード
     let studyMode: StudyMode
-
+    
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
@@ -40,12 +40,25 @@ struct ResultView: View {
             } // if ここまで
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("学習", displayMode: .inline)
+        .navigationBarTitle("学習結果", displayMode: .inline)
+        // 戻るボタンを隠す
+        .navigationBarBackButtonHidden(true)
         // ナビゲーションバーの右側に終了ボタンを配置
-        .navigationBarWithButtonTrailing(label: "終了") {
-            // ResultViewとQuestionViewを閉じる
-            isStudying = false
-        } // navigationBarWithButtonTrailing ここまで
+        .toolbar {
+            // ボタンの位置を指定
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    // 保存処理
+                    // // ResultViewとStudyViewを閉じる
+                    isStudying = false
+                } label: {
+                    // ラベル
+                    Text("終了")
+                    // 色を指定
+                        .foregroundColor(Color.black)
+                } // Button ここまで
+            } // ToolbarItem ここまで
+        } // toolbar ここまで
     } // body ここまで
     
     // 学習結果

@@ -18,28 +18,26 @@ struct QuestionsView: View {
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
-            // リストの名前を表示
-            Text(listName)
-            // 太字にする
-                .bold()
             // 薬の検索バー
             medicineSearchBar
             // 出題される薬の名前のリスト
             medicineList
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("問題リスト", displayMode: .inline)
-        // ナビゲーションバーの左側に戻るボタンを配置
-        .navigationBarWithBackButton {
-            // 戻るボタンの処理
-            // 画面を閉じる
-            dismiss()
-        } // navigationBarWithBackButton ここまで
-        // ナビゲーションバーの右側にカスタムの編集ボタンを配置
-        .navigationBarWithNavigationLinkTrailing(label: "編集") {
-            // 編集画面へ遷移
-            EditQuestionListView()
-        } // navigationBarWithNavigationLinkTrailing ここまで
+        .navigationBarTitle(listName, displayMode: .inline)
+        // ナビゲーションバーの右側に編集ボタンを配置
+        .toolbar {
+            // ボタンの位置を指定
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    // 編集画面へ遷移
+                    EditQuestionListView()
+                } label: {
+                    // ラベル
+                    Text("編集")
+                } // NavigationLink ここまで
+            } // ToolbarItem ここまで
+        } // toolbar ここまで
     } // body ここまで
 
     // 薬の名前の検索バー
