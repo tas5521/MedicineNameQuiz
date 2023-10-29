@@ -82,7 +82,7 @@ struct AccountView: View {
         // ユーザー名設定画面のシート
         .sheet(isPresented: $isShowUserNameSettingView) {
             // ユーザー名設定画面を表示
-            UserNameSetttingView(userName: $userName, isCalledFromAccountView: true)
+            UserNameSettingView(userName: $userName, isCalledFromAccountView: true)
             // ユーザー名設定画面が消えた時に実行
                 .onDisappear {
                     // 初回のユーザー名設定画面の表示を管理する変数をfalseに指定

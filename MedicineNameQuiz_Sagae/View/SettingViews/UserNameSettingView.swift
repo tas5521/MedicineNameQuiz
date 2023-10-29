@@ -1,5 +1,5 @@
 //
-//  UserNameSetttingView.swift
+//  UserNameSettingView.swift
 //  MedicineNameQuiz_Sagae
 //
 //  Created by 寒河江彪流 on 2023/09/30.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UserNameSetttingView: View {
+struct UserNameSettingView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // ユーザー名を管理する変数
@@ -68,8 +68,8 @@ struct UserNameSetttingView: View {
             Text("決定")
         } // Button ここまで
     } // decisionButton ここまで
-} // UserNameSetttingView ここまで
+} // UserNameSettingView ここまで
 
 #Preview {
-    UserNameSetttingView(userName: .constant(""), isCalledFromAccountView: false)
+    UserNameSettingView(userName: .constant(""), isCalledFromAccountView: false)
 }

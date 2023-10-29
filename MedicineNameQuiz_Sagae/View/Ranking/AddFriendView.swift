@@ -159,7 +159,7 @@ struct AddFriendView: View {
     private var firendList: some View {
         Text("友達リスト")
     } // firendList ここまで
-} // FriendAdditionView ここまで
+} // AddFriendView ここまで
 
 #Preview {
     AddFriendView(userName: .constant("sagae"))

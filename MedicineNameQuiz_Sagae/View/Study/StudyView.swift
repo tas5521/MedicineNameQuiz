@@ -8,143 +8,92 @@
 import SwiftUI
 
 struct StudyView: View {
-    // サインインしているかどうかを管理する変数
-    @Binding var isSignIn: Bool
-    // ユーザー名を管理する変数
-    @Binding var userName: String
-    // 初回のユーザー名設定画面の表示を管理する変数
-    @Binding var isFirstTimeUserNameSetting: Bool
     // 学習中であるかを管理する変数
-    @State private var isStudying: Bool = false
-    // タブの選択項目番号を保持する変数
-    @State private var tabIndex: Int = 0
+    @Binding var isStudying: Bool
+    // 選択されている学習モード
+    let studyMode: StudyMode
+    // ダミーの問題
+    let dummyQuestion: (String, [String]) = ("アムロジン", ["アムロジピンベシル酸塩", "イミダフェナシン", "エバスチン", "プランルカスト水和物"])
     
-    // View Presentation States
-    // ユーザー名設定画面の表示を管理する変数
-    @State var isShowUserNameSetttingView: Bool = false
-    // サインイン画面の表示を管理する変数
-    @State private var isShowSignInView: Bool = false
-    
-    // 選択されている学習モードを保持する変数
-    private var studyMode: StudyMode {
-        StudyMode.allCases[tabIndex]
-    } // studyModeここまで
-
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
-            // 学習モード選択タブを上に配置
-            studyModeTab
-            Spacer()
-            // 選択された学習モードにより画面を分けて表示
-            switch studyMode {
-                // 本番モードの場合
-            case .actual:
-                // 本番モードのViewを配置
-                actualModeView
-                // 練習モードの場合
-            case .practice:
-                // 練習モードのViewを配置
-                practiceModeView
-            } // switch ここまで
-            Spacer()
-            // スタートボタンを配置
-            startButton
+            // 垂直方向にレイアウト
+            VStack(alignment: .leading) {
+                // 水平方向にレイアウト
+                HStack {
+                    // スコアタイム
+                    scoreTime
+                        .padding()
+                    Spacer()
+                    // これまでの解答結果
+                    resultsSoFar
+                        .padding()
+                } // HStack ここまで
+                // 制限時間
+                timeLimit
+                    .padding()
+                // 問題文
+                questionText
+                    .padding()
+            } // VStackここまで
+            // 選択肢を配置
+            choices
             Spacer()
         } // VStack ここまで
-        // 問題を解く画面へ遷移
-        .navigationDestination(isPresented: $isStudying) {
-            QuestionView(isStudying: $isStudying, studyMode: studyMode)
-        } // navigationDestination ここまで
+        // ナビゲーションバータイトルを指定
+        .navigationBarTitle("学習", displayMode: .inline)
+        // ナビゲーションバーの右側に終了ボタンを配置
+        .navigationBarWithButtonTrailing(label: "終了") {
+            // QuestionViewを閉じる
+            isStudying = false
+        } // navigationBarWithButtonTrailing ここまで
     } // body ここまで
-
-    // 学習モード選択タブ
-    private var studyModeTab: some View {
-        // 学習モードの配列を取得
-        let modeArray = StudyMode.allCases.map({mode in mode.rawValue})
-        // 学習モードを選択するタブを返す
-        return TopTabView(tabNameList: modeArray, tabIndex: $tabIndex)
-    } // studyModeTab ここまで
-
-    // 本番モードの画面
-    private var actualModeView: some View {
-        // 垂直方向にレイアウト
-        VStack(alignment: .leading) {
-            Text("モード選択")
-            Text("区分")
+    
+    // スコアタイム
+    private var scoreTime: some View {
+        Text("時間")
+    } // scoreTime ここまで
+    
+    // これまでの解答結果
+    private var resultsSoFar: some View {
+        Text("まるばつパス")
+    } // resultsSoFar ここまで
+    
+    // 制限時間
+    private var timeLimit: some View {
+        Text("制限時間")
+    } // timeLimit ここまで
+    
+    // 問題文
+    private var questionText: some View {
+        Text("一般名を答えてください\nQ1. \(dummyQuestion.0)")
+    } // questionText ここまで
+    
+    // 選択肢
+    private var choices: some View {
+        VStack {
+            // 選択肢を作成
+            ForEach(dummyQuestion.1, id: \.self) { item in
+                NavigationLink {
+                    ResultView(isStudying: $isStudying, studyMode: studyMode)
+                } label: {
+                    Text(item)
+                        .foregroundColor(Color.blue)
+                } // NavigationLinkここまで
+                .padding()
+            } // ForEach ここまで
+            // パスボタン
+            NavigationLink {
+                ResultView(isStudying: $isStudying, studyMode: studyMode)
+            } label: {
+                Text("パス")
+                    .foregroundColor(Color.blue)
+            } // NavigationLinkここまで
         } // VStack ここまで
-        // 太字にする
-        .bold()
-    } // actualModeView ここまで
-
-    // 　練習モードの画面
-    private var practiceModeView: some View {
-        // 垂直方向にレイアウト
-        VStack(alignment: .leading) {
-            Text("制限時間")
-            // 太字にする
-                .bold()
-            Text("記録の表示")
-            // 太字にする
-                .bold()
-            Text("問題リスト選択")
-            // 太字にする
-                .bold()
-        } // VStack ここまで
-    } // practiceModeView ここまで
-
-    // スタートボタン
-    private var startButton: some View {
-        Button {
-            // 選択された学習モードにより異なる処理をする
-            switch studyMode {
-                // 本番モードの場合
-            case .actual:
-                // サインインしている場合
-                if isSignIn {
-                    // 学習開始
-                    isStudying.toggle()
-                    // サインインしていない場合
-                } else {
-                    // サインイン画面を表示
-                    isShowSignInView.toggle()
-                } // if ここまで
-                // 練習モードの場合
-            case .practice:
-                // 学習開始
-                isStudying.toggle()
-            } // switch ここまで
-        } label: {
-            Text("スタート")
-        } // Button ここまで
-        // サインイン画面のシート
-        .sheet(isPresented: $isShowSignInView) {
-            // サインイン画面を表示
-            SignInView(isSignIn: $isSignIn, userName: $userName)
-            // サインイン画面が閉じた時、実行
-                .onDisappear {
-                    // サインインしていているかチェック。サインインしていなかったら、何もしない
-                    guard isSignIn else { return }
-                    // 初回のユーザー名設定の場合
-                    if isFirstTimeUserNameSetting {
-                        // ユーザー名設定画面を表示
-                        isShowUserNameSetttingView.toggle()
-                    } // if ここまで
-                } // onDisappear ここまで
-        } // sheet ここまで
-        // ユーザー名設定画面のシート
-        .sheet(isPresented: $isShowUserNameSetttingView) {
-            // ユーザー名設定画面を表示
-            UserNameSetttingView(userName: $userName, isCalledFromAccountView: false)
-            // ユーザー名設定画面が閉じた時、実行
-                .onDisappear {
-                    // 初回のユーザー名設定画面の表示を管理する変数をfalseにする
-                    isFirstTimeUserNameSetting = false
-                } // onDisappear ここまで
-        } // sheet ここまで
-    } // startButton ここまで
+    } // choicesここまで
 } // StudyView ここまで
 
 #Preview {
-    StudyView(isSignIn: .constant(false), userName: .constant(""), isFirstTimeUserNameSetting: .constant(true))
+    StudyView(isStudying: .constant(true), studyMode: .actual)
 }

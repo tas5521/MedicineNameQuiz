@@ -77,7 +77,7 @@ struct QuestionsView: View {
         // 太字にする
             .bold()
     } // medicineList ここまで
-} // QuestionListRowView ここまで
+} // QuestionsView ここまで
 
 #Preview {
     QuestionsView(listName: "プレビュー薬局",

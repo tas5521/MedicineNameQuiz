@@ -24,7 +24,7 @@ struct MainTabView: View {
     @State private var isShowSignInView: Bool = false
     // ユーザー名設定画面の表示を管理する変数
     @State private var isShowUserNameSetttingView: Bool = false
-
+    
     var body: some View {
         NavigationStack {
             TabView(selection: $tabSelection) {
@@ -50,24 +50,24 @@ struct MainTabView: View {
                         addFriendButton
                     } // ToolbarItem ここまで
                 } // if ここまで
-            } // toolbarここまで
+            } // toolbar ここまで
             // 友達追加画面へ遷移
             .navigationDestination(isPresented: $isShowAddFriendView) {
                 AddFriendView(userName: $userName)
             } // navigationDestination ここまで
         } // NavigationStack ここまで
     } // body ここまで
-
+    
     // 学習画面
     private var studyView: some View {
-        StudyView(isSignIn: $isSignIn, 
-                  userName: $userName, isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
-            .tabItem {
-                Label("学習", systemImage: "book.fill")
-            } // tabItem ここまで
-            .tag(TabSelection.study)
+        ModeSelectionView(isSignIn: $isSignIn,
+                          userName: $userName, isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+        .tabItem {
+            Label("学習", systemImage: "book.fill")
+        } // tabItem ここまで
+        .tag(TabSelection.study)
     } // studyView ここまで
-
+    
     // 問題リスト画面
     private var questionListView: some View {
         QuestionListView()
@@ -99,10 +99,10 @@ struct MainTabView: View {
     private var othersView: some View {
         OthersView(userName: $userName, isSignIn: $isSignIn,
                    isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
-            .tabItem {
-                Label("その他", systemImage: "gearshape.fill")
-            } // tabItem ここまで
-            .tag(TabSelection.others)
+        .tabItem {
+            Label("その他", systemImage: "gearshape.fill")
+        } // tabItem ここまで
+        .tag(TabSelection.others)
     } // othersView ここまで
     
     // 友達追加ボタン
@@ -148,7 +148,7 @@ struct MainTabView: View {
         // ユーザー名設定画面のシート
         .sheet(isPresented: $isShowUserNameSetttingView) {
             // ユーザー名設定画面を表示
-            UserNameSetttingView(userName: $userName, isCalledFromAccountView: false)
+            UserNameSettingView(userName: $userName, isCalledFromAccountView: false)
             // ユーザー名設定画面が閉じた時に実行
                 .onDisappear {
                     // 初回のユーザー名設定画面の表示を管理する変数をfalseにする
@@ -157,8 +157,8 @@ struct MainTabView: View {
                     isShowAddFriendView.toggle()
                 } // onDisappear ここまで
         } // sheet ここまで
-    } // addFriendButtonここまで
-} // TabSwitchView
+    } // addFriendButton ここまで
+} // MainTabView ここまで
 
 #Preview {
     MainTabView()
