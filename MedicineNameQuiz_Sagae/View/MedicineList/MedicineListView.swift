@@ -12,6 +12,10 @@ struct MedicineListView: View {
     @State private var tabIndex: Int = 0
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
+    // 現在タブで選択されている区分を取得
+    private var classification: MedicineClassification {
+        MedicineClassification.allCases[tabIndex]
+    } // classificationここまで
     
     var body: some View {
         // 奥から手前方向にレイアウト
@@ -38,7 +42,7 @@ struct MedicineListView: View {
                     // スペースを空ける
                     Spacer()
                     // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                    if MedicineClassification.allCases[tabIndex] == .customMedicine {
+                    if classification == .customMedicine {
                         addMedicineButton
                             .padding()
                     } // if ここまで
