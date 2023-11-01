@@ -1,5 +1,5 @@
 //
-//  OthersView.swift
+//  AppSettingsListView.swift
 //  MedicineNameQuiz_Sagae
 //
 //  Created by 寒河江彪流 on 2023/09/30.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OthersView: View {
+struct AppSettingsListView: View {
     // ユーザー名を管理する変数
     @Binding var userName: String
     // サインインしているかどうかを管理する変数
@@ -18,7 +18,7 @@ struct OthersView: View {
     var body: some View {
         // 項目をリスト表示
         List {
-            ForEach(Others.allCases, id: \.self) { item in
+            ForEach(AppSettingsListItem.allCases, id: \.self) { item in
                 // 各項目ごとのタイトルを取得
                 let title = item.rawValue
                 // 項目ごとに異なる画面に遷移
@@ -44,8 +44,8 @@ struct OthersView: View {
             } // ForEach ここまで
         } // List ここまで
     } // body ここまで
-} // OthersView ここまで
+} // AppSettingsListView ここまで
 
 #Preview {
-    OthersView(userName: .constant("sagae"), isSignIn: .constant(true), isFirstTimeUserNameSetting: .constant(false))
+    AppSettingsListView(userName: .constant("sagae"), isSignIn: .constant(true), isFirstTimeUserNameSetting: .constant(false))
 }

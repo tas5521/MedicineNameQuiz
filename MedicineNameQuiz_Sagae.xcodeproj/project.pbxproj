@@ -13,7 +13,7 @@
 		4A9671602AC7B768006F7157 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715F2AC7B768006F7157 /* ModeSelectionView.swift */; };
 		4A9671622AC7B77A006F7157 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671612AC7B77A006F7157 /* RankingView.swift */; };
 		4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671632AC7B787006F7157 /* MedicineListView.swift */; };
-		4A9671662AC7B795006F7157 /* OthersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671652AC7B795006F7157 /* OthersView.swift */; };
+		4A9671662AC7B795006F7157 /* AppSettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671652AC7B795006F7157 /* AppSettingsListView.swift */; };
 		4A96716B2AC7BB2E006F7157 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */; };
 		4A96716F2AC7C7BC006F7157 /* StudyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716E2AC7C7BC006F7157 /* StudyMode.swift */; };
 		4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671722AC80BDD006F7157 /* TopTabView.swift */; };
@@ -30,7 +30,7 @@
 		4AA088302AC93A3C005BD8C2 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA0882F2AC93A3C005BD8C2 /* QRCodeView.swift */; };
 		4AA088322AC9409D005BD8C2 /* MedicineClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088312AC9409D005BD8C2 /* MedicineClassification.swift */; };
 		4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088332AC94A6B005BD8C2 /* AddMedicineView.swift */; };
-		4AA088362AC96FCB005BD8C2 /* Others.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088352AC96FCB005BD8C2 /* Others.swift */; };
+		4AA088362AC96FCB005BD8C2 /* AppSettingsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088352AC96FCB005BD8C2 /* AppSettingsListItem.swift */; };
 		4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088372AC97DAD005BD8C2 /* HowToUseView.swift */; };
 		4AA0883A2AC97DCC005BD8C2 /* ReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088392AC97DCC005BD8C2 /* ReferenceView.swift */; };
 		4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA0883B2AC97DEC005BD8C2 /* AdvertisementView.swift */; };
@@ -54,7 +54,7 @@
 		4A96715F2AC7B768006F7157 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
 		4A9671612AC7B77A006F7157 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		4A9671632AC7B787006F7157 /* MedicineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListView.swift; sourceTree = "<group>"; };
-		4A9671652AC7B795006F7157 /* OthersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersView.swift; sourceTree = "<group>"; };
+		4A9671652AC7B795006F7157 /* AppSettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsListView.swift; sourceTree = "<group>"; };
 		4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		4A96716E2AC7C7BC006F7157 /* StudyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMode.swift; sourceTree = "<group>"; };
 		4A9671722AC80BDD006F7157 /* TopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabView.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		4AA0882F2AC93A3C005BD8C2 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		4AA088312AC9409D005BD8C2 /* MedicineClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineClassification.swift; sourceTree = "<group>"; };
 		4AA088332AC94A6B005BD8C2 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
-		4AA088352AC96FCB005BD8C2 /* Others.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Others.swift; sourceTree = "<group>"; };
+		4AA088352AC96FCB005BD8C2 /* AppSettingsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsListItem.swift; sourceTree = "<group>"; };
 		4AA088372AC97DAD005BD8C2 /* HowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseView.swift; sourceTree = "<group>"; };
 		4AA088392AC97DCC005BD8C2 /* ReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceView.swift; sourceTree = "<group>"; };
 		4AA0883B2AC97DEC005BD8C2 /* AdvertisementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementView.swift; sourceTree = "<group>"; };
@@ -104,13 +104,14 @@
 			isa = PBXGroup;
 			children = (
 				4A9671582AC7B531006F7157 /* MainTabView.swift */,
+				4A9671782AC8578E006F7157 /* SignInView.swift */,
+				4A96717A2AC85A35006F7157 /* UserNameSettingView.swift */,
+				4A9671722AC80BDD006F7157 /* TopTabView.swift */,
 				4AA088272AC935B3005BD8C2 /* Study */,
 				4AA088282AC935E4005BD8C2 /* QuestionList */,
 				4AA088292AC93608005BD8C2 /* Ranking */,
 				4AA0882B2AC93634005BD8C2 /* MedicineList */,
-				4AA0882C2AC93648005BD8C2 /* Others */,
-				4AA0882D2AC93674005BD8C2 /* SettingViews */,
-				4AA0882E2AC936B1005BD8C2 /* ViewParts */,
+				4AA0882C2AC93648005BD8C2 /* Settings */,
 				4AAB711E2AD54B14001B9714 /* Extension */,
 			);
 			path = View;
@@ -124,7 +125,7 @@
 				4A9671812AC888B7006F7157 /* Question.swift */,
 				4A96716E2AC7C7BC006F7157 /* StudyMode.swift */,
 				4AA088312AC9409D005BD8C2 /* MedicineClassification.swift */,
-				4AA088352AC96FCB005BD8C2 /* Others.swift */,
+				4AA088352AC96FCB005BD8C2 /* AppSettingsListItem.swift */,
 				4AA088412AC98796005BD8C2 /* HowToUse.swift */,
 			);
 			path = Model;
@@ -170,10 +171,10 @@
 			path = MedicineList;
 			sourceTree = "<group>";
 		};
-		4AA0882C2AC93648005BD8C2 /* Others */ = {
+		4AA0882C2AC93648005BD8C2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				4A9671652AC7B795006F7157 /* OthersView.swift */,
+				4A9671652AC7B795006F7157 /* AppSettingsListView.swift */,
 				4AA088372AC97DAD005BD8C2 /* HowToUseView.swift */,
 				4AA088432AC98855005BD8C2 /* HowToUseStudyView.swift */,
 				4AA088452AC9886D005BD8C2 /* HowToUseQuestionListView.swift */,
@@ -183,24 +184,7 @@
 				4AA0883B2AC97DEC005BD8C2 /* AdvertisementView.swift */,
 				4AA0883D2AC97DFE005BD8C2 /* AccountView.swift */,
 			);
-			path = Others;
-			sourceTree = "<group>";
-		};
-		4AA0882D2AC93674005BD8C2 /* SettingViews */ = {
-			isa = PBXGroup;
-			children = (
-				4A9671782AC8578E006F7157 /* SignInView.swift */,
-				4A96717A2AC85A35006F7157 /* UserNameSettingView.swift */,
-			);
-			path = SettingViews;
-			sourceTree = "<group>";
-		};
-		4AA0882E2AC936B1005BD8C2 /* ViewParts */ = {
-			isa = PBXGroup;
-			children = (
-				4A9671722AC80BDD006F7157 /* TopTabView.swift */,
-			);
-			path = ViewParts;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		4AAB711E2AD54B14001B9714 /* Extension */ = {
@@ -322,7 +306,7 @@
 			files = (
 				4A9671622AC7B77A006F7157 /* RankingView.swift in Sources */,
 				4AADB2D62AC5588500C5A40E /* Persistence.swift in Sources */,
-				4AA088362AC96FCB005BD8C2 /* Others.swift in Sources */,
+				4AA088362AC96FCB005BD8C2 /* AppSettingsListItem.swift in Sources */,
 				4AA088262AC92CF2005BD8C2 /* AddFriendView.swift in Sources */,
 				4A3937872AD53F8D00BA5CE7 /* TabSelection.swift in Sources */,
 				4A96717E2AC87E55006F7157 /* QuestionListItem.swift in Sources */,
@@ -345,7 +329,7 @@
 				4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */,
 				4AA088322AC9409D005BD8C2 /* MedicineClassification.swift in Sources */,
 				4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */,
-				4A9671662AC7B795006F7157 /* OthersView.swift in Sources */,
+				4A9671662AC7B795006F7157 /* AppSettingsListView.swift in Sources */,
 				4A9671602AC7B768006F7157 /* ModeSelectionView.swift in Sources */,
 				4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */,
 				4AA0884A2AC9889D005BD8C2 /* HowToUseMedicineListView.swift in Sources */,

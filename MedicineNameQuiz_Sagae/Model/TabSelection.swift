@@ -10,5 +10,5 @@ enum TabSelection: String {
     case questionList = "問題リスト"
     case ranking = "ランキング"
     case medicineList = "薬リスト"
-    case others = "その他"
+    case settings = "設定"
 } // TabSelectionここまで

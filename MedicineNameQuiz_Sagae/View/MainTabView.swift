@@ -37,7 +37,7 @@ struct MainTabView: View {
                 // 薬リスト画面のViewを配置
                 medicineListView
                 // その他画面のViewを配置
-                othersView
+                settingsView
             } // TabView ここまで
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
@@ -95,15 +95,15 @@ struct MainTabView: View {
             .tag(TabSelection.medicineList)
     } // medicineListView ここまで
     
-    // その他画面
-    private var othersView: some View {
-        OthersView(userName: $userName, isSignIn: $isSignIn,
+    // 設定画面
+    private var settingsView: some View {
+        AppSettingsListView(userName: $userName, isSignIn: $isSignIn,
                    isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
         .tabItem {
             Label("その他", systemImage: "gearshape.fill")
         } // tabItem ここまで
-        .tag(TabSelection.others)
-    } // othersView ここまで
+        .tag(TabSelection.settings)
+    } // settingsView ここまで
     
     // 友達追加ボタン
     private var addFriendButton: some View {
