@@ -33,19 +33,40 @@ struct ModeSelectionView: View {
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
+            // 学習モードの配列を取得
+            let modeArray = StudyMode.allCases.map({mode in mode.rawValue})
             // 学習モード選択タブを上に配置
-            studyModeTab
+            TopTabView(tabNameList: modeArray, tabIndex: $tabIndex)
             Spacer()
             // 選択された学習モードにより画面を分けて表示
             switch studyMode {
+                
                 // 本番モードの場合
             case .actual:
                 // 本番モードのViewを配置
-                actualModeView
+                // 垂直方向にレイアウト
+                VStack(alignment: .leading) {
+                    Text("モード選択")
+                    Text("区分")
+                } // VStack ここまで
+                // 太字にする
+                .bold()
+                
                 // 練習モードの場合
             case .practice:
                 // 練習モードのViewを配置
-                practiceModeView
+                // 垂直方向にレイアウト
+                VStack(alignment: .leading) {
+                    Text("制限時間")
+                    // 太字にする
+                        .bold()
+                    Text("記録の表示")
+                    // 太字にする
+                        .bold()
+                    Text("問題リスト選択")
+                    // 太字にする
+                        .bold()
+                } // VStack ここまで
             } // switch ここまで
             Spacer()
             // スタートボタンを配置
@@ -57,42 +78,7 @@ struct ModeSelectionView: View {
             StudyView(isStudying: $isStudying, studyMode: studyMode)
         } // navigationDestination ここまで
     } // body ここまで
-    
-    // 学習モード選択タブ
-    private var studyModeTab: some View {
-        // 学習モードの配列を取得
-        let modeArray = StudyMode.allCases.map({mode in mode.rawValue})
-        // 学習モードを選択するタブを返す
-        return TopTabView(tabNameList: modeArray, tabIndex: $tabIndex)
-    } // studyModeTab ここまで
-    
-    // 本番モードの画面
-    private var actualModeView: some View {
-        // 垂直方向にレイアウト
-        VStack(alignment: .leading) {
-            Text("モード選択")
-            Text("区分")
-        } // VStack ここまで
-        // 太字にする
-        .bold()
-    } // actualModeView ここまで
-    
-    // 　練習モードの画面
-    private var practiceModeView: some View {
-        // 垂直方向にレイアウト
-        VStack(alignment: .leading) {
-            Text("制限時間")
-            // 太字にする
-                .bold()
-            Text("記録の表示")
-            // 太字にする
-                .bold()
-            Text("問題リスト選択")
-            // 太字にする
-                .bold()
-        } // VStack ここまで
-    } // practiceModeView ここまで
-    
+
     // スタートボタン
     private var startButton: some View {
         Button {
