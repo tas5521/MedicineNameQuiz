@@ -33,10 +33,8 @@ struct ModeSelectionView: View {
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
-            // 学習モードの配列を取得
-            let modeArray = StudyMode.allCases.map({mode in mode.rawValue})
             // 学習モード選択タブを上に配置
-            TopTabView(tabNameList: modeArray, tabIndex: $tabIndex)
+            TopTabView(tabNameList: StudyMode.allCases.map({mode in mode.rawValue}), tabIndex: $tabIndex)
             Spacer()
             // 選択された学習モードにより画面を分けて表示
             switch studyMode {
