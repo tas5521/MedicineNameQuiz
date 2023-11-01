@@ -19,42 +19,27 @@ struct QRCodeView: View {
             // カメラの表示を管理する変数がtrueの場合
             if isShowCamera {
                 // カメラを表示
-                qrCodeCamera
+                Text("QRコード読み取りカメラ")
                 // カメラの表示を管理する変数がfalseの場合
             } else {
                 // 自分のQRコードを表示
-                myQRCode
+                Image(systemName: "qrcode")
+                    .foregroundStyle(Color.black)
+                    .scaleEffect(15)
             } // if ここまで
             // 空白を空ける
             Spacer()
             // カメラとQRコードを切り替えるボタン
-            switchButton
+            Button {
+                // カメラとQRコードを切り替える
+                isShowCamera.toggle()
+            } label: {
+                // ラベル
+                Text(isShowCamera ? "自分のQRコードを表示" : "QRコード読み取りカメラを表示")
+            } // Button ここまで
             Spacer()
         } // VStack ここまで
     } // body ここまで
-    
-    // QRコード読み取りカメラ
-    private var qrCodeCamera: some View {
-        Text("QRコード読み取りカメラ")
-    } // qrCodeCamera ここまで
-    
-    // QRコード
-    private var myQRCode: some View {
-        Image(systemName: "qrcode")
-            .foregroundStyle(Color.black)
-            .scaleEffect(15)
-    } // myQRCode ここまで
-    
-    // カメラとQRコードを切り替えるボタン
-    private var switchButton: some View {
-        Button {
-            // カメラとQRコードを切り替える
-            isShowCamera.toggle()
-        } label: {
-            // ラベル
-            Text(isShowCamera ? "自分のQRコードを表示" : "QRコード読み取りカメラを表示")
-        } // Button ここまで
-    } // switchButton ここまで
 } // QRCodeView ここまで
 
 #Preview {
