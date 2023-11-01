@@ -12,13 +12,11 @@ struct HowToUseView: View {
     @Environment(\.dismiss) private var dismiss
     // 項目のタイトル
     let title: String
-    // 遷移先の種類
-    private let tabList: [HowToUse] = [.study, .questionList, .ranking, .medicineList]
     
     var body: some View {
         // リスト表示
         List {
-            ForEach(tabList, id: \.self) { item in
+            ForEach(HowToUse.allCases, id: \.self) { item in
                 // 各項目ごとのタイトル（サブ）を取得
                 let subtitle = item.rawValue
                 // 遷移先のビューに渡すタイトルを作成

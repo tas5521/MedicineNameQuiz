@@ -7,17 +7,9 @@
 
 import Foundation
 
-enum MedicineClassification: String {
+enum MedicineClassification: String, CaseIterable {
     case internalMedicine = "内用薬"
     case injectionMedicine = "注射薬"
     case externalMedicine = "外用薬"
     case customMedicine = "カスタム"
-
-    // すべてのケース
-    static let allCases: [MedicineClassification] = [
-        .internalMedicine,
-        .injectionMedicine,
-        .externalMedicine,
-        .customMedicine
-    ] // allCases ここまで
 } // SelectedClassificationここまで

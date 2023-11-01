@@ -14,13 +14,11 @@ struct OthersView: View {
     @Binding var isSignIn: Bool
     // 初回のユーザー名設定画面の表示を管理する変数
     @Binding var isFirstTimeUserNameSetting: Bool
-    // その他のタブで扱う項目のリスト
-    private let othersList: [Others] = [.howToUse, .reference, .advertisement, .account]
 
     var body: some View {
         // 項目をリスト表示
         List {
-            ForEach(othersList, id: \.self) { item in
+            ForEach(Others.allCases, id: \.self) { item in
                 // 各項目ごとのタイトルを取得
                 let title = item.rawValue
                 // 項目ごとに異なる画面に遷移

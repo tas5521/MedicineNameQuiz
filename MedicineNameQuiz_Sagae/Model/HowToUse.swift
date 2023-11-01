@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HowToUse: String {
+enum HowToUse: String, CaseIterable {
     case study = "学習"
     case questionList = "問題リスト"
     case ranking = "ランキング"
