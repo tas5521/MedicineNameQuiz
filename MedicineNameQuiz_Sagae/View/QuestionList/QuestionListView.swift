@@ -36,7 +36,7 @@ struct QuestionListView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 問題リストの検索バー
-                listSearchBar
+                Text("問題リスト検索バー")
                 // 問題リスト
                 questionList
             } // VStack ここまで
@@ -55,11 +55,6 @@ struct QuestionListView: View {
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
-    
-    // 問題リスト検索バー
-    private var listSearchBar: some View {
-        Text("問題リスト検索バー")
-    } // listSearchBar ここまで
 
     // 問題リスト
     private var questionList: some View {
