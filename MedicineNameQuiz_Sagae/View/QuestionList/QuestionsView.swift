@@ -1,5 +1,5 @@
 //
-//  QuestionListRowView.swift
+//  QuestionsView.swift
 //  MedicineNameQuiz_Sagae
 //
 //  Created by 寒河江彪流 on 2023/10/01.
@@ -19,9 +19,34 @@ struct QuestionsView: View {
         // 垂直方向にレイアウト
         VStack {
             // 薬の検索バー
-            medicineSearchBar
-            // 出題される薬の名前のリスト
-            medicineList
+            Text("検索バー")
+            // 垂直方向にレイアウト
+            VStack(alignment: .leading) {
+                // 総問題数を表示
+                Text("総問題数: \(questions.count)")
+                // 左に余白を追加
+                    .padding(.leading)
+                // 出題される薬の名前のリスト
+                List {
+                    ForEach(questions) { question in
+                        // 垂直方向にレイアウト
+                        VStack(alignment: .leading) {
+                            // 先発品名を表示
+                            Text(question.originalName)
+                            // 文字の色を青に変更
+                                .foregroundStyle(Color.blue)
+                            // 一般名を表示
+                            Text(question.genericName)
+                            // 文字の色を赤に変更
+                                .foregroundStyle(Color.red)
+                        } // VStack ここまで
+                    } // ForEach ここまで
+                } // List ここまで
+                // リストのスタイルを.groupedに変更
+                .listStyle(.grouped)
+            } // VStack ここまで
+            // 太字にする
+            .bold()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(listName, displayMode: .inline)
@@ -38,48 +63,12 @@ struct QuestionsView: View {
                 } // NavigationLink ここまで
             } // ToolbarItem ここまで
         } // toolbar ここまで
-    } // body ここまで
-
-    // 薬の名前の検索バー
-    private var medicineSearchBar: some View {
-        // 薬の名前を検索するバー
-        Text("検索バー")
-    } // medicineSearchBar ここまで
-    
-    // 出題される薬の名前のリスト
-    private var medicineList: some View {
-        VStack(alignment: .leading) {
-            // 総問題数を表示
-            Text("総問題数: \(questions.count)")
-            // 左に余白を追加
-                .padding(.leading)
-            // リスト表示
-            List {
-                ForEach(questions) { question in
-                    // 垂直方向にレイアウト
-                    VStack(alignment: .leading) {
-                        // 先発品名を表示
-                        Text(question.originalName)
-                        // 文字の色を青に変更
-                            .foregroundStyle(Color.blue)
-                        // 一般名を表示
-                        Text(question.genericName)
-                        // 文字の色を赤に変更
-                            .foregroundStyle(Color.red)
-                    } // VStack ここまで
-                } // ForEach ここまで
-            } // List ここまで
-            // リストのスタイルを.groupedに変更
-            .listStyle(.grouped)
-        } // VStack ここまで
-        // 太字にする
-            .bold()
-    } // medicineList ここまで
+    } // body ここまで// 垂直方向にレイアウト// 垂直方向にレイアウト
 } // QuestionsView ここまで
 
 #Preview {
     QuestionsView(listName: "プレビュー薬局",
-                        questions: [Question(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
-                                    Question(originalName: "エバステル", genericName: "エバスチン"),
-                                    Question(originalName: "オノン", genericName: "プランルカスト水和物")])
+                  questions: [Question(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
+                              Question(originalName: "エバステル", genericName: "エバスチン"),
+                              Question(originalName: "オノン", genericName: "プランルカスト水和物")])
 }
