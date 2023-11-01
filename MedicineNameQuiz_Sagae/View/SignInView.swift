@@ -26,53 +26,48 @@ struct SignInView: View {
                 .bold()
             // 上下左右に余白を追加
                 .padding()
-            // 下の二つのサインインボタンは、FirebaseAuthで実装予定
-            appleSingInButton
+            
+            // TODO: 下の二つのサインインボタンは、FirebaseAuthで実装予定
+            
+            // Appleサインインボタン
+            Button {
+                // サインインする
+                isSignIn = true
+                // ユーザーネームが空白だったら、デフォルトで名前をつける
+                if userName.isEmpty {
+                    userName = "sagae"
+                } // if ここまで
+                // デバッグエリアにメッセージを表示
+                print("サインインしました: \(userName)")
+                // 画面を閉じる
+                dismiss()
+            } label: {
+                // ラベル
+                Text("Sign in with Apple")
+            } // Buttonここまで
             // 上下左右に余白を追加
                 .padding()
-            googleSignInButton
+            
+            // Googleサインインボタン
+            Button {
+                // サインインする
+                isSignIn = true
+                // ユーザーネームが空白だったら、デフォルトで名前をつける
+                if userName.isEmpty {
+                    userName = "sagae"
+                } // if ここまで
+                // デバッグエリアにメッセージを表示
+                print("サインインしました: \(userName)")
+                // 画面を閉じる
+                dismiss()
+            } label: {
+                // ラベル
+                Text("Sign in with Google")
+            } // Buttonここまで
             // 上下左右に余白を追加
                 .padding()
         } // VStack ここまで
     } // body ここまで
-
-    // Appleサインインボタン
-    var appleSingInButton: some View {
-        Button {
-            // サインインする
-            isSignIn = true
-            // ユーザーネームが空白だったら、デフォルトで名前をつける
-            if userName.isEmpty {
-                userName = "sagae"
-            } // if ここまで
-            // デバッグエリアにメッセージを表示
-            print("サインインしました: \(userName)")
-            // 画面を閉じる
-            dismiss()
-        } label: {
-            // ラベル
-            Text("Sign in with Apple")
-        } // Buttonここまで
-    } // appleSingInButton ここまで
-    
-    // Googleサインインボタン
-    private var googleSignInButton: some View {
-        Button {
-            // サインインする
-            isSignIn = true
-            // ユーザーネームが空白だったら、デフォルトで名前をつける
-            if userName.isEmpty {
-                userName = "sagae"
-            } // if ここまで
-            // デバッグエリアにメッセージを表示
-            print("サインインしました: \(userName)")
-            // 画面を閉じる
-            dismiss()
-        } label: {
-            // ラベル
-            Text("Sign in with Google")
-        } // Buttonここまで
-    } // googleSignInButton ここまで
 } // SignInView ここまで
 
 #Preview {
