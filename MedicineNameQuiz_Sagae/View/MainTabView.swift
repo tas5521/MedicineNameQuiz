@@ -24,20 +24,48 @@ struct MainTabView: View {
     @State private var isShowSignInView: Bool = false
     // ユーザー名設定画面の表示を管理する変数
     @State private var isShowUserNameSettingView: Bool = false
-    
+
     var body: some View {
         NavigationStack {
             TabView(selection: $tabSelection) {
                 // 学習画面のViewを配置
-                studyView
+                ModeSelectionView(isSignIn: $isSignIn,
+                                  userName: $userName,
+                                  isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+                .tabItem {
+                    Label("学習", systemImage: "book.fill")
+                } // tabItem ここまで
+                .tag(TabSelection.study)
+                
                 // 問題リスト画面のViewを配置
-                questionListView
+                QuestionListView()
+                    .tabItem {
+                        Label("問題リスト", systemImage: "square.and.pencil")
+                    } // tabItem ここまで
+                    .tag(TabSelection.questionList)
+                
                 // ランキング画面のViewを配置
-                rankingView
+                RankingView()
+                    .tabItem {
+                        Label("ランキング", systemImage: "crown.fill")
+                    } // tabItem ここまで
+                    .tag(TabSelection.ranking)
+                
                 // 薬リスト画面のViewを配置
-                medicineListView
-                // その他画面のViewを配置
-                settingsView
+                MedicineListView()
+                    .tabItem {
+                        Label("薬リスト", systemImage: "list.bullet.rectangle.portrait.fill")
+                    } // tabItem ここまで
+                    .tag(TabSelection.medicineList)
+                
+                // 設定画面のViewを配置
+                AppSettingsListView(userName: $userName,
+                                    isSignIn: $isSignIn,
+                                    isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+                .tabItem {
+                    Label("その他", systemImage: "gearshape.fill")
+                } // tabItem ここまで
+                .tag(TabSelection.settings)
             } // TabView ここまで
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
@@ -57,53 +85,6 @@ struct MainTabView: View {
             } // navigationDestination ここまで
         } // NavigationStack ここまで
     } // body ここまで
-    
-    // 学習画面
-    private var studyView: some View {
-        ModeSelectionView(isSignIn: $isSignIn,
-                          userName: $userName, isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
-        .tabItem {
-            Label("学習", systemImage: "book.fill")
-        } // tabItem ここまで
-        .tag(TabSelection.study)
-    } // studyView ここまで
-    
-    // 問題リスト画面
-    private var questionListView: some View {
-        QuestionListView()
-            .tabItem {
-                Label("問題リスト", systemImage: "square.and.pencil")
-            } // tabItem ここまで
-            .tag(TabSelection.questionList)
-    } // questionListView ここまで
-    
-    // ランキング画面
-    private var rankingView: some View {
-        RankingView()
-            .tabItem {
-                Label("ランキング", systemImage: "crown.fill")
-            } // tabItem ここまで
-            .tag(TabSelection.ranking)
-    } // rankingView ここまで
-    
-    // 薬リスト画面
-    private var medicineListView: some View {
-        MedicineListView()
-            .tabItem {
-                Label("薬リスト", systemImage: "list.bullet.rectangle.portrait.fill")
-            } // tabItem ここまで
-            .tag(TabSelection.medicineList)
-    } // medicineListView ここまで
-    
-    // 設定画面
-    private var settingsView: some View {
-        AppSettingsListView(userName: $userName, isSignIn: $isSignIn,
-                   isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
-        .tabItem {
-            Label("その他", systemImage: "gearshape.fill")
-        } // tabItem ここまで
-        .tag(TabSelection.settings)
-    } // settingsView ここまで
     
     // 友達追加ボタン
     private var addFriendButton: some View {
