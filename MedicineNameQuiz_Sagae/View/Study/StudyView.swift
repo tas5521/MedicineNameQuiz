@@ -23,18 +23,18 @@ struct StudyView: View {
                 // 水平方向にレイアウト
                 HStack {
                     // スコアタイム
-                    scoreTime
+                    Text("時間")
                         .padding()
                     Spacer()
                     // これまでの解答結果
-                    resultsSoFar
+                    Text("まるばつパス")
                         .padding()
                 } // HStack ここまで
                 // 制限時間
-                timeLimit
+                Text("制限時間")
                     .padding()
                 // 問題文
-                questionText
+                Text("一般名を答えてください\nQ1. \(dummyQuestion.0)")
                     .padding()
             } // VStackここまで
             // 選択肢を配置
@@ -62,27 +62,7 @@ struct StudyView: View {
             } // ToolbarItem ここまで
         } // toolbar ここまで
     } // body ここまで
-    
-    // スコアタイム
-    private var scoreTime: some View {
-        Text("時間")
-    } // scoreTime ここまで
-    
-    // これまでの解答結果
-    private var resultsSoFar: some View {
-        Text("まるばつパス")
-    } // resultsSoFar ここまで
-    
-    // 制限時間
-    private var timeLimit: some View {
-        Text("制限時間")
-    } // timeLimit ここまで
-    
-    // 問題文
-    private var questionText: some View {
-        Text("一般名を答えてください\nQ1. \(dummyQuestion.0)")
-    } // questionText ここまで
-    
+
     // 選択肢
     private var choices: some View {
         VStack {
