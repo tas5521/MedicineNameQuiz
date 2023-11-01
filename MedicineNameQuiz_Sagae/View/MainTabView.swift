@@ -23,7 +23,7 @@ struct MainTabView: View {
     // サインイン画面の表示を管理する変数
     @State private var isShowSignInView: Bool = false
     // ユーザー名設定画面の表示を管理する変数
-    @State private var isShowUserNameSetttingView: Bool = false
+    @State private var isShowUserNameSettingView: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -137,7 +137,7 @@ struct MainTabView: View {
                     // 初回のユーザー名設定の場合
                     if isFirstTimeUserNameSetting {
                         // ユーザー名設定画面を表示
-                        isShowUserNameSetttingView.toggle()
+                        isShowUserNameSettingView.toggle()
                         // 初回のユーザー名設定でない場合
                     } else {
                         // 友達追加画面を表示
@@ -146,7 +146,7 @@ struct MainTabView: View {
                 } // onDisappear ここまで
         } // sheet ここまで
         // ユーザー名設定画面のシート
-        .sheet(isPresented: $isShowUserNameSetttingView) {
+        .sheet(isPresented: $isShowUserNameSettingView) {
             // ユーザー名設定画面を表示
             UserNameSettingView(userName: $userName, isCalledFromAccountView: false)
             // ユーザー名設定画面が閉じた時に実行

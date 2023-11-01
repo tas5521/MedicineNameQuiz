@@ -21,7 +21,7 @@ struct ModeSelectionView: View {
     
     // View Presentation States
     // ユーザー名設定画面の表示を管理する変数
-    @State var isShowUserNameSetttingView: Bool = false
+    @State var isShowUserNameSettingView: Bool = false
     // サインイン画面の表示を管理する変数
     @State private var isShowSignInView: Bool = false
     
@@ -128,12 +128,12 @@ struct ModeSelectionView: View {
                     // 初回のユーザー名設定の場合
                     if isFirstTimeUserNameSetting {
                         // ユーザー名設定画面を表示
-                        isShowUserNameSetttingView.toggle()
+                        isShowUserNameSettingView.toggle()
                     } // if ここまで
                 } // onDisappear ここまで
         } // sheet ここまで
         // ユーザー名設定画面のシート
-        .sheet(isPresented: $isShowUserNameSetttingView) {
+        .sheet(isPresented: $isShowUserNameSettingView) {
             // ユーザー名設定画面を表示
             UserNameSettingView(userName: $userName, isCalledFromAccountView: false)
             // ユーザー名設定画面が閉じた時、実行
