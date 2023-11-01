@@ -29,33 +29,9 @@ struct ResultView: View {
                 .padding()
 
             // 間違えた問題をリストに保存するボタン
-            Button {
-                // 警告を表示
-                isShowPopUp.toggle()
-            } label: {
-                Text("間違えた問題をリストに保存する")
-            } // Button ここまで
+            saveMistakesButton
             // 上下左右に余白を追加
                 .padding()
-            // 間違えた問題をリストに保存するためのポップアップを表示
-            .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
-                // 問題リストの名前を入力するテキストフィールド
-                TextField("問題リストの名前", text: $questionListName)
-                // 保存ボタン
-                Button {
-                    // 問題リストの作成処理
-                } label: {
-                    Text("保存")
-                } // Button ここまで
-                // やめるボタン
-                Button(role: .cancel) {
-                    // 何もしない
-                } label: {
-                    Text("やめる")
-                } // Button ここまで
-            } message: {
-                Text("リストに名前をつけてください")
-            } // alert ここまで
 
             // 練習モードでは、学習結果を表示
             if studyMode == .practice {
@@ -86,6 +62,35 @@ struct ResultView: View {
             } // ToolbarItem ここまで
         } // toolbar ここまで
     } // body ここまで
+    
+    // 間違えた問題をリストに保存するボタン
+    var saveMistakesButton: some View {
+        Button {
+            // 警告を表示
+            isShowPopUp.toggle()
+        } label: {
+            Text("間違えた問題をリストに保存する")
+        } // Button ここまで
+        // 間違えた問題をリストに保存するためのポップアップを表示
+        .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
+            // 問題リストの名前を入力するテキストフィールド
+            TextField("問題リストの名前", text: $questionListName)
+            // 保存ボタン
+            Button {
+                // 問題リストの作成処理
+            } label: {
+                Text("保存")
+            } // Button ここまで
+            // やめるボタン
+            Button(role: .cancel) {
+                // 何もしない
+            } label: {
+                Text("やめる")
+            } // Button ここまで
+        } message: {
+            Text("リストに名前をつけてください")
+        } // alert ここまで
+    } // saveMistakesButton ここまで
 } // ResultView ここまで
 
 #Preview {
