@@ -26,17 +26,25 @@ struct AddFriendView: View {
         VStack {
             // 垂直方向にレイアウト
             VStack(alignment: .leading) {
-                // ユーザー名
-                userNameText
+                // 自分のユーザー名を表示
+                Text(userName)
+                // フォントを.titleに変更
+                    .font(.title)
+                // 太字にする
+                    .bold()
                 // 上下左右に余白を追加
                     .padding()
-                // 　自分のユーザーID
-                myUserIDText
+                // 自分のユーザーID
+                Text("ユーザーID: qawsedrftgyhujikolp1234")
+                // 太字にする
+                    .bold()
                 // 左に余白を追加
                     .padding(.leading)
                 // 水平方向にレイアウト
                 HStack {
-                    friendListText
+                    Text("友達リスト")
+                    // 太字にする
+                        .bold()
                     // 左に余白を追加
                         .padding(.leading)
                     // スペースを空ける
@@ -51,38 +59,13 @@ struct AddFriendView: View {
             .padding()
             Spacer()
             // 友達リスト
-            firendList
+            Text("友達リスト")
             Spacer()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("友達追加", displayMode: .inline)
     } // body ここまで
-    
-    // ユーザー名のテキスト
-    private var userNameText: some View {
-        // 自分のユーザー名を表示
-        Text(userName)
-        // フォントを.titleに変更
-            .font(.title)
-        // 太字にする
-            .bold()
-    } // userNameText ここまで
 
-    // 自分のユーザーIDのテキスト
-    private var myUserIDText: some View {
-        // 自分のユーザーID
-        Text("ユーザーID: qawsedrftgyhujikolp1234")
-        // 太字にする
-            .bold()
-    } // myUserIDText ここまで
-    
-    // 友達リストのラベル
-    private var friendListText: some View {
-        Text("友達リスト")
-        // 太字にする
-            .bold()
-    } // friendListText ここまで
-    
     // ID入力ボタン
     private var inputIDButton: some View {
         Button {
@@ -148,11 +131,6 @@ struct AddFriendView: View {
             QRCodeView()
         } // sheetここまで
     } // qrCodeButton ここまで
-
-    // 友達リスト
-    private var firendList: some View {
-        Text("友達リスト")
-    } // firendList ここまで
 } // AddFriendView ここまで
 
 #Preview {
