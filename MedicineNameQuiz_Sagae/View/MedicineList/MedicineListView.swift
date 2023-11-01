@@ -23,13 +23,14 @@ struct MedicineListView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 薬の区分を選択するタブを上に配置
-                classificationTab
+                TopTabView(tabNameList: MedicineClassification.allCases.map({classification in
+                    classification.rawValue}), tabIndex: $tabIndex)
                 // 薬の検索バー
-                medicineSearchBar
+                Text("検索バー")
                 // スペースを空ける
                 Spacer()
                 // 薬リスト
-                medicineList
+                Text("薬リスト")
                 // スペースを空ける
                 Spacer()
             } // VStack ここまで
@@ -50,25 +51,7 @@ struct MedicineListView: View {
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
-    
-    // 薬の区分を選択するタブ
-    private var classificationTab: some View {
-        // 薬の区分の配列を取得
-        let classificationArray = MedicineClassification.allCases.map({classification in classification.rawValue})
-        // 薬の区分を選択するタブを返す
-        return TopTabView(tabNameList: classificationArray, tabIndex: $tabIndex)
-    } // classificationTab ここまで
-    
-    // 薬の検索バー
-    private var medicineSearchBar: some View {
-        Text("検索バー")
-    } // medicineSearchBar ここまで
-    
-    // 薬リスト
-    private var medicineList: some View {
-        Text("薬リスト")
-    } // medicineList ここまで
-    
+
     // カスタムで薬名を追加するボタン
     private var addMedicineButton: some View {
         Button {
