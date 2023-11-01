@@ -45,29 +45,19 @@ struct UserNameSettingView: View {
             // スペースを空ける
             Spacer()
             // 決定ボタン
-            decisionButton
+            Button {
+                // デバッグエリアにメッセージを表示
+                print("ユーザー名を登録しました: \(userName)")
+                // 画面を閉じる
+                dismiss()
+            } label: {
+                // ラベル
+                Text("決定")
+            } // Button ここまで
             // スペースを空ける
             Spacer()
         } // VStack ここまで
     } // body ここまで
-
-    // ユーザー名が変更できることをユーザーに伝えるためのテキスト
-    private var userNameCanBeChangedText: some View {
-        Text("ユーザー名は「その他」の「アカウント」からでも変更できます")
-    } // userNameCanBeChangedText ここまで
-
-    // 決定ボタン
-    private var decisionButton: some View {
-        Button {
-            // デバッグエリアにメッセージを表示
-            print("ユーザー名を登録しました: \(userName)")
-            // 画面を閉じる
-            dismiss()
-        } label: {
-            // ラベル
-            Text("決定")
-        } // Button ここまで
-    } // decisionButton ここまで
 } // UserNameSettingView ここまで
 
 #Preview {
