@@ -14,22 +14,23 @@ struct CreateQuestionListView: View {
     @State private var questionListName: String = ""
     // タブの選択項目を保持する変数
     @State private var tabIndex: Int = 0
-
+    
     // View Presentation State
     // リストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
-
+    
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
             // 薬の区分を選択するタブを上に配置
-            classificationTab
+            TopTabView(tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}),
+                       tabIndex: $tabIndex)
             Spacer()
             // 薬を検索するためのテキストフィールド
-            searchMedicineTextField
+            Text("薬の検索バー")
             Spacer()
             // 薬のリスト
-            medicineList
+            Text("薬リスト")
             Spacer()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
@@ -52,61 +53,27 @@ struct CreateQuestionListView: View {
         // リストに保存するためのポップアップ
         .alert("リストに保存", isPresented: $isShowPopUp) {
             // リスト名を取得するためのテキストフィールド
-            listNameTextField
+            TextField("リストの名前", text: $questionListName)
             // 名前が付けられたリストを保存するボタン
-            saveButton
+            Button {
+                // 問題リストの作成処理
+                // 画面を閉じる
+                dismiss()
+            } label: {
+                // ラベル
+                Text("保存")
+            } // Button ここまで
             // やめるボタン
-            cancelButton
+            Button(role: .cancel) {
+                // 何もしない
+            } label: {
+                // ラベル
+                Text("やめる")
+            } // Button ここまで
         } message: {
             Text("リストに名前をつけてください")
         } // alert ここまで
     } // body ここまで
-
-    // 薬の区分を選択するタブ
-    private var classificationTab: some View {
-        // 薬の区分の配列を取得
-        let classificationArray = MedicineClassification.allCases.map({classification in classification.rawValue})
-        // 薬の区分を選択するタブを返す
-        return TopTabView(tabNameList: classificationArray, tabIndex: $tabIndex)
-    } // classificationTab ここまで
-
-    // 薬を検索するためのテキストフィールド
-    private var searchMedicineTextField: some View {
-        Text("薬の検索バー")
-    } // searchMedicineTextField ここまで
-
-    // 薬のリスト
-    private var medicineList: some View {
-        Text("薬リスト")
-    } // medicineList ここまで
-
-    // リスト名を取得するためのテキストフィールド
-    private var listNameTextField: some View {
-        // リストの名前を取得するためのテキストフィールド
-        TextField("リストの名前", text: $questionListName)
-    } // listNameTextField ここまで
-
-    // 名前が付けられたリストを保存するボタン
-    private var saveButton: some View {
-        Button {
-            // 問題リストの作成処理
-            // 画面を閉じる
-            dismiss()
-        } label: {
-            // ラベル
-            Text("保存")
-        } // Button ここまで
-    } // saveButton ここまで
-
-    // やめるボタン
-    private var cancelButton: some View {
-        Button(role: .cancel) {
-            // 何もしない
-        } label: {
-            // ラベル
-            Text("やめる")
-        } // Button ここまで
-    } // cancelButton ここまで
 } // CreateQuestionListView ここまで
 
 #Preview {
