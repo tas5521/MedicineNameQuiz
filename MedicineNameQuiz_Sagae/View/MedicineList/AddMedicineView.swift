@@ -16,31 +16,12 @@ struct AddMedicineView: View {
         Text("追加する薬の名前を入力してください")
             .padding()
         // 先発品名を入力するためのテキストフィールド
-        originalMedicineTextField
+        Text("先発品名")
             .padding()
         // 一般名を入力するためのテキストフィールド
-        genericMedicineTextField
+        Text("一般名")
             .padding()
         // 追加ボタン
-        addButton
-            .padding()
-        // やめるボタン
-        cancelButton
-            .padding()
-    } // body ここまで
-
-    // 先発品名を入力するためのテキストフィールド
-    private var originalMedicineTextField: some View {
-        Text("先発品名")
-    } // originalMedicineTextField ここまで
-    
-    // 一般名を入力するためのテキストフィールド
-    private var genericMedicineTextField: some View {
-        Text("一般名")
-    } // genericMedicineTextField ここまで
-    
-    // 追加ボタン
-    private var addButton: some View {
         Button {
             // 薬の名前をカスタムに追加する処理
             dismiss()
@@ -48,10 +29,8 @@ struct AddMedicineView: View {
             // ラベル
             Text("追加")
         } // Button ここまで
-    } // addButton ここまで
-    
-    // やめるボタン
-    private var cancelButton: some View {
+            .padding()
+        // やめるボタン
         Button {
             // シートを閉じる
             dismiss()
@@ -59,8 +38,9 @@ struct AddMedicineView: View {
             // ラベル
             Text("やめる")
         } // Button ここまで
-    } // cancelButton ここまで
-} // AddMedicineView
+            .padding()
+    } // body ここまで
+} // AddMedicineView ここまで
 
 #Preview {
     AddMedicineView()
