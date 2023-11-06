@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct QuestionsView: View {
-    // 画面を閉じるために用いる環境変数
-    @Environment(\.dismiss) private var dismiss
     // リストの名前を保持する変数
     let listName: String
     // 問題を保持する変数
