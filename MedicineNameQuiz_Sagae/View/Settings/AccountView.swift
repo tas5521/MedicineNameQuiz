@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct AccountView: View {
-    // 画面を閉じるために用いる環境変数
-    @Environment(\.dismiss) private var dismiss
     // サインインしているかどうかを管理する変数
     @Binding var isSignIn: Bool
     // ユーザー名を管理する変数

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct AddFriendView: View {
-    // 画面を閉じるために用いる環境変数
-    @Environment(\.dismiss) private var dismiss
     // ユーザー名を管理する変数
     @Binding var userName: String
     // 友達のユーザーIDを格納する変数

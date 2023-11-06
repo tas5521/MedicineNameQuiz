@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HowToUseView: View {
-    // 画面を閉じるために用いる環境変数
-    @Environment(\.dismiss) private var dismiss
     // 項目のタイトル
     let title: String
     
