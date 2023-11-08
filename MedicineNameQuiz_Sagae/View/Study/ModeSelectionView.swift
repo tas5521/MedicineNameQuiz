@@ -21,7 +21,7 @@ struct ModeSelectionView: View {
     
     // View Presentation States
     // ユーザー名設定画面の表示を管理する変数
-    @State var isShowUserNameSettingView: Bool = false
+    @State private var isShowUserNameSettingView: Bool = false
     // サインイン画面の表示を管理する変数
     @State private var isShowSignInView: Bool = false
     

@@ -13,7 +13,7 @@ struct StudyView: View {
     // 選択されている学習モード
     let studyMode: StudyMode
     // ダミーの問題
-    let dummyQuestion: (String, [String]) = ("アムロジン", ["アムロジピンベシル酸塩", "イミダフェナシン", "エバスチン", "プランルカスト水和物"])
+    private let dummyQuestion: (String, [String]) = ("アムロジン", ["アムロジピンベシル酸塩", "イミダフェナシン", "エバスチン", "プランルカスト水和物"])
     
     var body: some View {
         // 垂直方向にレイアウト

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QRCodeView: View {
     // カメラの表示を管理する変数
-    @State var isShowCamera: Bool = true
+    @State private var isShowCamera: Bool = true
     
     var body: some View {
         // 垂直方向にレイアウト
