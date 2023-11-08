@@ -24,8 +24,7 @@ struct MedicineListView: View {
             VStack {
                 // 薬の区分を選択するタブを上に配置
                 TopTabView(
-                    tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}),
-                    tabIndex: $tabIndex)
+                    tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
                 // 薬の検索バー
                 Text("検索バー")
                 // スペースを空ける

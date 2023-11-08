@@ -18,8 +18,7 @@ struct EditQuestionListView: View {
         VStack {
             // 薬の区分を選択するタブを配置
             TopTabView(
-                tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}),
-                tabIndex: $tabIndex)
+                tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
             // リスト名編集用テキストフィールド
             Text("リスト名編集用テキストフィールド")
             // 薬を検索バー
