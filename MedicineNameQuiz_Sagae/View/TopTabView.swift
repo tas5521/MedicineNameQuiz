@@ -47,7 +47,7 @@ struct TopTabView: View {
         // 高さを48ポイントに指定
         .frame(height: 48)
         // 背景色は青（タブバーの色）
-        .background(Color.tabColor)
+        .background(.tabBlue)
     } // body ここまで
 } // TopTabView
 

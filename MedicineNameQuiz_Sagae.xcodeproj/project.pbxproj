@@ -14,7 +14,6 @@
 		4A9671622AC7B77A006F7157 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671612AC7B77A006F7157 /* RankingView.swift */; };
 		4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671632AC7B787006F7157 /* MedicineListView.swift */; };
 		4A9671662AC7B795006F7157 /* AppSettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671652AC7B795006F7157 /* AppSettingsListView.swift */; };
-		4A96716B2AC7BB2E006F7157 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */; };
 		4A96716F2AC7C7BC006F7157 /* StudyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716E2AC7C7BC006F7157 /* StudyMode.swift */; };
 		4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671722AC80BDD006F7157 /* TopTabView.swift */; };
 		4A9671752AC825E4006F7157 /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671742AC825E4006F7157 /* StudyView.swift */; };
@@ -55,7 +54,6 @@
 		4A9671612AC7B77A006F7157 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		4A9671632AC7B787006F7157 /* MedicineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListView.swift; sourceTree = "<group>"; };
 		4A9671652AC7B795006F7157 /* AppSettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsListView.swift; sourceTree = "<group>"; };
-		4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		4A96716E2AC7C7BC006F7157 /* StudyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMode.swift; sourceTree = "<group>"; };
 		4A9671722AC80BDD006F7157 /* TopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabView.swift; sourceTree = "<group>"; };
 		4A9671742AC825E4006F7157 /* StudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyView.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				4AA088292AC93608005BD8C2 /* Ranking */,
 				4AA0882B2AC93634005BD8C2 /* MedicineList */,
 				4AA0882C2AC93648005BD8C2 /* Settings */,
-				4AAB711E2AD54B14001B9714 /* Extension */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,14 +182,6 @@
 				4AA0883D2AC97DFE005BD8C2 /* AccountView.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		4AAB711E2AD54B14001B9714 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				4A96716A2AC7BB2E006F7157 /* ColorExtension.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		4AADB2C02AC5588300C5A40E = {
@@ -335,7 +324,6 @@
 				4AA0884A2AC9889D005BD8C2 /* HowToUseMedicineListView.swift in Sources */,
 				4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */,
 				4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */,
-				4A96716B2AC7BB2E006F7157 /* ColorExtension.swift in Sources */,
 				4AADB2D92AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld in Sources */,
 				4A9671792AC8578E006F7157 /* SignInView.swift in Sources */,
 				4AA0883E2AC97DFE005BD8C2 /* AccountView.swift in Sources */,
