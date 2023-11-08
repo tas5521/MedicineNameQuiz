@@ -52,5 +52,5 @@ struct TopTabView: View {
 } // TopTabView
 
 #Preview {
-    TopTabView(tabNameList: ["本番", "練習"], tabIndex: .constant(0))
+    TopTabView(tabIndex: .constant(0), tabNameList: ["本番", "練習"])
 }
