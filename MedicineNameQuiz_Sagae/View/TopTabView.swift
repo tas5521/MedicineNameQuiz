@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TopTabView: View {
-    // タブに表示する名前のリスト
-    let tabNameList: [String]
     // 選択されているタブの変数
     @Binding var tabIndex: Int
+    // タブに表示する名前のリスト
+    let tabNameList: [String]
     
     var body: some View {
         // 水平方向にレイアウト
