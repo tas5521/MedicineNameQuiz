@@ -67,7 +67,7 @@ struct MedicineListView: View {
                 .scaledToFit()
             // 幅高さ65に指定
                 .frame(width: 65, height: 65)
-            // 色をカスタムのボタンの色に指定
+            // ボタンの色をオレンジに指定
                 .foregroundStyle(.buttonOrange)
             // 背景を白に指定
                 .background(Color.white)
