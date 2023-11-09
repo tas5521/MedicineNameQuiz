@@ -33,28 +33,28 @@ struct MainTabView: View {
                                   userName: $userName,
                                   isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
                 .tabItem {
-                    Label("学習", systemImage: "book.fill")
+                    Label(TabSelection.study.rawValue, systemImage: "book.fill")
                 } // tabItem ここまで
                 .tag(TabSelection.study)
                 
                 // 問題リスト画面のViewを配置
                 QuestionListView()
                     .tabItem {
-                        Label("問題リスト", systemImage: "square.and.pencil")
+                        Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
                     } // tabItem ここまで
                     .tag(TabSelection.questionList)
                 
                 // ランキング画面のViewを配置
                 RankingView()
                     .tabItem {
-                        Label("ランキング", systemImage: "crown.fill")
+                        Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
                     } // tabItem ここまで
                     .tag(TabSelection.ranking)
                 
                 // 薬リスト画面のViewを配置
                 MedicineListView()
                     .tabItem {
-                        Label("薬リスト", systemImage: "list.bullet.rectangle.portrait.fill")
+                        Label(TabSelection.medicineList.rawValue, systemImage: "list.bullet.rectangle.portrait.fill")
                     } // tabItem ここまで
                     .tag(TabSelection.medicineList)
                 
@@ -63,7 +63,7 @@ struct MainTabView: View {
                                     isSignIn: $isSignIn,
                                     isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
                 .tabItem {
-                    Label("その他", systemImage: "gearshape.fill")
+                    Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
                 } // tabItem ここまで
                 .tag(TabSelection.settings)
             } // TabView ここまで
