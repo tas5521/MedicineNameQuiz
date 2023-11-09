@@ -43,24 +43,6 @@ struct StudyView: View {
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
-        // 戻るボタンを隠す
-        .navigationBarBackButtonHidden(true)
-        // ナビゲーションバーの右側に終了ボタンを配置
-        .toolbar {
-            // ボタンの位置を指定
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    // 保存処理
-                    // StudyViewを閉じる
-                    isStudying = false
-                } label: {
-                    // ラベル
-                    Text("終了")
-                    // 色を指定
-                        .foregroundColor(Color.black)
-                } // Button ここまで
-            } // ToolbarItem ここまで
-        } // toolbar ここまで
     } // body ここまで
 
     // 選択肢
