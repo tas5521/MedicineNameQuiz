@@ -14,7 +14,6 @@
 		4A9671622AC7B77A006F7157 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671612AC7B77A006F7157 /* RankingView.swift */; };
 		4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671632AC7B787006F7157 /* MedicineListView.swift */; };
 		4A9671662AC7B795006F7157 /* AppSettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671652AC7B795006F7157 /* AppSettingsListView.swift */; };
-		4A96716F2AC7C7BC006F7157 /* StudyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96716E2AC7C7BC006F7157 /* StudyMode.swift */; };
 		4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671722AC80BDD006F7157 /* TopTabView.swift */; };
 		4A9671752AC825E4006F7157 /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671742AC825E4006F7157 /* StudyView.swift */; };
 		4A9671772AC82CBC006F7157 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671762AC82CBC006F7157 /* ResultView.swift */; };
@@ -56,7 +55,6 @@
 		4A9671612AC7B77A006F7157 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		4A9671632AC7B787006F7157 /* MedicineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListView.swift; sourceTree = "<group>"; };
 		4A9671652AC7B795006F7157 /* AppSettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsListView.swift; sourceTree = "<group>"; };
-		4A96716E2AC7C7BC006F7157 /* StudyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMode.swift; sourceTree = "<group>"; };
 		4A9671722AC80BDD006F7157 /* TopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabView.swift; sourceTree = "<group>"; };
 		4A9671742AC825E4006F7157 /* StudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyView.swift; sourceTree = "<group>"; };
 		4A9671762AC82CBC006F7157 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				4A96717D2AC87E55006F7157 /* QuestionListItem.swift */,
 				4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */,
 				4A9671812AC888B7006F7157 /* Question.swift */,
-				4A96716E2AC7C7BC006F7157 /* StudyMode.swift */,
 				4AA088312AC9409D005BD8C2 /* MedicineClassification.swift */,
 				4AA088352AC96FCB005BD8C2 /* AppSettingsListItem.swift */,
 				4AA088412AC98796005BD8C2 /* HowToUse.swift */,
@@ -319,7 +316,6 @@
 				4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */,
 				4AA088482AC98887005BD8C2 /* HowToUseRankingView.swift in Sources */,
 				4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */,
-				4A96716F2AC7C7BC006F7157 /* StudyMode.swift in Sources */,
 				4A9671862AC92309006F7157 /* EditQuestionListView.swift in Sources */,
 				4AA088302AC93A3C005BD8C2 /* QRCodeView.swift in Sources */,
 				4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */,
