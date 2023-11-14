@@ -29,9 +29,7 @@ struct MainTabView: View {
         NavigationStack {
             TabView(selection: $tabSelection) {
                 // 学習画面のViewを配置
-                ModeSelectionView(isSignIn: $isSignIn,
-                                  userName: $userName,
-                                  isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+                ModeSelectionView()
                 .tabItem {
                     Label(TabSelection.study.rawValue, systemImage: "book.fill")
                 } // tabItem ここまで
@@ -45,7 +43,9 @@ struct MainTabView: View {
                     .tag(TabSelection.questionList)
                 
                 // ランキング画面のViewを配置
-                RankingView()
+                RankingView(userName: $userName,
+                            isSignIn: $isSignIn,
+                            isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
                     .tabItem {
                         Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
                     } // tabItem ここまで
