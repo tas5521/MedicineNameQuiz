@@ -1,15 +1,15 @@
 //
-//  StudyView.swift
+//  ChallengeRankingView.swift
 //  MedicineNameQuiz_Sagae
 //
-//  Created by 寒河江彪流 on 2023/09/30.
+//  Created by 寒河江彪流 on 2023/11/14.
 //
 
 import SwiftUI
 
-struct StudyView: View {
-    // 学習中であるかを管理する変数
-    @Binding var isStudying: Bool
+struct ChallengeRankingView: View {
+    // ランキングに挑戦中であるかを管理する変数
+    @Binding var isChallenging: Bool
     // ダミーの問題
     private let dummyQuestion: (String, [String]) = ("アムロジン", ["アムロジピンベシル酸塩", "イミダフェナシン", "エバスチン", "プランルカスト水和物"])
     
@@ -40,7 +40,7 @@ struct StudyView: View {
             Spacer()
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("学習中", displayMode: .inline)
+        .navigationBarTitle("挑戦中", displayMode: .inline)
     } // body ここまで
 
     // 選択肢
@@ -49,7 +49,7 @@ struct StudyView: View {
             // 選択肢を作成
             ForEach(dummyQuestion.1, id: \.self) { item in
                 NavigationLink {
-                    ResultView(isStudying: $isStudying)
+                    RankingResultView(isChallenging: $isChallenging)
                 } label: {
                     Text(item)
                         .foregroundColor(Color.blue)
@@ -58,15 +58,15 @@ struct StudyView: View {
             } // ForEach ここまで
             // パスボタン
             NavigationLink {
-                ResultView(isStudying: $isStudying)
+                RankingResultView(isChallenging: $isChallenging)
             } label: {
                 Text("パス")
                     .foregroundColor(Color.blue)
             } // NavigationLinkここまで
         } // VStack ここまで
     } // choicesここまで
-} // StudyView ここまで
+} // ChallengeRankingView ここまで
 
 #Preview {
-    StudyView(isStudying: .constant(true))
+    ChallengeRankingView(isChallenging: .constant(true))
 }
