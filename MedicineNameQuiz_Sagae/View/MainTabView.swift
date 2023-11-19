@@ -5,11 +5,17 @@
 //  Created by 寒河江彪流 on 2023/09/30.
 //
 
+// 本アプリの第1回目のリリース目標として、ランキング機能なしで学習のみできるアプリを作成することとなりました。
+// そのため、第一段階のアプリ作成の間は、ランキング機能に関連するコードをコメントアウトします。
+
 import SwiftUI
 
 struct MainTabView: View {
     // タブの選択項目を保持する変数
     @State private var tabSelection: TabSelection = .study
+
+    // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
+    /*
     // ユーザー名を管理する変数
     @State private var userName: String = ""
     // サインインしているかどうかを管理する変数
@@ -24,6 +30,7 @@ struct MainTabView: View {
     @State private var isShowSignInView: Bool = false
     // ユーザー名設定画面の表示を管理する変数
     @State private var isShowUserNameSettingView: Bool = false
+     */
 
     var body: some View {
         NavigationStack {
@@ -41,7 +48,9 @@ struct MainTabView: View {
                         Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
                     } // tabItem ここまで
                     .tag(TabSelection.questionList)
-                
+
+                // ランキング画面のタブを隠す
+                /*
                 // ランキング画面のViewを配置
                 RankingView(userName: $userName,
                             isSignIn: $isSignIn,
@@ -50,7 +59,8 @@ struct MainTabView: View {
                         Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
                     } // tabItem ここまで
                     .tag(TabSelection.ranking)
-                
+                */
+
                 // 薬リスト画面のViewを配置
                 MedicineListView()
                     .tabItem {
@@ -59,9 +69,14 @@ struct MainTabView: View {
                     .tag(TabSelection.medicineList)
                 
                 // 設定画面のViewを配置
-                AppSettingsListView(userName: $userName,
-                                    isSignIn: $isSignIn,
-                                    isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+                AppSettingsListView(
+                    // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
+                    /*
+                     userName: $userName,
+                     isSignIn: $isSignIn,
+                     isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting
+                     */
+                )
                 .tabItem {
                     Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
                 } // tabItem ここまで
@@ -69,6 +84,8 @@ struct MainTabView: View {
             } // TabView ここまで
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
+            // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
+            /*
             // ツールバー設定
             .toolbar {
                 // ランキングのタブでは、右に友達追加ボタンを配置する
@@ -83,9 +100,12 @@ struct MainTabView: View {
             .navigationDestination(isPresented: $isShowAddFriendView) {
                 AddFriendView(userName: $userName)
             } // navigationDestination ここまで
+             */
         } // NavigationStack ここまで
     } // body ここまで
     
+    // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
+    /*
     // 友達追加ボタン
     private var addFriendButton: some View {
         // 友達追加ボタン
@@ -139,6 +159,7 @@ struct MainTabView: View {
                 } // onDisappear ここまで
         } // sheet ここまで
     } // addFriendButton ここまで
+     */
 } // MainTabView ここまで
 
 #Preview {

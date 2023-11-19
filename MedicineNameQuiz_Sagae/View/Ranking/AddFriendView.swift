@@ -5,6 +5,11 @@
 //  Created by 寒河江彪流 on 2023/10/01.
 //
 
+// 本アプリの第1回目のリリース目標として、ランキング機能なしで学習のみできるアプリを作成することとなりました。
+// そのため、第一段階のアプリ作成の間は、ランキング機能に関連するコードをコメントアウトします。
+
+// ランキング機能が無ければ友達追加は行わないので、AddFriendView全体をコメントアウト
+/*
 import SwiftUI
 
 struct AddFriendView: View {
@@ -134,3 +139,4 @@ struct AddFriendView: View {
 #Preview {
     AddFriendView(userName: .constant("sagae"))
 }
+*/

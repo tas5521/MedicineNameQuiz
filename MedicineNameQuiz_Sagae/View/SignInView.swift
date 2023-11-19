@@ -5,6 +5,11 @@
 //  Created by 寒河江彪流 on 2023/09/30.
 //
 
+// 本アプリの第1回目のリリース目標として、ランキング機能なしで学習のみできるアプリを作成することとなりました。
+// そのため、第一段階のアプリ作成の間は、ランキング機能に関連するコードをコメントアウトします。
+
+// ランキング機能が無ければ、サインインは行わないので、SignInViewをコメントアウト
+/*
 import SwiftUI
 
 struct SignInView: View {
@@ -73,3 +78,5 @@ struct SignInView: View {
 #Preview {
     SignInView(isSignIn: .constant(true), userName: .constant(""))
 }
+
+*/
