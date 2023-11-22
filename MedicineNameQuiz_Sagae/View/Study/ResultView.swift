@@ -25,13 +25,13 @@ struct ResultView: View {
             // 上下左右に余白を追加
                 .padding()
             
-            // 間違えた問題をリストに保存するボタン
-            saveMistakesButton
-            // 上下左右に余白を追加
-                .padding()
-            
             // 結果のリスト
             Text("結果のリスト")
+            // 上下左右に余白を追加
+                .padding()
+
+            // 間違えた問題をリストに保存するボタン
+            saveMistakesButton
             // 上下左右に余白を追加
                 .padding()
         } // VStack ここまで
