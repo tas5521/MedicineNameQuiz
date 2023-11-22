@@ -37,13 +37,6 @@ struct ResultView: View {
         } // VStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習結果", displayMode: .inline)
-        // 戻るボタンを隠す
-        /*
-         本アプリでは、「ModeSelectionViewで出題モードを選択し、学習スタート → StudyViewで問題を解く → ResultViewで解答結果を集計し、表示する → 終了ボタンを押し、ModeSelectionViewに戻る」を学習の一連の流れとするため、ResultViewからStudyViewに戻ることは想定していません。
-         また、Result画面を終了した際は、ModeSelectionView（二つ前の画面）に一度に戻ることを想定しており、通常の戻るボタンを使用して、StudyViewを経由して戻ることは避けたいと考えています。
-         そのため、通常の戻るボタンを隠し、独自の終了ボタンを配置しています。
-         */
-        .navigationBarBackButtonHidden(true)
         // ナビゲーションバーの右側に終了ボタンを配置
         .toolbar {
             // ボタンの位置を指定

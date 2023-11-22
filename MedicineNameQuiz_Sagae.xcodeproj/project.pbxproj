@@ -110,7 +110,6 @@
 				4A9671582AC7B531006F7157 /* MainTabView.swift */,
 				4A9671782AC8578E006F7157 /* SignInView.swift */,
 				4A96717A2AC85A35006F7157 /* UserNameSettingView.swift */,
-				4A9671722AC80BDD006F7157 /* TopTabView.swift */,
 				4AA088272AC935B3005BD8C2 /* Study */,
 				4AA088282AC935E4005BD8C2 /* QuestionList */,
 				4AA088292AC93608005BD8C2 /* Ranking */,
@@ -172,6 +171,7 @@
 			children = (
 				4A9671632AC7B787006F7157 /* MedicineListView.swift */,
 				4AA088332AC94A6B005BD8C2 /* AddMedicineView.swift */,
+				4A9671722AC80BDD006F7157 /* TopTabView.swift */,
 			);
 			path = MedicineList;
 			sourceTree = "<group>";
