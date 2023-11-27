@@ -12,10 +12,6 @@ struct CardView: View {
     let frontText: String
     // 裏面のテキスト
     let backText: String
-    // カードの幅
-    private let width : CGFloat = 260
-    // カードの高さ
-    private let height : CGFloat = 180
     // CardViewModelのインスタンス
     private let cardViewModel: CardViewModel = CardViewModel.shared
     
@@ -37,7 +33,11 @@ struct CardView: View {
     
     // カードの面のView
     private func face(text: String, isFront: Bool) -> some View {
-        ZStack {
+        // カードの幅
+        let width : CGFloat = 260
+        // カードの高さ
+        let height : CGFloat = 180
+        return ZStack {
             // 角の丸い長方形を配置
             RoundedRectangle(cornerRadius: 20)
                 .fill(.white)
