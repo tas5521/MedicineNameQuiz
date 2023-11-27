@@ -21,9 +21,9 @@ struct CardView: View {
             // 奥から手前にレイアウト
             ZStack {
                 // 裏面
-                face(text: backText, isFront: false)
+                createCardFace(text: backText, isFront: false)
                 // 表面
-                face(text: frontText, isFront: true)
+                createCardFace(text: frontText, isFront: true)
             } // ZStack ここまで
             .onTapGesture {
                 cardViewModel.flipCard()
@@ -32,7 +32,7 @@ struct CardView: View {
     } // body ここまで
     
     // カードの面のView
-    private func face(text: String, isFront: Bool) -> some View {
+    private func createCardFace(text: String, isFront: Bool) -> some View {
         // カードの幅
         let width : CGFloat = 260
         // カードの高さ
