@@ -13,36 +13,14 @@ struct AnswerButton: View {
     let answerButtonType: AnswerButtonType
     // このボタンで行う処理
     let action: (() -> Void)?
-    // SFSymbolの名前
-    private var systemName: String {
-        switch answerButtonType {
-        case .correct:
-            "circle"
-        case .incorrect:
-            "multiply"
-        case .back:
-            "arrowshape.backward.fill"
-        } // switchここまで
-    } // systemName ここまで
-    // ボタンの色
-    private var buttonColor: Color {
-        switch answerButtonType {
-        case .correct:
-                .buttonGreen
-        case .incorrect:
-                .buttonRed
-        case .back:
-                .gray
-        } // switchここまで
-    } // buttonColor ここまで
-    
+
     var body: some View {
         Button {
             // このボタンで行う処理
             action?()
         } label: {
             // ラベル
-            Image(systemName: systemName)
+            Image(systemName: answerButtonType.systemName)
             // 幅高さ80に指定
                 .frame(width: 80, height: 80)
             // フォントを.titleに指定
@@ -50,7 +28,7 @@ struct AnswerButton: View {
             // 太字にする
                 .bold()
             // 背景色を指定
-                .background(buttonColor)
+                .background(answerButtonType.buttonColor)
             // 角を丸くする
                 .clipShape(.buttonBorder)
             // 文字の色を白に指定
