@@ -9,12 +9,32 @@ import SwiftUI
 
 // 解答ボタン
 struct AnswerButton: View {
+    // ボタンの種類
+    let answerButtonType: AnswerButtonType
     // このボタンで行う処理
     let action: (() -> Void)?
     // SFSymbolの名前
-    let systemName: String
+    private var systemName: String {
+        switch answerButtonType {
+        case .correct:
+            "circle"
+        case .incorrect:
+            "multiply"
+        case .back:
+            "arrowshape.backward.fill"
+        } // switchここまで
+    } // systemName ここまで
     // ボタンの色
-    let color: Color
+    private var buttonColor: Color {
+        switch answerButtonType {
+        case .correct:
+                .buttonGreen
+        case .incorrect:
+                .buttonRed
+        case .back:
+                .gray
+        } // switchここまで
+    } // buttonColor ここまで
     
     var body: some View {
         Button {
@@ -30,7 +50,7 @@ struct AnswerButton: View {
             // 太字にする
                 .bold()
             // 背景色を指定
-                .background(color)
+                .background(buttonColor)
             // 角を丸くする
                 .clipShape(.buttonBorder)
             // 文字の色を白に指定
@@ -40,5 +60,5 @@ struct AnswerButton: View {
 } // AnswerButton ここまで
 
 #Preview {
-    AnswerButton(action: { print("Correct") }, systemName: "circle", color: .buttonGreen)
+    AnswerButton(answerButtonType: .correct, action: { print("Correct") })
 }
