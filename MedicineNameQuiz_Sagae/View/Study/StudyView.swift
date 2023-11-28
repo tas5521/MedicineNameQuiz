@@ -66,12 +66,12 @@ struct StudyView: View {
                         .font(.title)
                     // 太字にする
                         .bold()
-                    // 背景色をオレンジに指定
-                        .background(.buttonOrange)
+                    // 背景色を緑に指定
+                        .background(.buttonGreen)
                     // 角を丸くする
                         .clipShape(.buttonBorder)
-                    // 文字の色を緑に指定
-                        .foregroundStyle(.green)
+                    // 文字の色を白に指定
+                        .foregroundStyle(.white)
                 } // Button ここまで
                 // 不正解ボタン
                 Button {
@@ -100,12 +100,12 @@ struct StudyView: View {
                         .font(.title)
                     // 太字にする
                         .bold()
-                    // 背景色をオレンジに指定
-                        .background(.buttonOrange)
+                    // 背景色を赤に指定
+                        .background(.buttonRed)
                     // 角を丸くする
                         .clipShape(.buttonBorder)
-                    // 文字の色を赤に指定
-                        .foregroundStyle(.red)
+                    // 文字の色を白に指定
+                        .foregroundStyle(.white)
                 } // Button ここまで
                 // 一つ前の問題に戻るボタン
                 Button {
@@ -133,11 +133,11 @@ struct StudyView: View {
                     // 太字にする
                         .bold()
                     // 背景色をオレンジに指定
-                        .background(.buttonOrange)
+                        .background(.gray)
                     // 角を丸くする
                         .clipShape(.buttonBorder)
                     // 文字の色をグレーに指定
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.white)
                 } // Button ここまで
             } // HStack ここまで
             // スペースを空ける
