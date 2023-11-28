@@ -12,11 +12,11 @@ struct StudyView: View {
     @Binding var isStudying: Bool
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
-
+    
     // View Presentation State
     // 結果画面の表示を管理する変数
     @State private var isShowResultView: Bool = false
-
+    
     // カードフリップに関する変数
     // カードがめくられているかを管理する変数
     @State private var isFlipped: Bool = false
@@ -26,14 +26,14 @@ struct StudyView: View {
     @State private var backDegree: Double = -90.0
     // カードが半分めくられるまでの時間間隔
     private let duration : CGFloat = 0.1
-
+    
     // ダミーの問題
     private let medicineNames: [(front: String, back: String)] = [
         ("アムロジン", "アムロジピンベシル酸塩"),
         ("インフリー", "インドメタシン　ファルネシル"),
         ("ウリトス", "イミダフェナシン")
     ] // medicineNames ここまで
-
+    
     var body: some View {
         // 垂直方向にレイアウト
         VStack {
@@ -124,26 +124,23 @@ struct StudyView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
     } // body ここまで
-
+    
     // カードのView
     private func cardView(frontText: String, backText: String) -> some View {
-        // 垂直方向にレイアウト
-        VStack {
-            // 奥から手前にレイアウト
-            ZStack {
-                // 裏面
-                createCardFace(text: backText, isFront: false)
-                // 表面
-                createCardFace(text: frontText, isFront: true)
-            } // ZStack ここまで
-            // タップされたら
-            .onTapGesture {
-                // カードをめくる
-                flipCard()
-            } // onTapGesture ここまで
-        } // VStack ここまで
+        // 奥から手前にレイアウト
+        ZStack {
+            // 裏面
+            createCardFace(text: backText, isFront: false)
+            // 表面
+            createCardFace(text: frontText, isFront: true)
+        } // ZStack ここまで
+        // タップされたら
+        .onTapGesture {
+            // カードをめくる
+            flipCard()
+        } // onTapGesture ここまで
     } // cardView ここまで
-
+    
     // カードの面を生成するメソッド
     private func createCardFace(text: String, isFront: Bool) -> some View {
         // カードの幅
@@ -180,7 +177,7 @@ struct StudyView: View {
             Angle(degrees: isFront ? frontDegree : backDegree), axis: (x: 0, y: 1, z: 0)
         )
     } // createCardFace ここまで
-
+    
     // カードをめくるメソッド
     private func flipCard() {
         // カードがめくられているか、めくられていないかを、切り替え
