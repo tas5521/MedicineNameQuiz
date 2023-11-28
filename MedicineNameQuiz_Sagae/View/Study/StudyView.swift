@@ -39,7 +39,7 @@ struct StudyView: View {
             // 水平方向にレイアウト
             HStack(spacing: 20) {
                 // 正解ボタン
-                Button {
+                AnswerButton(action: {
                     // カードがめくられていたら、元に戻す（ただし、最後の問題だったら、フリップしない）
                     if cardViewModel.isFlipped && questionNumber != cardViewModel.medicineNames.count - 1 {
                         // カードをめくる
@@ -57,24 +57,10 @@ struct StudyView: View {
                             isShowResultView.toggle()
                         } // if ここまで
                     } // DispatchQueue ここまで
-                } label: {
-                    // ラベル
-                    Image(systemName: "circle")
-                    // 幅高さ80に指定
-                        .frame(width: 80, height: 80)
-                    // フォントを.titleに指定
-                        .font(.title)
-                    // 太字にする
-                        .bold()
-                    // 背景色を緑に指定
-                        .background(.buttonGreen)
-                    // 角を丸くする
-                        .clipShape(.buttonBorder)
-                    // 文字の色を白に指定
-                        .foregroundStyle(.white)
-                } // Button ここまで
+                }, systemName: "circle", color: .buttonGreen)
+                
                 // 不正解ボタン
-                Button {
+                AnswerButton(action: {
                     // カードがめくられていたら、元に戻す（ただし、最後の問題だったら、フリップしない）
                     if cardViewModel.isFlipped && questionNumber != cardViewModel.medicineNames.count - 1 {
                         // カードをめくる
@@ -92,23 +78,10 @@ struct StudyView: View {
                             isShowResultView.toggle()
                         } // if ここまで
                     } // DispatchQueue ここまで
-                } label: {
-                    Image(systemName: "multiply")
-                    // 幅高さ80に指定
-                        .frame(width: 80, height: 80)
-                    // フォントを.titleに指定
-                        .font(.title)
-                    // 太字にする
-                        .bold()
-                    // 背景色を赤に指定
-                        .background(.buttonRed)
-                    // 角を丸くする
-                        .clipShape(.buttonBorder)
-                    // 文字の色を白に指定
-                        .foregroundStyle(.white)
-                } // Button ここまで
+                }, systemName: "multiply", color: .buttonRed)
+
                 // 一つ前の問題に戻るボタン
-                Button {
+                AnswerButton(action: {
                     // カードがめくられていたら、元に戻す
                     if cardViewModel.isFlipped {
                         // カードをめくる
@@ -124,21 +97,7 @@ struct StudyView: View {
                             questionNumber = 0
                         } // if ここまで
                     } // DispatchQueue ここまで
-                } label: {
-                    Image(systemName: "arrowshape.backward.fill")
-                    // 幅高さ80に指定
-                        .frame(width: 80, height: 80)
-                    // フォントを.titleに指定
-                        .font(.title)
-                    // 太字にする
-                        .bold()
-                    // 背景色をオレンジに指定
-                        .background(.gray)
-                    // 角を丸くする
-                        .clipShape(.buttonBorder)
-                    // 文字の色をグレーに指定
-                        .foregroundStyle(.white)
-                } // Button ここまで
+                }, systemName: "arrowshape.backward.fill", color: .gray)
             } // HStack ここまで
             // スペースを空ける
             Spacer()

@@ -47,6 +47,7 @@
 		4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABE86542B034828003AC69F /* RankingResultView.swift */; };
 		4AD2C0672B0CDCAD002EC687 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2C0662B0CDCAD002EC687 /* CardView.swift */; };
 		4AD2C06A2B0CDDFB002EC687 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2C0692B0CDDFB002EC687 /* CardViewModel.swift */; };
+		4AD429762B159B6100FEE2DD /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD429752B159B6100FEE2DD /* AnswerButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		4ABE86542B034828003AC69F /* RankingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingResultView.swift; sourceTree = "<group>"; };
 		4AD2C0662B0CDCAD002EC687 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		4AD2C0692B0CDDFB002EC687 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		4AD429752B159B6100FEE2DD /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				4A9671742AC825E4006F7157 /* StudyView.swift */,
 				4A9671762AC82CBC006F7157 /* ResultView.swift */,
 				4AD2C0662B0CDCAD002EC687 /* CardView.swift */,
+				4AD429752B159B6100FEE2DD /* AnswerButton.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				4A9671662AC7B795006F7157 /* AppSettingsListView.swift in Sources */,
 				4A9671602AC7B768006F7157 /* ModeSelectionView.swift in Sources */,
 				4AD2C06A2B0CDDFB002EC687 /* CardViewModel.swift in Sources */,
+				4AD429762B159B6100FEE2DD /* AnswerButton.swift in Sources */,
 				4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */,
 				4AA0884A2AC9889D005BD8C2 /* HowToUseMedicineListView.swift in Sources */,
 				4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */,
