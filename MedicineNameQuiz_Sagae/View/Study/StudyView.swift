@@ -116,14 +116,6 @@ struct StudyView: View {
             // スペースを空ける
             Spacer()
         } // VStack ここまで
-        // 学習終了時に、必ず、カードを元の面に戻す
-        .onDisappear {
-            // カードがめくられていたら、元に戻す
-            if isFlipped {
-                // カードをめくる
-                flipCard()
-            } // if ここまで
-        } // onDisappear ここまで
         // 問題を解く画面へ遷移
         .navigationDestination(isPresented: $isShowResultView) {
             // 結果画面を表示
