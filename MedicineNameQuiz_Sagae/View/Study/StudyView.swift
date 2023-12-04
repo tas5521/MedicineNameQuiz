@@ -69,21 +69,7 @@ struct StudyView: View {
                 
                 // 一つ前の問題に戻るボタン
                 AnswerButton(answerButtonType: .back, action: {
-                    // カードがめくられていたら、元に戻す
-                    if isCardFlipped {
-                        // カードをめくる
-                        flipCard()
-                    } // if ここまで
-                    // カードが半分めくられるまで待つ
-                    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                        // 一つ前の問題に戻る
-                        questionNumber -= 1
-                        // 問題番号が0未満の時
-                        if questionNumber < 0 {
-                            // クラッシュを避けるため、問題番号を0にする
-                            questionNumber = 0
-                        } // if ここまで
-                    } // DispatchQueue ここまで
+                    goBackToPreviousQuestion()
                 }) // 一つ前の問題に戻るボタン ここまで
             } // HStack ここまで
             // スペースを空ける
@@ -204,7 +190,22 @@ struct StudyView: View {
         } // DispatchQueue ここまで
     } // proceedToNextQuestion ここまで
     
-    
+    // 前の問題に戻る処理
+    private func goBackToPreviousQuestion() {
+        // カードがめくられていたら、元に戻す
+        if isCardFlipped {
+            // カードをめくる
+            flipCard()
+        } // if ここまで
+        // カードが半分めくられるまで待つ
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            // 最初の問題でない場合
+            if questionNumber > 0 {
+                // 一つ前の問題に戻る
+                questionNumber -= 1
+            } // if ここまで
+        } // DispatchQueue ここまで
+    } // goBackToPreviousQuestion ここまで
 } // StudyView ここまで
 
 #Preview {
