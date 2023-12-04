@@ -12,12 +12,12 @@ struct AnswerButton: View {
     // ボタンの種類
     let answerButtonType: AnswerButtonType
     // このボタンで行う処理
-    let action: (() -> Void)?
+    let action: () -> Void
 
     var body: some View {
         Button {
             // このボタンで行う処理
-            action?()
+            action()
         } label: {
             // ラベル
             Image(systemName: answerButtonType.systemName)
