@@ -55,44 +55,16 @@ struct StudyView: View {
             HStack(spacing: 20) {
                 // 正解ボタン
                 AnswerButton(answerButtonType: .correct, action: {
-                    // カードがめくられていたら、元に戻す（ただし、最後の問題だったら、フリップしない）
-                    if isCardFlipped && questionNumber != medicineNames.count - 1 {
-                        // カードをめくる
-                        flipCard()
-                    } // if ここまで
-                    // カードが半分めくられるまで待つ
-                    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                        // 次の問題へ
-                        questionNumber += 1
-                        // もし、最後の問題だったら
-                        if questionNumber == medicineNames.count {
-                            // クラッシュしないよう、numberを1減らす
-                            questionNumber -= 1
-                            // 結果画面を表示
-                            isShowResultView.toggle()
-                        } // if ここまで
-                    } // DispatchQueue ここまで
+                    // TODO: 現在の問題が正解であること記録する処理を実装
+                    // 次の問題へ進むか、結果を表示
+                    advanceToNextQuestionOrShowResult()
                 }) // 正解ボタン ここまで
                 
                 // 不正解ボタン
                 AnswerButton(answerButtonType: .incorrect, action: {
-                    // カードがめくられていたら、元に戻す（ただし、最後の問題だったら、フリップしない）
-                    if isCardFlipped && questionNumber != medicineNames.count - 1 {
-                        // カードをめくる
-                        flipCard()
-                    } // if ここまで
-                    // カードが半分めくられるまで待つ
-                    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                        // 次の問題へ
-                        questionNumber += 1
-                        // もし、最後の問題だったら
-                        if questionNumber == medicineNames.count {
-                            // クラッシュしないよう、numberを1減らす
-                            questionNumber -= 1
-                            // 結果画面を表示
-                            isShowResultView.toggle()
-                        } // if ここまで
-                    } // DispatchQueue ここまで
+                    // TODO: 現在の問題が不正解であること記録する処理を実装
+                    // 次の問題へ進むか、結果を表示
+                    advanceToNextQuestionOrShowResult()
                 }) // 不正解ボタン ここまで
                 
                 // 一つ前の問題に戻るボタン
@@ -204,6 +176,35 @@ struct StudyView: View {
             } // withAnimation ここまで
         } // if ここまで
     } // flipCard ここまで
+    
+    // 次の問題へ進むか、結果を表示
+    private func advanceToNextQuestionOrShowResult() {
+        // もし最後の問題だったら
+        if questionNumber == medicineNames.count - 1 {
+            // 結果画面を表示
+            isShowResultView.toggle()
+            // もし最後の問題でなかったら
+        } else {
+            // 次の問題へ進む
+            advanceToNextQuestion()
+        } // if ここまで
+    } // advanceToNextQuestionOrShowResult ここまで
+    
+    // 次の問題に進む処理
+    private func advanceToNextQuestion() {
+        // カードがめくられていたら、元に戻す
+        if isCardFlipped {
+            // カードをめくる
+            flipCard()
+        } // if ここまで
+        // カードが半分めくられるまで待つ
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            // 次の問題へ
+            questionNumber += 1
+        } // DispatchQueue ここまで
+    } // proceedToNextQuestion ここまで
+    
+    
 } // StudyView ここまで
 
 #Preview {
