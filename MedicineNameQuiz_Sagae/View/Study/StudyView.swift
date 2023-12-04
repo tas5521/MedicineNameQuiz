@@ -31,7 +31,8 @@ struct StudyView: View {
     private let medicineNames: [(front: String, back: String)] = [
         ("アムロジン", "アムロジピンベシル酸塩"),
         ("インフリー", "インドメタシン　ファルネシル"),
-        ("ウリトス", "イミダフェナシン")
+        ("ウリトス", "イミダフェナシン"),
+        ("ティーエスワン", "テガフール・ギメラシル・オテラシルカリウム")
     ] // medicineNames ここまで
     
     var body: some View {
