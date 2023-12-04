@@ -182,12 +182,15 @@ struct StudyView: View {
         if isCardFlipped {
             // カードをめくる
             flipCard()
-        } // if ここまで
-        // カードが半分めくられるまで待つ
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            // カードが半分めくられるまで待つ
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                // 次の問題へ
+                questionNumber += 1
+            } // DispatchQueue ここまで
+        } else {
             // 次の問題へ
             questionNumber += 1
-        } // DispatchQueue ここまで
+        }// if ここまで
     } // proceedToNextQuestion ここまで
     
     // 前の問題に戻る処理
@@ -196,15 +199,21 @@ struct StudyView: View {
         if isCardFlipped {
             // カードをめくる
             flipCard()
-        } // if ここまで
-        // カードが半分めくられるまで待つ
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            // カードが半分めくられるまで待つ
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                // 最初の問題でない場合
+                if questionNumber > 0 {
+                    // 一つ前の問題に戻る
+                    questionNumber -= 1
+                } // if ここまで
+            } // DispatchQueue ここまで
+        } else {
             // 最初の問題でない場合
             if questionNumber > 0 {
                 // 一つ前の問題に戻る
                 questionNumber -= 1
             } // if ここまで
-        } // DispatchQueue ここまで
+        } // if ここまで
     } // goBackToPreviousQuestion ここまで
 } // StudyView ここまで
 
