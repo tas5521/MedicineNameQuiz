@@ -19,7 +19,7 @@ struct StudyView: View {
     
     // カードフリップに関する変数
     // カードがめくられているかを管理する変数
-    @State private var isFlipped: Bool = false
+    @State private var isCardFlipped: Bool = false
     // カードの表面についての、めくられた角度
     @State private var frontDegree: Double = 0.0
     // カードの裏面についての、めくられた角度
@@ -56,7 +56,7 @@ struct StudyView: View {
                 // 正解ボタン
                 AnswerButton(answerButtonType: .correct, action: {
                     // カードがめくられていたら、元に戻す（ただし、最後の問題だったら、フリップしない）
-                    if isFlipped && questionNumber != medicineNames.count - 1 {
+                    if isCardFlipped && questionNumber != medicineNames.count - 1 {
                         // カードをめくる
                         flipCard()
                     } // if ここまで
@@ -77,7 +77,7 @@ struct StudyView: View {
                 // 不正解ボタン
                 AnswerButton(answerButtonType: .incorrect, action: {
                     // カードがめくられていたら、元に戻す（ただし、最後の問題だったら、フリップしない）
-                    if isFlipped && questionNumber != medicineNames.count - 1 {
+                    if isCardFlipped && questionNumber != medicineNames.count - 1 {
                         // カードをめくる
                         flipCard()
                     } // if ここまで
@@ -98,7 +98,7 @@ struct StudyView: View {
                 // 一つ前の問題に戻るボタン
                 AnswerButton(answerButtonType: .back, action: {
                     // カードがめくられていたら、元に戻す
-                    if isFlipped {
+                    if isCardFlipped {
                         // カードをめくる
                         flipCard()
                     } // if ここまで
@@ -182,9 +182,9 @@ struct StudyView: View {
     // カードをめくるメソッド
     private func flipCard() {
         // カードがめくられているか、めくられていないかを、切り替え
-        isFlipped.toggle()
+        isCardFlipped.toggle()
         // もしカードがめくられたら
-        if isFlipped {
+        if isCardFlipped {
             // アニメーションで、カードの表面についての、めくられた角度を90度にする
             withAnimation(.linear(duration: duration)) {
                 frontDegree = 90
