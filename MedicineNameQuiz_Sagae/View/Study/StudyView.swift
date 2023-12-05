@@ -57,19 +57,25 @@ struct StudyView: View {
                 AnswerButton(answerButtonType: .correct, action: {
                     // TODO: 現在の問題が正解であること記録する処理を実装
                     // 次の問題へ進むか、結果を表示
-                    advanceToNextQuestionOrShowResult()
+                    Task {
+                        await advanceToNextQuestionOrShowResult()
+                    }
                 }) // 正解ボタン ここまで
                 
                 // 不正解ボタン
                 AnswerButton(answerButtonType: .incorrect, action: {
                     // TODO: 現在の問題が不正解であること記録する処理を実装
                     // 次の問題へ進むか、結果を表示
-                    advanceToNextQuestionOrShowResult()
+                    Task {
+                        await advanceToNextQuestionOrShowResult()
+                    }
                 }) // 不正解ボタン ここまで
                 
                 // 一つ前の問題に戻るボタン
                 AnswerButton(answerButtonType: .back, action: {
-                    goBackToPreviousQuestion()
+                    Task {
+                        await goBackToPreviousQuestion()
+                    }
                 }) // 一つ前の問題に戻るボタン ここまで
             } // HStack ここまで
             // スペースを空ける
@@ -95,8 +101,10 @@ struct StudyView: View {
         } // ZStack ここまで
         // タップされたら
         .onTapGesture {
-            // カードをめくる
-            flipCard()
+            Task {
+                // カードをめくる
+                await flipCard()
+            }
         } // onTapGesture ここまで
     } // cardView ここまで
     
@@ -138,7 +146,7 @@ struct StudyView: View {
     } // createCardFace ここまで
     
     // カードをめくるメソッド
-    private func flipCard() {
+    private func flipCard() async {
         // カードがめくられているか、めくられていないかを、切り替え
         isCardFlipped.toggle()
         // もしカードがめくられたら
@@ -164,57 +172,46 @@ struct StudyView: View {
     } // flipCard ここまで
     
     // 次の問題へ進むか、結果を表示
-    private func advanceToNextQuestionOrShowResult() {
+    private func advanceToNextQuestionOrShowResult() async {
         // もし最後の問題だったら
         if questionNumber == medicineNames.count - 1 {
             // 結果画面を表示
             isShowResultView.toggle()
             // もし最後の問題でなかったら
         } else {
-            // 次の問題へ進む
-            advanceToNextQuestion()
-        } // if ここまで
-    } // advanceToNextQuestionOrShowResult ここまで
-    
-    // 次の問題に進む処理
-    private func advanceToNextQuestion() {
-        // カードがめくられていたら、元に戻す
-        if isCardFlipped {
-            // カードをめくる
-            flipCard()
-            // カードが半分めくられるまで待つ
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                // 次の問題へ
-                questionNumber += 1
-            } // DispatchQueue ここまで
-        } else {
+            // カードをめくり、指定した時間待機する
+            await flipCardAndWait()
             // 次の問題へ
             questionNumber += 1
-        }// if ここまで
-    } // proceedToNextQuestion ここまで
-    
+        } // if ここまで
+    } // advanceToNextQuestionOrShowResult ここまで
+
     // 前の問題に戻る処理
-    private func goBackToPreviousQuestion() {
-        // カードがめくられていたら、元に戻す
-        if isCardFlipped {
-            // カードをめくる
-            flipCard()
-            // カードが半分めくられるまで待つ
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-                // 最初の問題でない場合
-                if questionNumber > 0 {
-                    // 一つ前の問題に戻る
-                    questionNumber -= 1
-                } // if ここまで
-            } // DispatchQueue ここまで
-        } else {
-            // 最初の問題でない場合
-            if questionNumber > 0 {
-                // 一つ前の問題に戻る
-                questionNumber -= 1
-            } // if ここまで
+    private func goBackToPreviousQuestion() async {
+        // 最初の問題でない場合
+        if questionNumber > 0 {
+            // カードをめくり、指定した時間待機する
+            await flipCardAndWait()
+            // 一つ前の問題に戻る
+            questionNumber -= 1
         } // if ここまで
     } // goBackToPreviousQuestion ここまで
+    
+    // カードをめくり、指定した時間待機する
+    private func flipCardAndWait() async {
+        // カードがめくられていたら
+        if isCardFlipped {
+            // カードをめくる（元に戻す）
+            await flipCard()
+            do {
+                // カードが半分めくられるまで待つ
+                try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+            } catch {
+                // デバッグエリアにエラーメッセージを表示
+                print("Error: \(error)")
+            } // do-try-catch ここまで
+        } // if ここまで
+    } // flipCardAndWait ここまで
 } // StudyView ここまで
 
 #Preview {
