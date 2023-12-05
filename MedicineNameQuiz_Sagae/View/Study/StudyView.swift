@@ -77,6 +77,7 @@ struct StudyView: View {
                         await goBackToPreviousQuestion()
                     }
                 }) // 一つ前の問題に戻るボタン ここまで
+                .disabled(questionNumber == 0)
             } // HStack ここまで
             // スペースを空ける
             Spacer()
@@ -188,13 +189,10 @@ struct StudyView: View {
 
     // 前の問題に戻る処理
     private func goBackToPreviousQuestion() async {
-        // 最初の問題でない場合
-        if questionNumber > 0 {
-            // カードをめくり、指定した時間待機する
-            await flipCardAndWait()
-            // 一つ前の問題に戻る
-            questionNumber -= 1
-        } // if ここまで
+        // カードをめくり、指定した時間待機する
+        await flipCardAndWait()
+        // 一つ前の問題に戻る
+        questionNumber -= 1
     } // goBackToPreviousQuestion ここまで
     
     // カードをめくり、指定した時間待機する
