@@ -55,27 +55,28 @@ struct StudyView: View {
             HStack(spacing: 20) {
                 // 正解ボタン
                 AnswerButton(answerButtonType: .correct, action: {
-                    // TODO: 現在の問題が正解であること記録する処理を実装
-                    // 次の問題へ進むか、結果を表示
+                    // TODO: 現在の問題が正解であることを記録する処理を実装
                     Task {
+                        // 次の問題へ進むか、結果を表示
                         await advanceToNextQuestionOrShowResult()
-                    }
+                    } // Task ここまで
                 }) // 正解ボタン ここまで
                 
                 // 不正解ボタン
                 AnswerButton(answerButtonType: .incorrect, action: {
-                    // TODO: 現在の問題が不正解であること記録する処理を実装
-                    // 次の問題へ進むか、結果を表示
+                    // TODO: 現在の問題が不正解であることを記録する処理を実装
                     Task {
+                        // 次の問題へ進むか、結果を表示
                         await advanceToNextQuestionOrShowResult()
-                    }
+                    } // Task ここまで
                 }) // 不正解ボタン ここまで
                 
                 // 一つ前の問題に戻るボタン
                 AnswerButton(answerButtonType: .back, action: {
                     Task {
+                        // 前の問題に戻る
                         await goBackToPreviousQuestion()
-                    }
+                    } // Task ここまで
                 }) // 一つ前の問題に戻るボタン ここまで
                 .disabled(questionNumber == 0)
             } // HStack ここまで
@@ -105,7 +106,7 @@ struct StudyView: View {
             Task {
                 // カードをめくる
                 await flipCard()
-            }
+            } // Task ここまで
         } // onTapGesture ここまで
     } // cardView ここまで
     
