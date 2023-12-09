@@ -56,10 +56,8 @@ struct StudyView: View {
             } // ZStack ここまで
             // タップされたら
             .onTapGesture {
-                Task {
-                    // カードをめくる
-                    await flipCard()
-                } // Task ここまで
+                // カードをめくる
+                    flipCard()
             } // onTapGesture ここまで
             // スペースを空ける
             Spacer()
@@ -142,7 +140,7 @@ struct StudyView: View {
     } // createCardFace ここまで
     
     // カードをめくるメソッド
-    private func flipCard() async {
+    private func flipCard() {
         // カードがめくられているか、めくられていないかを、切り替え
         isCardFlipped.toggle()
         // もしカードがめくられたら
@@ -195,7 +193,7 @@ struct StudyView: View {
         // カードがめくられていたら
         if isCardFlipped {
             // カードをめくる（元に戻す）
-            await flipCard()
+            flipCard()
             do {
                 // カードが半分めくられるまで待つ
                 try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
