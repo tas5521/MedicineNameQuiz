@@ -46,9 +46,21 @@ struct StudyView: View {
                 .font(.title)
             // スペースを空ける
             Spacer()
-            // カードのViewを配置
-            cardView(frontText: medicineNames[questionNumber].front,
-                     backText: medicineNames[questionNumber].back)
+            // 奥から手前にレイアウト
+            ZStack {
+                // カードを配置
+                // 裏面
+                createCardFace(text: medicineNames[questionNumber].back, isFront: false)
+                // 表面
+                createCardFace(text: medicineNames[questionNumber].front, isFront: true)
+            } // ZStack ここまで
+            // タップされたら
+            .onTapGesture {
+                Task {
+                    // カードをめくる
+                    await flipCard()
+                } // Task ここまで
+            } // onTapGesture ここまで
             // スペースを空ける
             Spacer()
             // 水平方向にレイアウト
@@ -91,25 +103,7 @@ struct StudyView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
     } // body ここまで
-    
-    // カードのView
-    private func cardView(frontText: String, backText: String) -> some View {
-        // 奥から手前にレイアウト
-        ZStack {
-            // 裏面
-            createCardFace(text: backText, isFront: false)
-            // 表面
-            createCardFace(text: frontText, isFront: true)
-        } // ZStack ここまで
-        // タップされたら
-        .onTapGesture {
-            Task {
-                // カードをめくる
-                await flipCard()
-            } // Task ここまで
-        } // onTapGesture ここまで
-    } // cardView ここまで
-    
+
     // カードの面を生成するメソッド
     private func createCardFace(text: String, isFront: Bool) -> some View {
         // カードの幅
