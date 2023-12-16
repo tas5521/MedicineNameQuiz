@@ -36,7 +36,7 @@ struct ModeSelectionView: View {
                         } // ForEach ここまで
                     } // Picker ここまで
                     .pickerStyle(.wheel)
-                    .padding(.top, -20)
+                    .padding([.top, .bottom], -20)
                     Spacer()
                     Text("モード選択")
                         .font(.title)
@@ -56,8 +56,14 @@ struct ModeSelectionView: View {
                     // 学習開始
                     isStudying.toggle()
                     print(questionSelectionIndex)
+                    print(modeSelection)
                 } label: {
                     Text("スタート")
+                        .font(.title2)
+                        .frame(width: 150, height: 50)
+                        .clipShape(.buttonBorder)
+                        .background(Color.buttonOrange)
+                        .foregroundStyle(Color.white)
                 } // Button ここまで
                 .padding(.bottom, 80)
             } // VStack ここまで
