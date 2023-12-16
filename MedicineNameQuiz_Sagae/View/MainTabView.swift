@@ -42,6 +42,13 @@ struct MainTabView: View {
         navigationBarAppearance.backgroundColor = UIColor(.navigationBarBlue)
         // ナビゲーションバーの見た目を指定
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        
+        // タブバーの見た目のインスタンスを格納
+        let tabBarAppearance = UITabBar.appearance()
+        // タブバーの選択されていないタブの色を黒に変更
+        tabBarAppearance.unselectedItemTintColor = .black
+        // タブバーの背景色を青に変更
+        tabBarAppearance.backgroundColor = UIColor(.tabBlue)
     } // init ここまで
 
     var body: some View {
@@ -96,6 +103,8 @@ struct MainTabView: View {
             } // TabView ここまで
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
+            // 選択されているタブの色を白にする
+            .accentColor(Color.white)
             // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
             /*
             // ツールバー設定
