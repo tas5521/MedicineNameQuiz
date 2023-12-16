@@ -25,45 +25,73 @@ struct ModeSelectionView: View {
             Color.backgroundSkyBlue
             // 垂直方向にレイアウト
             VStack {
+                // 垂直方向にレイアウト（Viewを右に寄せる）
                 VStack(alignment: .leading) {
+                    // スペースを空ける
                     Spacer()
+                    // 問題リストの選択を促すテキスト
                     Text("問題リスト選択")
+                    // フォントを.titleに指定
                         .font(.title)
+                    // 太字にする
                         .bold()
+                    // 問題リスト選択用のPicker
                     Picker("問題リスト選択", selection: $questionSelectionIndex) {
+                        // 要素を繰り返す
                         ForEach(dummyQuestionNameList.indices, id: \.self) { index in
+                            // 問題名
                             Text(dummyQuestionNameList[index])
                         } // ForEach ここまで
                     } // Picker ここまで
+                    // ホイールで表示
                     .pickerStyle(.wheel)
+                    // 上下の余白を20減らす
                     .padding([.top, .bottom], -20)
+                    // スペースを空ける
                     Spacer()
+                    // モード選択を促すテキスト
                     Text("モード選択")
+                    // フォントを.titleに指定
                         .font(.title)
+                    // 太字にする
                         .bold()
+                    // 出題モード選択用のPicker
                     Picker("出題モード選択", selection: $modeSelection) {
+                        // 要素を繰り返す
                         ForEach(StudyMode.allCases, id: \.self) { mode in
-                            Text(mode.rawValue).tag(mode)
+                            // モードの選択肢
+                            Text(mode.rawValue)
+                                .tag(mode)
                         } // ForEach ここまで
                     } // Picker ここまで
+                    // セグメントで表示
                     .pickerStyle(.segmented)
+                    // 上下左右に余白を追加
                     .padding()
+                    //スペースを空ける
                     Spacer()
                 } // VStack ここまで
+                // 上下左右に余白を追加
                 .padding()
                 // スタートボタンを配置
                 Button {
                     // 学習開始
                     isStudying.toggle()
-                    print(questionSelectionIndex)
-                    print(modeSelection)
                 } label: {
+                    // ラベル
                     Text("スタート")
+                    // フォントを.title2に指定
                         .font(.title2)
-                        .frame(width: 150, height: 50)
-                        .clipShape(.buttonBorder)
-                        .background(Color.buttonOrange)
+                    // 太字にする
+                        .bold()
+                    // 文字の色を白に指定
                         .foregroundStyle(Color.white)
+                    // 幅150高さ50に指定
+                        .frame(width: 150, height: 60)
+                    // 背景色をオレンジに指定
+                        .background(Color.buttonOrange)
+                    // 角を丸くする
+                        .clipShape(.buttonBorder)
                 } // Button ここまで
                 .padding(.bottom, 80)
             } // VStack ここまで
