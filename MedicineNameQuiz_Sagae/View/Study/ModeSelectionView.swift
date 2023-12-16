@@ -10,7 +10,14 @@ import SwiftUI
 struct ModeSelectionView: View {
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
-
+    //
+    @State private var questionSelectionIndex: Int = 0
+    //
+    @State private var modeSelection: StudyMode = .brandToGeneric
+    
+    // ダミーのリスト
+    private var dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
+    
     var body: some View {
         // 手前から奥にレイアウト
         ZStack {
@@ -18,21 +25,36 @@ struct ModeSelectionView: View {
             Color.backgroundSkyBlue
             // 垂直方向にレイアウト
             VStack {
-                Spacer()
-                // 垂直方向にレイアウト
-                VStack(alignment: .leading) {
+                VStack {
+                    Spacer()
                     Text("問題リスト選択")
-                    // 太字にする
+                        .font(.title)
                         .bold()
+                    Picker("問題リスト選択", selection: $questionSelectionIndex) {
+                        ForEach(dummyQuestionNameList.indices, id: \.self) { index in
+                            Text(dummyQuestionNameList[index])
+                        } // ForEach ここまで
+                    } // Picker ここまで
+                    .pickerStyle(.wheel)
+                    .padding(.top, -20)
+                    Spacer()
                     Text("モード選択")
-                    // 太字にする
+                        .font(.title)
                         .bold()
+                    Picker("出題モード選択", selection: $modeSelection) {
+                        ForEach(StudyMode.allCases, id: \.self) { mode in
+                            Text(mode.rawValue).tag(mode)
+                        } // ForEach ここまで
+                    } // Picker ここまで
+                    .pickerStyle(.segmented)
+                    .padding()
+                    Spacer()
                 } // VStack ここまで
-                Spacer()
                 // スタートボタンを配置
                 Button {
                     // 学習開始
                     isStudying.toggle()
+                    print(questionSelectionIndex)
                 } label: {
                     Text("スタート")
                 } // Button ここまで

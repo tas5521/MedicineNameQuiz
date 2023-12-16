@@ -43,6 +43,7 @@
 		4AADB2D42AC5588500C5A40E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AADB2D32AC5588500C5A40E /* Preview Assets.xcassets */; };
 		4AADB2D62AC5588500C5A40E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AADB2D52AC5588500C5A40E /* Persistence.swift */; };
 		4AADB2D92AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4AADB2D72AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld */; };
+		4AB111652B2E091500DD79F2 /* StudyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB111642B2E091500DD79F2 /* StudyMode.swift */; };
 		4ABE86532B03465B003AC69F /* ChallengeRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABE86522B03465B003AC69F /* ChallengeRankingView.swift */; };
 		4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABE86542B034828003AC69F /* RankingResultView.swift */; };
 		4AD429762B159B6100FEE2DD /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD429752B159B6100FEE2DD /* AnswerButton.swift */; };
@@ -87,6 +88,7 @@
 		4AADB2D32AC5588500C5A40E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4AADB2D52AC5588500C5A40E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4AADB2D82AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedicineNameQuiz_Sagae.xcdatamodel; sourceTree = "<group>"; };
+		4AB111642B2E091500DD79F2 /* StudyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMode.swift; sourceTree = "<group>"; };
 		4ABE86522B03465B003AC69F /* ChallengeRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeRankingView.swift; sourceTree = "<group>"; };
 		4ABE86542B034828003AC69F /* RankingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingResultView.swift; sourceTree = "<group>"; };
 		4AD429752B159B6100FEE2DD /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				4AA088352AC96FCB005BD8C2 /* AppSettingsListItem.swift */,
 				4AA088412AC98796005BD8C2 /* HowToUse.swift */,
 				4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */,
+				4AB111642B2E091500DD79F2 /* StudyMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,7 +260,7 @@
 		4AADB2C12AC5588300C5A40E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
@@ -337,6 +340,7 @@
 				4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */,
 				4AADB2D92AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld in Sources */,
 				4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */,
+				4AB111652B2E091500DD79F2 /* StudyMode.swift in Sources */,
 				4A9671792AC8578E006F7157 /* SignInView.swift in Sources */,
 				4AA0883E2AC97DFE005BD8C2 /* AccountView.swift in Sources */,
 				4A9671752AC825E4006F7157 /* StudyView.swift in Sources */,
@@ -398,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -455,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
