@@ -25,7 +25,7 @@ struct ModeSelectionView: View {
             Color.backgroundSkyBlue
             // 垂直方向にレイアウト
             VStack {
-                VStack {
+                VStack(alignment: .leading) {
                     Spacer()
                     Text("問題リスト選択")
                         .font(.title)
@@ -50,6 +50,7 @@ struct ModeSelectionView: View {
                     .padding()
                     Spacer()
                 } // VStack ここまで
+                .padding()
                 // スタートボタンを配置
                 Button {
                     // 学習開始
@@ -58,7 +59,7 @@ struct ModeSelectionView: View {
                 } label: {
                     Text("スタート")
                 } // Button ここまで
-                Spacer()
+                .padding(.bottom, 80)
             } // VStack ここまで
             // 問題を解く画面へ遷移
             .navigationDestination(isPresented: $isStudying) {
