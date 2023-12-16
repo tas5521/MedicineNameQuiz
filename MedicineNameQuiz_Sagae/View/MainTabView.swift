@@ -31,6 +31,18 @@ struct MainTabView: View {
     // ユーザー名設定画面の表示を管理する変数
     @State private var isShowUserNameSettingView: Bool = false
      */
+    
+    // イニシャライザ
+    init() {
+        // ナビゲーションバー見た目を管理するインスタンスを作成
+        let navigationBarAppearance = UINavigationBarAppearance()
+        // ナビゲーションバーの文字色を白色に設定
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        // ナビゲーションバーの背景色を青色に設定
+        navigationBarAppearance.backgroundColor = UIColor(.navigationBarBlue)
+        // ナビゲーションバーの見た目を指定
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+    } // init ここまで
 
     var body: some View {
         NavigationStack {
