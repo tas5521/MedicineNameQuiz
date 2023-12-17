@@ -34,54 +34,56 @@ struct ResultView: View {
             // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
-            VStack(alignment: .leading) {
-                // 学習結果を表示
-                // 水平方向にレイアウト
-                HStack {
-                    // 正解の数を表示
-                    Image(systemName: StudyResult.correct.rawValue)
-                        .foregroundStyle(Color.buttonGreen)
-                        .bold()
-                    let correctCount = dummyResult.filter { $0.studyResult == .correct }.count
-                    Text(":  \(correctCount)")
-                        .padding(.trailing)
-                    // 不正解の数を表示
-                    Image(systemName: StudyResult.incorrect.rawValue)
-                        .foregroundStyle(Color.buttonRed)
-                        .bold()
-                    let incorrectCount = dummyResult.filter { $0.studyResult == .incorrect }.count
-                    Text(":  \(incorrectCount)")
-                } // HStack ここまで
-                .padding(.leading, 30)
-                .padding(.top, 30)
-                .scaleEffect(1.5)
-                
-                // 結果のリスト
-                List {
-                    ForEach(dummyResult) { item in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(item.brandName)
-                                    .foregroundStyle(Color.blue)
+            VStack {
+                // 垂直方向にレイアウト
+                VStack(alignment: .leading) {
+                    // 学習結果を表示
+                    // 水平方向にレイアウト
+                    HStack {
+                        // 正解の数を表示
+                        Image(systemName: StudyResult.correct.rawValue)
+                            .foregroundStyle(Color.buttonGreen)
+                            .bold()
+                        let correctCount = dummyResult.filter { $0.studyResult == .correct }.count
+                        Text(":  \(correctCount)")
+                            .padding(.trailing)
+                        // 不正解の数を表示
+                        Image(systemName: StudyResult.incorrect.rawValue)
+                            .foregroundStyle(Color.buttonRed)
+                            .bold()
+                        let incorrectCount = dummyResult.filter { $0.studyResult == .incorrect }.count
+                        Text(":  \(incorrectCount)")
+                    } // HStack ここまで
+                    .padding(.leading, 30)
+                    .padding(.top, 30)
+                    .scaleEffect(1.5)
+                    
+                    // 結果のリスト
+                    List {
+                        ForEach(dummyResult) { item in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(item.brandName)
+                                        .foregroundStyle(Color.blue)
+                                        .bold()
+                                    Text(item.genericName)
+                                        .foregroundStyle(Color.red)
+                                        .bold()
+                                } // VStack ここまで
+                                Spacer()
+                                let studyResult = item.studyResult
+                                Image(systemName: studyResult.rawValue)
+                                    .frame(width: 15)
+                                    .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
                                     .bold()
-                                Text(item.genericName)
-                                    .foregroundStyle(Color.red)
-                                    .bold()
-                            } // VStack ここまで
-                            Spacer()
-                            let studyResult = item.studyResult
-                            Image(systemName: studyResult.rawValue)
-                                .frame(width: 15)
-                                .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
-                                .bold()
-                        } // HStack ここまで
-                    } // ForEach ここまで
-                } // List ここまで
-                // リストのスタイルを.groupedに変更
-                .listStyle(.grouped)
-                // リストの背景のグレーの部分を非表示にする
-                .scrollContentBackground(.hidden)
-
+                            } // HStack ここまで
+                        } // ForEach ここまで
+                    } // List ここまで
+                    // リストのスタイルを.groupedに変更
+                    .listStyle(.grouped)
+                    // リストの背景のグレーの部分を非表示にする
+                    .scrollContentBackground(.hidden)
+                } // VStack ここまで
                 // 間違えた問題をリストに保存するボタン
                 saveMistakesButton
                 // 上下左右に余白を追加
@@ -115,6 +117,16 @@ struct ResultView: View {
             isShowPopUp.toggle()
         } label: {
             Text("間違えた問題をリストに保存する")
+            // 太字にする
+                .bold()
+            // 文字の色を白に指定
+                .foregroundStyle(Color.white)
+            // 幅150高さ50に指定
+                .frame(width: 300, height: 60)
+            // 背景色をオレンジに指定
+                .background(Color.buttonOrange)
+            // 角を丸くする
+                .clipShape(.buttonBorder)
         } // Button ここまで
         // 間違えた問題をリストに保存するためのポップアップを表示
         .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
