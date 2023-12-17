@@ -43,21 +43,18 @@ struct ResultView: View {
                         // 正解の数を表示
                         Image(systemName: StudyResult.correct.rawValue)
                             .foregroundStyle(Color.buttonGreen)
-                            .bold()
                         let correctCount = dummyResult.filter { $0.studyResult == .correct }.count
                         Text(":  \(correctCount)")
                             .padding(.trailing)
                         // 不正解の数を表示
                         Image(systemName: StudyResult.incorrect.rawValue)
                             .foregroundStyle(Color.buttonRed)
-                            .bold()
                         let incorrectCount = dummyResult.filter { $0.studyResult == .incorrect }.count
                         Text(":  \(incorrectCount)")
                     } // HStack ここまで
                     .padding(.leading, 30)
                     .padding(.top, 30)
                     .scaleEffect(1.5)
-                    
                     // 結果のリスト
                     List {
                         ForEach(dummyResult) { item in
@@ -65,17 +62,14 @@ struct ResultView: View {
                                 VStack(alignment: .leading) {
                                     Text(item.brandName)
                                         .foregroundStyle(Color.blue)
-                                        .bold()
                                     Text(item.genericName)
                                         .foregroundStyle(Color.red)
-                                        .bold()
                                 } // VStack ここまで
                                 Spacer()
                                 let studyResult = item.studyResult
                                 Image(systemName: studyResult.rawValue)
                                     .frame(width: 15)
                                     .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
-                                    .bold()
                             } // HStack ここまで
                         } // ForEach ここまで
                     } // List ここまで
@@ -89,6 +83,7 @@ struct ResultView: View {
                 // 上下左右に余白を追加
                     .padding()
             } // VStack ここまで
+            .bold()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習結果", displayMode: .inline)
