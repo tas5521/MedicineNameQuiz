@@ -17,6 +17,15 @@ struct ResultView: View {
     // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
     
+    // ダミーの解答結果
+    private let dummyResult: [StudyResultListItem] = [
+        StudyResultListItem(brandName: "アムロジン", genericName: "アムロジピンベシル酸塩", studyResult: .incorrect),
+        StudyResultListItem(brandName: "インフリー", genericName: "インドメタシン　ファルネシル", studyResult: .correct),
+        StudyResultListItem(brandName: "ウリトス", genericName: "イミダフェナシン", studyResult: .correct),
+        StudyResultListItem(brandName: "エバステル", genericName: "エバスチン", studyResult: .incorrect),
+        StudyResultListItem(brandName: "オノン", genericName: "プランルカスト水和物", studyResult: .correct)
+    ]
+    
     var body: some View {
         // 手前から奥にレイアウト
         ZStack {
@@ -25,16 +34,37 @@ struct ResultView: View {
             // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
-            VStack {
+            VStack(alignment: .leading) {
                 // 学習結果を表示
                 Text("結果表示")
                 // 上下左右に余白を追加
                     .padding()
                 
                 // 結果のリスト
-                Text("結果のリスト")
-                // 上下左右に余白を追加
-                    .padding()
+                List {
+                    ForEach(dummyResult) { item in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(item.brandName)
+                                    .foregroundStyle(Color.blue)
+                                    .bold()
+                                Text(item.genericName)
+                                    .foregroundStyle(Color.red)
+                                    .bold()
+                            } // VStack ここまで
+                            Spacer()
+                            let studyResult = item.studyResult
+                            Image(systemName: studyResult.rawValue)
+                                .frame(width: 15)
+                                .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
+                                .bold()
+                        } // HStack ここまで
+                    } // ForEach ここまで
+                } // List ここまで
+                // リストのスタイルを.groupedに変更
+                .listStyle(.grouped)
+                // リストの背景のグレーの部分を非表示にする
+                .scrollContentBackground(.hidden)
 
                 // 間違えた問題をリストに保存するボタン
                 saveMistakesButton
