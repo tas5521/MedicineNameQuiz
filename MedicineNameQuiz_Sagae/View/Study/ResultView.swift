@@ -103,8 +103,6 @@ struct ResultView: View {
                 } label: {
                     // ラベル
                     Text("終了")
-                    // 色を指定
-                        .foregroundColor(Color.black)
                 } // Button ここまで
             } // ToolbarItem ここまで
         } // toolbar ここまで
