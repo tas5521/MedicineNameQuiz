@@ -18,23 +18,30 @@ struct ResultView: View {
     @State private var isShowPopUp = false
     
     var body: some View {
-        // 垂直方向にレイアウト
-        VStack {
-            // 学習結果を表示
-            Text("結果表示")
-            // 上下左右に余白を追加
-                .padding()
-            
-            // 結果のリスト
-            Text("結果のリスト")
-            // 上下左右に余白を追加
-                .padding()
+        // 手前から奥にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            // 垂直方向にレイアウト
+            VStack {
+                // 学習結果を表示
+                Text("結果表示")
+                // 上下左右に余白を追加
+                    .padding()
+                
+                // 結果のリスト
+                Text("結果のリスト")
+                // 上下左右に余白を追加
+                    .padding()
 
-            // 間違えた問題をリストに保存するボタン
-            saveMistakesButton
-            // 上下左右に余白を追加
-                .padding()
-        } // VStack ここまで
+                // 間違えた問題をリストに保存するボタン
+                saveMistakesButton
+                // 上下左右に余白を追加
+                    .padding()
+            } // VStack ここまで
+        } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習結果", displayMode: .inline)
         // ナビゲーションバーの右側に終了ボタンを配置
