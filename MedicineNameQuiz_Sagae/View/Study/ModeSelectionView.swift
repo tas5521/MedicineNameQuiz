@@ -86,8 +86,6 @@ struct ModeSelectionView: View {
                         .font(.title2)
                     // 太字にする
                         .bold()
-                    // 文字の色を白に指定
-                        .foregroundStyle(Color.white)
                     // 幅150高さ50に指定
                         .frame(width: 150, height: 60)
                     // 背景色をオレンジに指定
