@@ -52,27 +52,7 @@ struct ResultView: View {
                     // 文字の大きさを1.5倍にする
                     .scaleEffect(1.5)
                     // 結果のリスト
-                    List {
-                        ForEach(dummyResult) { item in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(item.brandName)
-                                        .foregroundStyle(Color.blue)
-                                    Text(item.genericName)
-                                        .foregroundStyle(Color.red)
-                                } // VStack ここまで
-                                Spacer()
-                                let studyResult = item.studyResult
-                                Image(systemName: studyResult.rawValue)
-                                    .frame(width: 15)
-                                    .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
-                            } // HStack ここまで
-                        } // ForEach ここまで
-                    } // List ここまで
-                    // リストのスタイルを.groupedに変更
-                    .listStyle(.grouped)
-                    // リストの背景のグレーの部分を非表示にする
-                    .scrollContentBackground(.hidden)
+                    resultList
                 } // VStack ここまで
                 // 間違えた問題をリストに保存するボタン
                 saveMistakesButton
@@ -111,6 +91,42 @@ struct ResultView: View {
         // 正解または不正解の数を表示
         Text(":  \(resultCount)")
     } // countResult ここまで
+    
+    // 結果のリスト
+    private var resultList: some View {
+        // リストを作成
+        List {
+            // 繰り返し
+            ForEach(dummyResult) { item in
+                // 水平方向にレイアウト
+                HStack {
+                    // 垂直方向にレイアウト
+                    VStack(alignment: .leading) {
+                        // 先発品名を表示
+                        Text(item.brandName)
+                            .foregroundStyle(Color.blue)
+                        // 一般名を表示
+                        Text(item.genericName)
+                            .foregroundStyle(Color.red)
+                    } // VStack ここまで
+                    // スペースを空ける
+                    Spacer()
+                    // 学習結果（正解か不正解か）を取得
+                    let studyResult = item.studyResult
+                    // まる、または、ばつのImage
+                    Image(systemName: studyResult.rawValue)
+                    // 幅を15に指定
+                        .frame(width: 15)
+                    // 正解なら緑、不正解なら赤にする
+                        .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
+                } // HStack ここまで
+            } // ForEach ここまで
+        } // List ここまで
+        // リストのスタイルを.groupedに変更
+        .listStyle(.grouped)
+        // リストの背景のグレーの部分を非表示にする
+        .scrollContentBackground(.hidden)
+    } // resultList ここまで
 
     // 間違えた問題をリストに保存するボタン
     private var saveMistakesButton: some View {
