@@ -41,19 +41,15 @@ struct ResultView: View {
                     // 水平方向にレイアウト
                     HStack {
                         // 正解の数を表示
-                        Image(systemName: StudyResult.correct.rawValue)
-                            .foregroundStyle(Color.buttonGreen)
-                        let correctCount = dummyResult.filter { $0.studyResult == .correct }.count
-                        Text(":  \(correctCount)")
-                            .padding(.trailing)
+                        countResult(of: .correct)
                         // 不正解の数を表示
-                        Image(systemName: StudyResult.incorrect.rawValue)
-                            .foregroundStyle(Color.buttonRed)
-                        let incorrectCount = dummyResult.filter { $0.studyResult == .incorrect }.count
-                        Text(":  \(incorrectCount)")
+                        countResult(of: .incorrect)
                     } // HStack ここまで
+                    // 左に30ポイント余白をつける
                     .padding(.leading, 30)
+                    // 上に30ポイント余白をつける
                     .padding(.top, 30)
+                    // 文字の大きさを1.5倍にする
                     .scaleEffect(1.5)
                     // 結果のリスト
                     List {
@@ -103,8 +99,21 @@ struct ResultView: View {
         } // toolbar ここまで
     } // body ここまで
     
+    // 解答結果のカウント
+    @ViewBuilder
+    private func countResult(of result: StudyResult) -> some View {
+        // まるかばつのImageを配置
+        Image(systemName: result.rawValue)
+        // 正解なら緑、不正解なら赤にする
+            .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
+        // 正解または不正解の数をカウント
+        let resultCount = dummyResult.filter { $0.studyResult == result }.count
+        // 正解または不正解の数を表示
+        Text(":  \(resultCount)")
+    } // countResult ここまで
+
     // 間違えた問題をリストに保存するボタン
-    var saveMistakesButton: some View {
+    private var saveMistakesButton: some View {
         Button {
             // 警告を表示
             isShowPopUp.toggle()
