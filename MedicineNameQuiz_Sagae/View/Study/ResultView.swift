@@ -36,9 +36,25 @@ struct ResultView: View {
             // 垂直方向にレイアウト
             VStack(alignment: .leading) {
                 // 学習結果を表示
-                Text("結果表示")
-                // 上下左右に余白を追加
-                    .padding()
+                // 水平方向にレイアウト
+                HStack {
+                    // 正解の数を表示
+                    Image(systemName: StudyResult.correct.rawValue)
+                        .foregroundStyle(Color.buttonGreen)
+                        .bold()
+                    let correctCount = dummyResult.filter { $0.studyResult == .correct }.count
+                    Text(":  \(correctCount)")
+                        .padding(.trailing)
+                    // 不正解の数を表示
+                    Image(systemName: StudyResult.incorrect.rawValue)
+                        .foregroundStyle(Color.buttonRed)
+                        .bold()
+                    let incorrectCount = dummyResult.filter { $0.studyResult == .incorrect }.count
+                    Text(":  \(incorrectCount)")
+                } // HStack ここまで
+                .padding(.leading, 30)
+                .padding(.top, 30)
+                .scaleEffect(1.5)
                 
                 // 結果のリスト
                 List {
