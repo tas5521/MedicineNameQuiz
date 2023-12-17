@@ -45,10 +45,10 @@ struct ResultView: View {
                         // 不正解の数を表示
                         countResult(of: .incorrect)
                     } // HStack ここまで
-                    // 左に30ポイント余白をつける
-                    .padding(.leading, 30)
-                    // 上に30ポイント余白をつける
-                    .padding(.top, 30)
+                    // 上と左に30ポイント余白をつける
+                    .padding([.leading,.top], 30)
+                    // 下に10ポイント余白をつける
+                    .padding(.bottom, 15)
                     // 文字の大きさを1.5倍にする
                     .scaleEffect(1.5)
                     // 結果のリスト
