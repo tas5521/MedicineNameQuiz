@@ -31,25 +31,6 @@ struct MainTabView: View {
     // ユーザー名設定画面の表示を管理する変数
     @State private var isShowUserNameSettingView: Bool = false
      */
-    
-    // イニシャライザ
-    init() {
-        // ナビゲーションバー見た目を管理するインスタンスを作成
-        let navigationBarAppearance = UINavigationBarAppearance()
-        // ナビゲーションバーの文字色を白色に設定
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        // ナビゲーションバーの背景色を青色に設定
-        navigationBarAppearance.backgroundColor = UIColor(.navigationBarBlue)
-        // ナビゲーションバーの見た目を指定
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        
-        // タブバーの見た目のインスタンスを格納
-        let tabBarAppearance = UITabBar.appearance()
-        // タブバーの選択されていないタブの色を黒に変更
-        tabBarAppearance.unselectedItemTintColor = .black
-        // タブバーの背景色を青に変更
-        tabBarAppearance.backgroundColor = UIColor(.tabBlue)
-    } // init ここまで
 
     var body: some View {
         NavigationStack {
@@ -101,8 +82,15 @@ struct MainTabView: View {
                 } // tabItem ここまで
                 .tag(TabSelection.settings)
             } // TabView ここまで
+            // ナビゲーションバーの設定
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
+            // ナビゲーションバーの背景を青色に変更
+            .toolbarBackground(.navigationBarBlue, for: .navigationBar)
+            // ナビゲーションバーの背景を表示
+            .toolbarBackground(.visible, for: .navigationBar)
+            // ナビゲーしょ0んバーのタイトルの色を白にする
+            .toolbarColorScheme(.dark)
             // 選択されているタブの色を白にする
             .accentColor(Color.white)
             // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
