@@ -31,80 +31,76 @@ struct MainTabView: View {
     // ユーザー名設定画面の表示を管理する変数
     @State private var isShowUserNameSettingView: Bool = false
      */
-    
-    // イニシャライザ
-    init() {
-        // ナビゲーションバー見た目を管理するインスタンスを作成
-        let navigationBarAppearance = UINavigationBarAppearance()
-        // ナビゲーションバーの文字色を白色に設定
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        // ナビゲーションバーの背景色を青色に設定
-        navigationBarAppearance.backgroundColor = UIColor(.navigationBarBlue)
-        // ナビゲーションバーの見た目を指定
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        
-        // タブバーの見た目のインスタンスを格納
-        let tabBarAppearance = UITabBar.appearance()
-        // タブバーの選択されていないタブの色を黒に変更
-        tabBarAppearance.unselectedItemTintColor = .black
-        // タブバーの背景色を青に変更
-        tabBarAppearance.backgroundColor = UIColor(.tabBlue)
-    } // init ここまで
 
     var body: some View {
         NavigationStack {
             TabView(selection: $tabSelection) {
-                // 学習画面のViewを配置
-                ModeSelectionView()
-                .tabItem {
-                    Label(TabSelection.study.rawValue, systemImage: "book.fill")
-                } // tabItem ここまで
-                .tag(TabSelection.study)
-                
-                // 問題リスト画面のViewを配置
-                QuestionListView()
+                // タブの項目をグループにまとめる
+                Group {
+                    // 学習画面のViewを配置
+                    ModeSelectionView()
                     .tabItem {
-                        Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
+                        Label(TabSelection.study.rawValue, systemImage: "book.fill")
                     } // tabItem ここまで
-                    .tag(TabSelection.questionList)
+                    .tag(TabSelection.study)
+                    
+                    // 問題リスト画面のViewを配置
+                    QuestionListView()
+                        .tabItem {
+                            Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
+                        } // tabItem ここまで
+                        .tag(TabSelection.questionList)
 
-                // ランキング画面のタブを隠す
-                /*
-                // ランキング画面のViewを配置
-                RankingView(userName: $userName,
-                            isSignIn: $isSignIn,
-                            isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
-                    .tabItem {
-                        Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
-                    } // tabItem ここまで
-                    .tag(TabSelection.ranking)
-                */
-
-                // 薬リスト画面のViewを配置
-                MedicineListView()
-                    .tabItem {
-                        Label(TabSelection.medicineList.rawValue, systemImage: "list.bullet.rectangle.portrait.fill")
-                    } // tabItem ここまで
-                    .tag(TabSelection.medicineList)
-                
-                // 設定画面のViewを配置
-                AppSettingsListView(
-                    // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
+                    // ランキング画面のタブを隠す
                     /*
-                     userName: $userName,
-                     isSignIn: $isSignIn,
-                     isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting
-                     */
-                )
-                .tabItem {
-                    Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
-                } // tabItem ここまで
-                .tag(TabSelection.settings)
-            } // TabView ここまで
+                    // ランキング画面のViewを配置
+                    RankingView(userName: $userName,
+                                isSignIn: $isSignIn,
+                                isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+                        .tabItem {
+                            Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
+                        } // tabItem ここまで
+                        .tag(TabSelection.ranking)
+                    */
+
+                    // 薬リスト画面のViewを配置
+                    MedicineListView()
+                        .tabItem {
+                            Label(TabSelection.medicineList.rawValue, systemImage: "list.bullet.rectangle.portrait.fill")
+                        } // tabItem ここまで
+                        .tag(TabSelection.medicineList)
+                    
+                    // 設定画面のViewを配置
+                    AppSettingsListView(
+                        // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
+                        /*
+                         userName: $userName,
+                         isSignIn: $isSignIn,
+                         isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting
+                         */
+                    )
+                    .tabItem {
+                        Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
+                    } // tabItem ここまで
+                    .tag(TabSelection.settings)
+                } // Group ここまで
+                // タブの設定
+                // タブの背景を青色に変更
+                .toolbarBackground(.tabBlue, for: .tabBar)
+                // タブの背景を表示
+                .toolbarBackground(.visible, for: .tabBar)
+                // タブ外観をダークに設定
+                .toolbarColorScheme(.dark, for: .tabBar)
+            }  // TabView ここまで
+            // ナビゲーションバーの設定
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
-            // 選択されているタブの色を白にする
-            .accentColor(Color.white)
+            // ナビゲーションバーの背景を青色に変更
+            .toolbarBackground(.navigationBarBlue, for: .navigationBar)
+            // ナビゲーションバーの背景を表示
+            .toolbarBackground(.visible, for: .navigationBar)
+            // ナビゲーションバーのタイトルの色を白にする
+            .toolbarColorScheme(.dark)
             // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
             /*
             // ツールバー設定
