@@ -86,6 +86,8 @@ struct QuestionListView: View {
         } // List ここまで
         // リストのスタイルを.groupedに変更
         .listStyle(.grouped)
+        // リストの背景のグレーの部分を非表示にする
+        .scrollContentBackground(.hidden)
     } // questionList ここまで
 
     // リスト追加ボタン
