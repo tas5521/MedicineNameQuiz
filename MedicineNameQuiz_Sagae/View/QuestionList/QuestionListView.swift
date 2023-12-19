@@ -33,6 +33,7 @@ struct QuestionListView: View {
     var body: some View {
         // 奥から手前方向にレイアウト
         ZStack {
+            Color.backgroundSkyBlue
             // 垂直方向にレイアウト
             VStack {
                 // 問題リストの検索バー
