@@ -25,7 +25,7 @@ struct ModeSelectionView: View {
             
             // 垂直方向にレイアウト
             VStack {
-                // 垂直方向にレイアウト（Viewを右に寄せる）
+                // 垂直方向にレイアウト（Viewを左に寄せる）
                 VStack(alignment: .leading) {
                     // スペースを空ける
                     Spacer()
