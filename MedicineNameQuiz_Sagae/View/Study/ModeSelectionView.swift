@@ -22,8 +22,6 @@ struct ModeSelectionView: View {
         ZStack {
             // 背景を水色にする
             Color.backgroundSkyBlue
-            // セーフエリア外にも背景を反映
-                .ignoresSafeArea()
             
             // 垂直方向にレイアウト
             VStack {
