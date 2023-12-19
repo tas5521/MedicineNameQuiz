@@ -16,46 +16,55 @@ struct QuestionsView: View {
     let questions: [Question]
     
     var body: some View {
-        // 垂直方向にレイアウト
-        VStack {
-            // 薬の検索バー
-            HStack {
-                // 虫眼鏡のImage
-                Image(systemName: "magnifyingglass")
-                // 薬の検索バー
-                TextField("薬を検索できます", text: $medicineNameText)
-                    .textFieldStyle(.roundedBorder)
-            } // HStack ここまで
-            // 上下左右に余白を追加
-            .padding()
+        // 奥から手前方向にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
             // 垂直方向にレイアウト
-            VStack(alignment: .leading) {
-                // 総問題数を表示
-                Text("総問題数: \(questions.count)")
-                // 左に余白を追加
-                    .padding(.leading)
-                // 出題される薬の名前のリスト
-                List {
-                    ForEach(questions) { question in
-                        // 垂直方向にレイアウト
-                        VStack(alignment: .leading) {
-                            // 先発品名を表示
-                            Text(question.originalName)
-                            // 文字の色を青に変更
-                                .foregroundStyle(Color.blue)
-                            // 一般名を表示
-                            Text(question.genericName)
-                            // 文字の色を赤に変更
-                                .foregroundStyle(Color.red)
-                        } // VStack ここまで
-                    } // ForEach ここまで
-                } // List ここまで
-                // リストのスタイルを.groupedに変更
-                .listStyle(.grouped)
+            VStack {
+                // 薬の検索バー
+                HStack {
+                    // 虫眼鏡のImage
+                    Image(systemName: "magnifyingglass")
+                    // 薬の検索バー
+                    TextField("薬を検索できます", text: $medicineNameText)
+                        .textFieldStyle(.roundedBorder)
+                } // HStack ここまで
+                // 上下左右に余白を追加
+                .padding()
+                // 垂直方向にレイアウト
+                VStack(alignment: .leading) {
+                    // 総問題数を表示
+                    Text("総問題数: \(questions.count)")
+                    // 左に余白を追加
+                        .padding()
+                    // 出題される薬の名前のリスト
+                    List {
+                        ForEach(questions) { question in
+                            // 垂直方向にレイアウト
+                            VStack(alignment: .leading) {
+                                // 先発品名を表示
+                                Text(question.originalName)
+                                // 文字の色を青に変更
+                                    .foregroundStyle(Color.blue)
+                                // 一般名を表示
+                                Text(question.genericName)
+                                // 文字の色を赤に変更
+                                    .foregroundStyle(Color.red)
+                            } // VStack ここまで
+                        } // ForEach ここまで
+                    } // List ここまで
+                    // リストのスタイルを.groupedに変更
+                    .listStyle(.grouped)
+                    // リストの背景のグレーの部分を非表示にする
+                    .scrollContentBackground(.hidden)
+                } // VStack ここまで
+                // 太字にする
+                .bold()
             } // VStack ここまで
-            // 太字にする
-            .bold()
-        } // VStack ここまで
+        } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(listName, displayMode: .inline)
         // ナビゲーションバーの右側に編集ボタンを配置
