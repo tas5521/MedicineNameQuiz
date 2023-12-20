@@ -13,7 +13,9 @@ struct EditQuestionListView: View {
     // タブの選択項目を保持する変数
     @State private var tabIndex: Int = 0
     // リスト名
-    @State var listName: String = "さがえ薬局リスト"
+    @State private var listName: String = "さがえ薬局リスト"
+    // 薬の検索に使う変数
+    @State private var medicineNameText: String = ""
     
     var body: some View {
         // 奥から手前にレイアウト
@@ -31,9 +33,16 @@ struct EditQuestionListView: View {
                 TextField("リストの名前を入力してください", text: $listName)
                     .textFieldStyle(.roundedBorder)
                     .padding()
-
-                // 薬を検索バー
-                Text("薬の検索バー")
+                // 水平方向にレイアウト
+                HStack {
+                    // 虫眼鏡のImage
+                    Image(systemName: "magnifyingglass")
+                    // 薬の検索バー
+                    TextField("薬を検索できます", text: $medicineNameText)
+                        .textFieldStyle(.roundedBorder)
+                } // HStack ここまで
+                // 上下左右に余白を追加
+                .padding()
                 Spacer()
                 // 薬リスト
                 Text("薬リスト")
@@ -68,5 +77,5 @@ struct EditQuestionListView: View {
 } // EditQuestionListViewここまで
 
 #Preview {
-    EditQuestionListView(listName: "さがえ薬局リスト")
+    EditQuestionListView()
 }
