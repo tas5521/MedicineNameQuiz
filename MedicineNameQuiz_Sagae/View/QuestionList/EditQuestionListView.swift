@@ -16,6 +16,8 @@ struct EditQuestionListView: View {
     @State private var listName: String = "さがえ薬局リスト"
     // 薬の検索に使う変数
     @State private var medicineNameText: String = ""
+    // 「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAll: Bool = true
     // ダミーの薬リスト
     @State private var dummyMedicineList: [MedicineListItem] = [
         MedicineListItem(originalName: "アムロジン", genericName: "アムロジピンベシル酸塩", checked: false),
@@ -58,8 +60,36 @@ struct EditQuestionListView: View {
                 // 薬リスト
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
-                    // 総問題数を表示
-                    Text("総問題数: \(dummyMedicineList.count)")
+                    // 水平方向にレイアウト
+                    HStack {
+                        // 総問題数を表示
+                        Text("総問題数: \(dummyMedicineList.count)")
+                        // スペースを空ける
+                        Spacer()
+                        // 「すべてチェックする」もしくは「すべてのチェックを外す」ボタン
+                        Button {
+                            // もしボタンが「すべてチェックする」の状態だったら
+                            if checkAll {
+                                // すべてチェック状態にする
+                                for index in dummyMedicineList.indices {
+                                    dummyMedicineList[index].checked = true
+                                } // for ここまで
+                                // もしボタンが「すべてのチェックを外す」の状態だったら
+                            } else {
+                                // すべてのチェックを外す
+                                for index in dummyMedicineList.indices {
+                                    dummyMedicineList[index].checked = false
+                                } // for ここまで
+                            } // if ここまで
+                            // ボタンの状態を切り替える
+                            checkAll.toggle()
+                        } label: {
+                            // ラベル
+                            Text(checkAll ? "すべてチェックする" : "すべてのチェックを外す")
+                            // 青色にする
+                                .foregroundStyle(Color.blue)
+                        } // Buttonここまで
+                    } // HStack ここまで
                     // 左に余白を追加
                         .padding([.top, .leading, .trailing])
                     // 出題される薬の名前のリスト
