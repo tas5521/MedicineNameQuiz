@@ -16,23 +16,30 @@ struct EditQuestionListView: View {
     @State var listName: String = "さがえ薬局リスト"
     
     var body: some View {
-        // 垂直右方向にレイアウト
-        VStack {
-            // 薬の区分を選択するタブを配置
-            TopTabView(
-                tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
-            // リスト名編集用テキストフィールド
-            TextField("リストの名前を入力してください", text: $listName)
-                .textFieldStyle(.roundedBorder)
-                .padding()
+        // 奥から手前にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            // 垂直右方向にレイアウト
+            VStack {
+                // 薬の区分を選択するタブを配置
+                TopTabView(
+                    tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                // リスト名編集用テキストフィールド
+                TextField("リストの名前を入力してください", text: $listName)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
 
-            // 薬を検索バー
-            Text("薬の検索バー")
-            Spacer()
-            // 薬リスト
-            Text("薬リスト")
-            Spacer()
-        } // VStack ここまで
+                // 薬を検索バー
+                Text("薬の検索バー")
+                Spacer()
+                // 薬リスト
+                Text("薬リスト")
+                Spacer()
+            } // VStack ここまで
+        } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト編集", displayMode: .inline)
         // ナビゲーションバーの右側に保存ボタンを配置
