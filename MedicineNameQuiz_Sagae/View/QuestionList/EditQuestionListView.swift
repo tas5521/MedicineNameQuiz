@@ -16,6 +16,17 @@ struct EditQuestionListView: View {
     @State private var listName: String = "さがえ薬局リスト"
     // 薬の検索に使う変数
     @State private var medicineNameText: String = ""
+    // ダミーの薬リスト
+    @State private var dummyMedicineList: [MedicineListItem] = [
+        MedicineListItem(originalName: "アムロジン", genericName: "アムロジピンベシル酸塩", checked: false),
+        MedicineListItem(originalName: "インフリー", genericName: "インドメタシン　ファルネシル", checked: false),
+        MedicineListItem(originalName: "ウリトス", genericName: "イミダフェナシン", checked: false),
+        MedicineListItem(originalName: "エバステル", genericName: "エバスチン", checked: false),
+        MedicineListItem(originalName: "オノン", genericName: "プランルカスト水和物", checked: false),
+        MedicineListItem(originalName: "ガスター", genericName: "ファモチジン", checked: false),
+        MedicineListItem(originalName: "キプレス", genericName: "モンテルカストナトリウム", checked: false),
+        MedicineListItem(originalName: "クラビット", genericName: "レボフロキサシン", checked: false)
+    ] // dummyMedicineList ここまで
     
     var body: some View {
         // 奥から手前にレイアウト
@@ -45,9 +56,54 @@ struct EditQuestionListView: View {
                 .padding()
                 Spacer()
                 // 薬リスト
-                Text("薬リスト")
-                Spacer()
+                // 垂直方向にレイアウト
+                VStack(alignment: .leading) {
+                    // 総問題数を表示
+                    Text("総問題数: \(dummyMedicineList.count)")
+                    // 左に余白を追加
+                        .padding([.top, .leading, .trailing])
+                    // 出題される薬の名前のリスト
+                    List {
+                        ForEach(dummyMedicineList.indices, id: \.self) { index in
+                            // 水平方向にレイアウト
+                            HStack {
+                                // 垂直方向にレイアウト
+                                VStack(alignment: .leading) {
+                                    // 先発品名を表示
+                                    Text(dummyMedicineList[index].originalName)
+                                    // 文字の色を青に変更
+                                        .foregroundStyle(Color.blue)
+                                    // 一般名を表示
+                                    Text(dummyMedicineList[index].genericName)
+                                    // 文字の色を赤に変更
+                                        .foregroundStyle(Color.red)
+                                } // VStack ここまで
+                                // スペースを空ける
+                                Spacer()
+                                // チェックボタン
+                                Button {
+                                    // チェック状態を変更
+                                    dummyMedicineList[index].checked.toggle()
+                                } label: {
+                                    // ラベル
+                                    Image(systemName: "checkmark.square.fill")
+                                    // チェック状態では青、チェックされていない状態ではグレーにする
+                                        .foregroundStyle(dummyMedicineList[index].checked ? .blue : .gray)
+                                    // 大きさを1.8倍にする
+                                        .scaleEffect(1.8)
+                                } // Button ここまで
+                            } // HStack ここまで
+                        } // ForEach ここまで
+                    } // List ここまで
+                    // リストのスタイルを.groupedに変更
+                    .listStyle(.grouped)
+                    // リストの背景のグレーの部分を非表示にする
+                    .scrollContentBackground(.hidden)
+                } // VStack ここまで
+                // 太字にする
+                .bold()
             } // VStack ここまで
+            Spacer()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト編集", displayMode: .inline)
