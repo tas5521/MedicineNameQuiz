@@ -12,6 +12,8 @@ struct EditQuestionListView: View {
     @Environment(\.dismiss) private var dismiss
     // タブの選択項目を保持する変数
     @State private var tabIndex: Int = 0
+    // リスト名
+    @State var listName: String = "さがえ薬局リスト"
     
     var body: some View {
         // 垂直右方向にレイアウト
@@ -20,7 +22,10 @@ struct EditQuestionListView: View {
             TopTabView(
                 tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
             // リスト名編集用テキストフィールド
-            Text("リスト名編集用テキストフィールド")
+            TextField("リストの名前を入力してください", text: $listName)
+                .textFieldStyle(.roundedBorder)
+                .padding()
+
             // 薬を検索バー
             Text("薬の検索バー")
             Spacer()
@@ -50,5 +55,5 @@ struct EditQuestionListView: View {
 } // EditQuestionListViewここまで
 
 #Preview {
-    EditQuestionListView()
+    EditQuestionListView(listName: "さがえ薬局リスト")
 }
