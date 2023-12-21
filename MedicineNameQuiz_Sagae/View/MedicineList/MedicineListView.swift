@@ -12,6 +12,9 @@ struct MedicineListView: View {
     @State private var tabIndex: Int = 0
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
+    // 薬の検索に使う変数
+    @State private var medicineNameText: String = ""
+    
     // 現在タブで選択されている区分を取得
     private var classification: MedicineClassification {
         MedicineClassification.allCases[tabIndex]
@@ -26,7 +29,17 @@ struct MedicineListView: View {
                 TopTabView(
                     tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
                 // 薬の検索バー
-                Text("検索バー")
+                // 水平方向にレイアウト
+                HStack {
+                    // 虫眼鏡のImage
+                    Image(systemName: "magnifyingglass")
+                    // 薬の検索バー
+                    TextField("薬を検索できます", text: $medicineNameText)
+                        .textFieldStyle(.roundedBorder)
+                } // HStack ここまで
+                // 上下左右に余白を追加
+                .padding()
+                
                 // スペースを空ける
                 Spacer()
                 // 薬リスト
