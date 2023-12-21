@@ -17,9 +17,52 @@ struct CreateQuestionListView: View {
     // 薬の検索に使う変数
     @State private var medicineNameText: String = ""
     
+    // 内用薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllInternal: Bool = true
+    // 注射薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllInjection: Bool = true
+    // 外用薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllExternal: Bool = true
+    // カスタムの画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllCustom: Bool = true
+    
+    // ダミーの内用薬の配列
+    @State private var dummyInternalMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .internalMedicine, originalName: "内用薬先発品名1", genericName: "内用薬一般名1", checked: false),
+        MedicineListItem(medicineClassification: .internalMedicine, originalName: "内用薬先発品名2", genericName: "内用薬一般名2", checked: false),
+        MedicineListItem(medicineClassification: .internalMedicine, originalName: "内用薬先発品名3", genericName: "内用薬一般名3", checked: false)
+    ] // dummyInternalMedicineList ここまで
+    
+    // ダミーの注射薬の配列
+    @State private var dummyInjectionMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .injectionMedicine, originalName: "注射薬先発品名1", genericName: "注射薬一般名1", checked: false),
+        MedicineListItem(medicineClassification: .injectionMedicine, originalName: "注射薬先発品名2", genericName: "注射薬一般名2", checked: false),
+        MedicineListItem(medicineClassification: .injectionMedicine, originalName: "注射薬先発品名3", genericName: "注射薬一般名3", checked: false)
+    ] // dummyInjectionMedicineList ここまで
+    
+    // ダミーの外用薬の配列
+    @State private var dummyExternalMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .externalMedicine, originalName: "外用薬先発品名1", genericName: "外用薬一般名1", checked: false),
+        MedicineListItem(medicineClassification: .externalMedicine, originalName: "外用薬先発品名2", genericName: "外用薬一般名2", checked: false),
+        MedicineListItem(medicineClassification: .externalMedicine, originalName: "外用薬先発品名3", genericName: "外用薬一般名3", checked: false)
+    ] // dummyExternalMedicineList ここまで
+    
+    // ダミーのカスタム薬の配列
+    @State private var dummyCustomMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .customMedicine, originalName: "カスタム先発品名1", genericName: "カスタム一般名1", checked: false),
+        MedicineListItem(medicineClassification: .customMedicine, originalName: "カスタム先発品名2", genericName: "カスタム一般名2", checked: false),
+        MedicineListItem(medicineClassification: .customMedicine, originalName: "カスタム先発品名3", genericName: "カスタム一般名3", checked: false)
+    ] // dummyCustomMedicineList ここまで
+        
     // View Presentation State
     // リストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
+    
+    // 現在タブで選択されている区分を取得
+    private var classification: MedicineClassification {
+        MedicineClassification.allCases[tabIndex]
+    } // classificationここまで
+
     
     var body: some View {
         ZStack {
@@ -45,9 +88,19 @@ struct CreateQuestionListView: View {
                 .padding()
                 Spacer()
                 // 薬のリスト
-                Text("薬リスト")
-                Spacer()
+                // 薬リスト
+                switch classification {
+                case .internalMedicine:
+                    MedicineSelectableList(checkAll: $checkAllInternal, medicineArray: $dummyInternalMedicineList)
+                case .injectionMedicine:
+                    MedicineSelectableList(checkAll: $checkAllInjection, medicineArray: $dummyInjectionMedicineList)
+                case .externalMedicine:
+                    MedicineSelectableList(checkAll: $checkAllExternal, medicineArray: $dummyExternalMedicineList)
+                case .customMedicine:
+                    MedicineSelectableList(checkAll: $checkAllCustom, medicineArray: $dummyCustomMedicineList)
+                } // switch ここまで
             } // VStack ここまで
+            .bold()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト作成", displayMode: .inline)
