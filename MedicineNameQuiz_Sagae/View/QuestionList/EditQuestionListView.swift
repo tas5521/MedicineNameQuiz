@@ -16,19 +16,48 @@ struct EditQuestionListView: View {
     @State private var listName: String = "さがえ薬局リスト"
     // 薬の検索に使う変数
     @State private var medicineNameText: String = ""
-    // 「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
-    @State private var checkAll: Bool = true
-    // ダミーの薬リスト
-    @State private var dummyMedicineList: [MedicineListItem] = [
-        MedicineListItem(originalName: "アムロジン", genericName: "アムロジピンベシル酸塩", checked: false),
-        MedicineListItem(originalName: "インフリー", genericName: "インドメタシン　ファルネシル", checked: false),
-        MedicineListItem(originalName: "ウリトス", genericName: "イミダフェナシン", checked: false),
-        MedicineListItem(originalName: "エバステル", genericName: "エバスチン", checked: false),
-        MedicineListItem(originalName: "オノン", genericName: "プランルカスト水和物", checked: false),
-        MedicineListItem(originalName: "ガスター", genericName: "ファモチジン", checked: false),
-        MedicineListItem(originalName: "キプレス", genericName: "モンテルカストナトリウム", checked: false),
-        MedicineListItem(originalName: "クラビット", genericName: "レボフロキサシン", checked: false)
-    ] // dummyMedicineList ここまで
+    
+    // 内用薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllInternal: Bool = true
+    // 注射薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllInjection: Bool = true
+    // 外用薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllExternal: Bool = true
+    // カスタムの画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
+    @State private var checkAllCustom: Bool = true
+    
+    // ダミーの内用薬の配列
+    @State private var dummyInternalMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .internalMedicine, originalName: "内用薬先発品名1", genericName: "内用薬一般名1", checked: false),
+        MedicineListItem(medicineClassification: .internalMedicine, originalName: "内用薬先発品名2", genericName: "内用薬一般名2", checked: false),
+        MedicineListItem(medicineClassification: .internalMedicine, originalName: "内用薬先発品名3", genericName: "内用薬一般名3", checked: false)
+    ] // dummyInternalMedicineList ここまで
+    
+    // ダミーの注射薬の配列
+    @State private var dummyInjectionMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .injectionMedicine, originalName: "注射薬先発品名1", genericName: "注射薬一般名1", checked: false),
+        MedicineListItem(medicineClassification: .injectionMedicine, originalName: "注射薬先発品名2", genericName: "注射薬一般名2", checked: false),
+        MedicineListItem(medicineClassification: .injectionMedicine, originalName: "注射薬先発品名3", genericName: "注射薬一般名3", checked: false)
+    ] // dummyInjectionMedicineList ここまで
+    
+    // ダミーの外用薬の配列
+    @State private var dummyExternalMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .externalMedicine, originalName: "外用薬先発品名1", genericName: "外用薬一般名1", checked: false),
+        MedicineListItem(medicineClassification: .externalMedicine, originalName: "外用薬先発品名2", genericName: "外用薬一般名2", checked: false),
+        MedicineListItem(medicineClassification: .externalMedicine, originalName: "外用薬先発品名3", genericName: "外用薬一般名3", checked: false)
+    ] // dummyExternalMedicineList ここまで
+    
+    // ダミーのカスタム薬の配列
+    @State private var dummyCustomMedicineList: [MedicineListItem] = [
+        MedicineListItem(medicineClassification: .customMedicine, originalName: "カスタム先発品名1", genericName: "カスタム一般名1", checked: false),
+        MedicineListItem(medicineClassification: .customMedicine, originalName: "カスタム先発品名2", genericName: "カスタム一般名2", checked: false),
+        MedicineListItem(medicineClassification: .customMedicine, originalName: "カスタム先発品名3", genericName: "カスタム一般名3", checked: false)
+    ] // dummyCustomMedicineList ここまで
+    
+    // 現在タブで選択されている区分を取得
+    private var classification: MedicineClassification {
+        MedicineClassification.allCases[tabIndex]
+    } // classificationここまで
     
     var body: some View {
         // 奥から手前にレイアウト
@@ -58,82 +87,19 @@ struct EditQuestionListView: View {
                 .padding()
                 Spacer()
                 // 薬リスト
-                // 垂直方向にレイアウト
-                VStack(alignment: .leading) {
-                    // 水平方向にレイアウト
-                    HStack {
-                        // 総問題数を表示
-                        Text("総問題数: \(dummyMedicineList.count)")
-                        // スペースを空ける
-                        Spacer()
-                        // 「すべてチェックする」もしくは「すべてのチェックを外す」ボタン
-                        Button {
-                            // もしボタンが「すべてチェックする」の状態だったら
-                            if checkAll {
-                                // すべてチェック状態にする
-                                for index in dummyMedicineList.indices {
-                                    dummyMedicineList[index].checked = true
-                                } // for ここまで
-                                // もしボタンが「すべてのチェックを外す」の状態だったら
-                            } else {
-                                // すべてのチェックを外す
-                                for index in dummyMedicineList.indices {
-                                    dummyMedicineList[index].checked = false
-                                } // for ここまで
-                            } // if ここまで
-                            // ボタンの状態を切り替える
-                            checkAll.toggle()
-                        } label: {
-                            // ラベル
-                            Text(checkAll ? "すべてチェックする" : "すべてのチェックを外す")
-                            // 青色にする
-                                .foregroundStyle(Color.blue)
-                        } // Buttonここまで
-                    } // HStack ここまで
-                    // 左に余白を追加
-                        .padding([.top, .leading, .trailing])
-                    // 出題される薬の名前のリスト
-                    List {
-                        ForEach(dummyMedicineList.indices, id: \.self) { index in
-                            // 水平方向にレイアウト
-                            HStack {
-                                // 垂直方向にレイアウト
-                                VStack(alignment: .leading) {
-                                    // 先発品名を表示
-                                    Text(dummyMedicineList[index].originalName)
-                                    // 文字の色を青に変更
-                                        .foregroundStyle(Color.blue)
-                                    // 一般名を表示
-                                    Text(dummyMedicineList[index].genericName)
-                                    // 文字の色を赤に変更
-                                        .foregroundStyle(Color.red)
-                                } // VStack ここまで
-                                // スペースを空ける
-                                Spacer()
-                                // チェックボタン
-                                Button {
-                                    // チェック状態を変更
-                                    dummyMedicineList[index].checked.toggle()
-                                } label: {
-                                    // ラベル
-                                    Image(systemName: "checkmark.square.fill")
-                                    // チェック状態では青、チェックされていない状態ではグレーにする
-                                        .foregroundStyle(dummyMedicineList[index].checked ? .blue : .gray)
-                                    // 大きさを1.8倍にする
-                                        .scaleEffect(1.8)
-                                } // Button ここまで
-                            } // HStack ここまで
-                        } // ForEach ここまで
-                    } // List ここまで
-                    // リストのスタイルを.groupedに変更
-                    .listStyle(.grouped)
-                    // リストの背景のグレーの部分を非表示にする
-                    .scrollContentBackground(.hidden)
-                } // VStack ここまで
-                // 太字にする
-                .bold()
+                switch classification {
+                case .internalMedicine:
+                    MedicineSelectableList(checkAll: $checkAllInternal, medicineArray: $dummyInternalMedicineList)
+                case .injectionMedicine:
+                    MedicineSelectableList(checkAll: $checkAllInjection, medicineArray: $dummyInjectionMedicineList)
+                case .externalMedicine:
+                    MedicineSelectableList(checkAll: $checkAllExternal, medicineArray: $dummyExternalMedicineList)
+                case .customMedicine:
+                    MedicineSelectableList(checkAll: $checkAllCustom, medicineArray: $dummyCustomMedicineList)
+                } // switch ここまで
             } // VStack ここまで
-            Spacer()
+            // 太字にする
+            .bold()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト編集", displayMode: .inline)
