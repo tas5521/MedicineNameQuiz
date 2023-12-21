@@ -20,19 +20,25 @@ struct CreateQuestionListView: View {
     @State private var isShowPopUp = false
     
     var body: some View {
-        // 垂直方向にレイアウト
-        VStack {
-            // 薬の区分を選択するタブを上に配置
-            TopTabView(
-                tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
-            Spacer()
-            // 薬を検索するためのテキストフィールド
-            Text("薬の検索バー")
-            Spacer()
-            // 薬のリスト
-            Text("薬リスト")
-            Spacer()
-        } // VStack ここまで
+        ZStack {
+            // 背景を水色に変更
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            // 垂直方向にレイアウト
+            VStack {
+                // 薬の区分を選択するタブを上に配置
+                TopTabView(
+                    tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                Spacer()
+                // 薬を検索するためのテキストフィールド
+                Text("薬の検索バー")
+                Spacer()
+                // 薬のリスト
+                Text("薬リスト")
+                Spacer()
+            } // VStack ここまで
+        } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト作成", displayMode: .inline)
         // ナビゲーションバーの右側に保存ボタンを配置
