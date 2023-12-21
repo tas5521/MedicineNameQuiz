@@ -23,6 +23,8 @@ struct MedicineListView: View {
     var body: some View {
         // 奥から手前方向にレイアウト
         ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
             // 垂直方向にレイアウト
             VStack {
                 // 薬の区分を選択するタブを上に配置
