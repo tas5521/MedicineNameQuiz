@@ -12,4 +12,4 @@ struct MedicineListItem: Identifiable {
     let originalName: String
     let genericName: String
     var checked: Bool
-} // QuestionListItem ここまで
+} // MedicineListItem ここまで

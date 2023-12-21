@@ -15,6 +15,34 @@ struct MedicineListView: View {
     // 薬の検索に使う変数
     @State private var medicineNameText: String = ""
     
+    // ダミーの内用薬の配列
+    private let dummyInternalMedicineArray: [Question] = [
+        Question(originalName: "内用薬先発品名1", genericName: "内用薬一般名1"),
+        Question(originalName: "内用薬先発品名2", genericName: "内用薬一般名2"),
+        Question(originalName: "内用薬先発品名3", genericName: "内用薬一般名3")
+    ] // dummyInternalMedicineList ここまで
+    
+    // ダミーの注射薬の配列
+    private let dummyInjectionMedicineArray: [Question] = [
+        Question(originalName: "注射薬先発品名1", genericName: "注射薬一般名1"),
+        Question(originalName: "注射薬先発品名2", genericName: "注射薬一般名2"),
+        Question(originalName: "注射薬先発品名3", genericName: "注射薬一般名3")
+    ] // dummyInjectionMedicineList ここまで
+    
+    // ダミーの外用薬の配列
+    private let dummyExternalMedicineArray: [Question] = [
+        Question(originalName: "外用薬先発品名1", genericName: "外用薬一般名1"),
+        Question(originalName: "外用薬先発品名2", genericName: "外用薬一般名2"),
+        Question(originalName: "外用薬先発品名3", genericName: "外用薬一般名3")
+    ] // dummyExternalMedicineList ここまで
+    
+    // ダミーのカスタム薬の配列
+    private let dummyCustomMedicineArray: [Question] = [
+        Question(originalName: "カスタム先発品名1", genericName: "カスタム一般名1"),
+        Question(originalName: "カスタム先発品名2", genericName: "カスタム一般名2"),
+        Question(originalName: "カスタム先発品名3", genericName: "カスタム一般名3")
+    ] // dummyCustomMedicineList ここまで
+    
     // 現在タブで選択されている区分を取得
     private var classification: MedicineClassification {
         MedicineClassification.allCases[tabIndex]
@@ -45,10 +73,18 @@ struct MedicineListView: View {
                 // スペースを空ける
                 Spacer()
                 // 薬リスト
-                Text("薬リスト")
-                // スペースを空ける
-                Spacer()
+                switch classification {
+                case .internalMedicine:
+                    medicineList(of: dummyInternalMedicineArray)
+                case .injectionMedicine:
+                    medicineList(of: dummyInjectionMedicineArray)
+                case .externalMedicine:
+                    medicineList(of: dummyExternalMedicineArray)
+                case .customMedicine:
+                    medicineList(of: dummyCustomMedicineArray)
+                } // switch ここまで
             } // VStack ここまで
+            .bold()
             // 垂直方向にレイアウト
             VStack {
                 // スペースを空ける
@@ -66,6 +102,30 @@ struct MedicineListView: View {
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
+    
+    
+    private func medicineList(of medicineArray: [Question]) -> some View {
+        // 出題される薬の名前のリスト
+        List {
+            ForEach(medicineArray.indices, id: \.self) { index in
+                // 垂直方向にレイアウト
+                VStack(alignment: .leading) {
+                    // 先発品名を表示
+                    Text(medicineArray[index].originalName)
+                    // 文字の色を青に変更
+                        .foregroundStyle(Color.blue)
+                    // 一般名を表示
+                    Text(medicineArray[index].genericName)
+                    // 文字の色を赤に変更
+                        .foregroundStyle(Color.red)
+                } // VStack ここまで
+            } // ForEach ここまで
+        } // List ここまで
+        // リストのスタイルを.groupedに変更
+        .listStyle(.grouped)
+        // リストの背景のグレーの部分を非表示にする
+        .scrollContentBackground(.hidden)
+    } // medicineList ここまで
     
     // カスタムで薬名を追加するボタン
     private var addMedicineButton: some View {
