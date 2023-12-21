@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct QuestionListView: View {
+    // リスト名検索テキスト
+    @State private var listNameText: String = ""
+    
     // ダミーのリスト
     private var dummyList: [QuestionListItem] = [
         QuestionListItem(listName: "さがえ薬局リスト",
@@ -33,10 +36,20 @@ struct QuestionListView: View {
     var body: some View {
         // 奥から手前方向にレイアウト
         ZStack {
+            // 背景を水色に変更
+            Color.backgroundSkyBlue
             // 垂直方向にレイアウト
             VStack {
                 // 問題リストの検索バー
-                Text("問題リスト検索バー")
+                HStack {
+                    // 虫眼鏡のImage
+                    Image(systemName: "magnifyingglass")
+                    // 問題リストの検索バー
+                    TextField("問題リストを検索できます", text: $listNameText)
+                        .textFieldStyle(.roundedBorder)
+                } // HStack ここまで
+                // 上下左右に余白を追加
+                .padding()
                 // 問題リスト
                 questionList
             } // VStack ここまで
@@ -85,6 +98,8 @@ struct QuestionListView: View {
         } // List ここまで
         // リストのスタイルを.groupedに変更
         .listStyle(.grouped)
+        // リストの背景のグレーの部分を非表示にする
+        .scrollContentBackground(.hidden)
     } // questionList ここまで
 
     // リスト追加ボタン
