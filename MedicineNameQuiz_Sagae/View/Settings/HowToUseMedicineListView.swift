@@ -18,7 +18,23 @@ struct HowToUseMedicineListView: View {
             Color.backgroundSkyBlue
             // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
-            Text("HowToUseMedicineListView")
+            // 垂直方向にレイアウト
+            VStack {
+                // 水平方向にレイアウト
+                HStack {
+                    Text("アプリの使い方\n薬リストについて")
+                    // フォントを.title3に変更
+                        .font(.title3)
+                    // 太字にする
+                        .bold()
+                    // 上下左右に余白を追加
+                        .padding()
+                    // スペースを追加
+                    Spacer()
+                } // HStack ここまで
+                // スペースを追加
+                Spacer()
+            } // VStack ここまで
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
