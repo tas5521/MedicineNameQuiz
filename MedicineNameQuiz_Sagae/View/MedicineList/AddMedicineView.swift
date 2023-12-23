@@ -12,7 +12,9 @@ struct AddMedicineView: View {
     @Environment(\.dismiss) private var dismiss
     // 入力された先発品名を管理する変数
     @State private var brandNameText: String = ""
-    
+    // 入力された一般名を管理する変数
+    @State private var genericNameText: String = ""
+
     
     var body: some View {
         // 奥から手前にレイアウト
@@ -31,7 +33,8 @@ struct AddMedicineView: View {
                     .textFieldStyle(.roundedBorder)
                     .padding()
                 // 一般名を入力するためのテキストフィールド
-                Text("一般名")
+                TextField("一般名", text: $genericNameText)
+                    .textFieldStyle(.roundedBorder)
                     .padding()
                 // 追加ボタン
                 Button {
