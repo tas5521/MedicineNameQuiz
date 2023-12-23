@@ -50,7 +50,9 @@ struct HowToUseView: View {
                 } // ForEach ここまで
             } // List ここまで
             // リストの背景のグレーの部分を非表示にする
-                .scrollContentBackground(.hidden)
+            .scrollContentBackground(.hidden)
+            // スクロールできなくする
+            .scrollDisabled(true)
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
