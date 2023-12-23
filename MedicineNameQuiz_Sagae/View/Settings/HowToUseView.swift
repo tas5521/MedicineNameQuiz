@@ -37,8 +37,8 @@ struct HowToUseView: View {
                             HowToUseQuestionListView(title: titleWithSubtitle)
                             // ランキング機能が無ければ、ランキングの使い方の説明も不要なので、コメントアウト
                             /*
-                        case .ranking:
-                            HowToUseRankingView(title: titleWithSubtitle)
+                             case .ranking:
+                             HowToUseRankingView(title: titleWithSubtitle)
                              */
                         case .medicineList:
                             HowToUseMedicineListView(title: titleWithSubtitle)
@@ -56,6 +56,13 @@ struct HowToUseView: View {
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
+        // ナビゲーションバーの背景を青色に変更
+        .toolbarBackground(.navigationBarBlue, for: .navigationBar)
+        // ナビゲーションバーの背景を表示
+        .toolbarBackground(.visible, for: .navigationBar)
+        // ナビゲーションバーのタイトルの色を白にする
+        .toolbarColorScheme(.dark)
+        
     } // body ここまで
 } // HowToUseView ここまで
 
