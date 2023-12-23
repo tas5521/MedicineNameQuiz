@@ -35,8 +35,8 @@ struct HowToUseStudyView: View {
                 // スペースを追加
                 Spacer()
             } // VStack ここまで
-            // ナビゲーションバータイトルを指定
         } // ZStack ここまで
+        // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
         // ナビゲーションバーの背景を青色に変更
         .toolbarBackground(.navigationBarBlue, for: .navigationBar)
