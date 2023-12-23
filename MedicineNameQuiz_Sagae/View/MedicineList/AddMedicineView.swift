@@ -27,18 +27,20 @@ struct AddMedicineView: View {
             VStack {
                 // スペースを空ける
                 Spacer()
-
                 // 追加する薬の名前を入力するようユーザーに促すためのテキスト
                 Text("追加する薬の名前を入力してください")
+                    .font(.title3)
                     .padding()
                 // 先発品名を入力するためのテキストフィールド
                 TextField("先発品名", text: $brandNameText)
                     .textFieldStyle(.roundedBorder)
                     .padding()
+                    .padding([.leading, .trailing])
                 // 一般名を入力するためのテキストフィールド
                 TextField("一般名", text: $genericNameText)
                     .textFieldStyle(.roundedBorder)
                     .padding()
+                    .padding([.leading, .trailing])
                 // スペースを空ける
                 Spacer()
                 // 追加ボタン
