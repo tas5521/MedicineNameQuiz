@@ -10,6 +10,9 @@ import SwiftUI
 struct AddMedicineView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
+    // 入力された先発品名を管理する変数
+    @State private var brandNameText: String = ""
+    
     
     var body: some View {
         // 奥から手前にレイアウト
@@ -24,7 +27,8 @@ struct AddMedicineView: View {
                 Text("追加する薬の名前を入力してください")
                     .padding()
                 // 先発品名を入力するためのテキストフィールド
-                Text("先発品名")
+                TextField("先発品名", text: $brandNameText)
+                    .textFieldStyle(.roundedBorder)
                     .padding()
                 // 一般名を入力するためのテキストフィールド
                 Text("一般名")
