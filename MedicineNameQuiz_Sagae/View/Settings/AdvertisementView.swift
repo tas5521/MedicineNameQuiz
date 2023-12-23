@@ -12,7 +12,14 @@ struct AdvertisementView: View {
     let title: String
 
     var body: some View {
-        Text("Advertisement")
+        // 奥から手前にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            Text("Advertisement")
+        } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
     } // body ここまで
