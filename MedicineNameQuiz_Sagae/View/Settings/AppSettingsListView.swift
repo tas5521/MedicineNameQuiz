@@ -59,6 +59,8 @@ struct AppSettingsListView: View {
                     } // NavigationLink ここまで
                 } // ForEach ここまで
             } // List ここまで
+            // リストの背景のグレーの部分を非表示にする
+                .scrollContentBackground(.hidden)
         } // ZStack ここまで
     } // body ここまで
 } // AppSettingsListView ここまで
