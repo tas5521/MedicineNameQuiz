@@ -12,7 +12,14 @@ struct ReferenceView: View {
     let title: String
 
     var body: some View {
-        Text("Reference")
+        // 奥から手前にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            Text("Reference")
+        } // ZStck ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
     } // body ここまで
