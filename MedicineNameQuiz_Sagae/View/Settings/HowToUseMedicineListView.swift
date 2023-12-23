@@ -12,7 +12,14 @@ struct HowToUseMedicineListView: View {
     let title: String
 
     var body: some View {
-        Text("HowToUseMedicineListView")
+        // 奥から手前にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            Text("HowToUseMedicineListView")
+        } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
     } // bodyここまで
