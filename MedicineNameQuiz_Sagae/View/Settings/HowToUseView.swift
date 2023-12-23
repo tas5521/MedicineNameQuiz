@@ -15,34 +15,43 @@ struct HowToUseView: View {
     let title: String
     
     var body: some View {
-        // リスト表示
-        List {
-            ForEach(HowToUse.allCases, id: \.self) { item in
-                // 各項目ごとのタイトル（サブ）を取得
-                let subtitle = item.rawValue
-                // 遷移先のビューに渡すタイトルを作成
-                let titleWithSubtitle = "\(title)-\(subtitle)-"
-                // 画面遷移
-                NavigationLink {
-                    switch item {
-                    case .study:
-                        HowToUseStudyView(title: titleWithSubtitle)
-                    case .questionList:
-                        HowToUseQuestionListView(title: titleWithSubtitle)
-                        // ランキング機能が無ければ、ランキングの使い方の説明も不要なので、コメントアウト
-                        /*
-                    case .ranking:
-                        HowToUseRankingView(title: titleWithSubtitle)
-                         */
-                    case .medicineList:
-                        HowToUseMedicineListView(title: titleWithSubtitle)
-                    } // switch ここまで
-                } label: {
-                    // 項目ごとに異なるテキストを表示
-                    Text(subtitle)
-                } // NavigationLink ここまで
-            } // ForEach ここまで
-        } // List ここまで
+        // 奥から手前にレイアウト
+        ZStack {
+            // 背景を水色に変更
+            Color.backgroundSkyBlue
+            // セーフエリアにも背景を表示
+                .ignoresSafeArea()
+            // リスト表示
+            List {
+                ForEach(HowToUse.allCases, id: \.self) { item in
+                    // 各項目ごとのタイトル（サブ）を取得
+                    let subtitle = item.rawValue
+                    // 遷移先のビューに渡すタイトルを作成
+                    let titleWithSubtitle = "\(title)-\(subtitle)-"
+                    // 画面遷移
+                    NavigationLink {
+                        switch item {
+                        case .study:
+                            HowToUseStudyView(title: titleWithSubtitle)
+                        case .questionList:
+                            HowToUseQuestionListView(title: titleWithSubtitle)
+                            // ランキング機能が無ければ、ランキングの使い方の説明も不要なので、コメントアウト
+                            /*
+                        case .ranking:
+                            HowToUseRankingView(title: titleWithSubtitle)
+                             */
+                        case .medicineList:
+                            HowToUseMedicineListView(title: titleWithSubtitle)
+                        } // switch ここまで
+                    } label: {
+                        // 項目ごとに異なるテキストを表示
+                        Text(subtitle)
+                    } // NavigationLink ここまで
+                } // ForEach ここまで
+            } // List ここまで
+            // リストの背景のグレーの部分を非表示にする
+                .scrollContentBackground(.hidden)
+        } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
     } // body ここまで
