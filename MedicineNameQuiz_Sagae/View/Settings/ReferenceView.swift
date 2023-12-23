@@ -18,7 +18,27 @@ struct ReferenceView: View {
             Color.backgroundSkyBlue
             // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
-            Text("Reference")
+            // 垂直方向にレイアウト
+            VStack {
+                // 水平方向にレイアウト
+                HStack {
+                    // 垂直方向にレイアウト
+                    VStack(alignment: .leading) {
+                        Text("医薬品名の引用元\n厚生労働省ホームページ")
+                        Text("https://www.mhlw.go.jp/index.html")
+                    } // VStack ここまで
+                    // フォントを.title3に変更
+                        .font(.title3)
+                    // 太字にする
+                        .bold()
+                    // 上下左右に余白を追加
+                        .padding()
+                    // スペースを追加
+                    Spacer()
+                } // HStack ここまで
+                // スペースを追加
+                Spacer()
+            } // VStack ここまで
         } // ZStck ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
