@@ -12,8 +12,15 @@ struct HowToUseStudyView: View {
     let title: String
 
     var body: some View {
-        Text("HowToUseStudyView")
-        // ナビゲーションバータイトルを指定
+        // 奥から手前にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            Text("HowToUseStudyView")
+            // ナビゲーションバータイトルを指定
+        } // ZStack ここまで
         .navigationBarTitle(title, displayMode: .inline)
     } // bodyここまで
 } // HowToUseStudyView ここまで
