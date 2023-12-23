@@ -73,8 +73,9 @@ struct AddMedicineView: View {
                 .padding()
                 // スペースを空ける
                 Spacer()
-
             } // VStack ここまで
+            // 太字にする
+            .bold()
         } // ZStack ここまで
     } // body ここまで
 } // AddMedicineView ここまで
