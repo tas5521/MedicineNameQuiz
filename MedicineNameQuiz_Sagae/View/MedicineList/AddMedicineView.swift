@@ -52,11 +52,14 @@ struct AddMedicineView: View {
                     Text("追加")
                     // 幅300高さ50に指定
                         .frame(width: 300, height: 60)
-                    // 背景色をオレンジに指定
-                        .background(Color.buttonOrange)
+                    // 両方のテキストフィールドに文字が入力されている場合、背景色をオレンジに指定。そうでない場合はグレー
+                        .background(brandNameText == "" || genericNameText == "" ? Color.disabledButtonGray : Color.buttonOrange)
+                    // 文字色を白に指定
+                        .foregroundStyle(Color.white)
                     // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
+                .disabled(brandNameText == "" || genericNameText == "")
                 .padding()
                 // やめるボタン
                 Button {
