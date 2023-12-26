@@ -36,63 +36,70 @@ struct StudyView: View {
     ] // medicineNames ここまで
     
     var body: some View {
-        // 垂直方向にレイアウト
-        VStack {
-            // スペースを空ける
-            Spacer()
-            // 問題番号
-            Text("\(questionNumber + 1)/\(medicineNames.count)")
-            // フォントを.titleに変更
-                .font(.title)
-            // スペースを空ける
-            Spacer()
-            // 奥から手前にレイアウト
-            ZStack {
-                // カードを配置
-                // 裏面
-                createCardFace(text: medicineNames[questionNumber].back, isFront: false)
-                // 表面
-                createCardFace(text: medicineNames[questionNumber].front, isFront: true)
-            } // ZStack ここまで
-            // タップされたら
-            .onTapGesture {
-                // カードをめくる
-                    flipCard()
-            } // onTapGesture ここまで
-            // スペースを空ける
-            Spacer()
-            // 水平方向にレイアウト
-            HStack(spacing: 20) {
-                // 正解ボタン
-                AnswerButton(answerButtonType: .correct, action: {
-                    // TODO: 現在の問題が正解であることを記録する処理を実装
-                    Task {
-                        // 次の問題へ進むか、結果を表示
-                        await advanceToNextQuestionOrShowResult()
-                    } // Task ここまで
-                }) // 正解ボタン ここまで
-                
-                // 不正解ボタン
-                AnswerButton(answerButtonType: .incorrect, action: {
-                    // TODO: 現在の問題が不正解であることを記録する処理を実装
-                    Task {
-                        // 次の問題へ進むか、結果を表示
-                        await advanceToNextQuestionOrShowResult()
-                    } // Task ここまで
-                }) // 不正解ボタン ここまで
-                
-                // 一つ前の問題に戻るボタン
-                AnswerButton(answerButtonType: .back, action: {
-                    Task {
-                        // 前の問題に戻る
-                        await goBackToPreviousQuestion()
-                    } // Task ここまで
-                }) // 一つ前の問題に戻るボタン ここまで
-                .disabled(questionNumber == 0)
-            } // HStack ここまで
-            // スペースを空ける
-            Spacer()
-        } // VStack ここまで
+        // 手前から奥にレイアウト
+        ZStack {
+            // 背景を水色にする
+            Color.backgroundSkyBlue
+            // セーフエリア外にも背景を表示
+                .ignoresSafeArea()
+            // 垂直方向にレイアウト
+            VStack {
+                // スペースを空ける
+                Spacer()
+                // 問題番号
+                Text("\(questionNumber + 1)/\(medicineNames.count)")
+                // フォントを.titleに変更
+                    .font(.title)
+                // スペースを空ける
+                Spacer()
+                // 奥から手前にレイアウト
+                ZStack {
+                    // カードを配置
+                    // 裏面
+                    createCardFace(text: medicineNames[questionNumber].back, isFront: false)
+                    // 表面
+                    createCardFace(text: medicineNames[questionNumber].front, isFront: true)
+                } // ZStack ここまで
+                // タップされたら
+                .onTapGesture {
+                    // カードをめくる
+                        flipCard()
+                } // onTapGesture ここまで
+                // スペースを空ける
+                Spacer()
+                // 水平方向にレイアウト
+                HStack(spacing: 20) {
+                    // 正解ボタン
+                    AnswerButton(answerButtonType: .correct, action: {
+                        // TODO: 現在の問題が正解であることを記録する処理を実装
+                        Task {
+                            // 次の問題へ進むか、結果を表示
+                            await advanceToNextQuestionOrShowResult()
+                        } // Task ここまで
+                    }) // 正解ボタン ここまで
+                    
+                    // 不正解ボタン
+                    AnswerButton(answerButtonType: .incorrect, action: {
+                        // TODO: 現在の問題が不正解であることを記録する処理を実装
+                        Task {
+                            // 次の問題へ進むか、結果を表示
+                            await advanceToNextQuestionOrShowResult()
+                        } // Task ここまで
+                    }) // 不正解ボタン ここまで
+                    
+                    // 一つ前の問題に戻るボタン
+                    AnswerButton(answerButtonType: .back, action: {
+                        Task {
+                            // 前の問題に戻る
+                            await goBackToPreviousQuestion()
+                        } // Task ここまで
+                    }) // 一つ前の問題に戻るボタン ここまで
+                    .disabled(questionNumber == 0)
+                } // HStack ここまで
+                // スペースを空ける
+                Spacer()
+            } // VStack ここまで
+        } // ZStack ここまで
         // 問題を解く画面へ遷移
         .navigationDestination(isPresented: $isShowResultView) {
             // 結果画面を表示
@@ -100,6 +107,12 @@ struct StudyView: View {
         } // navigationDestination ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
+        // ナビゲーションバーの背景を青色に変更
+        .toolbarBackground(.navigationBarBlue, for: .navigationBar)
+        // ナビゲーションバーの背景を表示
+        .toolbarBackground(.visible, for: .navigationBar)
+        // ナビゲーションバーのタイトルの色を白にする
+        .toolbarColorScheme(.dark)
     } // body ここまで
 
     // カードの面を生成するメソッド

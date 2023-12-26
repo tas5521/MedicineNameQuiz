@@ -16,8 +16,8 @@ struct QuestionListView: View {
         QuestionListItem(listName: "さがえ薬局リスト",
                          date: Date(),
                          questions: [Question(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
-                                    Question(originalName: "エバステル", genericName: "エバスチン"),
-                                    Question(originalName: "オノン", genericName: "プランルカスト水和物")]
+                                     Question(originalName: "エバステル", genericName: "エバスチン"),
+                                     Question(originalName: "オノン", genericName: "プランルカスト水和物")]
                         ),
         QuestionListItem(listName: "ながつ薬局リスト",
                          date: Date(),
@@ -68,7 +68,7 @@ struct QuestionListView: View {
             } // VStack ここまで
         } // ZStack ここまで
     } // body ここまで
-
+    
     // 問題リスト
     private var questionList: some View {
         List {
@@ -101,7 +101,7 @@ struct QuestionListView: View {
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // questionList ここまで
-
+    
     // リスト追加ボタン
     private var addListButton: some View {
         NavigationLink {
