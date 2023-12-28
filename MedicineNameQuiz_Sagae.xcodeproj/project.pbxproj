@@ -50,6 +50,7 @@
 		4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABE86542B034828003AC69F /* RankingResultView.swift */; };
 		4AD429762B159B6100FEE2DD /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD429752B159B6100FEE2DD /* AnswerButton.swift */; };
 		4AD429782B15A21C00FEE2DD /* AnswerButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */; };
+		4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFA48972B3D61A200FC29B8 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,7 @@
 		4ABE86542B034828003AC69F /* RankingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingResultView.swift; sourceTree = "<group>"; };
 		4AD429752B159B6100FEE2DD /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 		4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButtonType.swift; sourceTree = "<group>"; };
+		4AFA48972B3D61A200FC29B8 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				4A9671582AC7B531006F7157 /* MainTabView.swift */,
 				4A9671782AC8578E006F7157 /* SignInView.swift */,
 				4A96717A2AC85A35006F7157 /* UserNameSettingView.swift */,
+				4AFA48972B3D61A200FC29B8 /* SearchBar.swift */,
 				4AA088272AC935B3005BD8C2 /* Study */,
 				4AA088282AC935E4005BD8C2 /* QuestionList */,
 				4AA088292AC93608005BD8C2 /* Ranking */,
@@ -346,6 +349,7 @@
 				4AA0884A2AC9889D005BD8C2 /* HowToUseMedicineListView.swift in Sources */,
 				4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */,
 				4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */,
+				4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */,
 				4AADB2D92AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld in Sources */,
 				4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */,
 				4AB111652B2E091500DD79F2 /* StudyMode.swift in Sources */,

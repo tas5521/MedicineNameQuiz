@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuestionsView: View {
     // 薬の名前の検索テキスト
-    @State private var medicineNameText: String = ""
+    @State private var searchMedicineNameText: String = ""
     // リストの名前を保持する変数
     let listName: String
     // 問題を保持する変数
@@ -25,15 +25,8 @@ struct QuestionsView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 薬の検索バー
-                HStack {
-                    // 虫眼鏡のImage
-                    Image(systemName: "magnifyingglass")
-                    // 薬の検索バー
-                    TextField("薬を検索できます", text: $medicineNameText)
-                        .textFieldStyle(.roundedBorder)
-                } // HStack ここまで
-                // 上下左右に余白を追加
-                .padding()
+                SearchBar(searchText: $searchMedicineNameText, placeholder: "薬を検索できます")
+                    .padding(.vertical)
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 総問題数を表示
