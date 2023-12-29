@@ -34,39 +34,31 @@ struct QuestionListView: View {
     ] // dummyList ここまで
     
     var body: some View {
-        // 奥から手前方向にレイアウト
-        ZStack {
-            // 背景を水色に変更
-            Color.backgroundSkyBlue
-            // 垂直方向にレイアウト
-            VStack {
-                // 問題リストの検索バー
-                HStack {
-                    // 虫眼鏡のImage
-                    Image(systemName: "magnifyingglass")
-                    // 問題リストの検索バー
-                    TextField("問題リストを検索できます", text: $listNameText)
-                        .textFieldStyle(.roundedBorder)
-                } // HStack ここまで
-                // 上下左右に余白を追加
-                .padding()
+        NavigationStack {
+            // 奥から手前方向にレイアウト
+            ZStack {
+                // 背景を水色に変更
+                Color.backgroundSkyBlue
                 // 問題リスト
                 questionList
-            } // VStack ここまで
-            // 垂直方向にレイアウト
-            VStack {
-                // スペースを空ける
-                Spacer()
-                // 水平方向にレイアウト
-                HStack {
+                    .searchable(text: $listNameText,
+                                placement: .navigationBarDrawer(displayMode: .always),
+                                prompt: "リストを検索できます")
+                // 垂直方向にレイアウト
+                VStack {
                     // スペースを空ける
                     Spacer()
-                    // リスト追加ボタン
-                    addListButton
-                        .padding()
-                } // HStack ここまで
-            } // VStack ここまで
-        } // ZStack ここまで
+                    // 水平方向にレイアウト
+                    HStack {
+                        // スペースを空ける
+                        Spacer()
+                        // リスト追加ボタン
+                        addListButton
+                            .padding()
+                    } // HStack ここまで
+                } // VStack ここまで
+            } // ZStack ここまで
+        } // NavigationStack ここまで
     } // body ここまで
     
     // 問題リスト

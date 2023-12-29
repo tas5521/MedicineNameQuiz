@@ -16,18 +16,13 @@ struct QuestionsView: View {
     let questions: [Question]
     
     var body: some View {
-        // 奥から手前方向にレイアウト
-        ZStack {
-            // 背景を水色にする
-            Color.backgroundSkyBlue
-            // セーフエリア外にも背景を表示
-                .ignoresSafeArea()
-            // 垂直方向にレイアウト
-            VStack {
-                // 薬の検索バー
-                SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
-                // 上下に余白を指定
-                    .padding(.vertical)
+        NavigationStack {
+            // 奥から手前方向にレイアウト
+            ZStack {
+                // 背景を水色にする
+                Color.backgroundSkyBlue
+                // セーフエリア外にも背景を表示
+                    .ignoresSafeArea()
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 総問題数を表示
@@ -50,6 +45,7 @@ struct QuestionsView: View {
                             } // VStack ここまで
                         } // ForEach ここまで
                     } // List ここまで
+                    .searchable(text: $searchMedicineNameText, prompt: "薬を検索できます")
                     // リストのスタイルを.groupedに変更
                     .listStyle(.grouped)
                     // リストの背景のグレーの部分を非表示にする
@@ -57,30 +53,30 @@ struct QuestionsView: View {
                 } // VStack ここまで
                 // 太字にする
                 .bold()
-            } // VStack ここまで
-        } // ZStack ここまで
-        // ナビゲーションバータイトルを指定
-        .navigationBarTitle(listName, displayMode: .inline)
-        // ナビゲーションバーの背景を青色に変更
-        .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-        // ナビゲーションバーの背景を表示
-        .toolbarBackground(.visible, for: .navigationBar)
-        // ナビゲーションバーのタイトルの色を白にする
-        .toolbarColorScheme(.dark)
-        // ナビゲーションバーの右側に編集ボタンを配置
-        .toolbar {
-            // ボタンの位置を指定
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    // 編集画面へ遷移
-                    EditQuestionListView()
-                } label: {
-                    // ラベル
-                    Text("編集")
-                } // NavigationLink ここまで
-            } // ToolbarItem ここまで
-        } // toolbar ここまで
-    } // body ここまで// 垂直方向にレイアウト// 垂直方向にレイアウト
+            } // ZStack ここまで
+            // ナビゲーションバータイトルを指定
+            .navigationBarTitle(listName, displayMode: .inline)
+            // ナビゲーションバーの背景を青色に変更
+            .toolbarBackground(.navigationBarBlue, for: .navigationBar)
+            // ナビゲーションバーの背景を表示
+            .toolbarBackground(.visible, for: .navigationBar)
+            // ナビゲーションバーのタイトルの色を白にする
+            .toolbarColorScheme(.dark)
+            // ナビゲーションバーの右側に編集ボタンを配置
+            .toolbar {
+                // ボタンの位置を指定
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        // 編集画面へ遷移
+                        EditQuestionListView()
+                    } label: {
+                        // ラベル
+                        Text("編集")
+                    } // NavigationLink ここまで
+                } // ToolbarItem ここまで
+            } // toolbar ここまで
+        } // NavigationStack ここまで
+    } // body ここまで
 } // QuestionsView ここまで
 
 #Preview {

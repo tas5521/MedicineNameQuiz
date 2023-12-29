@@ -12,44 +12,47 @@ struct MedicineListView: View {
     @State private var tabIndex: Int = 0
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
+    
+    // 薬の名前の検索テキスト
+    @State private var searchMedicineNameText: String = ""
+    
     // 現在タブで選択されている区分を取得
     private var classification: MedicineClassification {
         MedicineClassification.allCases[tabIndex]
     } // classificationここまで
     
     var body: some View {
-        // 奥から手前方向にレイアウト
-        ZStack {
-            // 垂直方向にレイアウト
-            VStack {
-                // 薬の区分を選択するタブを上に配置
-                TopTabView(
-                    tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
-                // 薬の検索バー
-                Text("検索バー")
-                // スペースを空ける
-                Spacer()
-                // 薬リスト
-                Text("薬リスト")
-                // スペースを空ける
-                Spacer()
-            } // VStack ここまで
-            // 垂直方向にレイアウト
-            VStack {
-                // スペースを空ける
-                Spacer()
-                // 水平方向にレイアウト
-                HStack {
+        NavigationStack {
+            // 奥から手前方向にレイアウト
+            ZStack {
+                // 垂直方向にレイアウト
+                VStack {
+                    // 薬の区分を選択するタブを上に配置
+                    TopTabView(
+                        tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                    // 薬リスト
+                    Text("薬リスト")
+                        .searchable(text: $searchMedicineNameText, prompt: "薬を検索できます")
                     // スペースを空ける
                     Spacer()
-                    // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                    if classification == .customMedicine {
-                        addMedicineButton
-                            .padding()
-                    } // if ここまで
-                } // HStack ここまで
-            } // VStack ここまで
-        } // ZStack ここまで
+                } // VStack ここまで
+                // 垂直方向にレイアウト
+                VStack {
+                    // スペースを空ける
+                    Spacer()
+                    // 水平方向にレイアウト
+                    HStack {
+                        // スペースを空ける
+                        Spacer()
+                        // カスタムのタブが選択されている場合、薬名追加ボタンを表示
+                        if classification == .customMedicine {
+                            addMedicineButton
+                                .padding()
+                        } // if ここまで
+                    } // HStack ここまで
+                } // VStack ここまで
+            } // ZStack ここまで
+        } // NavigationStack ここまで
     } // body ここまで
     
     // カスタムで薬名を追加するボタン
