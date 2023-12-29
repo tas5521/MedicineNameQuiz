@@ -41,15 +41,9 @@ struct QuestionListView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 問題リストの検索バー
-                HStack {
-                    // 虫眼鏡のImage
-                    Image(systemName: "magnifyingglass")
-                    // 問題リストの検索バー
-                    TextField("問題リストを検索できます", text: $listNameText)
-                        .textFieldStyle(.roundedBorder)
-                } // HStack ここまで
-                // 上下左右に余白を追加
-                .padding()
+                SearchBar(searchText: $listNameText, placeholderText: "リストを検索できます")
+                // 上下に余白を指定
+                    .padding(.vertical)
                 // 問題リスト
                 questionList
             } // VStack ここまで
