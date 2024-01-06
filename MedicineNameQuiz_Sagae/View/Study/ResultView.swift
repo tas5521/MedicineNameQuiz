@@ -63,12 +63,8 @@ struct ResultView: View {
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習結果", displayMode: .inline)
-        // ナビゲーションバーの背景を青色に変更
-        .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-        // ナビゲーションバーの背景を表示
-        .toolbarBackground(.visible, for: .navigationBar)
-        // ナビゲーションバーのタイトルの色を白にする
-        .toolbarColorScheme(.dark)
+        // ナビゲーションバーの背景を変更
+        .navigationBarBackground()
         // ナビゲーションバーの右側に終了ボタンを配置
         .toolbar {
             // ボタンの位置を指定
