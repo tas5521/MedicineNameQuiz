@@ -34,33 +34,46 @@ struct QuestionListView: View {
     ] // dummyList ここまで
     
     var body: some View {
-        // 奥から手前方向にレイアウト
-        ZStack {
-            // 背景を水色に変更
-            Color.backgroundSkyBlue
-            // 垂直方向にレイアウト
-            VStack {
-                // 問題リストの検索バー
-                SearchBar(searchText: $listNameText, placeholderText: "リストを検索できます")
-                // 上下に余白を指定
-                    .padding(.vertical)
-                // 問題リスト
-                questionList
-            } // VStack ここまで
-            // 垂直方向にレイアウト
-            VStack {
-                // スペースを空ける
-                Spacer()
-                // 水平方向にレイアウト
-                HStack {
+        NavigationStack {
+            // 手前から奥にレイアウト
+            ZStack {
+                // 背景を水色にする
+                Color.backgroundSkyBlue
+                // セーフエリア外にも背景を表示
+                    .ignoresSafeArea()
+                // 垂直方向にレイアウト
+                VStack {
+                    // 問題リストの検索バー
+                    SearchBar(searchText: $listNameText, placeholderText: "リストを検索できます")
+                    // 上下に余白を指定
+                        .padding(.vertical)
+                    // 問題リスト
+                    questionList
+                } // VStack ここまで
+                // 垂直方向にレイアウト
+                VStack {
                     // スペースを空ける
                     Spacer()
-                    // リスト追加ボタン
-                    addListButton
-                        .padding()
-                } // HStack ここまで
-            } // VStack ここまで
-        } // ZStack ここまで
+                    // 水平方向にレイアウト
+                    HStack {
+                        // スペースを空ける
+                        Spacer()
+                        // リスト追加ボタン
+                        addListButton
+                            .padding()
+                    } // HStack ここまで
+                } // VStack ここまで
+            } // ZStack ここまで
+            // ナビゲーションバーの設定
+            // ナビゲーションバーのタイトルを設定
+            .navigationBarTitle("問題リスト", displayMode: .inline)
+            // ナビゲーションバーの背景を青色に変更
+            .toolbarBackground(.navigationBarBlue, for: .navigationBar)
+            // ナビゲーションバーの背景を表示
+            .toolbarBackground(.visible, for: .navigationBar)
+            // ナビゲーションバーのタイトルの色を白にする
+            .toolbarColorScheme(.dark)
+        } // NavigationStack ここまで
     } // body ここまで
     
     // 問題リスト
