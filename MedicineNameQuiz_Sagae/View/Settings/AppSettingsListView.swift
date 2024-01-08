@@ -59,12 +59,8 @@ struct AppSettingsListView: View {
             // ナビゲーションバーの設定
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("設定", displayMode: .inline)
-            // ナビゲーションバーの背景を青色に変更
-            .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-            // ナビゲーションバーの背景を表示
-            .toolbarBackground(.visible, for: .navigationBar)
-            // ナビゲーションバーのタイトルの色を白にする
-            .toolbarColorScheme(.dark)
+            // ナビゲーションバーの背景を変更
+            .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
 } // AppSettingsListView ここまで
