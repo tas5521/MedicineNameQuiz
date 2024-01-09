@@ -73,21 +73,26 @@ struct EditQuestionListView: View {
                     tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
                 // リスト名編集用テキストフィールド
                 TextField("リストの名前を入力してください", text: $listName)
+                // 丸い縁をつける
                     .textFieldStyle(.roundedBorder)
+                // 上下左右に余白をつける
                     .padding()
                 // 薬の検索バーを配置
                 SearchBar(searchText: $medicineNameText, placeholderText: "薬を検索できます")
-                // 上下左右に余白を追加
-                .padding()
+                // スペースを空ける
                 Spacer()
                 // 薬リスト
                 switch classification {
+                    // 内用薬を表示
                 case .internalMedicine:
                     MedicineSelectableList(checkAll: $checkAllInternal, medicineArray: $dummyInternalMedicineList)
+                    // 注射薬を表示
                 case .injectionMedicine:
                     MedicineSelectableList(checkAll: $checkAllInjection, medicineArray: $dummyInjectionMedicineList)
+                    // 外用薬を表示
                 case .externalMedicine:
                     MedicineSelectableList(checkAll: $checkAllExternal, medicineArray: $dummyExternalMedicineList)
+                    // カスタムを表示
                 case .customMedicine:
                     MedicineSelectableList(checkAll: $checkAllCustom, medicineArray: $dummyCustomMedicineList)
                 } // switch ここまで
@@ -97,6 +102,7 @@ struct EditQuestionListView: View {
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト編集", displayMode: .inline)
+        // ナビゲーションバーの背景を変更
         .navigationBarBackground()
         .toolbar {
             // ボタンの位置を指定
