@@ -20,6 +20,8 @@ struct MedicineSelectableList: View {
             HStack {
                 // 問題数を表示
                 Text("問題数: \(medicineArray.count)")
+                // 太字にする
+                    .bold()
                 // スペースを空ける
                 Spacer()
                 // 「すべてチェックする」もしくは「すべてのチェックを外す」ボタン
@@ -81,6 +83,8 @@ struct MedicineSelectableList: View {
                     } // HStack ここまで
                 } // ForEach ここまで
             } // List ここまで
+            // 太字にする
+            .bold()
             // リストのスタイルを.groupedに変更
             .listStyle(.grouped)
             // リストの背景のグレーの部分を非表示にする

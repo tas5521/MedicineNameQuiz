@@ -71,6 +71,8 @@ struct EditQuestionListView: View {
                 // 薬の区分を選択するタブを配置
                 TopTabView(
                     tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                // 太字にする
+                .bold()
                 // リスト名編集用テキストフィールド
                 TextField("リストの名前を入力してください", text: $listName)
                 // 文字の左に余白を追加
@@ -105,8 +107,6 @@ struct EditQuestionListView: View {
                     MedicineSelectableList(checkAll: $checkAllCustom, medicineArray: $dummyCustomMedicineList)
                 } // switch ここまで
             } // VStack ここまで
-            // 太字にする
-            .bold()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト編集", displayMode: .inline)
