@@ -103,13 +103,7 @@ struct EditQuestionListView: View {
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト編集", displayMode: .inline)
-        // ナビゲーションバーの背景を青色に変更
-        .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-        // ナビゲーションバーの背景を表示
-        .toolbarBackground(.visible, for: .navigationBar)
-        // ナビゲーションバーのタイトルの色を白にする
-        .toolbarColorScheme(.dark)
-        // ナビゲーションバーの右側に保存ボタンを配置
+        .navigationBarBackground()
         .toolbar {
             // ボタンの位置を指定
             ToolbarItem(placement: .navigationBarTrailing) {
