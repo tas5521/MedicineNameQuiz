@@ -10,6 +10,7 @@ import SwiftUI
 struct MedicineSelectableList: View {
     // 「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
     @Binding var checkAll: Bool
+    // 表示する薬の名前を受け取る配列
     @Binding var medicineArray: [MedicineListItem]
     
     var body: some View {
@@ -45,7 +46,7 @@ struct MedicineSelectableList: View {
                         .foregroundStyle(Color.blue)
                 } // Buttonここまで
             } // HStack ここまで
-            // 左に余白を追加
+            // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
             // 出題される薬の名前のリスト
             List {
