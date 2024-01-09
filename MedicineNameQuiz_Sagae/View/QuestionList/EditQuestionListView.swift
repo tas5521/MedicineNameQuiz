@@ -75,14 +75,8 @@ struct EditQuestionListView: View {
                 TextField("リストの名前を入力してください", text: $listName)
                     .textFieldStyle(.roundedBorder)
                     .padding()
-                // 水平方向にレイアウト
-                HStack {
-                    // 虫眼鏡のImage
-                    Image(systemName: "magnifyingglass")
-                    // 薬の検索バー
-                    TextField("薬を検索できます", text: $medicineNameText)
-                        .textFieldStyle(.roundedBorder)
-                } // HStack ここまで
+                // 薬の検索バーを配置
+                SearchBar(searchText: $medicineNameText, placeholderText: "薬を検索できます")
                 // 上下左右に余白を追加
                 .padding()
                 Spacer()
