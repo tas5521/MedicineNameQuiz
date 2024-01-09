@@ -17,8 +17,8 @@ struct MedicineSelectableList: View {
         VStack(alignment: .leading) {
             // 水平方向にレイアウト
             HStack {
-                // 総問題数を表示
-                Text("総問題数: \(medicineArray.count)")
+                // 問題数を表示
+                Text("問題数: \(medicineArray.count)")
                 // スペースを空ける
                 Spacer()
                 // 「すべてチェックする」もしくは「すべてのチェックを外す」ボタン
