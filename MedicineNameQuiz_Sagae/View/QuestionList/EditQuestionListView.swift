@@ -16,16 +16,7 @@ struct EditQuestionListView: View {
     @State private var listName: String = "さがえ薬局リスト"
     // 薬の検索に使う変数
     @State private var medicineNameText: String = ""
-    
-    // 内用薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
-    @State private var checkAllInternal: Bool = true
-    // 注射薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
-    @State private var checkAllInjection: Bool = true
-    // 外用薬の画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
-    @State private var checkAllExternal: Bool = true
-    // カスタムの画面の「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
-    @State private var checkAllCustom: Bool = true
-    
+
     // ダミーの内用薬の配列
     @State private var dummyInternalMedicineList: [MedicineListItem] = [
         MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", checked: false),
@@ -109,16 +100,16 @@ struct EditQuestionListView: View {
                 switch classification {
                     // 内用薬を表示
                 case .internalMedicine:
-                    MedicineSelectableList(checkAll: $checkAllInternal, medicineArray: $dummyInternalMedicineList)
+                    MedicineSelectableList(medicineArray: $dummyInternalMedicineList)
                     // 注射薬を表示
                 case .injectionMedicine:
-                    MedicineSelectableList(checkAll: $checkAllInjection, medicineArray: $dummyInjectionMedicineList)
+                    MedicineSelectableList(medicineArray: $dummyInjectionMedicineList)
                     // 外用薬を表示
                 case .externalMedicine:
-                    MedicineSelectableList(checkAll: $checkAllExternal, medicineArray: $dummyExternalMedicineList)
+                    MedicineSelectableList(medicineArray: $dummyExternalMedicineList)
                     // カスタムを表示
                 case .customMedicine:
-                    MedicineSelectableList(checkAll: $checkAllCustom, medicineArray: $dummyCustomMedicineList)
+                    MedicineSelectableList(medicineArray: $dummyCustomMedicineList)
                 } // switch ここまで
             } // VStack ここまで
         } // ZStack ここまで

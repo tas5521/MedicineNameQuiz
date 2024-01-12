@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct MedicineSelectableList: View {
-    // 「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
-    @Binding var checkAll: Bool
     // 表示する薬の名前を受け取る配列
     @Binding var medicineArray: [MedicineListItem]
     
@@ -24,29 +22,12 @@ struct MedicineSelectableList: View {
                     .bold()
                 // スペースを空ける
                 Spacer()
-                // 「すべてチェックする」もしくは「すべてのチェックを外す」ボタン
-                Button {
-                    // もしボタンが「すべてチェックする」の状態だったら
-                    if checkAll {
-                        // すべてチェック状態にする
-                        for index in medicineArray.indices {
-                            medicineArray[index].checked = true
-                        } // for ここまで
-                        // もしボタンが「すべてのチェックを外す」の状態だったら
-                    } else {
-                        // すべてのチェックを外す
-                        for index in medicineArray.indices {
-                            medicineArray[index].checked = false
-                        } // for ここまで
-                    } // if ここまで
-                    // ボタンの状態を切り替える
-                    checkAll.toggle()
-                } label: {
-                    // ラベル
-                    Text(checkAll ? "すべてチェックする" : "すべてのチェックを外す")
-                    // 青色にする
-                        .foregroundStyle(Color.blue)
-                } // Buttonここまで
+                // 「全て選択する」ボタン
+                selectAllButton(selectAll: true)
+                // スペースを空ける
+                Spacer()
+                // 「全て選択しない」ボタン
+                selectAllButton(selectAll: false)
             } // HStack ここまで
             // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
@@ -77,10 +58,25 @@ struct MedicineSelectableList: View {
             .scrollContentBackground(.hidden)
         } // VStack ここまで
     } // body ここまで
+
+    // 全て選択する、もしくは、全て選択しないボタン
+    private func selectAllButton(selectAll: Bool) -> some View {
+        Button {
+            // 全て選択する、もしくは、全て選択しない
+            for index in medicineArray.indices {
+                medicineArray[index].checked = selectAll
+            } // for ここまで
+        } label: {
+            // ラベル
+            Text(selectAll ? "全て選択する" : "全て選択しない")
+            // 青色にする
+                .foregroundStyle(Color.blue)
+        } // Buttonここまで
+    } // selectAllButton ここまで
 } // MedicineSelectableList ここまで
 
 #Preview {
-    MedicineSelectableList(checkAll: .constant(true), medicineArray:
+    MedicineSelectableList(medicineArray:
             .constant([MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", checked: false),
                        MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", checked: false)]))
 }
