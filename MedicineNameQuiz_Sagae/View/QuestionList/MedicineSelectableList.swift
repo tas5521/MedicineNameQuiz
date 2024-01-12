@@ -35,7 +35,7 @@ struct MedicineSelectableList: View {
             List {
                 ForEach(medicineArray.indices, id: \.self) { index in
                     // Toggleを配置
-                    Toggle(isOn: $medicineArray[index].checked) {
+                    Toggle(isOn: $medicineArray[index].selected) {
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
@@ -64,7 +64,7 @@ struct MedicineSelectableList: View {
         Button {
             // 全て選択する、もしくは、全て選択しない
             for index in medicineArray.indices {
-                medicineArray[index].checked = selectAll
+                medicineArray[index].selected = selectAll
             } // for ここまで
         } label: {
             // ラベル
@@ -77,6 +77,6 @@ struct MedicineSelectableList: View {
 
 #Preview {
     MedicineSelectableList(medicineArray:
-            .constant([MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", checked: false),
-                       MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", checked: false)]))
+            .constant([MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
+                       MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
 }

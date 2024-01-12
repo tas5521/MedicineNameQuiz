@@ -19,30 +19,30 @@ struct EditQuestionListView: View {
 
     // ダミーの内用薬の配列
     @State private var dummyInternalMedicineList: [MedicineListItem] = [
-        MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", checked: false),
-        MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", checked: false),
-        MedicineListItem(originalName: "内用薬先発品名3", genericName: "内用薬一般名3", checked: false)
+        MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
+        MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false),
+        MedicineListItem(originalName: "内用薬先発品名3", genericName: "内用薬一般名3", selected: false)
     ] // dummyInternalMedicineList ここまで
     
     // ダミーの注射薬の配列
     @State private var dummyInjectionMedicineList: [MedicineListItem] = [
-        MedicineListItem(originalName: "注射薬先発品名1", genericName: "注射薬一般名1", checked: false),
-        MedicineListItem(originalName: "注射薬先発品名2", genericName: "注射薬一般名2", checked: false),
-        MedicineListItem(originalName: "注射薬先発品名3", genericName: "注射薬一般名3", checked: false)
+        MedicineListItem(originalName: "注射薬先発品名1", genericName: "注射薬一般名1", selected: false),
+        MedicineListItem(originalName: "注射薬先発品名2", genericName: "注射薬一般名2", selected: false),
+        MedicineListItem(originalName: "注射薬先発品名3", genericName: "注射薬一般名3", selected: false)
     ] // dummyInjectionMedicineList ここまで
     
     // ダミーの外用薬の配列
     @State private var dummyExternalMedicineList: [MedicineListItem] = [
-        MedicineListItem(originalName: "外用薬先発品名1", genericName: "外用薬一般名1", checked: false),
-        MedicineListItem(originalName: "外用薬先発品名2", genericName: "外用薬一般名2", checked: false),
-        MedicineListItem(originalName: "外用薬先発品名3", genericName: "外用薬一般名3", checked: false)
+        MedicineListItem(originalName: "外用薬先発品名1", genericName: "外用薬一般名1", selected: false),
+        MedicineListItem(originalName: "外用薬先発品名2", genericName: "外用薬一般名2", selected: false),
+        MedicineListItem(originalName: "外用薬先発品名3", genericName: "外用薬一般名3", selected: false)
     ] // dummyExternalMedicineList ここまで
     
     // ダミーのカスタム薬の配列
     @State private var dummyCustomMedicineList: [MedicineListItem] = [
-        MedicineListItem(originalName: "カスタム先発品名1", genericName: "カスタム一般名1", checked: false),
-        MedicineListItem(originalName: "カスタム先発品名2", genericName: "カスタム一般名2", checked: false),
-        MedicineListItem(originalName: "カスタム先発品名3", genericName: "カスタム一般名3", checked: false)
+        MedicineListItem(originalName: "カスタム先発品名1", genericName: "カスタム一般名1", selected: false),
+        MedicineListItem(originalName: "カスタム先発品名2", genericName: "カスタム一般名2", selected: false),
+        MedicineListItem(originalName: "カスタム先発品名3", genericName: "カスタム一般名3", selected: false)
     ] // dummyCustomMedicineList ここまで
     
     // 現在タブで選択されている区分を取得
