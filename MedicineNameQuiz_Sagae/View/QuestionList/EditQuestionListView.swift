@@ -61,16 +61,19 @@ struct EditQuestionListView: View {
             VStack(spacing: 0) {
                 // 奥から手前にレイアウト
                 ZStack {
-                    // 背景を水色にする
+                    // 背景をタブの青色にする
                     Color.tabBlue
                     // セーフエリア外にも背景を表示
                         .ignoresSafeArea()
-                    // 高さ100に指定
+                    // 高さを90に指定
                         .frame(height: 90)
                     // 垂直右方向にレイアウト
                     VStack(alignment: .leading) {
+                        // 「リストの名前」のテキストを配置
                         Text("リストの名前")
+                        // 文字色を白に指定
                             .foregroundStyle(Color.white)
+                        // 左に余白を追加
                             .padding(.leading)
                         // リスト名編集用テキストフィールド
                         TextField("リストの名前を入力してください", text: $listName)
