@@ -53,8 +53,8 @@ struct MedicineSelectableList: View {
             // 出題される薬の名前のリスト
             List {
                 ForEach(medicineArray.indices, id: \.self) { index in
-                    // 水平方向にレイアウト
-                    HStack {
+                    // Toggleを配置
+                    Toggle(isOn: $medicineArray[index].checked) {
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
@@ -66,21 +66,7 @@ struct MedicineSelectableList: View {
                             // 文字の色を赤に変更
                                 .foregroundStyle(Color.red)
                         } // VStack ここまで
-                        // スペースを空ける
-                        Spacer()
-                        // チェックボタン
-                        Button {
-                            // チェック状態を変更
-                            medicineArray[index].checked.toggle()
-                        } label: {
-                            // ラベル
-                            Image(systemName: "checkmark.square.fill")
-                            // チェック状態では青、チェックされていない状態ではグレーにする
-                                .foregroundStyle(medicineArray[index].checked ? .blue : .gray)
-                            // 大きさを1.8倍にする
-                                .scaleEffect(1.8)
-                        } // Button ここまで
-                    } // HStack ここまで
+                    } // Toggle ここまで
                 } // ForEach ここまで
             } // List ここまで
             // 太字にする
