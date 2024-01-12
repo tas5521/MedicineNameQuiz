@@ -67,28 +67,44 @@ struct EditQuestionListView: View {
             // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直右方向にレイアウト
-            VStack {
+            VStack(spacing: 0) {
+                // 奥から手前にレイアウト
+                ZStack {
+                    // 背景を水色にする
+                    Color.tabBlue
+                    // セーフエリア外にも背景を表示
+                        .ignoresSafeArea()
+                    // 高さ100に指定
+                        .frame(height: 90)
+                    // 垂直右方向にレイアウト
+                    VStack(alignment: .leading) {
+                        Text("リストの名前")
+                            .foregroundStyle(Color.white)
+                            .padding(.leading)
+                        // リスト名編集用テキストフィールド
+                        TextField("リストの名前を入力してください", text: $listName)
+                        // 文字の左に余白を追加
+                            .padding(.leading, 6)
+                        // 背景色を指定
+                            .background(
+                                // 背景を角の丸い四角にする
+                                RoundedRectangle(cornerRadius: 8)
+                                // 背景色を変更
+                                    .fill(Color(red: 237/255, green: 237/255, blue: 237/255))
+                                // 高さを36に指定
+                                    .frame(height: 36))
+                        // 上下左右に余白をつける
+                            .padding(.horizontal)
+                    } // VStack ここまで
+                } // ZStack ここまで
                 // 薬の区分を選択するタブを配置
                 TopTabView(
                     tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
                 // 太字にする
                 .bold()
-                // リスト名編集用テキストフィールド
-                TextField("リストの名前を入力してください", text: $listName)
-                // 文字の左に余白を追加
-                    .padding(.leading, 6)
-                // 背景色を指定
-                    .background(
-                        // 背景を角の丸い四角にする
-                        RoundedRectangle(cornerRadius: 8)
-                        // 背景色を変更
-                            .fill(Color(red: 237/255, green: 237/255, blue: 237/255))
-                        // 高さを36に指定
-                            .frame(height: 36))
-                // 上下左右に余白をつける
-                    .padding()
                 // 薬の検索バーを配置
                 SearchBar(searchText: $medicineNameText, placeholderText: "薬を検索できます")
+                    .padding(.top)
                 // 薬リスト
                 switch classification {
                     // 内用薬を表示
