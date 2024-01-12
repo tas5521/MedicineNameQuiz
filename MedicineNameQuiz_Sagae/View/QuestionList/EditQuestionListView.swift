@@ -89,8 +89,6 @@ struct EditQuestionListView: View {
                     .padding()
                 // 薬の検索バーを配置
                 SearchBar(searchText: $medicineNameText, placeholderText: "薬を検索できます")
-                // スペースを空ける
-                Spacer()
                 // 薬リスト
                 switch classification {
                     // 内用薬を表示
