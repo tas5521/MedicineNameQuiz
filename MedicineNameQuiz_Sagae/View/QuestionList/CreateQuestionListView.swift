@@ -67,6 +67,8 @@ struct CreateQuestionListView: View {
                 TopTabView(
                     tabIndex: $tabIndex, 
                     tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                // 太字にする
+                .bold()
                 // 薬の検索バー
                 SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
                 // 上に余白を追加
@@ -83,7 +85,6 @@ struct CreateQuestionListView: View {
                     MedicineSelectableList(medicineArray: $dummyCustomMedicineList)
                 } // switch ここまで
             } // VStack ここまで
-            .bold()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト作成", displayMode: .inline)
