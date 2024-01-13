@@ -15,7 +15,7 @@ struct CreateQuestionListView: View {
     // タブの選択項目を保持する変数
     @State private var tabIndex: Int = 0
     // 薬の検索に使う変数
-    @State private var medicineNameText: String = ""
+    @State private var searchMedicineNameText: String = ""
     
     // ダミーの内用薬の配列
     @State private var dummyInternalMedicineList: [MedicineListItem] = [
@@ -65,20 +65,12 @@ struct CreateQuestionListView: View {
             VStack {
                 // 薬の区分を選択するタブを上に配置
                 TopTabView(
-                    tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
-                // 薬を検索するためのテキストフィールド
-                // 水平方向にレイアウト
-                HStack {
-                    // 虫眼鏡のImage
-                    Image(systemName: "magnifyingglass")
-                    // 薬の検索バー
-                    TextField("薬を検索できます", text: $medicineNameText)
-                        .textFieldStyle(.roundedBorder)
-                } // HStack ここまで
-                // 上下左右に余白を追加
-                .padding()
-                Spacer()
-                // 薬のリスト
+                    tabIndex: $tabIndex, 
+                    tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                // 薬の検索バー
+                SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
+                // 上に余白を追加
+                    .padding(.top)
                 // 薬リスト
                 switch classification {
                 case .internalMedicine:
