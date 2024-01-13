@@ -51,6 +51,8 @@
 		4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABE86542B034828003AC69F /* RankingResultView.swift */; };
 		4AD429762B159B6100FEE2DD /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD429752B159B6100FEE2DD /* AnswerButton.swift */; };
 		4AD429782B15A21C00FEE2DD /* AnswerButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */; };
+		4AD680A92B33453D00414F22 /* MedicineListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD680A82B33453D00414F22 /* MedicineListItem.swift */; };
+		4AD680AB2B34868100414F22 /* MedicineSelectableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */; };
 		4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFA48972B3D61A200FC29B8 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +102,8 @@
 		4ABE86542B034828003AC69F /* RankingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingResultView.swift; sourceTree = "<group>"; };
 		4AD429752B159B6100FEE2DD /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 		4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButtonType.swift; sourceTree = "<group>"; };
+		4AD680A82B33453D00414F22 /* MedicineListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListItem.swift; sourceTree = "<group>"; };
+		4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineSelectableList.swift; sourceTree = "<group>"; };
 		4AFA48972B3D61A200FC29B8 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +145,7 @@
 				4AA088352AC96FCB005BD8C2 /* AppSettingsListItem.swift */,
 				4AA088412AC98796005BD8C2 /* HowToUse.swift */,
 				4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */,
+				4AD680A82B33453D00414F22 /* MedicineListItem.swift */,
 				4AB111642B2E091500DD79F2 /* StudyMode.swift */,
 				4A99F6502B2F36CE004672AD /* StudyResult.swift */,
 				4A99F6532B2F3BEC004672AD /* StudyResultListItem.swift */,
@@ -166,6 +171,7 @@
 				4A96717F2AC886B9006F7157 /* QuestionsView.swift */,
 				4A9671852AC92309006F7157 /* EditQuestionListView.swift */,
 				4A9671832AC890B7006F7157 /* CreateQuestionListView.swift */,
+				4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */,
 			);
 			path = QuestionList;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				4A764F082B492AD60052EB60 /* NavigationBarBackground.swift in Sources */,
 				4ABE86532B03465B003AC69F /* ChallengeRankingView.swift in Sources */,
 				4AD429782B15A21C00FEE2DD /* AnswerButtonType.swift in Sources */,
+				4AD680A92B33453D00414F22 /* MedicineListItem.swift in Sources */,
 				4AA088462AC9886D005BD8C2 /* HowToUseQuestionListView.swift in Sources */,
 				4A96717B2AC85A35006F7157 /* UserNameSettingView.swift in Sources */,
 				4AA088442AC98855005BD8C2 /* HowToUseStudyView.swift in Sources */,
@@ -348,6 +355,7 @@
 				4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */,
 				4A9671662AC7B795006F7157 /* AppSettingsListView.swift in Sources */,
 				4A9671602AC7B768006F7157 /* ModeSelectionView.swift in Sources */,
+				4AD680AB2B34868100414F22 /* MedicineSelectableList.swift in Sources */,
 				4AD429762B159B6100FEE2DD /* AnswerButton.swift in Sources */,
 				4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */,
 				4AA0884A2AC9889D005BD8C2 /* HowToUseMedicineListView.swift in Sources */,
