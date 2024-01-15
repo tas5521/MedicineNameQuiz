@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MedicineClassification: String, CaseIterable {
+enum MedicineClassification: String, CaseIterable{
     case internalMedicine = "内用薬"
     case injectionMedicine = "注射薬"
     case externalMedicine = "外用薬"

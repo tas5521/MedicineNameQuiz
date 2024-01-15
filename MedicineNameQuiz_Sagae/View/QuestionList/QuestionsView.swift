@@ -14,7 +14,7 @@ struct QuestionsView: View {
     let listName: String
     // 問題を保持する変数
     let questions: [Question]
-    
+
     var body: some View {
         // 奥から手前方向にレイアウト
         ZStack {

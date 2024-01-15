@@ -8,40 +8,31 @@
 import SwiftUI
 
 struct TopTabView: View {
-    // 選択されているタブの変数
-    @Binding var tabIndex: Int
-    // タブに表示する名前のリスト
-    let tabNameList: [String]
-    
+
+    @Binding var selectTab: MedicineClassification
+
     var body: some View {
         // 水平方向にレイアウト
         HStack(spacing: 0) {
             // タブに表示するリストの名前の数だけ繰り返す
-            ForEach(0 ..< tabNameList.count, id: \.self) { row in
+            ForEach(MedicineClassification.allCases, id: \.self) { tab in
                 // タブになるボタンを配置
                 Button {
                     // 選択されたタブの情報を保持
-                    tabIndex = row
+                    selectTab = tab
                 } label: {
-                    // 垂直方向にレイアウト
-                    VStack(spacing: 0) {
-                        // 水平方向にレイアウト
-                        HStack {
-                            // 各タブに名前を表示
-                            Text(tabNameList[row])
-                            // 選択されているタブは白に、それ以外は黒にする
-                                .foregroundColor(tabIndex == row ? Color.white : Color.black)
-                        }
-                        // 幅は画面の横幅 / タブの個数
-                        .frame(width: UIScreen.main.bounds.width / CGFloat(tabNameList.count), height: 42)
-                        // 選択されているタブの下に白いバーを配置
-                        Rectangle()
-                        // 選択されているタブでは白く塗りつぶす、それ以外は透明
-                            .fill(tabIndex == row ? Color.white : Color.clear)
-                        // 高さは6ポイント
-                            .frame(height: 6)
-                    } // VStack ここまで
+                    // 各タブに名前を表示
+                    Text(tab.rawValue)
+                    // 選択されているタブは白に、それ以外は黒にする
+                        .foregroundColor(selectTab == tab ? Color.white : Color.black)
                 } // Button ここまで
+                .frame(maxWidth: .infinity)
+                .frame(height: 48)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 3)
+                        .foregroundColor(selectTab == tab ? Color.white : Color.clear), alignment: .bottom
+                )
             } // ForEach ここまで
         } // HStack ここまで
         // 高さを48ポイントに指定
@@ -52,5 +43,5 @@ struct TopTabView: View {
 } // TopTabView
 
 #Preview {
-    TopTabView(tabIndex: .constant(0), tabNameList: ["本番", "練習"])
+    TopTabView(selectTab: .constant(.customMedicine))
 }

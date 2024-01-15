@@ -12,8 +12,8 @@ struct CreateQuestionListView: View {
     @Environment(\.dismiss) private var dismiss
     // 問題リストの名前を保持する変数
     @State private var questionListName: String = ""
-    // タブの選択項目を保持する変数
-    @State private var tabIndex: Int = 0
+    // TAB
+    @State var medicineClassification: MedicineClassification = .internalMedicine
     // 薬の検索に使う変数
     @State private var searchMedicineNameText: String = ""
     
@@ -48,13 +48,7 @@ struct CreateQuestionListView: View {
     // View Presentation State
     // リストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
-    
-    // 現在タブで選択されている区分を取得
-    private var classification: MedicineClassification {
-        MedicineClassification.allCases[tabIndex]
-    } // classificationここまで
 
-    
     var body: some View {
         ZStack {
             // 背景を水色に変更
@@ -64,9 +58,7 @@ struct CreateQuestionListView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 薬の区分を選択するタブを上に配置
-                TopTabView(
-                    tabIndex: $tabIndex, 
-                    tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                TopTabView(selectTab: $medicineClassification)
                 // 太字にする
                 .bold()
                 // 薬の検索バー
@@ -74,7 +66,7 @@ struct CreateQuestionListView: View {
                 // 上に余白を追加
                     .padding(.top)
                 // 薬リスト
-                switch classification {
+                switch medicineClassification {
                 case .internalMedicine:
                     MedicineSelectableList(medicineArray: $dummyInternalMedicineList)
                 case .injectionMedicine:
