@@ -12,4 +12,4 @@ enum MedicineClassification: String, CaseIterable {
     case injectionMedicine = "注射薬"
     case externalMedicine = "外用薬"
     case customMedicine = "カスタム"
-} // SelectedClassificationここまで
+} // MedicineClassificationここまで
