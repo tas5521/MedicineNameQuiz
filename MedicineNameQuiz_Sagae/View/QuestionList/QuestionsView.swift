@@ -9,12 +9,12 @@ import SwiftUI
 
 struct QuestionsView: View {
     // 薬の名前の検索テキスト
-    @State private var medicineNameText: String = ""
+    @State private var searchMedicineNameText: String = ""
     // リストの名前を保持する変数
     let listName: String
     // 問題を保持する変数
     let questions: [Question]
-    
+
     var body: some View {
         // 奥から手前方向にレイアウト
         ZStack {
@@ -25,15 +25,9 @@ struct QuestionsView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 薬の検索バー
-                HStack {
-                    // 虫眼鏡のImage
-                    Image(systemName: "magnifyingglass")
-                    // 薬の検索バー
-                    TextField("薬を検索できます", text: $medicineNameText)
-                        .textFieldStyle(.roundedBorder)
-                } // HStack ここまで
-                // 上下左右に余白を追加
-                .padding()
+                SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
+                // 上下に余白を指定
+                    .padding(.vertical)
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 総問題数を表示
@@ -67,12 +61,8 @@ struct QuestionsView: View {
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(listName, displayMode: .inline)
-        // ナビゲーションバーの背景を青色に変更
-        .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-        // ナビゲーションバーの背景を表示
-        .toolbarBackground(.visible, for: .navigationBar)
-        // ナビゲーションバーのタイトルの色を白にする
-        .toolbarColorScheme(.dark)
+        // ナビゲーションバーの背景を変更
+        .navigationBarBackground()
         // ナビゲーションバーの右側に編集ボタンを配置
         .toolbar {
             // ボタンの位置を指定
@@ -86,7 +76,7 @@ struct QuestionsView: View {
                 } // NavigationLink ここまで
             } // ToolbarItem ここまで
         } // toolbar ここまで
-    } // body ここまで// 垂直方向にレイアウト// 垂直方向にレイアウト
+    } // body ここまで
 } // QuestionsView ここまで
 
 #Preview {

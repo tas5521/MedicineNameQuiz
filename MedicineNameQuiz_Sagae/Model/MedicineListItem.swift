@@ -11,5 +11,5 @@ struct MedicineListItem: Identifiable {
     var id: UUID = UUID()
     let originalName: String
     let genericName: String
-    var checked: Bool
-} // MedicineListItem ここまで
+    var selected: Bool
+} // QuestionListItem ここまで

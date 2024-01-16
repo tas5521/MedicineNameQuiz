@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MedicineSelectableList: View {
-    // 「すべてチェックする」か「すべてのチェックを外す」かを管理する変数
-    @Binding var checkAll: Bool
+    // 表示する薬の名前を受け取る配列
     @Binding var medicineArray: [MedicineListItem]
     
     var body: some View {
@@ -17,41 +16,26 @@ struct MedicineSelectableList: View {
         VStack(alignment: .leading) {
             // 水平方向にレイアウト
             HStack {
-                // 総問題数を表示
-                Text("総問題数: \(medicineArray.count)")
+                // 問題数を表示
+                Text("問題数: \(medicineArray.count)")
+                // 太字にする
+                    .bold()
                 // スペースを空ける
                 Spacer()
-                // 「すべてチェックする」もしくは「すべてのチェックを外す」ボタン
-                Button {
-                    // もしボタンが「すべてチェックする」の状態だったら
-                    if checkAll {
-                        // すべてチェック状態にする
-                        for index in medicineArray.indices {
-                            medicineArray[index].checked = true
-                        } // for ここまで
-                        // もしボタンが「すべてのチェックを外す」の状態だったら
-                    } else {
-                        // すべてのチェックを外す
-                        for index in medicineArray.indices {
-                            medicineArray[index].checked = false
-                        } // for ここまで
-                    } // if ここまで
-                    // ボタンの状態を切り替える
-                    checkAll.toggle()
-                } label: {
-                    // ラベル
-                    Text(checkAll ? "すべてチェックする" : "すべてのチェックを外す")
-                    // 青色にする
-                        .foregroundStyle(Color.blue)
-                } // Buttonここまで
+                // 「全て選択する」ボタン
+                selectAllButton(selectAll: true)
+                // スペースを空ける
+                Spacer()
+                // 「全て選択しない」ボタン
+                selectAllButton(selectAll: false)
             } // HStack ここまで
-            // 左に余白を追加
+            // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
             // 出題される薬の名前のリスト
             List {
                 ForEach(medicineArray.indices, id: \.self) { index in
-                    // 水平方向にレイアウト
-                    HStack {
+                    // Toggleを配置
+                    Toggle(isOn: $medicineArray[index].selected) {
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
@@ -63,33 +47,36 @@ struct MedicineSelectableList: View {
                             // 文字の色を赤に変更
                                 .foregroundStyle(Color.red)
                         } // VStack ここまで
-                        // スペースを空ける
-                        Spacer()
-                        // チェックボタン
-                        Button {
-                            // チェック状態を変更
-                            medicineArray[index].checked.toggle()
-                        } label: {
-                            // ラベル
-                            Image(systemName: "checkmark.square.fill")
-                            // チェック状態では青、チェックされていない状態ではグレーにする
-                                .foregroundStyle(medicineArray[index].checked ? .blue : .gray)
-                            // 大きさを1.8倍にする
-                                .scaleEffect(1.8)
-                        } // Button ここまで
-                    } // HStack ここまで
+                    } // Toggle ここまで
                 } // ForEach ここまで
             } // List ここまで
+            // 太字にする
+            .bold()
             // リストのスタイルを.groupedに変更
             .listStyle(.grouped)
             // リストの背景のグレーの部分を非表示にする
             .scrollContentBackground(.hidden)
         } // VStack ここまで
     } // body ここまで
+
+    // 全て選択する、もしくは、全て選択しないボタン
+    private func selectAllButton(selectAll: Bool) -> some View {
+        Button {
+            // 全て選択する、もしくは、全て選択しない
+            for index in medicineArray.indices {
+                medicineArray[index].selected = selectAll
+            } // for ここまで
+        } label: {
+            // ラベル
+            Text(selectAll ? "全て選択する" : "全て選択しない")
+            // 青色にする
+                .foregroundStyle(Color.blue)
+        } // Buttonここまで
+    } // selectAllButton ここまで
 } // MedicineSelectableList ここまで
 
 #Preview {
-    MedicineSelectableList(checkAll: .constant(true), medicineArray:
-            .constant([MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", checked: false),
-                       MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", checked: false)]))
+    MedicineSelectableList(medicineArray:
+            .constant([MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
+                       MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
 }
