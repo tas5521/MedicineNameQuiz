@@ -99,18 +99,18 @@ struct MedicineListView: View {
         } // NavigationStack ここまで
     } // body ここまで
 
+    // 薬のリスト
     private func medicineList(of medicineArray: [Question]) -> some View {
-        // 出題される薬の名前のリスト
         List {
-            ForEach(medicineArray.indices, id: \.self) { index in
+            ForEach(medicineArray) { medicine in
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 先発品名を表示
-                    Text(medicineArray[index].originalName)
+                    Text(medicine.originalName)
                     // 文字の色を青に変更
                         .foregroundStyle(Color.blue)
                     // 一般名を表示
-                    Text(medicineArray[index].genericName)
+                    Text(medicine.genericName)
                     // 文字の色を赤に変更
                         .foregroundStyle(Color.red)
                 } // VStack ここまで
