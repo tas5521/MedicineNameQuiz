@@ -12,49 +12,43 @@ struct CreateQuestionListView: View {
     @Environment(\.dismiss) private var dismiss
     // 問題リストの名前を保持する変数
     @State private var questionListName: String = ""
-    // タブの選択項目を保持する変数
-    @State private var tabIndex: Int = 0
+    // 選択されているタブを管理する変数
+    @State private var medicineClassification: MedicineClassification = .internalMedicine
     // 薬の検索に使う変数
     @State private var searchMedicineNameText: String = ""
-    
+
     // ダミーの内用薬の配列
     @State private var dummyInternalMedicineList: [MedicineListItem] = [
         MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
         MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false),
         MedicineListItem(originalName: "内用薬先発品名3", genericName: "内用薬一般名3", selected: false)
     ] // dummyInternalMedicineList ここまで
-    
+
     // ダミーの注射薬の配列
     @State private var dummyInjectionMedicineList: [MedicineListItem] = [
         MedicineListItem(originalName: "注射薬先発品名1", genericName: "注射薬一般名1", selected: false),
         MedicineListItem(originalName: "注射薬先発品名2", genericName: "注射薬一般名2", selected: false),
         MedicineListItem(originalName: "注射薬先発品名3", genericName: "注射薬一般名3", selected: false)
     ] // dummyInjectionMedicineList ここまで
-    
+
     // ダミーの外用薬の配列
     @State private var dummyExternalMedicineList: [MedicineListItem] = [
         MedicineListItem(originalName: "外用薬先発品名1", genericName: "外用薬一般名1", selected: false),
         MedicineListItem(originalName: "外用薬先発品名2", genericName: "外用薬一般名2", selected: false),
         MedicineListItem(originalName: "外用薬先発品名3", genericName: "外用薬一般名3", selected: false)
     ] // dummyExternalMedicineList ここまで
-    
+
     // ダミーのカスタム薬の配列
     @State private var dummyCustomMedicineList: [MedicineListItem] = [
         MedicineListItem(originalName: "カスタム先発品名1", genericName: "カスタム一般名1", selected: false),
         MedicineListItem(originalName: "カスタム先発品名2", genericName: "カスタム一般名2", selected: false),
         MedicineListItem(originalName: "カスタム先発品名3", genericName: "カスタム一般名3", selected: false)
     ] // dummyCustomMedicineList ここまで
-        
+
     // View Presentation State
     // リストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
-    
-    // 現在タブで選択されている区分を取得
-    private var classification: MedicineClassification {
-        MedicineClassification.allCases[tabIndex]
-    } // classificationここまで
 
-    
     var body: some View {
         ZStack {
             // 背景を水色に変更
@@ -64,9 +58,7 @@ struct CreateQuestionListView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 薬の区分を選択するタブを上に配置
-                TopTabView(
-                    tabIndex: $tabIndex, 
-                    tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                TopTabView(selectTab: $medicineClassification)
                 // 太字にする
                 .bold()
                 // 薬の検索バー
@@ -74,7 +66,7 @@ struct CreateQuestionListView: View {
                 // 上に余白を追加
                     .padding(.top)
                 // 薬リスト
-                switch classification {
+                switch medicineClassification {
                 case .internalMedicine:
                     MedicineSelectableList(medicineArray: $dummyInternalMedicineList)
                 case .injectionMedicine:

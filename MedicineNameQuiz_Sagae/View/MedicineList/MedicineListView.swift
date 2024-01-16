@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct MedicineListView: View {
-    // タブの選択項目を保持する変数
-    @State private var tabIndex: Int = 0
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
-    // 現在タブで選択されている区分を取得
-    private var classification: MedicineClassification {
-        MedicineClassification.allCases[tabIndex]
-    } // classificationここまで
-    
+    // 選択されているタブを管理する変数
+    @State private var medicineClassification: MedicineClassification = .internalMedicine
+
     var body: some View {
         NavigationStack {
             // 手前から奥にレイアウト
@@ -28,8 +24,7 @@ struct MedicineListView: View {
                 // 垂直方向にレイアウト
                 VStack {
                     // 薬の区分を選択するタブを上に配置
-                    TopTabView(
-                        tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
+                    TopTabView(selectTab: $medicineClassification)
                     // 薬の検索バー
                     Text("検索バー")
                     // スペースを空ける
@@ -48,7 +43,7 @@ struct MedicineListView: View {
                         // スペースを空ける
                         Spacer()
                         // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                        if classification == .customMedicine {
+                        if medicineClassification == .customMedicine {
                             addMedicineButton
                                 .padding()
                         } // if ここまで
@@ -62,7 +57,7 @@ struct MedicineListView: View {
             .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
-    
+
     // カスタムで薬名を追加するボタン
     private var addMedicineButton: some View {
         Button {
@@ -87,7 +82,7 @@ struct MedicineListView: View {
         // 薬名追加ビューのシート
         .sheet(isPresented: $isShowAddMedicineView) {
             AddMedicineView()
-        }  // sheet ここまで
+        } // sheet ここまで
     } // addMedicineButton ここまで
 } // MedicineListView ここまで
 
