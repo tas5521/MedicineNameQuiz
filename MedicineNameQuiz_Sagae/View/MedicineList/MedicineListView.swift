@@ -11,7 +11,7 @@ struct MedicineListView: View {
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
     // 薬の検索に使う変数
-    @State private var medicineNameText: String = ""
+    @State private var searchMedicineNameText: String = ""
     // 選択されているタブを管理する変数
     @State private var medicineClassification: MedicineClassification = .internalMedicine
 
@@ -56,12 +56,9 @@ struct MedicineListView: View {
                     // 薬の区分を選択するタブを上に配置
                     TopTabView(selectTab: $medicineClassification)
                     // 薬の検索バー
-                    Text("検索バー")
-                    // スペースを空ける
-                    Spacer()
-                    // 薬リスト
-                    Text("薬リスト")
-                    // スペースを空ける
+                    SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
+                    // 上下に余白を追加
+                        .padding(.vertical)
                     Spacer()
                 } // VStack ここまで
                 // 垂直方向にレイアウト
