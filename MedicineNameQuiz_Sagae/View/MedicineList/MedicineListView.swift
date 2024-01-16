@@ -55,6 +55,8 @@ struct MedicineListView: View {
                 VStack {
                     // 薬の区分を選択するタブを上に配置
                     TopTabView(selectTab: $medicineClassification)
+                    // 太字にする
+                        .bold()
                     // 薬の検索バー
                     SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
                     // 上下に余白を追加
@@ -116,6 +118,8 @@ struct MedicineListView: View {
                 } // VStack ここまで
             } // ForEach ここまで
         } // List ここまで
+        // 太字にする
+        .bold()
         // リストのスタイルを.groupedに変更
         .listStyle(.grouped)
         // リストの背景のグレーの部分を非表示にする
