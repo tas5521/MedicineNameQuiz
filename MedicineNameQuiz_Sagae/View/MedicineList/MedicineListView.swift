@@ -59,7 +59,21 @@ struct MedicineListView: View {
                     SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
                     // 上下に余白を追加
                         .padding(.vertical)
-                    Spacer()
+                    // 薬リスト
+                    switch medicineClassification {
+                        // 内用薬を表示
+                    case .internalMedicine:
+                        medicineList(of: dummyInternalMedicineArray)
+                        // 注射薬を表示
+                    case .injectionMedicine:
+                        medicineList(of: dummyInjectionMedicineArray)
+                        // 外用薬を表示
+                    case .externalMedicine:
+                        medicineList(of: dummyExternalMedicineArray)
+                        // カスタムを表示
+                    case .customMedicine:
+                        medicineList(of: dummyCustomMedicineArray)
+                    } // switch ここまで
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
