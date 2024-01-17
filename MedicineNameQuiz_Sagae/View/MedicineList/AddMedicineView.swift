@@ -14,8 +14,7 @@ struct AddMedicineView: View {
     @State private var originalNameText: String = ""
     // 入力された一般名を管理する変数
     @State private var genericNameText: String = ""
-    
-    
+
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
@@ -65,6 +64,7 @@ struct AddMedicineView: View {
                     // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
+                // 先発品名か一般名の少なくとも一方が入力されていなかったら、ボタンを押せなくする
                 .disabled(originalNameText == "" || genericNameText == "")
                 // 太字にする
                 .bold()
