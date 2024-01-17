@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MedicineListView: View {
-    // タブの選択項目を保持する変数
-    @State private var tabIndex: Int = 0
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
     // 薬の検索に使う変数
-    @State private var medicineNameText: String = ""
-    
+    @State private var searchMedicineNameText: String = ""
+    // 選択されているタブを管理する変数
+    @State private var medicineClassification: MedicineClassification = .internalMedicine
+
     // ダミーの内用薬の配列
     private let dummyInternalMedicineArray: [Question] = [
         Question(originalName: "内用薬先発品名1", genericName: "内用薬一般名1"),
@@ -42,91 +42,90 @@ struct MedicineListView: View {
         Question(originalName: "カスタム先発品名2", genericName: "カスタム一般名2"),
         Question(originalName: "カスタム先発品名3", genericName: "カスタム一般名3")
     ] // dummyCustomMedicineList ここまで
-    
-    // 現在タブで選択されている区分を取得
-    private var classification: MedicineClassification {
-        MedicineClassification.allCases[tabIndex]
-    } // classificationここまで
-    
+
     var body: some View {
-        // 奥から手前方向にレイアウト
-        ZStack {
-            // 背景を水色にする
-            Color.backgroundSkyBlue
-            // 垂直方向にレイアウト
-            VStack {
-                // 薬の区分を選択するタブを上に配置
-                TopTabView(
-                    tabIndex: $tabIndex, tabNameList: MedicineClassification.allCases.map({classification in classification.rawValue}))
-                // 薬の検索バー
-                // 水平方向にレイアウト
-                HStack {
-                    // 虫眼鏡のImage
-                    Image(systemName: "magnifyingglass")
+        NavigationStack {
+            // 手前から奥にレイアウト
+            ZStack {
+                // 背景を水色にする
+                Color.backgroundSkyBlue
+                // セーフエリア外にも背景を表示
+                    .ignoresSafeArea()
+                // 垂直方向にレイアウト
+                VStack {
+                    // 薬の区分を選択するタブを上に配置
+                    TopTabView(selectTab: $medicineClassification)
+                    // 太字にする
+                        .bold()
                     // 薬の検索バー
-                    TextField("薬を検索できます", text: $medicineNameText)
-                        .textFieldStyle(.roundedBorder)
-                } // HStack ここまで
-                // 上下左右に余白を追加
-                .padding()
-                
-                // スペースを空ける
-                Spacer()
-                // 薬リスト
-                switch classification {
-                case .internalMedicine:
-                    medicineList(of: dummyInternalMedicineArray)
-                case .injectionMedicine:
-                    medicineList(of: dummyInjectionMedicineArray)
-                case .externalMedicine:
-                    medicineList(of: dummyExternalMedicineArray)
-                case .customMedicine:
-                    medicineList(of: dummyCustomMedicineArray)
-                } // switch ここまで
-            } // VStack ここまで
-            .bold()
-            // 垂直方向にレイアウト
-            VStack {
-                // スペースを空ける
-                Spacer()
-                // 水平方向にレイアウト
-                HStack {
+                    SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
+                    // 上下に余白を追加
+                        .padding(.vertical)
+                    // 薬リスト
+                    switch medicineClassification {
+                        // 内用薬を表示
+                    case .internalMedicine:
+                        medicineList(of: dummyInternalMedicineArray)
+                        // 注射薬を表示
+                    case .injectionMedicine:
+                        medicineList(of: dummyInjectionMedicineArray)
+                        // 外用薬を表示
+                    case .externalMedicine:
+                        medicineList(of: dummyExternalMedicineArray)
+                        // カスタムを表示
+                    case .customMedicine:
+                        medicineList(of: dummyCustomMedicineArray)
+                    } // switch ここまで
+                } // VStack ここまで
+                // 垂直方向にレイアウト
+                VStack {
                     // スペースを空ける
                     Spacer()
-                    // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                    if classification == .customMedicine {
-                        addMedicineButton
-                            .padding()
-                    } // if ここまで
-                } // HStack ここまで
-            } // VStack ここまで
-        } // ZStack ここまで
+                    // 水平方向にレイアウト
+                    HStack {
+                        // スペースを空ける
+                        Spacer()
+                        // カスタムのタブが選択されている場合、薬名追加ボタンを表示
+                        if medicineClassification == .customMedicine {
+                            addMedicineButton
+                                .padding()
+                        } // if ここまで
+                    } // HStack ここまで
+                } // VStack ここまで
+            } // ZStack ここまで
+            // ナビゲーションバーの設定
+            // ナビゲーションバーのタイトルを設定
+            .navigationBarTitle("薬リスト", displayMode: .inline)
+            // ナビゲーションバーの背景を変更
+            .navigationBarBackground()
+        } // NavigationStack ここまで
     } // body ここまで
-    
-    
+
+    // 薬のリスト
     private func medicineList(of medicineArray: [Question]) -> some View {
-        // 出題される薬の名前のリスト
         List {
-            ForEach(medicineArray.indices, id: \.self) { index in
+            ForEach(medicineArray) { medicine in
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 先発品名を表示
-                    Text(medicineArray[index].originalName)
+                    Text(medicine.originalName)
                     // 文字の色を青に変更
                         .foregroundStyle(Color.blue)
                     // 一般名を表示
-                    Text(medicineArray[index].genericName)
+                    Text(medicine.genericName)
                     // 文字の色を赤に変更
                         .foregroundStyle(Color.red)
                 } // VStack ここまで
             } // ForEach ここまで
         } // List ここまで
+        // 太字にする
+        .bold()
         // リストのスタイルを.groupedに変更
         .listStyle(.grouped)
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // medicineList ここまで
-    
+
     // カスタムで薬名を追加するボタン
     private var addMedicineButton: some View {
         Button {
@@ -151,7 +150,7 @@ struct MedicineListView: View {
         // 薬名追加ビューのシート
         .sheet(isPresented: $isShowAddMedicineView) {
             AddMedicineView()
-        }  // sheet ここまで
+        } // sheet ここまで
     } // addMedicineButton ここまで
 } // MedicineListView ここまで
 
