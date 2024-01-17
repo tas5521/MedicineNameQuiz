@@ -29,7 +29,11 @@ struct AddMedicineView: View {
                 Spacer()
                 // 追加する薬の名前を入力するようユーザーに促すためのテキスト
                 Text("追加する薬の名前を入力してください")
+                // フォントを.title3に変更
                     .font(.title3)
+                // 太字にする
+                    .bold()
+                // 上下左右に余白を追加
                     .padding()
                 // 先発品名を入力するためのテキストフィールド
                 TextField("先発品名", text: $brandNameText)
@@ -60,6 +64,8 @@ struct AddMedicineView: View {
                         .clipShape(.buttonBorder)
                 } // Button ここまで
                 .disabled(brandNameText == "" || genericNameText == "")
+                // 太字にする
+                .bold()
                 .padding()
                 // やめるボタン
                 Button {
@@ -75,12 +81,12 @@ struct AddMedicineView: View {
                     // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
+                // 太字にする
+                .bold()
                 .padding()
                 // スペースを空ける
                 Spacer()
             } // VStack ここまで
-            // 太字にする
-            .bold()
         } // ZStack ここまで
     } // body ここまで
 } // AddMedicineView ここまで
