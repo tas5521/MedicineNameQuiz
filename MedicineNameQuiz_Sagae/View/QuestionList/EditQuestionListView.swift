@@ -72,18 +72,8 @@ struct EditQuestionListView: View {
                             .padding(.leading)
                         // リスト名編集用テキストフィールド
                         TextField("リストの名前を入力してください", text: $listName)
-                        // 文字の左に余白を追加
-                            .padding(.leading, 6)
-                        // 背景色を指定
-                            .background(
-                                // 背景を角の丸い四角にする
-                                RoundedRectangle(cornerRadius: 8)
-                                // 背景色を変更
-                                    .fill(Color(red: 237/255, green: 237/255, blue: 237/255))
-                                // 高さを36に指定
-                                    .frame(height: 36))
-                        // 上下左右に余白をつける
-                            .padding(.horizontal)
+                        // テキストフィールドの背景を指定
+                            .textFieldBackground()
                     } // VStack ここまで
                 } // ZStack ここまで
                 // 薬の区分を選択するタブを配置

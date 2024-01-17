@@ -37,14 +37,16 @@ struct AddMedicineView: View {
                     .padding()
                 // 先発品名を入力するためのテキストフィールド
                 TextField("先発品名", text: $brandNameText)
-                    .textFieldStyle(.roundedBorder)
+                // テキストフィールドの背景を指定
+                    .textFieldBackground()
+                // 上下左右に余白を追加
                     .padding()
-                    .padding([.leading, .trailing])
                 // 一般名を入力するためのテキストフィールド
                 TextField("一般名", text: $genericNameText)
-                    .textFieldStyle(.roundedBorder)
+                // テキストフィールドの背景を指定
+                    .textFieldBackground()
+                // 上下左右に余白を追加
                     .padding()
-                    .padding([.leading, .trailing])
                 // スペースを空ける
                 Spacer()
                 // 追加ボタン
@@ -66,7 +68,8 @@ struct AddMedicineView: View {
                 .disabled(brandNameText == "" || genericNameText == "")
                 // 太字にする
                 .bold()
-                .padding()
+                // 下に余白を追加
+                .padding(.bottom)
                 // やめるボタン
                 Button {
                     // シートを閉じる
@@ -83,7 +86,6 @@ struct AddMedicineView: View {
                 } // Button ここまで
                 // 太字にする
                 .bold()
-                .padding()
                 // スペースを空ける
                 Spacer()
             } // VStack ここまで
