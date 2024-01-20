@@ -31,12 +31,12 @@ struct AppSettingsListView: View {
                     .ignoresSafeArea()
                 // 項目をリスト表示
                 List {
-                    ForEach(AppSettingsListItem.allCases, id: \.self) { item in
+                    ForEach(AppSettingsListItem.allCases, id: \.self) { listItem in
                         // 各項目ごとのタイトルを取得
-                        let title = item.rawValue
+                        let title = listItem.rawValue
                         // 項目ごとに異なる画面に遷移
                         NavigationLink {
-                            switch item {
+                            switch listItem {
                             case .howToUse:
                                 // アプリの使い方画面
                                 HowToUseView(title: title)
