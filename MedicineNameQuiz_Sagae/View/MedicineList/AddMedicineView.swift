@@ -14,7 +14,7 @@ struct AddMedicineView: View {
     @State private var originalNameText: String = ""
     // 入力された一般名を管理する変数
     @State private var genericNameText: String = ""
-
+    
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
@@ -55,6 +55,8 @@ struct AddMedicineView: View {
                 } label: {
                     // ラベル
                     Text("追加")
+                    // 太字にする
+                        .bold()
                     // 幅300高さ50に指定
                         .frame(width: 300, height: 60)
                     // 両方のテキストフィールドに文字が入力されている場合、背景色をオレンジに指定。そうでない場合はグレー
@@ -66,8 +68,6 @@ struct AddMedicineView: View {
                 } // Button ここまで
                 // 先発品名か一般名の少なくとも一方が入力されていなかったら、ボタンを押せなくする
                 .disabled(originalNameText == "" || genericNameText == "")
-                // 太字にする
-                .bold()
                 // 下に余白を追加
                 .padding(.bottom)
                 // やめるボタン
@@ -77,6 +77,8 @@ struct AddMedicineView: View {
                 } label: {
                     // ラベル
                     Text("やめる")
+                    // 太字にする
+                        .bold()
                     // 幅300高さ50に指定
                         .frame(width: 300, height: 60)
                     // 背景色をオレンジに指定
@@ -84,8 +86,6 @@ struct AddMedicineView: View {
                     // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
-                // 太字にする
-                .bold()
                 // スペースを空ける
                 Spacer()
             } // VStack ここまで
