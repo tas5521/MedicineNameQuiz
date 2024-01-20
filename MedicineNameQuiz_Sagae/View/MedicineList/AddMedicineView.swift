@@ -27,7 +27,7 @@ struct AddMedicineView: View {
             // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
-            VStack {
+            VStack(spacing: 30) {
                 // スペースを空ける
                 Spacer()
                 // 追加する薬の名前を入力するようユーザーに促すためのテキスト
@@ -36,20 +36,14 @@ struct AddMedicineView: View {
                     .font(.title3)
                 // 太字にする
                     .bold()
-                // 上下左右に余白を追加
-                    .padding()
                 // 先発品名を入力するためのテキストフィールド
                 TextField("先発品名", text: $originalNameText)
                 // テキストフィールドの背景を指定
                     .textFieldBackground()
-                // 上下左右に余白を追加
-                    .padding()
                 // 一般名を入力するためのテキストフィールド
                 TextField("一般名", text: $genericNameText)
                 // テキストフィールドの背景を指定
                     .textFieldBackground()
-                // 上下左右に余白を追加
-                    .padding()
                 // スペースを空ける
                 Spacer()
                 // 追加ボタン
@@ -61,8 +55,10 @@ struct AddMedicineView: View {
                     Text("追加")
                     // 太字にする
                         .bold()
-                    // 幅300高さ50に指定
-                        .frame(width: 300, height: 60)
+                    // 最大幅.infinityに指定
+                        .frame(maxWidth: .infinity)
+                    // 高さ60に指定
+                        .frame(height: 60)
                     // 両方のテキストフィールドに文字が入力されている場合、背景色をオレンジに指定。そうでない場合はグレー
                         .background(canAddNew ? Color.buttonOrange : Color.disabledButtonGray)
                     // 文字色を白に指定
@@ -72,8 +68,6 @@ struct AddMedicineView: View {
                 } // Button ここまで
                 // 先発品名か一般名の少なくとも一方が入力されていなかったら、ボタンを押せなくする
                 .disabled(!canAddNew)
-                // 下に余白を追加
-                .padding(.bottom)
                 // やめるボタン
                 Button {
                     // シートを閉じる
@@ -83,8 +77,10 @@ struct AddMedicineView: View {
                     Text("やめる")
                     // 太字にする
                         .bold()
-                    // 幅300高さ50に指定
-                        .frame(width: 300, height: 60)
+                    // 最大幅.infinityに指定
+                        .frame(maxWidth: .infinity)
+                    // 高さ60に指定
+                        .frame(height: 60)
                     // 背景色をオレンジに指定
                         .background(Color.buttonOrange)
                     // 角を丸くする
@@ -93,6 +89,8 @@ struct AddMedicineView: View {
                 // スペースを空ける
                 Spacer()
             } // VStack ここまで
+            // 上下左右に余白を追加
+            .padding()
         } // ZStack ここまで
     } // body ここまで
 } // AddMedicineView ここまで

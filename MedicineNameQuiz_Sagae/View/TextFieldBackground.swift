@@ -20,8 +20,6 @@ struct TextFieldBackground: ViewModifier {
                     .fill(Color(red: 237/255, green: 237/255, blue: 237/255))
                 // 高さを36に指定
                     .frame(height: 36))
-        // 左右に余白をつける
-            .padding(.horizontal)
     } // body ここまで
 } // TextFieldBackground ここまで
 

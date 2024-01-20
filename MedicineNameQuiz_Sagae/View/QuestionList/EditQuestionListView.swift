@@ -74,6 +74,7 @@ struct EditQuestionListView: View {
                         TextField("リストの名前を入力してください", text: $listName)
                         // テキストフィールドの背景を指定
                             .textFieldBackground()
+                            .padding(.horizontal)
                     } // VStack ここまで
                 } // ZStack ここまで
                 // 薬の区分を選択するタブを配置
