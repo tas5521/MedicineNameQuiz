@@ -23,7 +23,7 @@ struct TextFieldBarBackground: ViewModifier {
         // 左右に余白をつける
             .padding(.horizontal)
     } // body ここまで
-} // NavigationBarBackground ここまで
+} // TextFieldBarBackground ここまで
 
 extension View {
     func textFieldBackground() -> some View {
