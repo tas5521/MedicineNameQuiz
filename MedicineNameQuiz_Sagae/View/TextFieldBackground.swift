@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextFieldBarBackground: ViewModifier {
+struct TextFieldBackground: ViewModifier {
     func body(content: Content) -> some View {
         content
         // 文字の左に余白を追加
@@ -23,10 +23,10 @@ struct TextFieldBarBackground: ViewModifier {
         // 左右に余白をつける
             .padding(.horizontal)
     } // body ここまで
-} // TextFieldBarBackground ここまで
+} // TextFieldBackground ここまで
 
 extension View {
     func textFieldBackground() -> some View {
-        modifier(TextFieldBarBackground())
+        modifier(TextFieldBackground())
     } // textFieldBackground ここまで
 } // View拡張ここまで
