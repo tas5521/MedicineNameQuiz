@@ -14,7 +14,11 @@ struct AddMedicineView: View {
     @State private var originalNameText: String = ""
     // 入力された一般名を管理する変数
     @State private var genericNameText: String = ""
-    
+    // 新しい薬名を追加できるかどうかを管理する変数
+    private var canAddNew: Bool {
+        !(originalNameText == "" || genericNameText == "")
+    } // canAddNew ここまで
+
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
@@ -60,14 +64,14 @@ struct AddMedicineView: View {
                     // 幅300高さ50に指定
                         .frame(width: 300, height: 60)
                     // 両方のテキストフィールドに文字が入力されている場合、背景色をオレンジに指定。そうでない場合はグレー
-                        .background(originalNameText == "" || genericNameText == "" ? Color.disabledButtonGray : Color.buttonOrange)
+                        .background(canAddNew ? Color.buttonOrange : Color.disabledButtonGray)
                     // 文字色を白に指定
                         .foregroundStyle(Color.white)
                     // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
                 // 先発品名か一般名の少なくとも一方が入力されていなかったら、ボタンを押せなくする
-                .disabled(originalNameText == "" || genericNameText == "")
+                .disabled(!canAddNew)
                 // 下に余白を追加
                 .padding(.bottom)
                 // やめるボタン
