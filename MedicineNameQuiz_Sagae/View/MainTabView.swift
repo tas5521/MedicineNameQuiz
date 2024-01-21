@@ -33,92 +33,82 @@ struct MainTabView: View {
      */
 
     var body: some View {
-        NavigationStack {
-            TabView(selection: $tabSelection) {
-                // タブの項目をグループにまとめる
-                Group {
-                    // 学習画面のViewを配置
-                    ModeSelectionView()
+        // タブを配置
+        TabView(selection: $tabSelection) {
+            // タブの項目をグループにまとめる
+            Group {
+                // 学習画面のViewを配置
+                ModeSelectionView()
+                .tabItem {
+                    Label(TabSelection.study.rawValue, systemImage: "book.fill")
+                } // tabItem ここまで
+                .tag(TabSelection.study)
+                
+                // 問題リスト画面のViewを配置
+                QuestionListView()
                     .tabItem {
-                        Label(TabSelection.study.rawValue, systemImage: "book.fill")
+                        Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
                     } // tabItem ここまで
-                    .tag(TabSelection.study)
-                    
-                    // 問題リスト画面のViewを配置
-                    QuestionListView()
-                        .tabItem {
-                            Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
-                        } // tabItem ここまで
-                        .tag(TabSelection.questionList)
+                    .tag(TabSelection.questionList)
 
-                    // ランキング画面のタブを隠す
+                // ランキング画面のタブを隠す
+                /*
+                // ランキング画面のViewを配置
+                RankingView(userName: $userName,
+                            isSignIn: $isSignIn,
+                            isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+                    .tabItem {
+                        Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
+                    } // tabItem ここまで
+                    .tag(TabSelection.ranking)
+                */
+
+                // 薬リスト画面のViewを配置
+                MedicineListView()
+                    .tabItem {
+                        Label(TabSelection.medicineList.rawValue, systemImage: "list.bullet.rectangle.portrait.fill")
+                    } // tabItem ここまで
+                    .tag(TabSelection.medicineList)
+                
+                // 設定画面のViewを配置
+                AppSettingsListView(
+                    // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
                     /*
-                    // ランキング画面のViewを配置
-                    RankingView(userName: $userName,
-                                isSignIn: $isSignIn,
-                                isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
-                        .tabItem {
-                            Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
-                        } // tabItem ここまで
-                        .tag(TabSelection.ranking)
-                    */
-
-                    // 薬リスト画面のViewを配置
-                    MedicineListView()
-                        .tabItem {
-                            Label(TabSelection.medicineList.rawValue, systemImage: "list.bullet.rectangle.portrait.fill")
-                        } // tabItem ここまで
-                        .tag(TabSelection.medicineList)
-                    
-                    // 設定画面のViewを配置
-                    AppSettingsListView(
-                        // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
-                        /*
-                         userName: $userName,
-                         isSignIn: $isSignIn,
-                         isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting
-                         */
-                    )
-                    .tabItem {
-                        Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
-                    } // tabItem ここまで
-                    .tag(TabSelection.settings)
-                } // Group ここまで
-                // タブの設定
-                // タブの背景を青色に変更
-                .toolbarBackground(.tabBlue, for: .tabBar)
-                // タブの背景を表示
-                .toolbarBackground(.visible, for: .tabBar)
-                // タブ外観をダークに設定
-                .toolbarColorScheme(.dark, for: .tabBar)
-            }  // TabView ここまで
-            // ナビゲーションバーの設定
-            // ナビゲーションバーのタイトルを設定
-            .navigationBarTitle(tabSelection.rawValue, displayMode: .inline)
-            // ナビゲーションバーの背景を青色に変更
-            .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-            // ナビゲーションバーの背景を表示
-            .toolbarBackground(.visible, for: .navigationBar)
-            // ナビゲーションバーのタイトルの色を白にする
-            .toolbarColorScheme(.dark)
-            // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
-            /*
-            // ツールバー設定
-            .toolbar {
-                // ランキングのタブでは、右に友達追加ボタンを配置する
-                if tabSelection == .ranking {
-                    // 友達追加ボタンを右に配置
-                    ToolbarItem(placement: .topBarTrailing) {
-                        addFriendButton
-                    } // ToolbarItem ここまで
-                } // if ここまで
-            } // toolbar ここまで
-            // 友達追加画面へ遷移
-            .navigationDestination(isPresented: $isShowAddFriendView) {
-                AddFriendView(userName: $userName)
-            } // navigationDestination ここまで
-             */
-        } // NavigationStack ここまで
+                     userName: $userName,
+                     isSignIn: $isSignIn,
+                     isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting
+                     */
+                )
+                .tabItem {
+                    Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
+                } // tabItem ここまで
+                .tag(TabSelection.settings)
+            } // Group ここまで
+            // タブの設定
+            // タブの背景を青色に変更
+            .toolbarBackground(.tabBlue, for: .tabBar)
+            // タブの背景を表示
+            .toolbarBackground(.visible, for: .tabBar)
+            // タブ外観をダークに設定
+            .toolbarColorScheme(.dark, for: .tabBar)
+        }  // TabView ここまで
+        // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
+        /*
+        // ツールバー設定
+        .toolbar {
+            // ランキングのタブでは、右に友達追加ボタンを配置する
+            if tabSelection == .ranking {
+                // 友達追加ボタンを右に配置
+                ToolbarItem(placement: .topBarTrailing) {
+                    addFriendButton
+                } // ToolbarItem ここまで
+            } // if ここまで
+        } // toolbar ここまで
+        // 友達追加画面へ遷移
+        .navigationDestination(isPresented: $isShowAddFriendView) {
+            AddFriendView(userName: $userName)
+        } // navigationDestination ここまで
+         */
     } // body ここまで
     
     // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
