@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct QuestionListView: View {
+    // リスト名検索テキスト
+    @State private var listNameText: String = ""
+    
     // ダミーのリスト
     private var dummyList: [QuestionListItem] = [
         QuestionListItem(listName: "さがえ薬局リスト",
                          date: Date(),
                          questions: [Question(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
-                                    Question(originalName: "エバステル", genericName: "エバスチン"),
-                                    Question(originalName: "オノン", genericName: "プランルカスト水和物")]
+                                     Question(originalName: "エバステル", genericName: "エバスチン"),
+                                     Question(originalName: "オノン", genericName: "プランルカスト水和物")]
                         ),
         QuestionListItem(listName: "ながつ薬局リスト",
                          date: Date(),
@@ -31,31 +34,44 @@ struct QuestionListView: View {
     ] // dummyList ここまで
     
     var body: some View {
-        // 奥から手前方向にレイアウト
-        ZStack {
-            // 垂直方向にレイアウト
-            VStack {
-                // 問題リストの検索バー
-                Text("問題リスト検索バー")
-                // 問題リスト
-                questionList
-            } // VStack ここまで
-            // 垂直方向にレイアウト
-            VStack {
-                // スペースを空ける
-                Spacer()
-                // 水平方向にレイアウト
-                HStack {
+        NavigationStack {
+            // 手前から奥にレイアウト
+            ZStack {
+                // 背景を水色にする
+                Color.backgroundSkyBlue
+                // セーフエリア外にも背景を表示
+                    .ignoresSafeArea()
+                // 垂直方向にレイアウト
+                VStack {
+                    // 問題リストの検索バー
+                    SearchBar(searchText: $listNameText, placeholderText: "リストを検索できます")
+                    // 上下に余白を指定
+                        .padding(.vertical)
+                    // 問題リスト
+                    questionList
+                } // VStack ここまで
+                // 垂直方向にレイアウト
+                VStack {
                     // スペースを空ける
                     Spacer()
-                    // リスト追加ボタン
-                    addListButton
-                        .padding()
-                } // HStack ここまで
-            } // VStack ここまで
-        } // ZStack ここまで
+                    // 水平方向にレイアウト
+                    HStack {
+                        // スペースを空ける
+                        Spacer()
+                        // リスト追加ボタン
+                        addListButton
+                            .padding()
+                    } // HStack ここまで
+                } // VStack ここまで
+            } // ZStack ここまで
+            // ナビゲーションバーの設定
+            // ナビゲーションバーのタイトルを設定
+            .navigationBarTitle("問題リスト", displayMode: .inline)
+            // ナビゲーションバーの背景を変更
+            .navigationBarBackground()
+        } // NavigationStack ここまで
     } // body ここまで
-
+    
     // 問題リスト
     private var questionList: some View {
         List {
@@ -85,8 +101,10 @@ struct QuestionListView: View {
         } // List ここまで
         // リストのスタイルを.groupedに変更
         .listStyle(.grouped)
+        // リストの背景のグレーの部分を非表示にする
+        .scrollContentBackground(.hidden)
     } // questionList ここまで
-
+    
     // リスト追加ボタン
     private var addListButton: some View {
         NavigationLink {
