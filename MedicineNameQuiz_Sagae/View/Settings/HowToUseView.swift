@@ -23,14 +23,14 @@ struct HowToUseView: View {
                 .ignoresSafeArea()
             // リスト表示
             List {
-                ForEach(HowToUse.allCases, id: \.self) { item in
+                ForEach(HowToUse.allCases, id: \.self) { listItem in
                     // 各項目ごとのタイトル（サブ）を取得
-                    let subtitle = item.rawValue
+                    let subtitle = listItem.rawValue
                     // 遷移先のビューに渡すタイトルを作成
                     let titleWithSubtitle = "\(title)-\(subtitle)-"
                     // 画面遷移
                     NavigationLink {
-                        switch item {
+                        switch listItem {
                         case .study:
                             HowToUseStudyView(title: titleWithSubtitle)
                         case .questionList:
@@ -56,13 +56,8 @@ struct HowToUseView: View {
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
-        // ナビゲーションバーの背景を青色に変更
-        .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-        // ナビゲーションバーの背景を表示
-        .toolbarBackground(.visible, for: .navigationBar)
-        // ナビゲーションバーのタイトルの色を白にする
-        .toolbarColorScheme(.dark)
-        
+        // ナビゲーションバーの背景を変更
+        .navigationBarBackground()
     } // body ここまで
 } // HowToUseView ここまで
 
