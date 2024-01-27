@@ -22,12 +22,26 @@ struct MedicineSelectableList: View {
                     .bold()
                 // スペースを空ける
                 Spacer()
-                // 「全て選択する」ボタン
-                selectAllButton(selectAll: true)
-                // スペースを空ける
-                Spacer()
-                // 「全て選択しない」ボタン
-                selectAllButton(selectAll: false)
+                // 全て選択されているかどうかを判定
+                var isAllSelected: Bool {
+                    // 初期値はtrue
+                    var isSelected: Bool = true
+                    // 全てのselectedの値との論理積をとる
+                    for medicineArrayItem in medicineArray {
+                        isSelected = isSelected && medicineArrayItem.selected
+                    } // for ここまで
+                    // isSelectedを返す
+                    return isSelected
+                } // isAllSelected ここまで
+                // 選択されている項目が1つでもある場合
+                if isAllSelected {
+                    // 「全て選択しない」ボタンを表示
+                    selectAllButton(selectAll: false)
+                    // 選択されていない項目が一つでもある場合
+                } else {
+                    // 「全て選択する」ボタン
+                    selectAllButton(selectAll: true)
+                } // if ここまで
             } // HStack ここまで
             // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
