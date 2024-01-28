@@ -34,7 +34,7 @@ struct MedicineListView: View {
                     // 上下に余白を追加
                         .padding(.vertical)
                     // 薬リスト
-                        medicineList(of: medicineClassification.medicineData)
+                        medicineList(of: medicineClassification.medicineNameData)
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -61,7 +61,7 @@ struct MedicineListView: View {
     } // body ここまで
 
     // 薬のリスト
-    private func medicineList(of medicineArray: [Question]) -> some View {
+    private func medicineList(of medicineArray: [MedicineNameItem]) -> some View {
         List {
             ForEach(medicineArray) { medicine in
                 // 垂直方向にレイアウト

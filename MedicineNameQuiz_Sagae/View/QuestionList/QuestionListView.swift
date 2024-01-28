@@ -15,21 +15,21 @@ struct QuestionListView: View {
     private var dummyList: [QuestionListItem] = [
         QuestionListItem(listName: "さがえ薬局リスト",
                          date: Date(),
-                         questions: [Question(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
-                                     Question(originalName: "エバステル", genericName: "エバスチン"),
-                                     Question(originalName: "オノン", genericName: "プランルカスト水和物")]
+                         questions: [MedicineNameItem(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
+                                     MedicineNameItem(originalName: "エバステル", genericName: "エバスチン"),
+                                     MedicineNameItem(originalName: "オノン", genericName: "プランルカスト水和物")]
                         ),
         QuestionListItem(listName: "ながつ薬局リスト",
                          date: Date(),
-                         questions: [Question(originalName: "ガスター", genericName: "ファモチジン"),
-                                     Question(originalName: "キプレス", genericName: "モンテルカストナトリウム"),
-                                     Question(originalName: "クラビット", genericName: "レボフロキサシン水和物")]
+                         questions: [MedicineNameItem(originalName: "ガスター", genericName: "ファモチジン"),
+                                     MedicineNameItem(originalName: "キプレス", genericName: "モンテルカストナトリウム"),
+                                     MedicineNameItem(originalName: "クラビット", genericName: "レボフロキサシン水和物")]
                         ),
         QuestionListItem(listName: "こばやし薬局リスト",
                          date: Date(),
-                         questions: [Question(originalName: "インフリー", genericName: "インドメタシン　ファルネシル"),
-                                     Question(originalName: "ウリトス", genericName: "イミダフェナシン"),
-                                     Question(originalName: "ケフラール", genericName: "セファクロル")]
+                         questions: [MedicineNameItem(originalName: "インフリー", genericName: "インドメタシン　ファルネシル"),
+                                     MedicineNameItem(originalName: "ウリトス", genericName: "イミダフェナシン"),
+                                     MedicineNameItem(originalName: "ケフラール", genericName: "セファクロル")]
                         )
     ] // dummyList ここまで
     
