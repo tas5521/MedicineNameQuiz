@@ -60,7 +60,7 @@
 
 /* Begin PBXFileReference section */
 		4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSelection.swift; sourceTree = "<group>"; };
-		4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */ = {isa = PBXFileReference; lastKnownFileType = file; path = MedicineNameList.csv; sourceTree = SOURCE_ROOT; };
+		4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = MedicineNameList.csv; sourceTree = SOURCE_ROOT; };
 		4A764F072B492AD60052EB60 /* NavigationBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarBackground.swift; sourceTree = "<group>"; };
 		4A9671582AC7B531006F7157 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4A96715D2AC7B73E006F7157 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
