@@ -15,34 +15,6 @@ struct MedicineListView: View {
     // 選択されているタブを管理する変数
     @State private var medicineClassification: MedicineClassification = .internalMedicine
 
-    // ダミーの内用薬の配列
-    private let dummyInternalMedicineArray: [Question] = [
-        Question(originalName: "内用薬先発品名1", genericName: "内用薬一般名1"),
-        Question(originalName: "内用薬先発品名2", genericName: "内用薬一般名2"),
-        Question(originalName: "内用薬先発品名3", genericName: "内用薬一般名3")
-    ] // dummyInternalMedicineList ここまで
-    
-    // ダミーの注射薬の配列
-    private let dummyInjectionMedicineArray: [Question] = [
-        Question(originalName: "注射薬先発品名1", genericName: "注射薬一般名1"),
-        Question(originalName: "注射薬先発品名2", genericName: "注射薬一般名2"),
-        Question(originalName: "注射薬先発品名3", genericName: "注射薬一般名3")
-    ] // dummyInjectionMedicineList ここまで
-    
-    // ダミーの外用薬の配列
-    private let dummyExternalMedicineArray: [Question] = [
-        Question(originalName: "外用薬先発品名1", genericName: "外用薬一般名1"),
-        Question(originalName: "外用薬先発品名2", genericName: "外用薬一般名2"),
-        Question(originalName: "外用薬先発品名3", genericName: "外用薬一般名3")
-    ] // dummyExternalMedicineList ここまで
-    
-    // ダミーのカスタム薬の配列
-    private let dummyCustomMedicineArray: [Question] = [
-        Question(originalName: "カスタム先発品名1", genericName: "カスタム一般名1"),
-        Question(originalName: "カスタム先発品名2", genericName: "カスタム一般名2"),
-        Question(originalName: "カスタム先発品名3", genericName: "カスタム一般名3")
-    ] // dummyCustomMedicineList ここまで
-
     var body: some View {
         NavigationStack {
             // 手前から奥にレイアウト
@@ -62,20 +34,7 @@ struct MedicineListView: View {
                     // 上下に余白を追加
                         .padding(.vertical)
                     // 薬リスト
-                    switch medicineClassification {
-                        // 内用薬を表示
-                    case .internalMedicine:
-                        medicineList(of: dummyInternalMedicineArray)
-                        // 注射薬を表示
-                    case .injectionMedicine:
-                        medicineList(of: dummyInjectionMedicineArray)
-                        // 外用薬を表示
-                    case .externalMedicine:
-                        medicineList(of: dummyExternalMedicineArray)
-                        // カスタムを表示
-                    case .customMedicine:
-                        medicineList(of: dummyCustomMedicineArray)
-                    } // switch ここまで
+                        medicineList(of: medicineClassification.medicineData)
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
