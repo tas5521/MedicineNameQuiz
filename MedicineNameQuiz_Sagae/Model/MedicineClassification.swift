@@ -36,7 +36,7 @@ enum MedicineClassification: String, CaseIterable {
         } // for ここまで
         // 薬の名前の要素の配列を返却
         return medicineNameItems
-    } // medicineData ここまで
+    } // medicineNameData ここまで
     
     // CSVファイルを読み込む関数を作成
     private func loadCsvFile(resourceName: String) -> [String] {
