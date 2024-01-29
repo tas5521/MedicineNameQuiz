@@ -15,6 +15,12 @@ struct MedicineListView: View {
     // MedicineListViewModelのインスタンスを生成
     @State private var medicineListViewModel: MedicineListViewModel = MedicineListViewModel()
     
+    // カスタムの薬データをフェッチ
+    @FetchRequest(entity: CustomMedicineName.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicineName.originalName, ascending: true)],
+                  animation: nil
+    ) private var fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>
+    
     var body: some View {
         NavigationStack {
             // 手前から奥にレイアウト
@@ -35,14 +41,45 @@ struct MedicineListView: View {
                         .bold()
                     // 薬の検索バー
                     SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
-                    // 上下に余白を追加
-                        .padding(.vertical)
-                    // 薬リスト
-                    medicineList(of: medicineListViewModel.searchedMedicineNameData)
                     // 検索キーワードが変わった時に検索を行う
                         .onChange(of: searchMedicineNameText) {
                             medicineListViewModel.searchMedicineName(keyword: searchMedicineNameText)
+                            searchCustomMedicine(text: searchMedicineNameText)
                         } // onChange ここまで
+                    // 上下に余白を追加
+                        .padding(.vertical)
+                    // 薬リスト
+                    if medicineListViewModel.medicineClassification == .customMedicine {
+                        List {
+                            ForEach(fetchedCustomMedicineNameList) { medicine in
+                                // 垂直方向にレイアウト
+                                VStack(alignment: .leading) {
+                                    // 先発品名を表示
+                                    Text(medicine.originalName ?? "")
+                                    // 文字の色を青に変更
+                                        .foregroundStyle(Color.blue)
+                                    // 一般名を表示
+                                    Text(medicine.genericName ?? "")
+                                    // 文字の色を赤に変更
+                                        .foregroundStyle(Color.red)
+                                } // VStack ここまで
+                            } // ForEach ここまで
+                            .onDelete { index in
+                                medicineListViewModel.deleteCustomMedicineName(
+                                    index: index,
+                                    fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
+                            } // onDelete ここまで
+                        } // List ここまで
+                        // 太字にする
+                        .bold()
+                        // リストのスタイルを.groupedに変更
+                        .listStyle(.grouped)
+                        // リストの背景のグレーの部分を非表示にする
+                        .scrollContentBackground(.hidden)
+                    } else {
+                        medicineList(of: medicineListViewModel.searchedMedicineNameData)
+                    } // if ここまで
+                    
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -67,7 +104,7 @@ struct MedicineListView: View {
             .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
-
+    
     // 薬のリスト
     private func medicineList(of medicineArray: [MedicineNameItem]) -> some View {
         List {
@@ -92,7 +129,7 @@ struct MedicineListView: View {
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // medicineList ここまで
-
+    
     // カスタムで薬名を追加するボタン
     private var addMedicineButton: some View {
         Button {
@@ -121,6 +158,16 @@ struct MedicineListView: View {
             AddMedicineView()
         } // sheet ここまで
     } // addMedicineButton ここまで
+    
+    private func searchCustomMedicine(text: String) {
+        if text.isEmpty {
+            fetchedCustomMedicineNameList.nsPredicate = nil
+        } else {
+            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", text)
+            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", text)
+            fetchedCustomMedicineNameList.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
+        } // if ここまで
+    } // searchCustomMedicine
 } // MedicineListView ここまで
 
 #Preview {

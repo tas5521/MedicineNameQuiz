@@ -5,7 +5,8 @@
 //  Created by 寒河江彪流 on 2024/01/29.
 //
 
-import Foundation
+import SwiftUI
+import CoreData
 
 @Observable
 final class MedicineListViewModel {
@@ -21,7 +22,7 @@ final class MedicineListViewModel {
     // 薬名を検索するメソッド
     func searchMedicineName(keyword: String) {
         // 検索キーワードが空だったら、全てのデータを表示
-        if keyword == "" {
+        if keyword.isEmpty {
             searchedMedicineNameData = medicineNameData
             // 検索キーワードが入力されていたら
         } else {
@@ -33,4 +34,22 @@ final class MedicineListViewModel {
             searchedMedicineNameData = filteredMedicineNameData
         } // if ここまで
     } // searchMedicineName ここまで
+    
+    func deleteCustomMedicineName(index: IndexSet, fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
+        // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+        let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
+        if let unwrappedFirstIndex = index.first {
+            // CoreDataから該当するindexのメモを削除
+            context.delete(fetchedCustomMedicineNameList[unwrappedFirstIndex])
+            // エラーハンドリング
+            do {
+                // 生成したインスタンスをCoreDataに保持する
+                try context.save()
+            } catch {
+                // このメソッドにより、クラッシュログを残して終了する
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            } // エラーハンドリングここまで
+        } // if let ここまで
+    } // deleteCustomMedicineName
 } // MedicineListViewModel ここまで
