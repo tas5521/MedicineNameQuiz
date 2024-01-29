@@ -115,7 +115,9 @@ struct MedicineListView: View {
                 .clipShape(Circle())
         } // Button ここまで
         // 薬名追加ビューのシート
-        .sheet(isPresented: $isShowAddMedicineView) {
+        .sheet(isPresented: $isShowAddMedicineView, onDismiss: {
+            medicineListViewModel.searchMedicineName(keyword: searchMedicineNameText)
+        }) {
             AddMedicineView()
         } // sheet ここまで
     } // addMedicineButton ここまで

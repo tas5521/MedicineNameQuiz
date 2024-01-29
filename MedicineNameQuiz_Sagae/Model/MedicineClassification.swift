@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum MedicineClassification: String, CaseIterable {
     case internalMedicine = "内用薬"
@@ -14,26 +15,50 @@ enum MedicineClassification: String, CaseIterable {
     case customMedicine = "カスタム"
     
     // 薬のデータ
-    // TODO: カスタムのデータを追加できるようにする際に、カスタムのデータの処理を追加
     var medicineNameData: [MedicineNameItem] {
-        // 全ての薬データのCSVLineを取得
-        let medicineDataCSVLines = self.loadCsvFile(resourceName: "MedicineNameList")
-        // カンマ（,）で分割した配列を作成
-        let medicineDataArray = medicineDataCSVLines.map( { line in line.components(separatedBy: ",")} )
-        // 選択された区分により、データをフィルターする
-        let filteredMedicineDataArray = medicineDataArray.filter( { medicineData in medicineData[1] == self.rawValue} )
         // 薬の名前の要素を格納する空の配列を作成
         var medicineNameItems: [MedicineNameItem] = []
-        // 先発品名と一般名を取得する
-        for medicineData in filteredMedicineDataArray {
-            // 配列の第2要素が先発品名、第3要素が一般名
-            let originalName = medicineData[2]
-            let genericName = medicineData[3]
-            // 薬の先発品名と一般名の組み合わせの要素を作成
-            let medicineNameItem = MedicineNameItem(originalName: originalName, genericName: genericName)
-            // 薬の名前の要素の配列に格納
-            medicineNameItems.append(medicineNameItem)
-        } // for ここまで
+        // カスタムが選択されていたら
+        if self == .customMedicine {
+            // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+            let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
+            // Core Dataからデータを取得
+            let fetchCustomMedicineNameRequest: NSFetchRequest<CustomMedicineName> = CustomMedicineName.fetchRequest()
+            do {
+                // カスタムの薬名をフェッチ
+                let fetchedCustomMedicineNames = try context.fetch(fetchCustomMedicineNameRequest)
+                // 薬の名前の要素を格納する配列に格納
+                for customMedicineName in fetchedCustomMedicineNames {
+                    let originalName = customMedicineName.originalName ?? ""
+                    let genericName = customMedicineName.genericName ?? ""
+                    // 薬の先発品名と一般名の組み合わせの要素を作成
+                    let medicineNameItem = MedicineNameItem(originalName: originalName, genericName: genericName)
+                    // 薬の名前の要素の配列に格納
+                    medicineNameItems.append(medicineNameItem)
+                } // for ここまで
+            } catch {
+                // デバッグエリアにエラーを表示
+                print("Fetch failed: \(error)")
+            } // do-try-catchここまで
+            // 内用薬、注射薬、外用薬が選択されていたら
+        } else {
+            // 全ての薬データのCSVLineを取得
+            let medicineDataCSVLines = self.loadCsvFile(resourceName: "MedicineNameList")
+            // カンマ（,）で分割した配列を作成
+            let medicineDataArray = medicineDataCSVLines.map( { line in line.components(separatedBy: ",")} )
+            // 選択された区分により、データをフィルターする
+            let filteredMedicineDataArray = medicineDataArray.filter( { medicineData in medicineData[1] == self.rawValue} )
+            // 先発品名と一般名を取得する
+            for medicineData in filteredMedicineDataArray {
+                // 配列の第2要素が先発品名、第3要素が一般名
+                let originalName = medicineData[2]
+                let genericName = medicineData[3]
+                // 薬の先発品名と一般名の組み合わせの要素を作成
+                let medicineNameItem = MedicineNameItem(originalName: originalName, genericName: genericName)
+                // 薬の名前の要素の配列に格納
+                medicineNameItems.append(medicineNameItem)
+            } // for ここまで
+        } // if ここまで
         // 薬の名前の要素の配列を返却
         return medicineNameItems
     } // medicineNameData ここまで
