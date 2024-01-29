@@ -27,6 +27,10 @@ struct MedicineListView: View {
                 VStack {
                     // 薬の区分を選択するタブを上に配置
                     TopTabView(selectTab: $medicineListViewModel.medicineClassification)
+                    // 上部タブが切り替わった時に検索処理を行う
+                        .onChange(of: medicineListViewModel.medicineClassification, initial: true) {
+                            medicineListViewModel.searchMedicineName(keyword: searchMedicineNameText)
+                        } // onChange ここまで
                     // 太字にする
                         .bold()
                     // 薬の検索バー
@@ -34,7 +38,11 @@ struct MedicineListView: View {
                     // 上下に余白を追加
                         .padding(.vertical)
                     // 薬リスト
-                    medicineList(of: medicineListViewModel.medicineNameData)
+                    medicineList(of: medicineListViewModel.searchedMedicineNameData)
+                    // 検索キーワードが変わった時に検索を行う
+                        .onChange(of: searchMedicineNameText) {
+                            medicineListViewModel.searchMedicineName(keyword: searchMedicineNameText)
+                        } // onChange ここまで
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
