@@ -19,7 +19,7 @@ struct AddMedicineView: View {
         !(originalNameText == "" || genericNameText == "")
     } // canAddNew ここまで
     // AddMedicineViewModelのインスタンスを生成
-    private var addMedicineViewModel: AddMedicineViewModel = AddMedicineViewModel()
+    private let addMedicineViewModel: AddMedicineViewModel = AddMedicineViewModel()
     
     var body: some View {
         // 奥から手前にレイアウト

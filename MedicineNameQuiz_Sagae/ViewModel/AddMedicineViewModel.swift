@@ -10,7 +10,7 @@ import CoreData
 
 final class AddMedicineViewModel {
     // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
-    let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
+    private let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
     
     // ユーザー独自の薬名を追加するメソッド
     func addUserOriginalMedicineName(originalName: String, genericName: String) {
