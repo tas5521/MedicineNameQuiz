@@ -18,7 +18,9 @@ struct AddMedicineView: View {
     private var canAddNew: Bool {
         !(originalNameText == "" || genericNameText == "")
     } // canAddNew ここまで
-
+    // AddMedicineViewModelのインスタンスを生成
+    private var addMedicineViewModel: AddMedicineViewModel = AddMedicineViewModel()
+    
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
@@ -49,6 +51,11 @@ struct AddMedicineView: View {
                 // 追加ボタン
                 Button {
                     // 薬の名前をカスタムに追加する処理
+                    addMedicineViewModel.addUserOriginalMedicineName(
+                        originalName: originalNameText,
+                        genericName: genericNameText
+                    ) // addUserOriginalMedicineName ここまで
+                    // シートを閉じる
                     dismiss()
                 } label: {
                     // ラベル
