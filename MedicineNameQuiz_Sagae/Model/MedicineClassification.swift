@@ -14,7 +14,7 @@ enum MedicineClassification: String, CaseIterable {
     case customMedicine = "カスタム"
 
     // 薬のデータをこの配列に格納
-    static var medicineDataArray: [MedicineItem] = []
+    static private var medicineDataArray: [MedicineItem] = []
 
     // 薬のデータ
     var medicineNameData: [MedicineItem] {
