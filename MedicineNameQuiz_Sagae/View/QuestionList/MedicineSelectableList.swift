@@ -22,8 +22,8 @@ struct MedicineSelectableList: View {
                     .bold()
                 // スペースを空ける
                 Spacer()
-                // 全て選択されているかどうかを判定
-                var isAllSelected: Bool {
+                // 全ての薬が選択されているかどうかを判定
+                var isAllMedicineSelected: Bool {
                     // 初期値はtrue
                     var isSelected: Bool = true
                     // 全てのselectedの値との論理積をとる
@@ -32,9 +32,9 @@ struct MedicineSelectableList: View {
                     } // for ここまで
                     // isSelectedを返す
                     return isSelected
-                } // isAllSelected ここまで
+                } // isAllMedicineSelected ここまで
                 // 選択されている項目が1つでもある場合
-                if isAllSelected {
+                if isAllMedicineSelected {
                     // 「全て選択しない」ボタンを表示
                     selectAllButton(selectAll: false)
                     // 選択されていない項目が一つでもある場合
