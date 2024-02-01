@@ -15,7 +15,7 @@ enum MedicineClassification: String, CaseIterable {
     
     // 薬のデータ
     // TODO: カスタムのデータを追加できるようにする際に、カスタムのデータの処理を追加
-    var medicineNameData: [MedicineNameItem] {
+    var medicineNameData: [MedicineItem] {
         // 全ての薬データのCSVLineを取得
         let medicineDataCSVLines = self.loadCsvFile(resourceName: "MedicineNameList")
         // カンマ（,）で分割した配列を作成
@@ -23,14 +23,14 @@ enum MedicineClassification: String, CaseIterable {
         // 選択された区分により、データをフィルターする
         let filteredMedicineDataArray = medicineDataArray.filter( { medicineData in medicineData[1] == self.rawValue} )
         // 薬の名前の要素を格納する空の配列を作成
-        var medicineNameItems: [MedicineNameItem] = []
+        var medicineNameItems: [MedicineItem] = []
         // 先発品名と一般名を取得する
         for medicineData in filteredMedicineDataArray {
             // 配列の第2要素が先発品名、第3要素が一般名
             let originalName = medicineData[2]
             let genericName = medicineData[3]
             // 薬の先発品名と一般名の組み合わせの要素を作成
-            let medicineNameItem = MedicineNameItem(originalName: originalName, genericName: genericName)
+            let medicineNameItem = MedicineItem(medicineCategory: "内用薬", originalName: originalName, genericName: genericName)
             // 薬の名前の要素の配列に格納
             medicineNameItems.append(medicineNameItem)
         } // for ここまで

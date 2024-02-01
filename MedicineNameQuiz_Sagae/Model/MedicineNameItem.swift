@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct MedicineNameItem: Identifiable {
+struct MedicineItem: Identifiable {
     var id: UUID = UUID()
+    var medicineCategory: String
     var originalName: String
     var genericName: String
-} // MedicineNameItem ここまで
+} // MedicineItem ここまで
