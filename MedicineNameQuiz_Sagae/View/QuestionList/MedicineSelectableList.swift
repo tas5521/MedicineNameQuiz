@@ -27,15 +27,8 @@ struct MedicineSelectableList: View {
                     .bold()
                 // スペースを空ける
                 Spacer()
-                // 選択されている項目が1つでもある場合
-                if isAllMedicineSelected {
-                    // 「全て選択しない」ボタンを表示
-                    selectAllButton(selectAll: false)
-                    // 選択されていない項目が一つでもある場合
-                } else {
-                    // 「全て選択する」ボタン
-                    selectAllButton(selectAll: true)
-                } // if ここまで
+                    // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
+                    selectAllButton(selectAll: !isAllMedicineSelected)
             } // HStack ここまで
             // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
