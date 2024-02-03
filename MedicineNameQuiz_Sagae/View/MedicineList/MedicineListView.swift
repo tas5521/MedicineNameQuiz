@@ -38,36 +38,7 @@ struct MedicineListView: View {
                     // 上下に余白を追加
                         .padding(.vertical)
                     // 薬リスト
-                    if medicineListViewModel.medicineClassification == .customMedicine {
-                        List {
-                            ForEach(fetchedCustomMedicineNameList) { medicine in
-                                // 垂直方向にレイアウト
-                                VStack(alignment: .leading) {
-                                    // 先発品名を表示
-                                    Text(medicine.originalName ?? "")
-                                    // 文字の色を青に変更
-                                        .foregroundStyle(Color.blue)
-                                    // 一般名を表示
-                                    Text(medicine.genericName ?? "")
-                                    // 文字の色を赤に変更
-                                        .foregroundStyle(Color.red)
-                                } // VStack ここまで
-                            } // ForEach ここまで
-                            .onDelete { index in
-                                medicineListViewModel.deleteCustomMedicineName(
-                                    index: index,
-                                    fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
-                            } // onDelete ここまで
-                        } // List ここまで
-                        // 太字にする
-                        .bold()
-                        // リストのスタイルを.groupedに変更
-                        .listStyle(.grouped)
-                        // リストの背景のグレーの部分を非表示にする
-                        .scrollContentBackground(.hidden)
-                    } else {
-                        medicineList(of: medicineListViewModel.searchedMedicineNameData)
-                    } // if ここまで
+                        medicineList(medicineClassification: medicineListViewModel.medicineClassification)
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -94,9 +65,23 @@ struct MedicineListView: View {
     } // body ここまで
     
     // 薬のリスト
-    private func medicineList(of medicineArray: [MedicineItem]) -> some View {
-        List {
-            ForEach(medicineArray) { medicine in
+    private func medicineList(medicineClassification: MedicineClassification) -> some View {
+        // 表示する薬リストを格納する配列
+        var shownMedicineList: [MedicineItem] = []
+        // カスタムが選択されている場合は、CoreDataからfetchしたデータをshownMedicineListに格納
+        if medicineClassification == .customMedicine {
+            let customMedicineList = fetchedCustomMedicineNameList.compactMap( { customMedicineName in
+                MedicineItem(medicineCategory: medicineClassification.rawValue,
+                             originalName: customMedicineName.originalName ?? "",
+                             genericName: customMedicineName.genericName ?? "")
+            } )
+            shownMedicineList = customMedicineList
+        } else {
+            // 内用薬、注射薬、外用薬が選択されている場合は、medicineNameDataをshownMedicineListに格納
+            shownMedicineList = medicineClassification.medicineNameData
+        } // if ここまで
+        return List {
+            ForEach(shownMedicineList) { medicine in
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 先発品名を表示
@@ -109,6 +94,11 @@ struct MedicineListView: View {
                         .foregroundStyle(Color.red)
                 } // VStack ここまで
             } // ForEach ここまで
+            .onDelete { index in
+                medicineListViewModel.deleteCustomMedicineName(
+                    index: index,
+                    fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
+            } // onDelete ここまで
         } // List ここまで
         // 太字にする
         .bold()
