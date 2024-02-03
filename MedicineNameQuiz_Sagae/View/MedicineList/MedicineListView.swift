@@ -36,10 +36,11 @@ struct MedicineListView: View {
                     // 薬の検索バー
                     SearchBar(searchText: $medicineListViewModel.searchMedicineNameText,
                               placeholderText: "薬を検索できます")
-                    .onChange(of: medicineListViewModel.searchMedicineNameText, {
+                    // searchMedicineNameTextが変更されたときに実行
+                    .onChange(of: medicineListViewModel.searchMedicineNameText) {
                         // カスタムの薬リストに検索をかける
                         medicineListViewModel.searchCustomMedicine(from: fetchedCustomMedicineNameList)
-                    })
+                    }
                     // 上下に余白を追加
                     .padding(.vertical)
                     // 薬リスト
@@ -61,7 +62,6 @@ struct MedicineListView: View {
                     } // HStack ここまで
                 } // VStack ここまで
             } // ZStack ここまで
-            // ナビゲーションバーの設定
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("薬リスト", displayMode: .inline)
             // ナビゲーションバーの背景を変更
@@ -74,8 +74,6 @@ struct MedicineListView: View {
         Group {
             // カスタムが選択されていたら
             if medicineListViewModel.medicineClassification == .customMedicine {
-                // Core Dataからフェッチしたカスタムの薬名をMedicineItem型に変換
-                //            medicineListViewModel.convertToMedicineItem(from: fetchedCustomMedicineNameList)
                 List {
                     ForEach(fetchedCustomMedicineNameList) { medicine in
                         // 垂直方向にレイアウト
