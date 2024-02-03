@@ -43,6 +43,17 @@ final class MedicineListViewModel {
                          genericName: customMedicineName.genericName ?? "")
         } ) // compactMap ここまで
     } // convertToMedicineItem ここまで
+
+    // カスタムの薬リストに検索をかける
+    func searchCustomMedicine(from fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
+        if searchMedicineNameText.isEmpty {
+            fetchedCustomMedicineNameList.nsPredicate = nil
+        } else {
+            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", searchMedicineNameText)
+            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", searchMedicineNameText)
+            fetchedCustomMedicineNameList.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
+        } // if ここまで
+    } // searchCustomMedicine ここまで
     
     func deleteCustomMedicineName(index: IndexSet, fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
         // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得

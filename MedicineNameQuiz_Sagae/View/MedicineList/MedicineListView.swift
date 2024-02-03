@@ -136,16 +136,6 @@ struct MedicineListView: View {
             AddMedicineView()
         } // sheet ここまで
     } // addMedicineButton ここまで
-    
-    private func searchCustomMedicine(text: String) {
-        if text.isEmpty {
-            fetchedCustomMedicineNameList.nsPredicate = nil
-        } else {
-            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", text)
-            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", text)
-            fetchedCustomMedicineNameList.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
-        } // if ここまで
-    } // searchCustomMedicine
 } // MedicineListView ここまで
 
 #Preview {
