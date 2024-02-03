@@ -51,10 +51,10 @@ struct AddMedicineView: View {
                 // 追加ボタン
                 Button {
                     // 薬の名前をカスタムに追加する処理
-                    addMedicineViewModel.addUserOriginalMedicineName(
+                    addMedicineViewModel.addCustomMedicineName(
                         originalName: originalNameText,
                         genericName: genericNameText
-                    ) // addUserOriginalMedicineName ここまで
+                    ) // addCustomMedicineName ここまで
                     // シートを閉じる
                     dismiss()
                 } label: {

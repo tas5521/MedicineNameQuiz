@@ -12,8 +12,8 @@ final class AddMedicineViewModel {
     // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
     private let viewContext: NSManagedObjectContext = PersistenceController.shared.container.viewContext
     
-    // ユーザー独自の薬名を追加するメソッド
-    func addUserOriginalMedicineName(originalName: String, genericName: String) {
+    // カスタムの薬名を追加するメソッド
+    func addCustomMedicineName(originalName: String, genericName: String) {
         // 新しいユーザー独自の薬名をCore Dataに保存
         let newCustomMedicineName = CustomMedicineName(context: viewContext)
         newCustomMedicineName.medicineCategory = "カスタム"
@@ -25,5 +25,5 @@ final class AddMedicineViewModel {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
             print("エラー: \(error)")
         } // do-try-catch ここまで
-    } // addUserOriginalMedicineName ここまで
+    } // addCustomMedicineName ここまで
 } // AddMedicineViewModel ここまで
