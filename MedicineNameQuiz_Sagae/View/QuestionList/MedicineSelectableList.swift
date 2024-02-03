@@ -12,7 +12,7 @@ struct MedicineSelectableList: View {
     @Binding var medicineArray: [MedicineListItem]
 
     // 全ての薬が選択されているかどうかを判定
-    var isAllMedicineSelected: Bool {
+    private var isAllMedicineSelected: Bool {
         medicineArray.allSatisfy( { medicine in medicine.selected } )
     } // isAllMedicineSelected ここまで
 
