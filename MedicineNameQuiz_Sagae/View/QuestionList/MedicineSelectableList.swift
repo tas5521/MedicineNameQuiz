@@ -13,14 +13,7 @@ struct MedicineSelectableList: View {
 
     // 全ての薬が選択されているかどうかを判定
     var isAllMedicineSelected: Bool {
-        // 初期値はtrue
-        var isSelected: Bool = true
-        // 全てのselectedの値との論理積をとる
-        for medicineArrayItem in medicineArray {
-            isSelected = isSelected && medicineArrayItem.selected
-        } // for ここまで
-        // isSelectedを返す
-        return isSelected
+        medicineArray.allSatisfy( { medicine in medicine.selected } )
     } // isAllMedicineSelected ここまで
 
     var body: some View {
