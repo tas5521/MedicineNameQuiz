@@ -69,7 +69,7 @@ struct MedicineListView: View {
     } // body ここまで
 
     // 薬のリスト
-    private func medicineList(of medicineArray: [MedicineNameItem]) -> some View {
+    private func medicineList(of medicineArray: [MedicineItem]) -> some View {
         List {
             ForEach(medicineArray) { medicine in
                 // 垂直方向にレイアウト

@@ -12,7 +12,7 @@ final class MedicineListViewModel {
     // 選択されているタブを管理する変数
     var medicineClassification: MedicineClassification = .internalMedicine
     // 薬データを格納する変数
-    var medicineNameData: [MedicineNameItem] {
+    var medicineNameData: [MedicineItem] {
         medicineClassification.medicineNameData
     } // medicineNameData ここまで
     // 検索された薬名データを格納する配列
