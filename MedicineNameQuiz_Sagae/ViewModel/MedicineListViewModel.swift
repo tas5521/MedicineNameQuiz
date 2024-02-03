@@ -15,22 +15,21 @@ final class MedicineListViewModel {
     var medicineNameData: [MedicineItem] {
         medicineClassification.medicineNameData
     } // medicineNameData ここまで
+    // 薬の検索に使う変数
+    var searchMedicineNameText: String = ""
     // 検索された薬名データを格納する配列
-    var searchedMedicineNameData: [MedicineItem] = []
-
-    // 薬名を検索するメソッド
-    func searchMedicineName(keyword: String) {
+    var searchedMedicineNameData: [MedicineItem] {
         // 検索キーワードが空だったら、全てのデータを表示
-        if keyword == "" {
-            searchedMedicineNameData = medicineNameData
+        if searchMedicineNameText.isEmpty {
+            return medicineNameData
             // 検索キーワードが入力されていたら
         } else {
             // 検索キーワードを先発品名または一般名に含むデータを探す
             let filteredMedicineNameData = medicineNameData.filter( { medicineName in
-                medicineName.originalName.contains(keyword) || medicineName.genericName.contains(keyword)
+                medicineName.originalName.contains(searchMedicineNameText) || medicineName.genericName.contains(searchMedicineNameText)
             }) // filteredMedicineNameData ここまで
             // 検索キーワードを先発品名または一般名に含むデータを表示
-            searchedMedicineNameData = filteredMedicineNameData
+            return filteredMedicineNameData
         } // if ここまで
-    } // searchMedicineName ここまで
+    } // searchedMedicineNameData ここまで
 } // MedicineListViewModel ここまで
