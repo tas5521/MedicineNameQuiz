@@ -34,11 +34,16 @@ struct MedicineListView: View {
                     // 太字にする
                         .bold()
                     // 薬の検索バー
-                    SearchBar(searchText: $medicineListViewModel.searchMedicineNameText, placeholderText: "薬を検索できます")
+                    SearchBar(searchText: $medicineListViewModel.searchMedicineNameText,
+                              placeholderText: "薬を検索できます")
+                    .onChange(of: medicineListViewModel.searchMedicineNameText, {
+                        // カスタムの薬リストに検索をかける
+                        medicineListViewModel.searchCustomMedicine(from: fetchedCustomMedicineNameList)
+                    })
                     // 上下に余白を追加
-                        .padding(.vertical)
+                    .padding(.vertical)
                     // 薬リスト
-                        medicineList(medicineClassification: medicineListViewModel.medicineClassification)
+                    medicineList
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -65,23 +70,20 @@ struct MedicineListView: View {
     } // body ここまで
     
     // 薬のリスト
-    private func medicineList(medicineClassification: MedicineClassification) -> some View {
-        // 表示する薬リストを格納する配列
-        var shownMedicineList: [MedicineItem] = []
-        // カスタムが選択されている場合は、CoreDataからfetchしたデータをshownMedicineListに格納
-        if medicineClassification == .customMedicine {
-            let customMedicineList = fetchedCustomMedicineNameList.compactMap( { customMedicineName in
-                MedicineItem(medicineCategory: medicineClassification.rawValue,
-                             originalName: customMedicineName.originalName ?? "",
-                             genericName: customMedicineName.genericName ?? "")
-            } )
-            shownMedicineList = customMedicineList
-        } else {
-            // 内用薬、注射薬、外用薬が選択されている場合は、medicineNameDataをshownMedicineListに格納
-            shownMedicineList = medicineClassification.medicineNameData
-        } // if ここまで
+    private var medicineList: some View {
+        // 表示する薬データを選択
+        var shownMedicineNameData: [MedicineItem] {
+            // カスタムが選択されていたら
+            if medicineListViewModel.medicineClassification == .customMedicine {
+                // Core Dataからフェッチしたカスタムの薬名をMedicineItem型に変換
+                medicineListViewModel.convertToMedicineItem(from: fetchedCustomMedicineNameList)
+            } else {
+                // 内用薬、注射薬、外用薬が選択されていたら、検索がかけられた薬名データを取得
+                medicineListViewModel.searchedMedicineNameData
+            } // if ここまで
+        } // shownMedicineNameData ここまで
         return List {
-            ForEach(shownMedicineList) { medicine in
+            ForEach(shownMedicineNameData) { medicine in
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 先発品名を表示

@@ -12,7 +12,7 @@ import CoreData
 final class MedicineListViewModel {
     // 選択されているタブを管理する変数
     var medicineClassification: MedicineClassification = .internalMedicine
-    // 薬データを格納する変数
+    // 内用薬、注射薬、外用薬のデータを格納する変数
     var medicineNameData: [MedicineItem] {
         medicineClassification.medicineNameData
     } // medicineNameData ここまで
@@ -33,7 +33,17 @@ final class MedicineListViewModel {
             return filteredMedicineNameData
         } // if ここまで
     } // searchedMedicineNameData ここまで
-
+    
+    // Core DataからフェッチしたデータをMedicineItem型に変換する
+    func convertToMedicineItem(from fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) -> [MedicineItem] {
+        // カスタムが選択されている場合は、CoreDataからfetchしたデータをshownMedicineListに格納
+        fetchedCustomMedicineNameList.compactMap( { customMedicineName in
+            MedicineItem(medicineCategory: medicineClassification.rawValue,
+                         originalName: customMedicineName.originalName ?? "",
+                         genericName: customMedicineName.genericName ?? "")
+        } ) // compactMap ここまで
+    } // convertToMedicineItem ここまで
+    
     func deleteCustomMedicineName(index: IndexSet, fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
         // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
         let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
