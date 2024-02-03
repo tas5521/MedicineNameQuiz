@@ -10,7 +10,19 @@ import SwiftUI
 struct MedicineSelectableList: View {
     // 表示する薬の名前を受け取る配列
     @Binding var medicineArray: [MedicineListItem]
-    
+
+    // 全ての薬が選択されているかどうかを判定
+    var isAllMedicineSelected: Bool {
+        // 初期値はtrue
+        var isSelected: Bool = true
+        // 全てのselectedの値との論理積をとる
+        for medicineArrayItem in medicineArray {
+            isSelected = isSelected && medicineArrayItem.selected
+        } // for ここまで
+        // isSelectedを返す
+        return isSelected
+    } // isAllMedicineSelected ここまで
+
     var body: some View {
         // 垂直方向にレイアウト
         VStack(alignment: .leading) {
@@ -22,17 +34,6 @@ struct MedicineSelectableList: View {
                     .bold()
                 // スペースを空ける
                 Spacer()
-                // 全ての薬が選択されているかどうかを判定
-                var isAllMedicineSelected: Bool {
-                    // 初期値はtrue
-                    var isSelected: Bool = true
-                    // 全てのselectedの値との論理積をとる
-                    for medicineArrayItem in medicineArray {
-                        isSelected = isSelected && medicineArrayItem.selected
-                    } // for ここまで
-                    // isSelectedを返す
-                    return isSelected
-                } // isAllMedicineSelected ここまで
                 // 選択されている項目が1つでもある場合
                 if isAllMedicineSelected {
                     // 「全て選択しない」ボタンを表示
