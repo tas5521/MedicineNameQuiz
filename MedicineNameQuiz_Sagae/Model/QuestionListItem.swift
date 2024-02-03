@@ -11,5 +11,5 @@ struct QuestionListItem: Identifiable {
     var id: UUID = UUID()
     var listName: String
     var date: Date
-    var questions: [Question]
+    var questions: [MedicineItem]
 } // QuestionListItem ここまで
