@@ -33,16 +33,6 @@ final class MedicineListViewModel {
             return filteredMedicineNameData
         } // if ここまで
     } // searchedMedicineNameData ここまで
-    
-    // Core DataからフェッチしたデータをMedicineItem型に変換する
-    func convertToMedicineItem(from fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) -> [MedicineItem] {
-        // カスタムが選択されている場合は、CoreDataからfetchしたデータをshownMedicineListに格納
-        fetchedCustomMedicineNameList.compactMap( { customMedicineName in
-            MedicineItem(medicineCategory: medicineClassification.rawValue,
-                         originalName: customMedicineName.originalName ?? "",
-                         genericName: customMedicineName.genericName ?? "")
-        } ) // compactMap ここまで
-    } // convertToMedicineItem ここまで
 
     // カスタムの薬リストに検索をかける
     func searchCustomMedicine(from fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
@@ -54,7 +44,8 @@ final class MedicineListViewModel {
             fetchedCustomMedicineNameList.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
         } // if ここまで
     } // searchCustomMedicine ここまで
-    
+
+    // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
     func deleteCustomMedicineName(index: IndexSet, fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
         // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
         let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext

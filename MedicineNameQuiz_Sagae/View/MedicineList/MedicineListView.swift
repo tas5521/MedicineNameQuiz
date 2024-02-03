@@ -71,37 +71,50 @@ struct MedicineListView: View {
     
     // 薬のリスト
     private var medicineList: some View {
-        // 表示する薬データを選択
-        var shownMedicineNameData: [MedicineItem] {
+        Group {
             // カスタムが選択されていたら
             if medicineListViewModel.medicineClassification == .customMedicine {
                 // Core Dataからフェッチしたカスタムの薬名をMedicineItem型に変換
-                medicineListViewModel.convertToMedicineItem(from: fetchedCustomMedicineNameList)
+                //            medicineListViewModel.convertToMedicineItem(from: fetchedCustomMedicineNameList)
+                List {
+                    ForEach(fetchedCustomMedicineNameList) { medicine in
+                        // 垂直方向にレイアウト
+                        VStack(alignment: .leading) {
+                            // 先発品名を表示
+                            Text(medicine.originalName ?? "")
+                            // 文字の色を青に変更
+                                .foregroundStyle(Color.blue)
+                            // 一般名を表示
+                            Text(medicine.genericName ?? "")
+                            // 文字の色を赤に変更
+                                .foregroundStyle(Color.red)
+                        } // VStack ここまで
+                    } // ForEach ここまで
+                    .onDelete { index in
+                        medicineListViewModel.deleteCustomMedicineName(
+                            index: index,
+                            fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
+                    } // onDelete ここまで
+                } // List ここまで
+                // 内用薬、注射薬、外用薬が選択されていたら
             } else {
-                // 内用薬、注射薬、外用薬が選択されていたら、検索がかけられた薬名データを取得
-                medicineListViewModel.searchedMedicineNameData
+                List {
+                    ForEach(medicineListViewModel.searchedMedicineNameData) { medicine in
+                        // 垂直方向にレイアウト
+                        VStack(alignment: .leading) {
+                            // 先発品名を表示
+                            Text(medicine.originalName)
+                            // 文字の色を青に変更
+                                .foregroundStyle(Color.blue)
+                            // 一般名を表示
+                            Text(medicine.genericName)
+                            // 文字の色を赤に変更
+                                .foregroundStyle(Color.red)
+                        } // VStack ここまで
+                    } // ForEach ここまで
+                } // List ここまで
             } // if ここまで
-        } // shownMedicineNameData ここまで
-        return List {
-            ForEach(shownMedicineNameData) { medicine in
-                // 垂直方向にレイアウト
-                VStack(alignment: .leading) {
-                    // 先発品名を表示
-                    Text(medicine.originalName)
-                    // 文字の色を青に変更
-                        .foregroundStyle(Color.blue)
-                    // 一般名を表示
-                    Text(medicine.genericName)
-                    // 文字の色を赤に変更
-                        .foregroundStyle(Color.red)
-                } // VStack ここまで
-            } // ForEach ここまで
-            .onDelete { index in
-                medicineListViewModel.deleteCustomMedicineName(
-                    index: index,
-                    fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
-            } // onDelete ここまで
-        } // List ここまで
+        } // Group ここまで
         // 太字にする
         .bold()
         // リストのスタイルを.groupedに変更
