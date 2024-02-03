@@ -16,7 +16,7 @@ final class MedicineListViewModel {
         medicineClassification.medicineNameData
     } // medicineNameData ここまで
     // 検索された薬名データを格納する配列
-    var searchedMedicineNameData: [MedicineNameItem] = []
+    var searchedMedicineNameData: [MedicineItem] = []
 
     // 薬名を検索するメソッド
     func searchMedicineName(keyword: String) {
