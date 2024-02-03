@@ -15,21 +15,39 @@ struct QuestionListView: View {
     private var dummyList: [QuestionListItem] = [
         QuestionListItem(listName: "さがえ薬局リスト",
                          date: Date(),
-                         questions: [MedicineNameItem(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
-                                     MedicineNameItem(originalName: "エバステル", genericName: "エバスチン"),
-                                     MedicineNameItem(originalName: "オノン", genericName: "プランルカスト水和物")]
+                         questions: [MedicineItem(medicineCategory: "内用薬",
+                                                  originalName: "アムロジン",
+                                                  genericName: "アムロジピンべシル酸塩"),
+                                     MedicineItem(medicineCategory: "内用薬",
+                                                  originalName: "エバステル",
+                                                  genericName: "エバスチン"),
+                                     MedicineItem(medicineCategory: "内用薬",
+                                                  originalName: "オノン",
+                                                  genericName: "プランルカスト水和物")]
                         ),
         QuestionListItem(listName: "ながつ薬局リスト",
                          date: Date(),
-                         questions: [MedicineNameItem(originalName: "ガスター", genericName: "ファモチジン"),
-                                     MedicineNameItem(originalName: "キプレス", genericName: "モンテルカストナトリウム"),
-                                     MedicineNameItem(originalName: "クラビット", genericName: "レボフロキサシン水和物")]
+                         questions: [MedicineItem(medicineCategory: "内用薬",
+                                                  originalName: "ガスター",
+                                                  genericName: "ファモチジン"),
+                                     MedicineItem(medicineCategory: "内用薬",
+                                                      originalName: "キプレス",
+                                                      genericName: "モンテルカストナトリウム"),
+                                     MedicineItem(medicineCategory: "内用薬",
+                                                      originalName: "クラビット",
+                                                      genericName: "レボフロキサシン水和物")]
                         ),
         QuestionListItem(listName: "こばやし薬局リスト",
                          date: Date(),
-                         questions: [MedicineNameItem(originalName: "インフリー", genericName: "インドメタシン　ファルネシル"),
-                                     MedicineNameItem(originalName: "ウリトス", genericName: "イミダフェナシン"),
-                                     MedicineNameItem(originalName: "ケフラール", genericName: "セファクロル")]
+                         questions: [MedicineItem(medicineCategory: "内用薬",
+                                                  originalName: "インフリー",
+                                                  genericName: "インドメタシン　ファルネシル"),
+                                     MedicineItem(medicineCategory: "内用薬",
+                                                  originalName: "ウリトス",
+                                                  genericName: "イミダフェナシン"),
+                                     MedicineItem(medicineCategory: "内用薬",
+                                                  originalName: "ケフラール",
+                                                  genericName: "セファクロル")]
                         )
     ] // dummyList ここまで
     

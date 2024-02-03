@@ -13,7 +13,7 @@ struct QuestionsView: View {
     // リストの名前を保持する変数
     let listName: String
     // 問題を保持する変数
-    let questions: [MedicineNameItem]
+    let questions: [MedicineItem]
 
     var body: some View {
         // 奥から手前方向にレイアウト
@@ -81,7 +81,15 @@ struct QuestionsView: View {
 
 #Preview {
     QuestionsView(listName: "プレビュー薬局",
-                  questions: [MedicineNameItem(originalName: "アムロジン", genericName: "アムロジピンべシル酸塩"),
-                              MedicineNameItem(originalName: "エバステル", genericName: "エバスチン"),
-                              MedicineNameItem(originalName: "オノン", genericName: "プランルカスト水和物")])
+                  questions: [MedicineItem(medicineCategory: "内用薬",
+                                           originalName: "アムロジン",
+                                           genericName: "アムロジピンべシル酸塩"),
+                              MedicineItem(medicineCategory: "内用薬",
+                                           originalName: "エバステル", 
+                                           genericName: "エバスチン"),
+                              MedicineItem(medicineCategory: "内用薬",
+                                           originalName: "オノン",
+                                           genericName: "プランルカスト水和物")
+                  ]
+    )
 }

@@ -13,36 +13,40 @@ enum MedicineClassification: String, CaseIterable {
     case injectionMedicine = "注射薬"
     case externalMedicine = "外用薬"
     case customMedicine = "カスタム"
-    
+
+    // 薬のデータをこの配列に格納
+    static private var medicineDataArray: [MedicineItem] = []
+
     // 薬のデータ
-    var medicineNameData: [MedicineNameItem] {
-        // 全ての薬データのCSVLineを取得
-        let medicineDataCSVLines = self.loadCsvFile(resourceName: "MedicineNameList")
-        // カンマ（,）で分割した配列を作成
-        let medicineDataArray = medicineDataCSVLines.map( { line in line.components(separatedBy: ",")} )
+    var medicineNameData: [MedicineItem] {
+        // もし薬データを読み込んでいなかったら
+        if MedicineClassification.medicineDataArray.isEmpty {
+            // 全ての薬データのCSVLineを取得
+            let medicineDataCSVLines = self.loadCsvFile(resourceName: "MedicineNameList")
+            // 薬のデータを配列に格納
+            MedicineClassification.medicineDataArray = medicineDataCSVLines
+            // カンマ（,）で分割した配列を作成
+                .map({ line in
+                    line.components(separatedBy: ",")
+                })
+            // MedicineItem構造体にする
+                .compactMap({ array in
+                    MedicineItem(medicineCategory: array[1], originalName: array[2], genericName: array[3])
+                })
+        } // if ここまで
         // 選択された区分により、データをフィルターする
-        let filteredMedicineDataArray = medicineDataArray.filter( { medicineData in medicineData[1] == self.rawValue} )
-        // 薬の名前の要素を格納する空の配列を作成
-        var medicineNameItems: [MedicineNameItem] = []
-        // 先発品名と一般名を取得する
-        for medicineData in filteredMedicineDataArray {
-            // 配列の第2要素が先発品名、第3要素が一般名
-            let originalName = medicineData[2]
-            let genericName = medicineData[3]
-            // 薬の先発品名と一般名の組み合わせの要素を作成
-            let medicineNameItem = MedicineNameItem(originalName: originalName, genericName: genericName)
-            // 薬の名前の要素の配列に格納
-            medicineNameItems.append(medicineNameItem)
-        } // for ここまで
+        let filteredMedicineDataArray = MedicineClassification.medicineDataArray.filter( { medicineData in
+            medicineData.medicineCategory == self.rawValue
+        })
         // 薬の名前の要素の配列を返却
-        return medicineNameItems
+        return filteredMedicineDataArray
     } // medicineNameData ここまで
-    
+
     // CSVファイルを読み込む関数を作成
     private func loadCsvFile(resourceName: String) -> [String] {
         // 読み込んだCSVのデータを格納する配列を宣言
         var csvLines: [String] = []
-        
+
         // 読み込み先に、ファイルが存在してるかチェック
         guard let path = Bundle.main.path(forResource: resourceName, ofType:"csv") else {
             // 存在しなければ、エラーメッセージを配列に格納して返却
