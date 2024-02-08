@@ -40,7 +40,7 @@ struct MedicineListView: View {
                     .onChange(of: medicineListViewModel.searchMedicineNameText) {
                         // カスタムの薬リストに検索をかける
                         medicineListViewModel.searchCustomMedicine(from: fetchedCustomMedicineNameList)
-                    }
+                    } // onChange ここまで
                     // 上下に余白を追加
                     .padding(.vertical)
                     // 薬リスト
@@ -88,6 +88,7 @@ struct MedicineListView: View {
                                 .foregroundStyle(Color.red)
                         } // VStack ここまで
                     } // ForEach ここまで
+                    // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
                     .onDelete { index in
                         medicineListViewModel.deleteCustomMedicineName(
                             index: index,
