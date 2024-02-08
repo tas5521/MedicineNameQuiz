@@ -10,7 +10,12 @@ import SwiftUI
 struct MedicineSelectableList: View {
     // 表示する薬の名前を受け取る配列
     @Binding var medicineArray: [MedicineListItem]
-    
+
+    // 全ての薬が選択されているかどうかを判定
+    private var isAllMedicineSelected: Bool {
+        medicineArray.allSatisfy( { medicine in medicine.selected } )
+    } // isAllMedicineSelected ここまで
+
     var body: some View {
         // 垂直方向にレイアウト
         VStack(alignment: .leading) {
@@ -22,12 +27,8 @@ struct MedicineSelectableList: View {
                     .bold()
                 // スペースを空ける
                 Spacer()
-                // 「全て選択する」ボタン
-                selectAllButton(selectAll: true)
-                // スペースを空ける
-                Spacer()
-                // 「全て選択しない」ボタン
-                selectAllButton(selectAll: false)
+                    // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
+                    selectAllButton(selectAll: !isAllMedicineSelected)
             } // HStack ここまで
             // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
