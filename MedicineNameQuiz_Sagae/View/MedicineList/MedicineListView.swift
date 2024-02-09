@@ -11,7 +11,7 @@ struct MedicineListView: View {
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
     // MedicineListViewModelのインスタンスを生成
-    @State private var medicineListViewModel: MedicineListViewModel = MedicineListViewModel()
+    @State private var viewModel: MedicineListViewModel = MedicineListViewModel()
     
     var body: some View {
         NavigationStack {
@@ -24,15 +24,15 @@ struct MedicineListView: View {
                 // 垂直方向にレイアウト
                 VStack {
                     // 薬の区分を選択するタブを上に配置
-                    TopTabView(selectTab: $medicineListViewModel.medicineClassification)
+                    TopTabView(selectTab: $viewModel.medicineClassification)
                     // 太字にする
                         .bold()
                     // 薬の検索バー
-                    SearchBar(searchText: $medicineListViewModel.searchMedicineNameText, placeholderText: "薬を検索できます")
+                    SearchBar(searchText: $viewModel.searchMedicineNameText, placeholderText: "薬を検索できます")
                     // 上下に余白を追加
                         .padding(.vertical)
                     // 薬リスト
-                    medicineList(of: medicineListViewModel.searchedMedicineNameData)
+                    medicineList(of: viewModel.searchedMedicineNameData)
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -43,7 +43,7 @@ struct MedicineListView: View {
                         // スペースを空ける
                         Spacer()
                         // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                        if medicineListViewModel.medicineClassification == .customMedicine {
+                        if viewModel.medicineClassification == .customMedicine {
                             addMedicineButton
                                 .padding()
                         } // if ここまで
