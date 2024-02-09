@@ -32,7 +32,7 @@ struct MedicineListView: View {
                     // 上下に余白を追加
                         .padding(.vertical)
                     // 薬リスト
-                    medicineList(of: viewModel.searchedMedicineNameData)
+                    medicineList(of: viewModel.medicineItems)
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -59,17 +59,17 @@ struct MedicineListView: View {
     } // body ここまで
 
     // 薬のリスト
-    private func medicineList(of medicineArray: [MedicineItem]) -> some View {
+    private func medicineList(of medicineItems: [MedicineItem]) -> some View {
         List {
-            ForEach(medicineArray) { medicine in
+            ForEach(medicineItems) { medicineItem in
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 先発品名を表示
-                    Text(medicine.originalName)
+                    Text(medicineItem.originalName)
                     // 文字の色を青に変更
                         .foregroundStyle(Color.blue)
                     // 一般名を表示
-                    Text(medicine.genericName)
+                    Text(medicineItem.genericName)
                     // 文字の色を赤に変更
                         .foregroundStyle(Color.red)
                 } // VStack ここまで

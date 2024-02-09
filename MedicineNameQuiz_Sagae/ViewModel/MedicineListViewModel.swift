@@ -13,8 +13,8 @@ final class MedicineListViewModel {
     var medicineClassification: MedicineClassification = .internalMedicine
     // 薬の検索に使う変数
     var searchMedicineNameText: String = ""
-    // 検索された薬名データを格納する配列
-    var searchedMedicineNameData: [MedicineItem] {
+    // Viewに表示する薬名を格納する配列
+    var medicineItems: [MedicineItem] {
         let medicineNameData: [MedicineItem] = medicineClassification.medicineNameData
         // 検索キーワードが空だったら、全てのデータを表示
         guard !searchMedicineNameText.isEmpty else {
