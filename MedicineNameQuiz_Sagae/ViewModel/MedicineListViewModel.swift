@@ -11,21 +11,17 @@ import Foundation
 final class MedicineListViewModel {
     // 選択されているタブを管理する変数
     var medicineClassification: MedicineClassification = .internalMedicine
-    // 薬データを格納する変数
-    var medicineNameData: [MedicineItem] {
-        medicineClassification.medicineNameData
-    } // medicineNameData ここまで
     // 薬の検索に使う変数
     var searchMedicineNameText: String = ""
     // 検索された薬名データを格納する配列
     var searchedMedicineNameData: [MedicineItem] {
         // 検索キーワードが空だったら、全てのデータを表示
         if searchMedicineNameText.isEmpty {
-            return medicineNameData
+            return medicineClassification.medicineNameData
             // 検索キーワードが入力されていたら
         } else {
             // 検索キーワードを先発品名または一般名に含むデータを探す
-            let filteredMedicineNameData = medicineNameData.filter( { medicineName in
+            let filteredMedicineNameData = medicineClassification.medicineNameData.filter( { medicineName in
                 medicineName.originalName.contains(searchMedicineNameText) || medicineName.genericName.contains(searchMedicineNameText)
             }) // filteredMedicineNameData ここまで
             // 検索キーワードを先発品名または一般名に含むデータを表示
