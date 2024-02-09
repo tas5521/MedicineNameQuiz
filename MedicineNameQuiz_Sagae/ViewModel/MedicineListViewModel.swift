@@ -26,5 +26,5 @@ final class MedicineListViewModel {
         }) // filteredMedicineNameData ここまで
         // 検索キーワードを先発品名または一般名に含むデータを表示
         return filteredMedicineNameData
-    } // searchedMedicineNameData ここまで
+    } // medicineItems ここまで
 } // MedicineListViewModel ここまで
