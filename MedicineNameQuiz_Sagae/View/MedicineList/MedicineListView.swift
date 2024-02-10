@@ -90,7 +90,7 @@ struct MedicineListView: View {
                     } // ForEach ここまで
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
                     .onDelete { index in
-                        viewModel.deleteCustomMedicineName(
+                        viewModel.deleteCustomMedicineData(
                             index: index,
                             fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
                     } // onDelete ここまで

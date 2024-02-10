@@ -41,7 +41,7 @@ final class MedicineListViewModel {
     } // searchCustomMedicine ここまで
 
     // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
-    func deleteCustomMedicineName(index: IndexSet, fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
+    func deleteCustomMedicineData(index: IndexSet, fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
         // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
         let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
         if let unwrappedFirstIndex = index.first {
@@ -57,5 +57,5 @@ final class MedicineListViewModel {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             } // エラーハンドリングここまで
         } // if let ここまで
-    } // deleteCustomMedicineName
+    } // deleteCustomMedicineData ここまで
 } // MedicineListViewModel ここまで
