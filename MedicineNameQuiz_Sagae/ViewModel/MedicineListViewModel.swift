@@ -29,24 +29,24 @@ final class MedicineListViewModel {
         return filteredMedicines
     } // medicineItems ここまで
 
-    // カスタムの薬リストに検索をかける
-    func searchCustomMedicine(from fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
+    // カスタムの薬リストに検索をかけるメソッド
+    func searchCustomMedicine(fetchedCustomMedicines: FetchedResults<CustomMedicineName>) {
         if searchMedicineNameText.isEmpty {
-            fetchedCustomMedicineNameList.nsPredicate = nil
+            fetchedCustomMedicines.nsPredicate = nil
         } else {
             let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", searchMedicineNameText)
             let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", searchMedicineNameText)
-            fetchedCustomMedicineNameList.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
+            fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
         } // if ここまで
     } // searchCustomMedicine ここまで
 
     // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
-    func deleteCustomMedicineData(index: IndexSet, fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {
+    func deleteCustomMedicineData(index: IndexSet, fetchedCustomMedicines: FetchedResults<CustomMedicineName>) {
         // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
         let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
         if let unwrappedFirstIndex = index.first {
             // CoreDataから該当するindexのメモを削除
-            context.delete(fetchedCustomMedicineNameList[unwrappedFirstIndex])
+            context.delete(fetchedCustomMedicines[unwrappedFirstIndex])
             // エラーハンドリング
             do {
                 // 生成したインスタンスをCoreDataに保持する

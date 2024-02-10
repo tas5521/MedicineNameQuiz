@@ -17,7 +17,7 @@ struct MedicineListView: View {
     @FetchRequest(entity: CustomMedicineName.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicineName.originalName, ascending: true)],
                   animation: nil
-    ) private var fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>
+    ) private var fetchedCustomMedicines: FetchedResults<CustomMedicineName>
     
     var body: some View {
         NavigationStack {
@@ -39,7 +39,7 @@ struct MedicineListView: View {
                     // searchMedicineNameTextが変更されたときに実行
                     .onChange(of: viewModel.searchMedicineNameText) {
                         // カスタムの薬リストに検索をかける
-                        viewModel.searchCustomMedicine(from: fetchedCustomMedicineNameList)
+                        viewModel.searchCustomMedicine(fetchedCustomMedicines: fetchedCustomMedicines)
                     } // onChange ここまで
                     // 上下に余白を追加
                     .padding(.vertical)
@@ -75,7 +75,7 @@ struct MedicineListView: View {
             // カスタムが選択されていたら
             if viewModel.medicineClassification == .customMedicine {
                 List {
-                    ForEach(fetchedCustomMedicineNameList) { medicine in
+                    ForEach(fetchedCustomMedicines) { medicine in
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
@@ -92,7 +92,7 @@ struct MedicineListView: View {
                     .onDelete { index in
                         viewModel.deleteCustomMedicineData(
                             index: index,
-                            fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
+                            fetchedCustomMedicines: fetchedCustomMedicines)
                     } // onDelete ここまで
                 } // List ここまで
                 // 内用薬、注射薬、外用薬が選択されていたら
