@@ -12,27 +12,22 @@ import CoreData
 final class MedicineListViewModel {
     // 選択されているタブを管理する変数
     var medicineClassification: MedicineClassification = .internalMedicine
-    // 内用薬、注射薬、外用薬のデータを格納する変数
-    var medicineNameData: [MedicineItem] {
-        medicineClassification.medicineNameData
-    } // medicineNameData ここまで
     // 薬の検索に使う変数
     var searchMedicineNameText: String = ""
-    // 検索された薬名データを格納する配列
-    var searchedMedicineNameData: [MedicineItem] {
-        // 検索キーワードが空だったら、全てのデータを表示
-        if searchMedicineNameText.isEmpty {
+    // Viewに表示する薬名を格納する配列
+    var medicineItems: [MedicineItem] {
+        let medicineNameData: [MedicineItem] = medicineClassification.medicineNameData
+        // 検索条件がなければ、検索せずに全てのデータを返す
+        guard searchMedicineNameText.isEmpty == false else {
             return medicineNameData
-            // 検索キーワードが入力されていたら
-        } else {
-            // 検索キーワードを先発品名または一般名に含むデータを探す
-            let filteredMedicineNameData = medicineNameData.filter( { medicineName in
-                medicineName.originalName.contains(searchMedicineNameText) || medicineName.genericName.contains(searchMedicineNameText)
-            }) // filteredMedicineNameData ここまで
-            // 検索キーワードを先発品名または一般名に含むデータを表示
-            return filteredMedicineNameData
-        } // if ここまで
-    } // searchedMedicineNameData ここまで
+        } // guard ここまで
+        // 検索キーワードを先発品名または一般名に含むデータを探す
+        let filteredMedicines = medicineNameData.filter( { medicineName in
+            medicineName.originalName.contains(searchMedicineNameText) || medicineName.genericName.contains(searchMedicineNameText)
+        }) // filteredMedicines ここまで
+        // 検索キーワードを先発品名または一般名に含むデータを表示
+        return filteredMedicines
+    } // medicineItems ここまで
 
     // カスタムの薬リストに検索をかける
     func searchCustomMedicine(from fetchedCustomMedicineNameList: FetchedResults<CustomMedicineName>) {

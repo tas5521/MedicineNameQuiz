@@ -11,7 +11,7 @@ struct MedicineListView: View {
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
     // MedicineListViewModelのインスタンスを生成
-    @State private var medicineListViewModel: MedicineListViewModel = MedicineListViewModel()
+    @State private var viewModel: MedicineListViewModel = MedicineListViewModel()
     
     // カスタムの薬データをフェッチ
     @FetchRequest(entity: CustomMedicineName.entity(),
@@ -30,16 +30,16 @@ struct MedicineListView: View {
                 // 垂直方向にレイアウト
                 VStack {
                     // 薬の区分を選択するタブを上に配置
-                    TopTabView(selectTab: $medicineListViewModel.medicineClassification)
+                    TopTabView(selectTab: $viewModel.medicineClassification)
                     // 太字にする
                         .bold()
                     // 薬の検索バー
-                    SearchBar(searchText: $medicineListViewModel.searchMedicineNameText,
+                    SearchBar(searchText: $viewModel.searchMedicineNameText,
                               placeholderText: "薬を検索できます")
                     // searchMedicineNameTextが変更されたときに実行
-                    .onChange(of: medicineListViewModel.searchMedicineNameText) {
+                    .onChange(of: viewModel.searchMedicineNameText) {
                         // カスタムの薬リストに検索をかける
-                        medicineListViewModel.searchCustomMedicine(from: fetchedCustomMedicineNameList)
+                        viewModel.searchCustomMedicine(from: fetchedCustomMedicineNameList)
                     } // onChange ここまで
                     // 上下に余白を追加
                     .padding(.vertical)
@@ -55,7 +55,7 @@ struct MedicineListView: View {
                         // スペースを空ける
                         Spacer()
                         // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                        if medicineListViewModel.medicineClassification == .customMedicine {
+                        if viewModel.medicineClassification == .customMedicine {
                             addMedicineButton
                                 .padding()
                         } // if ここまで
@@ -68,12 +68,12 @@ struct MedicineListView: View {
             .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
-    
+
     // 薬のリスト
     private var medicineList: some View {
         Group {
             // カスタムが選択されていたら
-            if medicineListViewModel.medicineClassification == .customMedicine {
+            if viewModel.medicineClassification == .customMedicine {
                 List {
                     ForEach(fetchedCustomMedicineNameList) { medicine in
                         // 垂直方向にレイアウト
@@ -90,7 +90,7 @@ struct MedicineListView: View {
                     } // ForEach ここまで
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
                     .onDelete { index in
-                        medicineListViewModel.deleteCustomMedicineName(
+                        viewModel.deleteCustomMedicineName(
                             index: index,
                             fetchedCustomMedicineNameList: fetchedCustomMedicineNameList)
                     } // onDelete ここまで
@@ -98,7 +98,7 @@ struct MedicineListView: View {
                 // 内用薬、注射薬、外用薬が選択されていたら
             } else {
                 List {
-                    ForEach(medicineListViewModel.searchedMedicineNameData) { medicine in
+                    ForEach(viewModel.medicineItems) { medicine in
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
