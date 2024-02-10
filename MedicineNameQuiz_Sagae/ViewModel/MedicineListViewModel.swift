@@ -16,8 +16,8 @@ final class MedicineListViewModel {
     // Viewに表示する薬名を格納する配列
     var medicineItems: [MedicineItem] {
         let medicineNameData: [MedicineItem] = medicineClassification.medicineNameData
-        // 検索キーワードが空だったら、全てのデータを表示
-        guard !searchMedicineNameText.isEmpty else {
+        // 検索条件がなければ、検索せずに全てのデータを返す
+        guard searchMedicineNameText.isEmpty == false else {
             return medicineNameData
         } // guard ここまで
         // 検索キーワードを先発品名または一般名に含むデータを探す
