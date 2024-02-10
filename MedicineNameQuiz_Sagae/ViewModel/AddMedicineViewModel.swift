@@ -9,17 +9,20 @@ import SwiftUI
 import CoreData
 
 final class AddMedicineViewModel {
-    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
-    private let viewContext: NSManagedObjectContext = PersistenceController.shared.container.viewContext
-    
     // カスタムの薬名を追加するメソッド
     func addCustomMedicineName(originalName: String, genericName: String) {
-        // 新しいユーザー独自の薬名をCore Dataに保存
+        // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+        let viewContext: NSManagedObjectContext = PersistenceController.shared.container.viewContext
+        // 新しいカスタムの薬名データのインスタンスを生成
         let newCustomMedicineName = CustomMedicineName(context: viewContext)
+        // 薬のカテゴリを保持
         newCustomMedicineName.medicineCategory = "カスタム"
+        // 先発品名を保持
         newCustomMedicineName.originalName = originalName
+        // 一般名を保持
         newCustomMedicineName.genericName = genericName
         do {
+            // カスタムの薬名をCore Dataに保存
             try viewContext.save()
         } catch {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
