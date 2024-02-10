@@ -10,10 +10,8 @@ import SwiftUI
 struct MedicineListView: View {
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
-    // 薬の検索に使う変数
-    @State private var searchMedicineNameText: String = ""
     // MedicineListViewModelのインスタンスを生成
-    @State private var medicineListViewModel: MedicineListViewModel = MedicineListViewModel()
+    @State private var viewModel: MedicineListViewModel = MedicineListViewModel()
     
     var body: some View {
         NavigationStack {
@@ -26,15 +24,15 @@ struct MedicineListView: View {
                 // 垂直方向にレイアウト
                 VStack {
                     // 薬の区分を選択するタブを上に配置
-                    TopTabView(selectTab: $medicineListViewModel.medicineClassification)
+                    TopTabView(selectTab: $viewModel.medicineClassification)
                     // 太字にする
                         .bold()
                     // 薬の検索バー
-                    SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
+                    SearchBar(searchText: $viewModel.searchMedicineNameText, placeholderText: "薬を検索できます")
                     // 上下に余白を追加
                         .padding(.vertical)
                     // 薬リスト
-                    medicineList(of: medicineListViewModel.medicineNameData)
+                    medicineList(of: viewModel.medicineItems)
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -45,7 +43,7 @@ struct MedicineListView: View {
                         // スペースを空ける
                         Spacer()
                         // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                        if medicineListViewModel.medicineClassification == .customMedicine {
+                        if viewModel.medicineClassification == .customMedicine {
                             addMedicineButton
                                 .padding()
                         } // if ここまで
@@ -61,17 +59,17 @@ struct MedicineListView: View {
     } // body ここまで
 
     // 薬のリスト
-    private func medicineList(of medicineArray: [MedicineItem]) -> some View {
+    private func medicineList(of medicineItems: [MedicineItem]) -> some View {
         List {
-            ForEach(medicineArray) { medicine in
+            ForEach(medicineItems) { medicineItem in
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 先発品名を表示
-                    Text(medicine.originalName)
+                    Text(medicineItem.originalName)
                     // 文字の色を青に変更
                         .foregroundStyle(Color.blue)
                     // 一般名を表示
-                    Text(medicine.genericName)
+                    Text(medicineItem.genericName)
                     // 文字の色を赤に変更
                         .foregroundStyle(Color.red)
                 } // VStack ここまで
