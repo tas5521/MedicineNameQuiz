@@ -31,11 +31,17 @@ final class MedicineListViewModel {
 
     // カスタムの薬リストに検索をかけるメソッド
     func searchCustomMedicine(fetchedCustomMedicines: FetchedResults<CustomMedicineName>) {
+        // 検索キーワードが空の場合
         if searchMedicineNameText.isEmpty {
+            // 検索条件を無し（nil）にする
             fetchedCustomMedicines.nsPredicate = nil
         } else {
+            // 検索キーワードがある場合
+            // originalNameに検索キーワードを含むか調べる条件を指定
             let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", searchMedicineNameText)
+            // genericNameに検索キーワードを含むか調べる条件を指定
             let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", searchMedicineNameText)
+            // 指定した条件を適用し、検索をかける
             fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
         } // if ここまで
     } // searchCustomMedicine ここまで
