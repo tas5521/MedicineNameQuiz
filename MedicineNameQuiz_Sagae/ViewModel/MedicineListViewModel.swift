@@ -21,10 +21,10 @@ final class MedicineListViewModel {
             return medicineNameData
         } // guard ここまで
         // 検索キーワードを先発品名または一般名に含むデータを探す
-        let filteredMedicineNameData = medicineNameData.filter( { medicineName in
+        let filteredMedicines = medicineNameData.filter( { medicineName in
             medicineName.originalName.contains(searchMedicineNameText) || medicineName.genericName.contains(searchMedicineNameText)
-        }) // filteredMedicineNameData ここまで
+        }) // filteredMedicines ここまで
         // 検索キーワードを先発品名または一般名に含むデータを表示
-        return filteredMedicineNameData
+        return filteredMedicines
     } // medicineItems ここまで
 } // MedicineListViewModel ここまで
