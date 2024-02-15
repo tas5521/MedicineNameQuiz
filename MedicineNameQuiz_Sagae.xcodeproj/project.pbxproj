@@ -57,7 +57,6 @@
 		4AD680A92B33453D00414F22 /* MedicineListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD680A82B33453D00414F22 /* MedicineListItem.swift */; };
 		4AD680AB2B34868100414F22 /* MedicineSelectableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */; };
 		4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFA48972B3D61A200FC29B8 /* SearchBar.swift */; };
-		4AFD2ADD2B678340005ED035 /* AddMedicineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD2ADC2B678340005ED035 /* AddMedicineViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,7 +111,6 @@
 		4AD680A82B33453D00414F22 /* MedicineListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListItem.swift; sourceTree = "<group>"; };
 		4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineSelectableList.swift; sourceTree = "<group>"; };
 		4AFA48972B3D61A200FC29B8 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		4AFD2ADC2B678340005ED035 /* AddMedicineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				4A9DDA652B66B2B900F65646 /* MedicineListViewModel.swift */,
-				4AFD2ADC2B678340005ED035 /* AddMedicineViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -384,7 +381,6 @@
 				4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */,
 				4AAD5DF02B5809F9000E62ED /* TextFieldBackground.swift in Sources */,
 				4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */,
-				4AFD2ADD2B678340005ED035 /* AddMedicineViewModel.swift in Sources */,
 				4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */,
 				4AADB2D92AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld in Sources */,
 				4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */,

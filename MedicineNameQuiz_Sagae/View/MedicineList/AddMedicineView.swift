@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct AddMedicineView: View {
+    @Environment(\.managedObjectContext) private var context
+
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // 入力された先発品名を管理する変数
-    @State private var originalNameText: String = ""
+    @State private var originalName: String = ""
     // 入力された一般名を管理する変数
-    @State private var genericNameText: String = ""
+    @State private var genericName: String = ""
     // 新しい薬名を追加できるかどうかを管理する変数
     private var canAddNew: Bool {
-        !(originalNameText == "" || genericNameText == "")
+        !(originalName == "" || genericName == "")
     } // canAddNew ここまで
-    // AddMedicineViewModelのインスタンスを生成
-    private let addMedicineViewModel: AddMedicineViewModel = AddMedicineViewModel()
-    
+
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
@@ -39,22 +39,33 @@ struct AddMedicineView: View {
                 // 太字にする
                     .bold()
                 // 先発品名を入力するためのテキストフィールド
-                TextField("先発品名", text: $originalNameText)
+                TextField("先発品名", text: $originalName)
                 // テキストフィールドの背景を指定
                     .textFieldBackground()
                 // 一般名を入力するためのテキストフィールド
-                TextField("一般名", text: $genericNameText)
+                TextField("一般名", text: $genericName)
                 // テキストフィールドの背景を指定
                     .textFieldBackground()
                 // スペースを空ける
                 Spacer()
                 // 追加ボタン
                 Button {
-                    // 薬の名前をカスタムに追加する処理
-                    addMedicineViewModel.addCustomMedicineName(
-                        originalName: originalNameText,
-                        genericName: genericNameText
-                    ) // addCustomMedicineName ここまで
+                    // 新しいカスタムの薬名データのインスタンスを生成
+                    let newCustomMedicineName = CustomMedicineName(context: context)
+                    // 薬のカテゴリを保持
+                    newCustomMedicineName.medicineCategory = "カスタム"
+                    // 先発品名を保持
+                    newCustomMedicineName.originalName = originalName
+                    // 一般名を保持
+                    newCustomMedicineName.genericName = genericName
+                    do {
+                        // カスタムの薬名をCore Dataに保存
+                        try context.save()
+                    } catch {
+                        // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
+                        print("エラー: \(error)")
+                    } // do-try-catch ここまで
+
                     // シートを閉じる
                     dismiss()
                 } label: {

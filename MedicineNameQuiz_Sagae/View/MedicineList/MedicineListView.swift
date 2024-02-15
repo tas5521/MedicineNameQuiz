@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MedicineListView: View {
+    @Environment(\.managedObjectContext) private var context
+
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
     // MedicineListViewModelのインスタンスを生成
@@ -36,11 +38,6 @@ struct MedicineListView: View {
                     // 薬の検索バー
                     SearchBar(searchText: $viewModel.searchMedicineNameText,
                               placeholderText: "薬を検索できます")
-                    // searchMedicineNameTextが変更されたときに実行
-                    .onChange(of: viewModel.searchMedicineNameText) {
-                        // カスタムの薬リストに検索をかける
-                        viewModel.searchCustomMedicine(fetchedCustomMedicines: fetchedCustomMedicines)
-                    } // onChange ここまで
                     // 上下に余白を追加
                     .padding(.vertical)
                     // 薬リスト
@@ -69,6 +66,40 @@ struct MedicineListView: View {
         } // NavigationStack ここまで
     } // body ここまで
 
+    // カスタムの薬リストに検索をかけるメソッド
+    private func searchCustomMedicine() {
+        // 検索キーワードが空の場合
+        if viewModel.searchMedicineNameText.isEmpty {
+            // 検索条件を無し（nil）にする
+            fetchedCustomMedicines.nsPredicate = nil
+        } else {
+            // 検索キーワードがある場合
+            // originalNameに検索キーワードを含むか調べる条件を指定
+            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", viewModel.searchMedicineNameText)
+            // genericNameに検索キーワードを含むか調べる条件を指定
+            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.searchMedicineNameText)
+            // 指定した条件を適用し、検索をかける
+            fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
+        } // if ここまで
+    } // searchCustomMedicine ここまで
+
+    // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
+    private func deleteCustomMedicineData(offsets: IndexSet) {
+
+        for index in offsets {
+            context.delete(fetchedCustomMedicines[index])
+        }
+        // エラーハンドリング
+        do {
+            // 生成したインスタンスをCoreDataに保持する
+            try context.save()
+        } catch {
+            // このメソッドにより、クラッシュログを残して終了する
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        } // エラーハンドリングここまで
+    } // deleteCustomMedicineData ここまで
+
     // 薬のリスト
     private var medicineList: some View {
         Group {
@@ -89,12 +120,14 @@ struct MedicineListView: View {
                         } // VStack ここまで
                     } // ForEach ここまで
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
-                    .onDelete { index in
-                        viewModel.deleteCustomMedicineData(
-                            index: index,
-                            fetchedCustomMedicines: fetchedCustomMedicines)
-                    } // onDelete ここまで
+                    .onDelete(perform: deleteCustomMedicineData)
                 } // List ここまで
+                // searchMedicineNameTextが変更されたときに実行
+                .onChange(of: viewModel.searchMedicineNameText, initial: true ) {
+                    // カスタムの薬リストに検索をかける
+                    searchCustomMedicine()
+                } // onChange ここまで
+
                 // 内用薬、注射薬、外用薬が選択されていたら
             } else {
                 List {
