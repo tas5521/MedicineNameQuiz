@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddMedicineView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
@@ -49,6 +50,7 @@ struct AddMedicineView: View {
                 Spacer()
                 // 追加ボタン
                 Button {
+                    // カスタムの薬名を追加
                     addCustomMedicineName()
                     // シートを閉じる
                     dismiss()
@@ -96,6 +98,7 @@ struct AddMedicineView: View {
         } // ZStack ここまで
     } // body ここまで
     
+    // カスタムの薬名を追加するメソッド
     private func addCustomMedicineName() {
         // 新しいカスタムの薬名データのインスタンスを生成
         let newCustomMedicineName = CustomMedicineName(context: context)
