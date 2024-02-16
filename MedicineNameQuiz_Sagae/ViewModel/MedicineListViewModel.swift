@@ -5,8 +5,7 @@
 //  Created by 寒河江彪流 on 2024/01/29.
 //
 
-import SwiftUI
-import CoreData
+import Foundation
 
 @Observable
 final class MedicineListViewModel {
