@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MedicineListView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
     // MedicineListViewModelのインスタンスを生成
@@ -85,11 +87,7 @@ struct MedicineListView: View {
                         } // VStack ここまで
                     } // ForEach ここまで
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
-                    .onDelete { index in
-                        viewModel.deleteCustomMedicineData(
-                            index: index,
-                            fetchedCustomMedicines: fetchedCustomMedicines)
-                    } // onDelete ここまで
+                    .onDelete(perform: deleteCustomMedicineData)
                 } // List ここまで
                 .onChange(of: viewModel.searchMedicineNameText) {
                     // カスタムの薬リストに検索をかける
@@ -165,6 +163,23 @@ struct MedicineListView: View {
             fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
         } // if ここまで
     } // searchCustomMedicine ここまで
+    
+    // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
+    private func deleteCustomMedicineData(offsets: IndexSet) {
+        for index in offsets {
+            // CoreDataから該当するindexのメモを削除
+            context.delete(fetchedCustomMedicines[index])
+            // エラーハンドリング
+            do {
+                // 生成したインスタンスをCoreDataに保持する
+                try context.save()
+            } catch {
+                // このメソッドにより、クラッシュログを残して終了する
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            } // エラーハンドリングここまで
+        } // if let ここまで
+    } // deleteCustomMedicineData ここまで
 } // MedicineListView ここまで
 
 #Preview {

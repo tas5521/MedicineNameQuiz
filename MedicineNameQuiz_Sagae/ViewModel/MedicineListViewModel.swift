@@ -28,23 +28,4 @@ final class MedicineListViewModel {
         // 検索キーワードを先発品名または一般名に含むデータを表示
         return filteredMedicines
     } // medicineItems ここまで
-
-    // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
-    func deleteCustomMedicineData(index: IndexSet, fetchedCustomMedicines: FetchedResults<CustomMedicineName>) {
-        // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
-        let context: NSManagedObjectContext = PersistenceController.shared.container.viewContext
-        if let unwrappedFirstIndex = index.first {
-            // CoreDataから該当するindexのメモを削除
-            context.delete(fetchedCustomMedicines[unwrappedFirstIndex])
-            // エラーハンドリング
-            do {
-                // 生成したインスタンスをCoreDataに保持する
-                try context.save()
-            } catch {
-                // このメソッドにより、クラッシュログを残して終了する
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            } // エラーハンドリングここまで
-        } // if let ここまで
-    } // deleteCustomMedicineData ここまで
 } // MedicineListViewModel ここまで
