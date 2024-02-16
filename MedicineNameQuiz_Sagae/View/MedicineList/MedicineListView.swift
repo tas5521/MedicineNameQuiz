@@ -36,7 +36,7 @@ struct MedicineListView: View {
                     // 太字にする
                         .bold()
                     // 薬の検索バー
-                    SearchBar(searchText: $viewModel.searchMedicineNameText,
+                    SearchBar(searchText: $viewModel.searchMedicineName,
                               placeholderText: "薬を検索できます")
                     // searchMedicineNameTextが変更されたときに実行
                     // 上下に余白を追加
@@ -89,7 +89,7 @@ struct MedicineListView: View {
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
                     .onDelete(perform: deleteCustomMedicineData)
                 } // List ここまで
-                .onChange(of: viewModel.searchMedicineNameText) {
+                .onChange(of: viewModel.searchMedicineName) {
                     // カスタムの薬リストに検索をかける
                     searchCustomMedicine()
                 } // onChange ここまで
@@ -150,15 +150,15 @@ struct MedicineListView: View {
     // カスタムの薬リストに検索をかけるメソッド
     private func searchCustomMedicine() {
         // 検索キーワードが空の場合
-        if viewModel.searchMedicineNameText.isEmpty {
+        if viewModel.searchMedicineName.isEmpty {
             // 検索条件を無し（nil）にする
             fetchedCustomMedicines.nsPredicate = nil
         } else {
             // 検索キーワードがある場合
             // originalNameに検索キーワードを含むか調べる条件を指定
-            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", viewModel.searchMedicineNameText)
+            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", viewModel.searchMedicineName)
             // genericNameに検索キーワードを含むか調べる条件を指定
-            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.searchMedicineNameText)
+            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.searchMedicineName)
             // 指定した条件を適用し、検索をかける
             fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
         } // if ここまで
