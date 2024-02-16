@@ -169,16 +169,16 @@ struct MedicineListView: View {
         for index in offsets {
             // CoreDataから該当するindexのメモを削除
             context.delete(fetchedCustomMedicines[index])
-            // エラーハンドリング
-            do {
-                // 生成したインスタンスをCoreDataに保持する
-                try context.save()
-            } catch {
-                // このメソッドにより、クラッシュログを残して終了する
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            } // エラーハンドリングここまで
-        } // if let ここまで
+        } // for ここまで
+        // エラーハンドリング
+        do {
+            // 生成したインスタンスをCoreDataに保持する
+            try context.save()
+        } catch {
+            // このメソッドにより、クラッシュログを残して終了する
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        } // エラーハンドリングここまで
     } // deleteCustomMedicineData ここまで
 } // MedicineListView ここまで
 
