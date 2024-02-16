@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddMedicineView: View {
+    @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // 入力された先発品名を管理する変数
@@ -18,8 +19,6 @@ struct AddMedicineView: View {
     private var canAddNew: Bool {
         !(originalName == "" || genericName == "")
     } // canAddNew ここまで
-    // AddMedicineViewModelのインスタンスを生成
-    private let addMedicineViewModel: AddMedicineViewModel = AddMedicineViewModel()
     
     var body: some View {
         // 奥から手前にレイアウト
@@ -50,11 +49,7 @@ struct AddMedicineView: View {
                 Spacer()
                 // 追加ボタン
                 Button {
-                    // 薬の名前をカスタムに追加する処理
-                    addMedicineViewModel.addCustomMedicineName(
-                        originalName: originalName,
-                        genericName: genericName
-                    ) // addCustomMedicineName ここまで
+                    addCustomMedicineName()
                     // シートを閉じる
                     dismiss()
                 } label: {
@@ -100,6 +95,24 @@ struct AddMedicineView: View {
             .padding()
         } // ZStack ここまで
     } // body ここまで
+    
+    private func addCustomMedicineName() {
+        // 新しいカスタムの薬名データのインスタンスを生成
+        let newCustomMedicineName = CustomMedicineName(context: context)
+        // 薬のカテゴリを保持
+        newCustomMedicineName.medicineCategory = "カスタム"
+        // 先発品名を保持
+        newCustomMedicineName.originalName = originalName
+        // 一般名を保持
+        newCustomMedicineName.genericName = genericName
+        do {
+            // カスタムの薬名をCore Dataに保存
+            try context.save()
+        } catch {
+            // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
+            print("エラー: \(error)")
+        } // do-try-catch ここまで
+    } // addCustomMedicineName ここまで
 } // AddMedicineView ここまで
 
 #Preview {
