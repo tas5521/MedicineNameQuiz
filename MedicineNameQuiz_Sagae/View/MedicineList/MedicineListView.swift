@@ -89,7 +89,7 @@ struct MedicineListView: View {
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
                     .onDelete(perform: deleteCustomMedicineData)
                 } // List ここまで
-                .onChange(of: viewModel.searchMedicineName) {
+                .onChange(of: viewModel.searchMedicineName, initial: true) {
                     // カスタムの薬リストに検索をかける
                     searchCustomMedicine()
                 } // onChange ここまで
