@@ -148,7 +148,7 @@ struct MedicineListView: View {
     } // addMedicineButton ここまで
     
     // カスタムの薬リストに検索をかけるメソッド
-    func searchCustomMedicine() {
+    private func searchCustomMedicine() {
         // 検索キーワードが空の場合
         if viewModel.searchMedicineNameText.isEmpty {
             // 検索条件を無し（nil）にする
