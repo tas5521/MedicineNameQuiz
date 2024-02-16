@@ -37,10 +37,6 @@ struct MedicineListView: View {
                     SearchBar(searchText: $viewModel.searchMedicineNameText,
                               placeholderText: "薬を検索できます")
                     // searchMedicineNameTextが変更されたときに実行
-                    .onChange(of: viewModel.searchMedicineNameText) {
-                        // カスタムの薬リストに検索をかける
-                        viewModel.searchCustomMedicine(fetchedCustomMedicines: fetchedCustomMedicines)
-                    } // onChange ここまで
                     // 上下に余白を追加
                     .padding(.vertical)
                     // 薬リスト
@@ -95,6 +91,10 @@ struct MedicineListView: View {
                             fetchedCustomMedicines: fetchedCustomMedicines)
                     } // onDelete ここまで
                 } // List ここまで
+                .onChange(of: viewModel.searchMedicineNameText) {
+                    // カスタムの薬リストに検索をかける
+                    searchCustomMedicine()
+                } // onChange ここまで
                 // 内用薬、注射薬、外用薬が選択されていたら
             } else {
                 List {
@@ -148,6 +148,23 @@ struct MedicineListView: View {
             AddMedicineView()
         } // sheet ここまで
     } // addMedicineButton ここまで
+    
+    // カスタムの薬リストに検索をかけるメソッド
+    func searchCustomMedicine() {
+        // 検索キーワードが空の場合
+        if viewModel.searchMedicineNameText.isEmpty {
+            // 検索条件を無し（nil）にする
+            fetchedCustomMedicines.nsPredicate = nil
+        } else {
+            // 検索キーワードがある場合
+            // originalNameに検索キーワードを含むか調べる条件を指定
+            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", viewModel.searchMedicineNameText)
+            // genericNameに検索キーワードを含むか調べる条件を指定
+            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.searchMedicineNameText)
+            // 指定した条件を適用し、検索をかける
+            fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
+        } // if ここまで
+    } // searchCustomMedicine ここまで
 } // MedicineListView ここまで
 
 #Preview {
