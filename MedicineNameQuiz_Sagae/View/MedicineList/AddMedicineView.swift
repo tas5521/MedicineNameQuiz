@@ -51,7 +51,7 @@ struct AddMedicineView: View {
                 // 追加ボタン
                 Button {
                     // カスタムの薬名を追加
-                    addCustomMedicineName()
+                    addCustomMedicine()
                     // シートを閉じる
                     dismiss()
                 } label: {
@@ -98,9 +98,9 @@ struct AddMedicineView: View {
         } // ZStack ここまで
     } // body ここまで
     
-    // カスタムの薬名を追加するメソッド
-    private func addCustomMedicineName() {
-        // 新しいカスタムの薬名データのインスタンスを生成
+    // カスタムの薬を追加するメソッド
+    private func addCustomMedicine() {
+        // 新しいカスタムの薬データのインスタンスを生成
         let newCustomMedicineName = CustomMedicine(context: context)
         // 薬のカテゴリを保持
         newCustomMedicineName.medicineCategory = "カスタム"
@@ -109,13 +109,13 @@ struct AddMedicineView: View {
         // 一般名を保持
         newCustomMedicineName.genericName = genericName
         do {
-            // カスタムの薬名をCore Dataに保存
+            // カスタムの薬をCore Dataに保存
             try context.save()
         } catch {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
             print("エラー: \(error)")
         } // do-try-catch ここまで
-    } // addCustomMedicineName ここまで
+    } // addCustomMedicine ここまで
 } // AddMedicineView ここまで
 
 #Preview {
