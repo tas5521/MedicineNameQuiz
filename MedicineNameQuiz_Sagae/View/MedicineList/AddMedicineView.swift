@@ -101,7 +101,7 @@ struct AddMedicineView: View {
     // カスタムの薬名を追加するメソッド
     private func addCustomMedicineName() {
         // 新しいカスタムの薬名データのインスタンスを生成
-        let newCustomMedicineName = CustomMedicineName(context: context)
+        let newCustomMedicineName = CustomMedicine(context: context)
         // 薬のカテゴリを保持
         newCustomMedicineName.medicineCategory = "カスタム"
         // 先発品名を保持

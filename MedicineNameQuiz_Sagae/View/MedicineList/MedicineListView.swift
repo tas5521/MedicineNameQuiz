@@ -16,10 +16,10 @@ struct MedicineListView: View {
     @State private var viewModel: MedicineListViewModel = MedicineListViewModel()
     
     // カスタムの薬データをフェッチ
-    @FetchRequest(entity: CustomMedicineName.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicineName.originalName, ascending: true)],
+    @FetchRequest(entity: CustomMedicine.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.originalName, ascending: true)],
                   animation: nil
-    ) private var fetchedCustomMedicines: FetchedResults<CustomMedicineName>
+    ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
     
     var body: some View {
         NavigationStack {
