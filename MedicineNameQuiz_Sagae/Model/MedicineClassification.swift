@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum MedicineClassification: String, CaseIterable {
     case internalMedicine = "内用薬"

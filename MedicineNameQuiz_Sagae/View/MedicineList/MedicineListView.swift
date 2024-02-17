@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct MedicineListView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 薬名追加ビューの表示を管理する変数
     @State private var isShowAddMedicineView: Bool = false
     // MedicineListViewModelのインスタンスを生成
     @State private var viewModel: MedicineListViewModel = MedicineListViewModel()
+    
+    // カスタムの薬データをフェッチ
+    @FetchRequest(entity: CustomMedicine.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.originalName, ascending: true)],
+                  animation: nil
+    ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
     
     var body: some View {
         NavigationStack {
@@ -28,11 +36,13 @@ struct MedicineListView: View {
                     // 太字にする
                         .bold()
                     // 薬の検索バー
-                    SearchBar(searchText: $viewModel.searchMedicineNameText, placeholderText: "薬を検索できます")
+                    SearchBar(searchText: $viewModel.searchMedicineName,
+                              placeholderText: "薬を検索できます")
+                    // searchMedicineNameTextが変更されたときに実行
                     // 上下に余白を追加
-                        .padding(.vertical)
+                    .padding(.vertical)
                     // 薬リスト
-                    medicineList(of: viewModel.medicineItems)
+                    medicineList
                 } // VStack ここまで
                 // 垂直方向にレイアウト
                 VStack {
@@ -50,7 +60,6 @@ struct MedicineListView: View {
                     } // HStack ここまで
                 } // VStack ここまで
             } // ZStack ここまで
-            // ナビゲーションバーの設定
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("薬リスト", displayMode: .inline)
             // ナビゲーションバーの背景を変更
@@ -59,22 +68,50 @@ struct MedicineListView: View {
     } // body ここまで
 
     // 薬のリスト
-    private func medicineList(of medicineItems: [MedicineItem]) -> some View {
-        List {
-            ForEach(medicineItems) { medicineItem in
-                // 垂直方向にレイアウト
-                VStack(alignment: .leading) {
-                    // 先発品名を表示
-                    Text(medicineItem.originalName)
-                    // 文字の色を青に変更
-                        .foregroundStyle(Color.blue)
-                    // 一般名を表示
-                    Text(medicineItem.genericName)
-                    // 文字の色を赤に変更
-                        .foregroundStyle(Color.red)
-                } // VStack ここまで
-            } // ForEach ここまで
-        } // List ここまで
+    private var medicineList: some View {
+        Group {
+            // カスタムが選択されていたら
+            if viewModel.medicineClassification == .customMedicine {
+                List {
+                    ForEach(fetchedCustomMedicines) { medicine in
+                        // 垂直方向にレイアウト
+                        VStack(alignment: .leading) {
+                            // 先発品名を表示
+                            Text(medicine.originalName ?? "")
+                            // 文字の色を青に変更
+                                .foregroundStyle(Color.blue)
+                            // 一般名を表示
+                            Text(medicine.genericName ?? "")
+                            // 文字の色を赤に変更
+                                .foregroundStyle(Color.red)
+                        } // VStack ここまで
+                    } // ForEach ここまで
+                    // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
+                    .onDelete(perform: deleteCustomMedicineData)
+                } // List ここまで
+                .onChange(of: viewModel.searchMedicineName, initial: true) {
+                    // カスタムの薬リストに検索をかける
+                    searchCustomMedicine()
+                } // onChange ここまで
+                // 内用薬、注射薬、外用薬が選択されていたら
+            } else {
+                List {
+                    ForEach(viewModel.medicineItems) { medicine in
+                        // 垂直方向にレイアウト
+                        VStack(alignment: .leading) {
+                            // 先発品名を表示
+                            Text(medicine.originalName)
+                            // 文字の色を青に変更
+                                .foregroundStyle(Color.blue)
+                            // 一般名を表示
+                            Text(medicine.genericName)
+                            // 文字の色を赤に変更
+                                .foregroundStyle(Color.red)
+                        } // VStack ここまで
+                    } // ForEach ここまで
+                } // List ここまで
+            } // if ここまで
+        } // Group ここまで
         // 太字にする
         .bold()
         // リストのスタイルを.groupedに変更
@@ -82,7 +119,7 @@ struct MedicineListView: View {
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // medicineList ここまで
-
+    
     // カスタムで薬名を追加するボタン
     private var addMedicineButton: some View {
         Button {
@@ -109,6 +146,40 @@ struct MedicineListView: View {
             AddMedicineView()
         } // sheet ここまで
     } // addMedicineButton ここまで
+    
+    // カスタムの薬リストに検索をかけるメソッド
+    private func searchCustomMedicine() {
+        // 検索キーワードが空の場合
+        if viewModel.searchMedicineName.isEmpty {
+            // 検索条件を無し（nil）にする
+            fetchedCustomMedicines.nsPredicate = nil
+        } else {
+            // 検索キーワードがある場合
+            // originalNameに検索キーワードを含むか調べる条件を指定
+            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", viewModel.searchMedicineName)
+            // genericNameに検索キーワードを含むか調べる条件を指定
+            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.searchMedicineName)
+            // 指定した条件を適用し、検索をかける
+            fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
+        } // if ここまで
+    } // searchCustomMedicine ここまで
+    
+    // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
+    private func deleteCustomMedicineData(offsets: IndexSet) {
+        for index in offsets {
+            // CoreDataから該当するindexのメモを削除
+            context.delete(fetchedCustomMedicines[index])
+        } // for ここまで
+        // エラーハンドリング
+        do {
+            // 生成したインスタンスをCoreDataに保持する
+            try context.save()
+        } catch {
+            // このメソッドにより、クラッシュログを残して終了する
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        } // エラーハンドリングここまで
+    } // deleteCustomMedicineData ここまで
 } // MedicineListView ここまで
 
 #Preview {
