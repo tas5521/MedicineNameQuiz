@@ -49,6 +49,9 @@ struct CreateQuestionListView: View {
     // リストに名前が無い時に表示するアラートを管理する変数
     @State private var isShowNoListNameAlert = false
     
+    // 問題リストを作成するか編集するかを管理する変数
+    let questionListMode: QuestionListMode
+
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
@@ -106,7 +109,7 @@ struct CreateQuestionListView: View {
             } // VStack ここまで
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("リスト編集", displayMode: .inline)
+        .navigationBarTitle("リスト\(questionListMode.rawValue)", displayMode: .inline)
         // ナビゲーションバーの背景を変更
         .navigationBarBackground()
         .toolbar {
@@ -144,5 +147,5 @@ struct CreateQuestionListView: View {
 } // CreateQuestionListView ここまで
 
 #Preview {
-    CreateQuestionListView()
+    CreateQuestionListView(questionListMode: .create)
 }

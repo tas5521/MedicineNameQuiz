@@ -69,7 +69,7 @@ struct QuestionsView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
                     // 問題リスト作成画面へ遷移
-                    CreateQuestionListView()
+                    CreateQuestionListView(questionListMode: .edit)
                 } label: {
                     // ラベル
                     Text("編集")

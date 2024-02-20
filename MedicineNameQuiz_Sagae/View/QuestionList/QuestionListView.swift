@@ -127,7 +127,7 @@ struct QuestionListView: View {
     private var addListButton: some View {
         NavigationLink {
             // 問題リスト作成画面へ遷移
-            CreateQuestionListView()
+            CreateQuestionListView(questionListMode: .create)
         } label: {
             Image(systemName: "plus.circle.fill")
             // リサイズする

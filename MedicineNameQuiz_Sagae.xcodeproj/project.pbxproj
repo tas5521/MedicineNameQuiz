@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A20191C2B84D3E5007FE769 /* QuestionListMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20191B2B84D3E5007FE769 /* QuestionListMode.swift */; };
 		4A3937872AD53F8D00BA5CE7 /* TabSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */; };
 		4A4DE7F32B667C7100F1B4CB /* MedicineNameList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */; };
 		4A764F082B492AD60052EB60 /* NavigationBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A764F072B492AD60052EB60 /* NavigationBarBackground.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A20191B2B84D3E5007FE769 /* QuestionListMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListMode.swift; sourceTree = "<group>"; };
 		4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSelection.swift; sourceTree = "<group>"; };
 		4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = MedicineNameList.csv; sourceTree = SOURCE_ROOT; };
 		4A764F072B492AD60052EB60 /* NavigationBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarBackground.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				4AB111642B2E091500DD79F2 /* StudyMode.swift */,
 				4A99F6502B2F36CE004672AD /* StudyResult.swift */,
 				4A99F6532B2F3BEC004672AD /* StudyResultListItem.swift */,
+				4A20191B2B84D3E5007FE769 /* QuestionListMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				4AA088442AC98855005BD8C2 /* HowToUseStudyView.swift in Sources */,
 				4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */,
 				4AA088482AC98887005BD8C2 /* HowToUseRankingView.swift in Sources */,
+				4A20191C2B84D3E5007FE769 /* QuestionListMode.swift in Sources */,
 				4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */,
 				4AA088302AC93A3C005BD8C2 /* QRCodeView.swift in Sources */,
 				4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */,
