@@ -25,7 +25,6 @@
 		4A9671802AC886B9006F7157 /* QuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96717F2AC886B9006F7157 /* QuestionsView.swift */; };
 		4A9671822AC888B7006F7157 /* MedicineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671812AC888B7006F7157 /* MedicineItem.swift */; };
 		4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671832AC890B7006F7157 /* CreateQuestionListView.swift */; };
-		4A9671862AC92309006F7157 /* EditQuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671852AC92309006F7157 /* EditQuestionListView.swift */; };
 		4A99F6512B2F36CE004672AD /* StudyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F6502B2F36CE004672AD /* StudyResult.swift */; };
 		4A99F6542B2F3BEC004672AD /* StudyResultListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A99F6532B2F3BEC004672AD /* StudyResultListItem.swift */; };
 		4A9DDA662B66B2B900F65646 /* MedicineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9DDA652B66B2B900F65646 /* MedicineListViewModel.swift */; };
@@ -78,7 +77,6 @@
 		4A96717F2AC886B9006F7157 /* QuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsView.swift; sourceTree = "<group>"; };
 		4A9671812AC888B7006F7157 /* MedicineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineItem.swift; sourceTree = "<group>"; };
 		4A9671832AC890B7006F7157 /* CreateQuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionListView.swift; sourceTree = "<group>"; };
-		4A9671852AC92309006F7157 /* EditQuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditQuestionListView.swift; sourceTree = "<group>"; };
 		4A99F6502B2F36CE004672AD /* StudyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyResult.swift; sourceTree = "<group>"; };
 		4A99F6532B2F3BEC004672AD /* StudyResultListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyResultListItem.swift; sourceTree = "<group>"; };
 		4A9DDA652B66B2B900F65646 /* MedicineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListViewModel.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			children = (
 				4A96715D2AC7B73E006F7157 /* QuestionListView.swift */,
 				4A96717F2AC886B9006F7157 /* QuestionsView.swift */,
-				4A9671852AC92309006F7157 /* EditQuestionListView.swift */,
 				4A9671832AC890B7006F7157 /* CreateQuestionListView.swift */,
 				4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */,
 			);
@@ -366,7 +363,6 @@
 				4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */,
 				4AA088482AC98887005BD8C2 /* HowToUseRankingView.swift in Sources */,
 				4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */,
-				4A9671862AC92309006F7157 /* EditQuestionListView.swift in Sources */,
 				4AA088302AC93A3C005BD8C2 /* QRCodeView.swift in Sources */,
 				4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */,
 				4AA088322AC9409D005BD8C2 /* MedicineClassification.swift in Sources */,

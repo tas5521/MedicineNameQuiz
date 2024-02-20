@@ -11,11 +11,11 @@ struct CreateQuestionListView: View {
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // 問題リストの名前を保持する変数
-    @State private var questionListName: String = ""
+    @State private var listName: String = ""
     // 選択されているタブを管理する変数
     @State private var medicineClassification: MedicineClassification = .internalMedicine
     // 薬の検索に使う変数
-    @State private var searchMedicineNameText: String = ""
+    @State private var searchMedicineName: String = ""
 
     // ダミーの内用薬の配列
     @State private var dummyInternalMedicineList: [MedicineListItem] = [
@@ -44,81 +44,101 @@ struct CreateQuestionListView: View {
         MedicineListItem(originalName: "カスタム先発品名2", genericName: "カスタム一般名2", selected: false),
         MedicineListItem(originalName: "カスタム先発品名3", genericName: "カスタム一般名3", selected: false)
     ] // dummyCustomMedicineList ここまで
-
+    
     // View Presentation State
-    // リストに保存するためのポップアップの表示を管理する変数
-    @State private var isShowPopUp = false
-
+    // リストに名前が無い時に表示するアラートを管理する変数
+    @State private var isShowNoListNameAlert = false
+    
     var body: some View {
+        // 奥から手前にレイアウト
         ZStack {
-            // 背景を水色に変更
+            // 背景を水色にする
             Color.backgroundSkyBlue
             // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
-            // 垂直方向にレイアウト
-            VStack {
-                // 薬の区分を選択するタブを上に配置
+            // 垂直右方向にレイアウト
+            VStack(spacing: 0) {
+                // 奥から手前にレイアウト
+                ZStack {
+                    // 背景をタブの青色にする
+                    Color.tabBlue
+                    // セーフエリア外にも背景を表示
+                        .ignoresSafeArea()
+                    // 高さを90に指定
+                        .frame(height: 90)
+                    // 垂直右方向にレイアウト
+                    VStack(alignment: .leading) {
+                        // 「リストの名前」のテキストを配置
+                        Text("リストの名前")
+                        // 文字色を白に指定
+                            .foregroundStyle(Color.white)
+                        // 左に余白を追加
+                            .padding(.leading)
+                        // リスト名編集用テキストフィールド
+                        TextField("リストの名前を入力してください", text: $listName)
+                        // テキストフィールドの背景を指定
+                            .textFieldBackground()
+                            .padding(.horizontal)
+                    } // VStack ここまで
+                } // ZStack ここまで
+                // 薬の区分を選択するタブを配置
                 TopTabView(selectTab: $medicineClassification)
                 // 太字にする
                 .bold()
-                // 薬の検索バー
-                SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
-                // 上に余白を追加
+                // 薬の検索バーを配置
+                SearchBar(searchText: $searchMedicineName, placeholderText: "薬を検索できます")
                     .padding(.top)
                 // 薬リスト
                 switch medicineClassification {
+                    // 内用薬を表示
                 case .internalMedicine:
                     MedicineSelectableList(medicineArray: $dummyInternalMedicineList)
+                    // 注射薬を表示
                 case .injectionMedicine:
                     MedicineSelectableList(medicineArray: $dummyInjectionMedicineList)
+                    // 外用薬を表示
                 case .externalMedicine:
                     MedicineSelectableList(medicineArray: $dummyExternalMedicineList)
+                    // カスタムを表示
                 case .customMedicine:
                     MedicineSelectableList(medicineArray: $dummyCustomMedicineList)
                 } // switch ここまで
             } // VStack ここまで
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("リスト作成", displayMode: .inline)
+        .navigationBarTitle("リスト編集", displayMode: .inline)
         // ナビゲーションバーの背景を変更
         .navigationBarBackground()
-        // ナビゲーションバーの右側に保存ボタンを配置
         .toolbar {
             // ボタンの位置を指定
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    // アラートを表示
-                    isShowPopUp.toggle()
+                    if listName.isEmpty {
+                        isShowNoListNameAlert.toggle()
+                    } else {
+                        // 保存処理
+                        // 画面を閉じる
+                        dismiss()
+                    } // if ここまで
                 } label: {
                     // ラベル
                     Text("保存")
                     // 色を指定
-                        .foregroundStyle(Color.white)
+                        .foregroundColor(Color.white)
                 } // Button ここまで
             } // ToolbarItem ここまで
         } // toolbar ここまで
-        // リストに保存するためのポップアップ
-        .alert("リストに保存", isPresented: $isShowPopUp) {
-            // リスト名を取得するためのテキストフィールド
-            TextField("リストの名前", text: $questionListName)
-            // 名前が付けられたリストを保存するボタン
-            Button {
-                // 問題リストの作成処理
-                // 画面を閉じる
-                dismiss()
-            } label: {
-                // ラベル
-                Text("保存")
-            } // Button ここまで
-            // やめるボタン
-            Button(role: .cancel) {
-                // 何もしない
-            } label: {
-                // ラベル
-                Text("やめる")
-            } // Button ここまで
-        } message: {
-            Text("リストに名前をつけてください")
+        // リストの名前が無いことを警告するアラート
+        .alert("リストに名前がありません", isPresented: $isShowNoListNameAlert) {
+                // やめるボタン
+                Button {
+                    // 何もしない
+                } label: {
+                    // ラベル
+                    Text("OK")
+                } // Button ここまで
+            } message: {
+                Text("リストに名前をつけてください")
         } // alert ここまで
     } // body ここまで
 } // CreateQuestionListView ここまで

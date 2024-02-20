@@ -68,8 +68,8 @@ struct QuestionsView: View {
             // ボタンの位置を指定
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    // 編集画面へ遷移
-                    EditQuestionListView()
+                    // 問題リスト作成画面へ遷移
+                    CreateQuestionListView()
                 } label: {
                     // ラベル
                     Text("編集")
@@ -85,7 +85,7 @@ struct QuestionsView: View {
                                            originalName: "アムロジン",
                                            genericName: "アムロジピンべシル酸塩"),
                               MedicineItem(medicineCategory: "内用薬",
-                                           originalName: "エバステル", 
+                                           originalName: "エバステル",
                                            genericName: "エバスチン"),
                               MedicineItem(medicineCategory: "内用薬",
                                            originalName: "オノン",
