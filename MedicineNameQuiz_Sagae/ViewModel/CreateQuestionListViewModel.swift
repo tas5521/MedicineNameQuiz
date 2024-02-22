@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 @Observable
 final class CreateQuestionListViewModel {
@@ -26,42 +25,15 @@ final class CreateQuestionListViewModel {
     // カスタム薬の配列
     var customMedicineList: [MedicineListItem] = []
     
-    // 薬のデータをこの配列に格納
-    private var medicineDataArray: [MedicineListItem] = []
-    
-    // 薬データをフェッチ
-    func fetchMedicineListItem(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
-        // CSVデータを取得していなければ、取得する
-        if medicineDataArray.isEmpty {
-            // CSV読み込みのクラスのインスタンスを生成
-            let csvLoader = CSVLoader()
-            // 全ての薬データのCSVLineを取得
-            let medicineDataCSVLines = csvLoader.loadCsvFile(resourceName: "MedicineNameList")
-            // 薬のデータを配列に格納
-            medicineDataArray = medicineDataCSVLines
-            // カンマ（,）で分割した配列を作成
-                .map({ line in
-                    line.components(separatedBy: ",")
-                })
-            // MedicineListItem構造体にする
-                .compactMap({ array in
-                    MedicineListItem(medicineCategory: array[1],
-                                     originalName: array[2],
-                                     genericName: array[3],
-                                     selected: false)
-                })
-        } // if ここまで
+    func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
+        // CreateQuestionListModelのインスタンスを生成
+        let createQuestionListModel = CreateQuestionListModel()
+        // 薬データを取得
+        let medicineListItems = createQuestionListModel.fetchMedicineListItems(fetchedCustomMedicines: fetchedCustomMedicines)
         // 薬データを配列に格納
-        internalMedicineList = medicineDataArray.filter({ medicineData in medicineData.medicineCategory == "内用薬" })
-        injectionMedicineList = medicineDataArray.filter({ medicineData in medicineData.medicineCategory == "注射薬" })
-        externalMedicineList = medicineDataArray.filter({ medicineData in medicineData.medicineCategory == "外用薬" })
-        customMedicineList = fetchedCustomMedicines
-        // MedicineListItem構造体にする
-            .compactMap({ array in
-                MedicineListItem(medicineCategory: array.medicineCategory ?? "",
-                                 originalName: array.originalName ?? "",
-                                 genericName: array.genericName ?? "",
-                                 selected: false)
-            })
-    } // fetchMedicineListItem ここまで
+        internalMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "内用薬" })
+        injectionMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "注射薬" })
+        externalMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "外用薬" })
+        customMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "カスタム" })
+    } // fetchMedicines ここまで
 } // CreateQuestionListViewModel ここまで
