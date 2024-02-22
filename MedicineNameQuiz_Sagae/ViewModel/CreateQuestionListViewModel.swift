@@ -25,9 +25,11 @@ final class CreateQuestionListViewModel {
     // カスタム薬の配列
     var customMedicineList: [MedicineListItem] = []
     
+    // CreateQuestionListModelのインスタンスを生成
+    let createQuestionListModel = CreateQuestionListModel()
+
+    // 薬データをフェッチ
     func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
-        // CreateQuestionListModelのインスタンスを生成
-        let createQuestionListModel = CreateQuestionListModel()
         // 薬データを取得
         let medicineListItems = createQuestionListModel.fetchMedicineListItems(fetchedCustomMedicines: fetchedCustomMedicines)
         // 薬データを配列に格納
