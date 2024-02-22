@@ -16,7 +16,11 @@ struct CreateQuestionListView: View {
     // View Presentation State
     // リストに名前が無い時に表示するアラートを管理する変数
     @State private var isShowNoListNameAlert = false
-    
+    // カスタムの薬データをフェッチ
+    @FetchRequest(entity: CustomMedicine.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.originalName, ascending: true)],
+                  animation: nil
+    ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
     // 問題リストを作成するか編集するかを管理する変数
     let questionListMode: QuestionListMode
 
@@ -78,7 +82,7 @@ struct CreateQuestionListView: View {
         } // ZStack ここまで
         .onAppear {
             // 薬リストをフェッチ
-            viewModel.fetchMedicineListItem()
+            viewModel.fetchMedicineListItem(fetchedCustomMedicines: fetchedCustomMedicines)
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト\(questionListMode.rawValue)", displayMode: .inline)
