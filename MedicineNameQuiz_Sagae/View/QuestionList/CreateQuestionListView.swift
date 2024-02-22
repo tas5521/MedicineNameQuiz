@@ -81,6 +81,8 @@ struct CreateQuestionListView: View {
             } // VStack ここまで
         } // ZStack ここまで
         .onAppear {
+            // リスト名を無くす
+            viewModel.listName.removeAll()
             // 薬リストをフェッチ
             viewModel.fetchMedicineListItem(fetchedCustomMedicines: fetchedCustomMedicines)
         } // onAppear ここまで
