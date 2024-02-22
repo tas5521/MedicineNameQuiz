@@ -76,6 +76,10 @@ struct CreateQuestionListView: View {
                 } // switch ここまで
             } // VStack ここまで
         } // ZStack ここまで
+        .onAppear {
+            // 薬リストをフェッチ
+            viewModel.fetchMedicineListItem()
+        } // onAppear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト\(questionListMode.rawValue)", displayMode: .inline)
         // ナビゲーションバーの背景を変更
