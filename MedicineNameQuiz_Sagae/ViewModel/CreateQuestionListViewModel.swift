@@ -26,7 +26,7 @@ final class CreateQuestionListViewModel {
     var customMedicineList: [MedicineListItem] = []
     
     // CreateQuestionListModelのインスタンスを生成
-    let createQuestionListModel = CreateQuestionListModel()
+    private let createQuestionListModel = CreateQuestionListModel()
 
     // 薬データをフェッチ
     func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
