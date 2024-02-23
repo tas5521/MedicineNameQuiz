@@ -13,7 +13,7 @@ final class CreateQuestionListModel {
     
     // 薬データをフェッチ
     func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
-        // CSVデータを取得していなければ、取得する
+        // 内用薬、注射薬、外用薬のデータを取得していなければ、取得する
         if medicineDataArray.isEmpty {
             // CSV読み込みのクラスのインスタンスを生成
             let csvLoader = CSVLoader()
@@ -36,12 +36,12 @@ final class CreateQuestionListModel {
         // カスタムの薬データをフェッチ
         let customMedicineDataArray = fetchedCustomMedicines
         // MedicineListItem構造体にする
-            .compactMap({ array in
-                MedicineListItem(medicineCategory: array.medicineCategory ?? "",
-                                 originalName: array.originalName ?? "",
-                                 genericName: array.genericName ?? "",
+            .compactMap({ customMedicine in
+                MedicineListItem(medicineCategory: customMedicine.medicineCategory ?? "",
+                                 originalName: customMedicine.originalName ?? "",
+                                 genericName: customMedicine.genericName ?? "",
                                  selected: false)
             })
         return medicineDataArray + customMedicineDataArray
-    } // fetchMedicineListItem ここまで
+    } // fetchMedicineListItems ここまで
 } // CreateQuestionListModel ここまで
