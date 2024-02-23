@@ -37,5 +37,5 @@ final class CreateQuestionListViewModel {
         injectionMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "注射薬" })
         externalMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "外用薬" })
         customMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "カスタム" })
-    } // fetchMedicines ここまで
+    } // fetchMedicineListItems ここまで
 } // CreateQuestionListViewModel ここまで

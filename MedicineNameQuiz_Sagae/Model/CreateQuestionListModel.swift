@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class CreateQuestionListModel {
-    // 薬のデータをこの配列に格納
+    // 内用薬、注射薬、外用薬のデータをこの配列に格納
     private var medicineDataArray: [MedicineListItem] = []
     
     // 薬データをフェッチ
