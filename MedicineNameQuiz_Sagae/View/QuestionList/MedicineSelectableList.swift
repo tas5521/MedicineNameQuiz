@@ -28,7 +28,9 @@ struct MedicineSelectableList: View {
                 // スペースを空ける
                 Spacer()
                     // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
+                if !medicineArray.isEmpty {
                     selectAllButton(selectAll: !isAllMedicineSelected)
+                } // if ここまで
             } // HStack ここまで
             // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
