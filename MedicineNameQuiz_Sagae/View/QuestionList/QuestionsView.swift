@@ -81,13 +81,13 @@ struct QuestionsView: View {
 
 #Preview {
     QuestionsView(listName: "プレビュー薬局",
-                  questions: [MedicineItem(medicineCategory: "内用薬",
+                  questions: [MedicineItem(medicineCategory: .internalMedicine,
                                            originalName: "アムロジン",
                                            genericName: "アムロジピンべシル酸塩"),
-                              MedicineItem(medicineCategory: "内用薬",
+                              MedicineItem(medicineCategory: .internalMedicine,
                                            originalName: "エバステル",
                                            genericName: "エバスチン"),
-                              MedicineItem(medicineCategory: "内用薬",
+                              MedicineItem(medicineCategory: .internalMedicine,
                                            originalName: "オノン",
                                            genericName: "プランルカスト水和物")
                   ]

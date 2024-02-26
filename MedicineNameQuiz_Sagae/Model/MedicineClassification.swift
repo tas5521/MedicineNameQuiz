@@ -28,14 +28,21 @@ enum MedicineClassification: String, CaseIterable {
                 })
             // MedicineItem構造体にする
                 .compactMap({ array in
-                    MedicineItem(medicineCategory: array[1], originalName: array[2], genericName: array[3])
+                    MedicineItem(medicineCategory: MedicineClassification.getCategory(from: array[1]),
+                                 originalName: array[2],
+                                 genericName: array[3])
                 })
         } // if ここまで
         // 選択された区分により、データをフィルターする
         let filteredMedicineDataArray = MedicineClassification.medicineDataArray.filter( { medicineData in
-            medicineData.medicineCategory == self.rawValue
+            medicineData.medicineCategory == self
         })
         // 薬の名前の要素の配列を返却
         return filteredMedicineDataArray
     } // medicineNameData ここまで
+    
+    // 文字列（内用薬、注射薬、外用薬、カスタム）から列挙子に変換するメソッド
+    static func getCategory(from categoryName: String) -> MedicineClassification {
+        return MedicineClassification.allCases.first { $0.rawValue == categoryName } ?? .customMedicine
+    } // getCategory ここまで
 } // MedicineClassificationここまで
