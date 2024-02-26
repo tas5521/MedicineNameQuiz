@@ -33,9 +33,17 @@ final class CreateQuestionListViewModel {
         // 薬データを取得
         let medicineListItems = createQuestionListModel.fetchMedicineListItems(fetchedCustomMedicines: fetchedCustomMedicines)
         // 薬データを配列に格納
-        internalMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "内用薬" })
-        injectionMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "注射薬" })
-        externalMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "外用薬" })
-        customMedicineList = medicineListItems.filter({ medicineData in medicineData.medicineCategory == "カスタム" })
+        internalMedicineList = medicineListItems.filter({ medicineData in
+            medicineData.medicineCategory == MedicineClassification.internalMedicine.rawValue
+        }) // internalMedicineList ここまで
+        injectionMedicineList = medicineListItems.filter({ medicineData in
+            medicineData.medicineCategory == MedicineClassification.injectionMedicine.rawValue
+        }) // injectionMedicineList ここまで
+        externalMedicineList = medicineListItems.filter({ medicineData in
+            medicineData.medicineCategory == MedicineClassification.externalMedicine.rawValue
+        }) // externalMedicineList ここまで
+        customMedicineList = medicineListItems.filter({ medicineData in
+            medicineData.medicineCategory == MedicineClassification.customMedicine.rawValue
+        }) // customMedicineList ここまで
     } // fetchMedicineListItems ここまで
 } // CreateQuestionListViewModel ここまで
