@@ -20,11 +20,8 @@ enum MedicineClassification: String, CaseIterable {
     var medicineNameData: [MedicineItem] {
         // もし薬データを読み込んでいなかったら
         if MedicineClassification.medicineDataArray.isEmpty {
-            let csvLoader = CSVLoader()
-            // 全ての薬データのCSVLineを取得
-            let medicineDataCSVLines = csvLoader.loadCsvFile(resourceName: "MedicineNameList")
             // 薬のデータを配列に格納
-            MedicineClassification.medicineDataArray = medicineDataCSVLines
+            MedicineClassification.medicineDataArray = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
             // カンマ（,）で分割した配列を作成
                 .map({ line in
                     line.components(separatedBy: ",")

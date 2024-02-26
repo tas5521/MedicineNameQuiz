@@ -15,12 +15,8 @@ final class CreateQuestionListModel {
     func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
         // 内用薬、注射薬、外用薬のデータを取得していなければ、取得する
         if medicineDataArray.isEmpty {
-            // CSV読み込みのクラスのインスタンスを生成
-            let csvLoader = CSVLoader()
-            // 全ての薬データのCSVLineを取得
-            let medicineDataCSVLines = csvLoader.loadCsvFile(resourceName: "MedicineNameList")
             // 薬のデータを配列に格納
-            medicineDataArray = medicineDataCSVLines
+            medicineDataArray = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
             // カンマ（,）で分割した配列を作成
                 .map({ line in
                     line.components(separatedBy: ",")

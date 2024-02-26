@@ -9,7 +9,7 @@ import Foundation
 
 final class CSVLoader {
     // CSVファイルを読み込む関数を作成
-    func loadCsvFile(resourceName: String) -> [String] {
+    static func loadCsvFile(resourceName: String) -> [String] {
         // 読み込み先に、ファイルが存在してるかチェック
         guard let path = Bundle.main.path(forResource: resourceName, ofType:"csv") else {
             // 存在しなければ、エラーメッセージを配列に格納して返却
