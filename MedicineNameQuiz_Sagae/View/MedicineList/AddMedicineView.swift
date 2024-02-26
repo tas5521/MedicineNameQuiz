@@ -81,6 +81,8 @@ struct AddMedicineView: View {
                     Text("やめる")
                     // 太字にする
                         .bold()
+                    // 文字色を白に指定
+                        .foregroundStyle(Color.white)
                     // 最大幅.infinityに指定
                         .frame(maxWidth: .infinity)
                     // 高さ60に指定
