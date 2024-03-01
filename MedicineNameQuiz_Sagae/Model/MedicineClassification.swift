@@ -11,7 +11,7 @@ enum MedicineCategory: String, CaseIterable {
     case oral = "内用薬"
     case injection = "注射薬"
     case topical = "外用薬"
-    case customMedicine = "カスタム"
+    case custom = "カスタム"
 
     // 薬のデータをこの配列に格納
     static private var medicineDataArray: [MedicineItem] = []
@@ -43,6 +43,6 @@ enum MedicineCategory: String, CaseIterable {
     
     // 文字列（内用薬、注射薬、外用薬、カスタム）から列挙子に変換するメソッド
     static func getCategory(from categoryName: String) -> MedicineCategory {
-        MedicineCategory(rawValue: categoryName) ?? .customMedicine
+        MedicineCategory(rawValue: categoryName) ?? .custom
     } // getCategory ここまで
 } // MedicineCategory ここまで

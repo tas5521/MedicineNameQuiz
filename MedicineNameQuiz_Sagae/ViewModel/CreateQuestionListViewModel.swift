@@ -43,7 +43,7 @@ final class CreateQuestionListViewModel {
             medicineData.category == .topical
         }) // externalMedicineList ここまで
         customMedicineList = medicineListItems.filter({ medicineData in
-            medicineData.category == .customMedicine
+            medicineData.category == .custom
         }) // customMedicineList ここまで
     } // fetchMedicineListItems ここまで
 } // CreateQuestionListViewModel ここまで

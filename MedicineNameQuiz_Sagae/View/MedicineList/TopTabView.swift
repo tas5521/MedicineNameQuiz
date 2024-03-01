@@ -51,5 +51,5 @@ struct TopTabView: View {
 } // TopTabView
 
 #Preview {
-    TopTabView(selectTab: .constant(.customMedicine))
+    TopTabView(selectTab: .constant(.custom))
 }

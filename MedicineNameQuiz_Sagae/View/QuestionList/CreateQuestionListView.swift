@@ -75,7 +75,7 @@ struct CreateQuestionListView: View {
                 case .topical:
                     MedicineSelectableList(medicineArray: $viewModel.externalMedicineList)
                     // カスタムを表示
-                case .customMedicine:
+                case .custom:
                     MedicineSelectableList(medicineArray: $viewModel.customMedicineList)
                 } // switch ここまで
             } // VStack ここまで

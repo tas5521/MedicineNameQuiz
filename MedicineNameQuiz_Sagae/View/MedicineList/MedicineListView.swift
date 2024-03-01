@@ -53,7 +53,7 @@ struct MedicineListView: View {
                         // スペースを空ける
                         Spacer()
                         // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                        if viewModel.medicineClassification == .customMedicine {
+                        if viewModel.medicineClassification == .custom {
                             addMedicineButton
                                 .padding()
                         } // if ここまで
@@ -71,7 +71,7 @@ struct MedicineListView: View {
     private var medicineList: some View {
         Group {
             // カスタムが選択されていたら
-            if viewModel.medicineClassification == .customMedicine {
+            if viewModel.medicineClassification == .custom {
                 List {
                     ForEach(fetchedCustomMedicines) { medicine in
                         // 垂直方向にレイアウト
