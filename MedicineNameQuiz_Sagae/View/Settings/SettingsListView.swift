@@ -31,7 +31,7 @@ struct SettingsListView: View {
                     .ignoresSafeArea()
                 // 項目をリスト表示
                 List {
-                    ForEach(AppSettingsListItem.allCases, id: \.self) { listItem in
+                    ForEach(SettingsListItem.allCases, id: \.self) { listItem in
                         // 各項目ごとのタイトルを取得
                         let title = listItem.rawValue
                         // 項目ごとに異なる画面に遷移
