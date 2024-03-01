@@ -96,7 +96,7 @@ struct MedicineListView: View {
                 // 内用薬、注射薬、外用薬が選択されていたら
             } else {
                 List {
-                    ForEach(viewModel.medicineItems) { medicine in
+                    ForEach(viewModel.items) { medicine in
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 商品名を表示
