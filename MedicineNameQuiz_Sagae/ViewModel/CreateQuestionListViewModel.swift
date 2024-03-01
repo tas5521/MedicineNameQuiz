@@ -15,7 +15,7 @@ final class CreateQuestionListViewModel {
     var category: MedicineCategory = .oral
     // 薬の検索に使う変数
     var medSearchText: String = ""
-    
+
     // 内用薬の配列
     var oralListItems: [MedicineListItem] = []
     // 注射薬の配列
@@ -24,7 +24,7 @@ final class CreateQuestionListViewModel {
     var topicalListItems: [MedicineListItem] = []
     // カスタム薬の配列
     var customListItems: [MedicineListItem] = []
-    
+
     // CreateQuestionListModelのインスタンスを生成
     private let model = CreateQuestionListModel()
 

@@ -20,19 +20,19 @@ struct QuestionsView: View {
         ZStack {
             // 背景を水色にする
             Color.backgroundSkyBlue
-            // セーフエリア外にも背景を表示
+                // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack {
                 // 薬の検索バー
                 SearchBar(searchText: $medSearchText, placeholderText: "薬を検索できます")
-                // 上下に余白を指定
+                    // 上下に余白を指定
                     .padding(.vertical)
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 総問題数を表示
                     Text("総問題数: \(questions.count)")
-                    // 左に余白を追加
+                        // 左に余白を追加
                         .padding([.top, .leading, .trailing])
                     // 出題される薬の名前のリスト
                     List {
@@ -41,11 +41,11 @@ struct QuestionsView: View {
                             VStack(alignment: .leading) {
                                 // 商品名を表示
                                 Text(question.brandName)
-                                // 文字の色を青に変更
+                                    // 文字の色を青に変更
                                     .foregroundStyle(Color.blue)
                                 // 一般名を表示
                                 Text(question.genericName)
-                                // 文字の色を赤に変更
+                                    // 文字の色を赤に変更
                                     .foregroundStyle(Color.red)
                             } // VStack ここまで
                         } // ForEach ここまで

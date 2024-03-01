@@ -16,7 +16,7 @@ struct ReferenceView: View {
         ZStack {
             // 背景を水色にする
             Color.backgroundSkyBlue
-            // セーフエリア外にも背景を表示
+                // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack {
@@ -28,11 +28,11 @@ struct ReferenceView: View {
                         Text("https://www.mhlw.go.jp/index.html")
                     } // VStack ここまで
                     // フォントを.title3に変更
-                        .font(.title3)
+                    .font(.title3)
                     // 太字にする
-                        .bold()
+                    .bold()
                     // 上下左右に余白を追加
-                        .padding()
+                    .padding()
                     // スペースを追加
                     Spacer()
                 } // HStack ここまで

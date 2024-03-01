@@ -13,7 +13,7 @@ struct MedicineSelectableList: View {
 
     // 全ての薬が選択されているかどうかを判定
     private var isAllSelected: Bool {
-        listItems.allSatisfy( { medicine in medicine.selected } )
+        listItems.allSatisfy({ medicine in medicine.selected })
     } // isAllSelected ここまで
 
     var body: some View {
@@ -23,11 +23,11 @@ struct MedicineSelectableList: View {
             HStack {
                 // 問題数を表示
                 Text("問題数: \(listItems.count)")
-                // 太字にする
+                    // 太字にする
                     .bold()
                 // スペースを空ける
                 Spacer()
-                    // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
+                // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
                 if !listItems.isEmpty {
                     selectAllButton(selectAll: !isAllSelected)
                 } // if ここまで
@@ -43,11 +43,11 @@ struct MedicineSelectableList: View {
                         VStack(alignment: .leading) {
                             // 商品名を表示
                             Text(listItems[index].brandName)
-                            // 文字の色を青に変更
+                                // 文字の色を青に変更
                                 .foregroundStyle(Color.blue)
                             // 一般名を表示
                             Text(listItems[index].genericName)
-                            // 文字の色を赤に変更
+                                // 文字の色を赤に変更
                                 .foregroundStyle(Color.red)
                         } // VStack ここまで
                     } // Toggle ここまで
@@ -72,7 +72,7 @@ struct MedicineSelectableList: View {
         } label: {
             // ラベル
             Text(selectAll ? "全て選択する" : "全て選択しない")
-            // 青色にする
+                // 青色にする
                 .foregroundStyle(Color.blue)
         } // Buttonここまで
     } // selectAllButton ここまで
@@ -80,6 +80,6 @@ struct MedicineSelectableList: View {
 
 #Preview {
     MedicineSelectableList(listItems:
-            .constant([MedicineListItem(category: .oral, brandName: "内用薬商品名1", genericName: "内用薬一般名1", selected: false),
-                       MedicineListItem(category: .oral, brandName: "内用薬商品名2", genericName: "内用薬一般名2", selected: false)]))
+                            .constant([MedicineListItem(category: .oral, brandName: "内用薬商品名1", genericName: "内用薬一般名1", selected: false),
+                                       MedicineListItem(category: .oral, brandName: "内用薬商品名2", genericName: "内用薬一般名2", selected: false)]))
 }

@@ -10,20 +10,20 @@
 
 // HowToUseRankingView全体をコメントアウト
 /*
-import SwiftUI
+ import SwiftUI
 
-struct HowToUseRankingView: View {
-    // 項目のタイトル
-    let title: String
+ struct HowToUseRankingView: View {
+ // 項目のタイトル
+ let title: String
 
-    var body: some View {
-        Text("HowToUseRankingView")
-        // ナビゲーションバータイトルを指定
-        .navigationBarTitle(title, displayMode: .inline)
-    } // bodyここまで
-} // HowToUseRankingView ここまで
+ var body: some View {
+ Text("HowToUseRankingView")
+ // ナビゲーションバータイトルを指定
+ .navigationBarTitle(title, displayMode: .inline)
+ } // bodyここまで
+ } // HowToUseRankingView ここまで
 
-#Preview {
-    HowToUseRankingView(title: "アプリの使い方-ランキング-")
-}
-*/
+ #Preview {
+ HowToUseRankingView(title: "アプリの使い方-ランキング-")
+ }
+ */

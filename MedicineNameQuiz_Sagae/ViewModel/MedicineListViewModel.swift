@@ -21,7 +21,7 @@ final class MedicineListViewModel {
             return medicineNameData
         } // guard ここまで
         // 検索キーワードを商品名または一般名に含むデータを探す
-        let filteredMedicines = medicineNameData.filter( { medicineName in
+        let filteredMedicines = medicineNameData.filter({ medicineName in
             medicineName.brandName.contains(medSearchText) || medicineName.genericName.contains(medSearchText)
         }) // filteredMedicines ここまで
         // 検索キーワードを商品名または一般名に含むデータを表示

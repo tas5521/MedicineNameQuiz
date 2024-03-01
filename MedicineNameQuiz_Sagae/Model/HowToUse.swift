@@ -17,4 +17,3 @@ enum HowToUse: String, CaseIterable {
     // case ranking = "ランキング"
     case medicineList = "薬リスト"
 } // HowToUseここまで
-

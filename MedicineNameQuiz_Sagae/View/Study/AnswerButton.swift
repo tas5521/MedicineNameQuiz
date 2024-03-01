@@ -21,17 +21,17 @@ struct AnswerButton: View {
         } label: {
             // ラベル
             Image(systemName: buttonType.systemName)
-            // 幅高さ80に指定
+                // 幅高さ80に指定
                 .frame(width: 80, height: 80)
-            // フォントを.titleに指定
+                // フォントを.titleに指定
                 .font(.title)
-            // 太字にする
+                // 太字にする
                 .bold()
-            // 背景色を指定
+                // 背景色を指定
                 .background(buttonType.buttonColor)
-            // 角を丸くする
+                // 角を丸くする
                 .clipShape(.buttonBorder)
-            // 文字の色を白に指定
+                // 文字の色を白に指定
                 .foregroundStyle(.white)
         } // Button ここまで
     } // body ここまで

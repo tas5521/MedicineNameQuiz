@@ -22,11 +22,11 @@ enum MedicineCategory: String, CaseIterable {
         if MedicineCategory.items.isEmpty {
             // 薬のデータを配列に格納
             MedicineCategory.items = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
-            // カンマ（,）で分割した配列を作成
+                // カンマ（,）で分割した配列を作成
                 .map({ line in
                     line.components(separatedBy: ",")
                 })
-            // MedicineItem構造体にする
+                // MedicineItem構造体にする
                 .compactMap({ array in
                     MedicineItem(category: MedicineCategory.getCategory(from: array[1]),
                                  brandName: array[2],
@@ -34,13 +34,13 @@ enum MedicineCategory: String, CaseIterable {
                 })
         } // if ここまで
         // 選択された区分により、データをフィルターする
-        let filteredItems = MedicineCategory.items.filter( { medicineData in
+        let filteredItems = MedicineCategory.items.filter({ medicineData in
             medicineData.category == self
         })
         // 薬の名前の要素の配列を返却
         return filteredItems
     } // medicineNameData ここまで
-    
+
     // 文字列（内用薬、注射薬、外用薬、カスタム）から列挙子に変換するメソッド
     static func getCategory(from categoryName: String) -> MedicineCategory {
         MedicineCategory(rawValue: categoryName) ?? .custom

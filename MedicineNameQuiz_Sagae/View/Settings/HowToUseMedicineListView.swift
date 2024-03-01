@@ -16,18 +16,18 @@ struct HowToUseMedicineListView: View {
         ZStack {
             // 背景を水色にする
             Color.backgroundSkyBlue
-            // セーフエリア外にも背景を表示
+                // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack {
                 // 水平方向にレイアウト
                 HStack {
                     Text("アプリの使い方\n薬リストについて")
-                    // フォントを.title3に変更
+                        // フォントを.title3に変更
                         .font(.title3)
-                    // 太字にする
+                        // 太字にする
                         .bold()
-                    // 上下左右に余白を追加
+                        // 上下左右に余白を追加
                         .padding()
                     // スペースを追加
                     Spacer()

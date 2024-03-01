@@ -23,7 +23,7 @@ struct TopTabView: View {
                 } label: {
                     // 各タブに名前を表示
                     Text(tab.rawValue)
-                    // 選択されているタブは白に、それ以外は黒にする
+                        // 選択されているタブは白に、それ以外は黒にする
                         .foregroundStyle(selectTab == tab ? Color.white : Color.black)
                 } // Button ここまで
                 // 画面端まで
@@ -34,9 +34,9 @@ struct TopTabView: View {
                 .overlay(
                     // 長方形を配置
                     Rectangle()
-                    // 高さ3に指定
+                        // 高さ3に指定
                         .frame(height: 3)
-                    // 選択されているタブは白に、それ以外は黒にする
+                        // 選択されているタブは白に、それ以外は黒にする
                         .foregroundStyle(selectTab == tab ? Color.white : Color.clear)
                     // 下に配置
                     , alignment: .bottom

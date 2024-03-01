@@ -10,7 +10,7 @@ import SwiftUI
 struct QuestionListView: View {
     // リスト名検索テキスト
     @State private var listName: String = ""
-    
+
     // ダミーのリスト
     private var dummyList: [QuestionListItem] = [
         QuestionListItem(listName: "さがえ薬局リスト",
@@ -24,7 +24,7 @@ struct QuestionListView: View {
                                      MedicineItem(category: .oral,
                                                   brandName: "オノン",
                                                   genericName: "プランルカスト水和物")]
-                        ),
+        ),
         QuestionListItem(listName: "ながつ薬局リスト",
                          date: Date(),
                          questions: [MedicineItem(category: .oral,
@@ -36,7 +36,7 @@ struct QuestionListView: View {
                                      MedicineItem(category: .oral,
                                                   brandName: "クラビット",
                                                   genericName: "レボフロキサシン水和物")]
-                        ),
+        ),
         QuestionListItem(listName: "こばやし薬局リスト",
                          date: Date(),
                          questions: [MedicineItem(category: .oral,
@@ -48,22 +48,22 @@ struct QuestionListView: View {
                                      MedicineItem(category: .oral,
                                                   brandName: "ケフラール",
                                                   genericName: "セファクロル")]
-                        )
+        )
     ] // dummyList ここまで
-    
+
     var body: some View {
         NavigationStack {
             // 手前から奥にレイアウト
             ZStack {
                 // 背景を水色にする
                 Color.backgroundSkyBlue
-                // セーフエリア外にも背景を表示
+                    // セーフエリア外にも背景を表示
                     .ignoresSafeArea()
                 // 垂直方向にレイアウト
                 VStack {
                     // 問題リストの検索バー
                     SearchBar(searchText: $listName, placeholderText: "リストを検索できます")
-                    // 上下に余白を指定
+                        // 上下に余白を指定
                         .padding(.vertical)
                     // 問題リスト
                     questionList
@@ -89,7 +89,7 @@ struct QuestionListView: View {
             .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
-    
+
     // 問題リスト
     private var questionList: some View {
         List {
@@ -122,7 +122,7 @@ struct QuestionListView: View {
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // questionList ここまで
-    
+
     // リスト追加ボタン
     private var addListButton: some View {
         NavigationLink {
@@ -130,17 +130,17 @@ struct QuestionListView: View {
             CreateQuestionListView(questionListMode: .create)
         } label: {
             Image(systemName: "plus.circle.fill")
-            // リサイズする
+                // リサイズする
                 .resizable()
-            // アスペクト比を保ったまま枠いっぱいに表示
+                // アスペクト比を保ったまま枠いっぱいに表示
                 .scaledToFit()
-            // 幅高さ65に指定
+                // 幅高さ65に指定
                 .frame(width: 65, height: 65)
-            // ボタンの色をオレンジに指定
+                // ボタンの色をオレンジに指定
                 .foregroundStyle(.buttonOrange)
-            // 背景を白に指定
+                // 背景を白に指定
                 .background(Color.white)
-            // 丸くクリッピング
+                // 丸くクリッピング
                 .clipShape(Circle())
         } // Button ここまで
     } // addListButton ここまで

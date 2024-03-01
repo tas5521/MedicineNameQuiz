@@ -20,14 +20,14 @@ struct SettingsListView: View {
      // 初回のユーザー名設定画面の表示を管理する変数
      @Binding var isFirstTimeUserNameSetting: Bool
      */
-    
+
     var body: some View {
         NavigationStack {
             // 奥から手前にレイアウト
             ZStack {
                 // 背景を水色に変更
                 Color.backgroundSkyBlue
-                // セーフエリア外にも背景を表示
+                    // セーフエリア外にも背景を表示
                     .ignoresSafeArea()
                 // 項目をリスト表示
                 List {
@@ -46,15 +46,15 @@ struct SettingsListView: View {
                             case .advertisement:
                                 // 広告の表示について画面
                                 AdvertisementView(title: title)
-                                // ランキング機能が無ければ、アカウントは管理しないので、アカウント画面を表示するコードはコメントアウト
-                                /*
-                                 case .account:
-                                 // アカウント画面
-                                 AccountView(isSignIn: $isSignIn,
-                                 userName: $userName,
-                                 isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting,
-                                 title: title)
-                                 */
+                            // ランキング機能が無ければ、アカウントは管理しないので、アカウント画面を表示するコードはコメントアウト
+                            /*
+                             case .account:
+                             // アカウント画面
+                             AccountView(isSignIn: $isSignIn,
+                             userName: $userName,
+                             isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting,
+                             title: title)
+                             */
                             } // switch ここまで
                         } label: {
                             // 項目ごとに異なるテキストを表示

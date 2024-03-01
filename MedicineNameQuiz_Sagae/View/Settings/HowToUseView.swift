@@ -13,13 +13,13 @@ import SwiftUI
 struct HowToUseView: View {
     // 項目のタイトル
     let title: String
-    
+
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
             // 背景を水色に変更
             Color.backgroundSkyBlue
-            // セーフエリアにも背景を表示
+                // セーフエリアにも背景を表示
                 .ignoresSafeArea()
             // リスト表示
             List {
@@ -35,11 +35,11 @@ struct HowToUseView: View {
                             HowToUseStudyView(title: titleWithSubtitle)
                         case .questionList:
                             HowToUseQuestionListView(title: titleWithSubtitle)
-                            // ランキング機能が無ければ、ランキングの使い方の説明も不要なので、コメントアウト
-                            /*
-                             case .ranking:
-                             HowToUseRankingView(title: titleWithSubtitle)
-                             */
+                        // ランキング機能が無ければ、ランキングの使い方の説明も不要なので、コメントアウト
+                        /*
+                         case .ranking:
+                         HowToUseRankingView(title: titleWithSubtitle)
+                         */
                         case .medicineList:
                             HowToUseMedicineListView(title: titleWithSubtitle)
                         } // switch ここまで

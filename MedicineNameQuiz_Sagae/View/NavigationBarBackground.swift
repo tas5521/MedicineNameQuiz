@@ -10,11 +10,11 @@ import SwiftUI
 struct NavigationBarBackground: ViewModifier {
     func body(content: Content) -> some View {
         content
-        // ナビゲーションバーの背景を青色に変更
+            // ナビゲーションバーの背景を青色に変更
             .toolbarBackground(.navigationBarBlue, for: .navigationBar)
-        // ナビゲーションバーの背景を表示
+            // ナビゲーションバーの背景を表示
             .toolbarBackground(.visible, for: .navigationBar)
-        // ナビゲーションバーのタイトルの色を白にする
+            // ナビゲーションバーのタイトルの色を白にする
             .toolbarColorScheme(.dark)
     } // body ここまで
 } // NavigationBarBackground ここまで

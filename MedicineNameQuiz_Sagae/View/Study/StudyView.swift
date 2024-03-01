@@ -12,11 +12,11 @@ struct StudyView: View {
     @Binding var isStudying: Bool
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
-    
+
     // View Presentation State
     // 結果画面の表示を管理する変数
     @State private var isShowResult: Bool = false
-    
+
     // カードフリップに関する変数
     // カードがめくられているかを管理する変数
     @State private var isCardFlipped: Bool = false
@@ -25,8 +25,8 @@ struct StudyView: View {
     // カードの裏面についての、めくられた角度
     @State private var backDegree: Double = -90.0
     // カードが半分めくられるまでの時間間隔
-    private let duration : CGFloat = 0.1
-    
+    private let duration: CGFloat = 0.1
+
     // ダミーの問題
     private let medicineNames: [(front: String, back: String)] = [
         ("アムロジン", "アムロジピンベシル酸塩"),
@@ -34,13 +34,13 @@ struct StudyView: View {
         ("ウリトス", "イミダフェナシン"),
         ("ティーエスワン", "テガフール・ギメラシル・オテラシルカリウム")
     ] // medicineNames ここまで
-    
+
     var body: some View {
         // 手前から奥にレイアウト
         ZStack {
             // 背景を水色にする
             Color.backgroundSkyBlue
-            // セーフエリア外にも背景を表示
+                // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack {
@@ -48,7 +48,7 @@ struct StudyView: View {
                 Spacer()
                 // 問題番号
                 Text("\(questionNumber + 1)/\(medicineNames.count)")
-                // フォントを.titleに変更
+                    // フォントを.titleに変更
                     .font(.title)
                 // スペースを空ける
                 Spacer()
@@ -63,7 +63,7 @@ struct StudyView: View {
                 // タップされたら
                 .onTapGesture {
                     // カードをめくる
-                        flipCard()
+                    flipCard()
                 } // onTapGesture ここまで
                 // スペースを空ける
                 Spacer()
@@ -77,7 +77,7 @@ struct StudyView: View {
                             await advanceToNextQuestionOrShowResult()
                         } // Task ここまで
                     }) // 正解ボタン ここまで
-                    
+
                     // 不正解ボタン
                     AnswerButton(buttonType: .incorrect, action: {
                         // TODO: 現在の問題が不正解であることを記録する処理を実装
@@ -86,7 +86,7 @@ struct StudyView: View {
                             await advanceToNextQuestionOrShowResult()
                         } // Task ここまで
                     }) // 不正解ボタン ここまで
-                    
+
                     // 一つ前の問題に戻るボタン
                     AnswerButton(buttonType: .back, action: {
                         Task {
@@ -114,30 +114,30 @@ struct StudyView: View {
     // カードの面を生成するメソッド
     private func createCardFace(text: String, isFront: Bool) -> some View {
         // カードの幅
-        let width : CGFloat = 260
+        let width: CGFloat = 260
         // カードの高さ
-        let height : CGFloat = 180
+        let height: CGFloat = 180
         // ZStack を返す
         return ZStack {
             // 角の丸い長方形を配置
             RoundedRectangle(cornerRadius: 20)
-            // 白で塗る
+                // 白で塗る
                 .fill(.white)
-            // 幅高さを指定
+                // 幅高さを指定
                 .frame(width: width, height: height)
-            // 影をつける
+                // 影をつける
                 .shadow(color: .gray, radius: 2, x: 0, y: 0)
             // 左上のテキストを表面ではQ、裏面ではAにする
             Text(isFront ? "Q.":"A.")
-            // 太字にする
+                // 太字にする
                 .bold()
-            // カードの左上に配置
+                // カードの左上に配置
                 .offset(CGSize(width: -100, height: -60.0))
             // 薬の名前のテキスト
             Text(text)
-            // 太字にする
+                // 太字にする
                 .bold()
-            // 幅高さを指定
+                // 幅高さを指定
                 .frame(width: width - 50, height: height - 50)
         } // ZStack ここまで
         // 文字の色を表面では黒、裏面では赤にする
@@ -147,7 +147,7 @@ struct StudyView: View {
             Angle(degrees: isFront ? frontDegree : backDegree), axis: (x: 0, y: 1, z: 0)
         )
     } // createCardFace ここまで
-    
+
     // カードをめくるメソッド
     private func flipCard() {
         // カードがめくられているか、めくられていないかを、切り替え
@@ -159,7 +159,7 @@ struct StudyView: View {
                 frontDegree = 90
             } // withAnimation ここまで
             // アニメーションで、カードの裏面についての、めくられた角度を0度にする
-            withAnimation(.linear(duration: duration).delay(duration)){
+            withAnimation(.linear(duration: duration).delay(duration)) {
                 backDegree = 0
             } // withAnimation ここまで
         } else {
@@ -168,12 +168,12 @@ struct StudyView: View {
                 backDegree = -90
             } // withAnimation ここまで
             // アニメーションで、カードの表面についての、めくられた角度を0度にする
-            withAnimation(.linear(duration: duration).delay(duration)){
+            withAnimation(.linear(duration: duration).delay(duration)) {
                 frontDegree = 0
             } // withAnimation ここまで
         } // if ここまで
     } // flipCard ここまで
-    
+
     // 次の問題へ進むか、結果を表示
     private func advanceToNextQuestionOrShowResult() async {
         // もし最後の問題だったら
@@ -196,7 +196,7 @@ struct StudyView: View {
         // 一つ前の問題に戻る
         questionNumber -= 1
     } // goBackToPreviousQuestion ここまで
-    
+
     // カードをめくり、指定した時間待機する
     private func flipCardAndWait() async {
         // カードがめくられていたら

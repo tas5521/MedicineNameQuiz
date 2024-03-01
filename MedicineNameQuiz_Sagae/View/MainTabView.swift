@@ -16,20 +16,20 @@ struct MainTabView: View {
 
     // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
     /*
-    // ユーザー名を管理する変数
-    @State private var userName: String = ""
-    // サインインしているかどうかを管理する変数
-    @State private var isSignIn: Bool = false
-    // 初回のユーザー名設定画面の表示を管理する変数
-    @State private var isFirstTimeUserNameSetting: Bool = true
-    
-    // View Presentation States
-    // 友達追加画面への遷移を管理する変数
-    @State private var isShowAddFriendView: Bool = false
-    // サインイン画面の表示を管理する変数
-    @State private var isShowSignInView: Bool = false
-    // ユーザー名設定画面の表示を管理する変数
-    @State private var isShowUserNameSettingView: Bool = false
+     // ユーザー名を管理する変数
+     @State private var userName: String = ""
+     // サインインしているかどうかを管理する変数
+     @State private var isSignIn: Bool = false
+     // 初回のユーザー名設定画面の表示を管理する変数
+     @State private var isFirstTimeUserNameSetting: Bool = true
+
+     // View Presentation States
+     // 友達追加画面への遷移を管理する変数
+     @State private var isShowAddFriendView: Bool = false
+     // サインイン画面の表示を管理する変数
+     @State private var isShowSignInView: Bool = false
+     // ユーザー名設定画面の表示を管理する変数
+     @State private var isShowUserNameSettingView: Bool = false
      */
 
     var body: some View {
@@ -39,11 +39,11 @@ struct MainTabView: View {
             Group {
                 // 学習画面のViewを配置
                 ModeSelectionView()
-                .tabItem {
-                    Label(TabSelection.study.rawValue, systemImage: "book.fill")
-                } // tabItem ここまで
-                .tag(TabSelection.study)
-                
+                    .tabItem {
+                        Label(TabSelection.study.rawValue, systemImage: "book.fill")
+                    } // tabItem ここまで
+                    .tag(TabSelection.study)
+
                 // 問題リスト画面のViewを配置
                 QuestionListView()
                     .tabItem {
@@ -53,15 +53,15 @@ struct MainTabView: View {
 
                 // ランキング画面のタブを隠す
                 /*
-                // ランキング画面のViewを配置
-                RankingView(userName: $userName,
-                            isSignIn: $isSignIn,
-                            isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
-                    .tabItem {
-                        Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
-                    } // tabItem ここまで
-                    .tag(TabSelection.ranking)
-                */
+                 // ランキング画面のViewを配置
+                 RankingView(userName: $userName,
+                 isSignIn: $isSignIn,
+                 isFirstTimeUserNameSetting: $isFirstTimeUserNameSetting)
+                 .tabItem {
+                 Label(TabSelection.ranking.rawValue, systemImage: "crown.fill")
+                 } // tabItem ここまで
+                 .tag(TabSelection.ranking)
+                 */
 
                 // 薬リスト画面のViewを配置
                 MedicineListView()
@@ -69,7 +69,7 @@ struct MainTabView: View {
                         Label(TabSelection.medicineList.rawValue, systemImage: "list.bullet.rectangle.portrait.fill")
                     } // tabItem ここまで
                     .tag(TabSelection.medicineList)
-                
+
                 // 設定画面のViewを配置
                 SettingsListView(
                     // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
@@ -94,78 +94,78 @@ struct MainTabView: View {
         }  // TabView ここまで
         // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
         /*
-        // ツールバー設定
-        .toolbar {
-            // ランキングのタブでは、右に友達追加ボタンを配置する
-            if tabSelection == .ranking {
-                // 友達追加ボタンを右に配置
-                ToolbarItem(placement: .topBarTrailing) {
-                    addFriendButton
-                } // ToolbarItem ここまで
-            } // if ここまで
-        } // toolbar ここまで
-        // 友達追加画面へ遷移
-        .navigationDestination(isPresented: $isShowAddFriendView) {
-            AddFriendView(userName: $userName)
-        } // navigationDestination ここまで
+         // ツールバー設定
+         .toolbar {
+         // ランキングのタブでは、右に友達追加ボタンを配置する
+         if tabSelection == .ranking {
+         // 友達追加ボタンを右に配置
+         ToolbarItem(placement: .topBarTrailing) {
+         addFriendButton
+         } // ToolbarItem ここまで
+         } // if ここまで
+         } // toolbar ここまで
+         // 友達追加画面へ遷移
+         .navigationDestination(isPresented: $isShowAddFriendView) {
+         AddFriendView(userName: $userName)
+         } // navigationDestination ここまで
          */
     } // body ここまで
-    
+
     // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
     /*
-    // 友達追加ボタン
-    private var addFriendButton: some View {
-        // 友達追加ボタン
-        Button {
-            // サインインしている場合
-            if isSignIn {
-                // 友達追加画面を表示
-                isShowAddFriendView.toggle()
-                // サインインしていない場合
-            } else {
-                // サインイン画面を表示
-                isShowSignInView.toggle()
-            } // if ここまで
-        } label: {
-            // 水平方向に配置
-            HStack {
-                Image(systemName: "person.fill.badge.plus")
-            } // HStack ここまで
-        } // Button ここまで
-        // 色を青に指定
-        .foregroundColor(Color.blue)
-        // サインイン画面のシート
-        .sheet(isPresented: $isShowSignInView) {
-            // サインイン画面を表示
-            SignInView(isSignIn: $isSignIn, userName: $userName)
-            // サインイン画面が閉じた時に実行
-                .onDisappear {
-                    // サインインしていなかったら何もしない
-                    guard isSignIn else { return }
-                    // 初回のユーザー名設定の場合
-                    if isFirstTimeUserNameSetting {
-                        // ユーザー名設定画面を表示
-                        isShowUserNameSettingView.toggle()
-                        // 初回のユーザー名設定でない場合
-                    } else {
-                        // 友達追加画面を表示
-                        isShowAddFriendView.toggle()
-                    } // if ここまで
-                } // onDisappear ここまで
-        } // sheet ここまで
-        // ユーザー名設定画面のシート
-        .sheet(isPresented: $isShowUserNameSettingView) {
-            // ユーザー名設定画面を表示
-            UserNameSettingView(userName: $userName, isCalledFromAccountView: false)
-            // ユーザー名設定画面が閉じた時に実行
-                .onDisappear {
-                    // 初回のユーザー名設定画面の表示を管理する変数をfalseにする
-                    isFirstTimeUserNameSetting = false
-                    // 友達追加画面を表示
-                    isShowAddFriendView.toggle()
-                } // onDisappear ここまで
-        } // sheet ここまで
-    } // addFriendButton ここまで
+     // 友達追加ボタン
+     private var addFriendButton: some View {
+     // 友達追加ボタン
+     Button {
+     // サインインしている場合
+     if isSignIn {
+     // 友達追加画面を表示
+     isShowAddFriendView.toggle()
+     // サインインしていない場合
+     } else {
+     // サインイン画面を表示
+     isShowSignInView.toggle()
+     } // if ここまで
+     } label: {
+     // 水平方向に配置
+     HStack {
+     Image(systemName: "person.fill.badge.plus")
+     } // HStack ここまで
+     } // Button ここまで
+     // 色を青に指定
+     .foregroundColor(Color.blue)
+     // サインイン画面のシート
+     .sheet(isPresented: $isShowSignInView) {
+     // サインイン画面を表示
+     SignInView(isSignIn: $isSignIn, userName: $userName)
+     // サインイン画面が閉じた時に実行
+     .onDisappear {
+     // サインインしていなかったら何もしない
+     guard isSignIn else { return }
+     // 初回のユーザー名設定の場合
+     if isFirstTimeUserNameSetting {
+     // ユーザー名設定画面を表示
+     isShowUserNameSettingView.toggle()
+     // 初回のユーザー名設定でない場合
+     } else {
+     // 友達追加画面を表示
+     isShowAddFriendView.toggle()
+     } // if ここまで
+     } // onDisappear ここまで
+     } // sheet ここまで
+     // ユーザー名設定画面のシート
+     .sheet(isPresented: $isShowUserNameSettingView) {
+     // ユーザー名設定画面を表示
+     UserNameSettingView(userName: $userName, isCalledFromAccountView: false)
+     // ユーザー名設定画面が閉じた時に実行
+     .onDisappear {
+     // 初回のユーザー名設定画面の表示を管理する変数をfalseにする
+     isFirstTimeUserNameSetting = false
+     // 友達追加画面を表示
+     isShowAddFriendView.toggle()
+     } // onDisappear ここまで
+     } // sheet ここまで
+     } // addFriendButton ここまで
      */
 } // MainTabView ここまで
 

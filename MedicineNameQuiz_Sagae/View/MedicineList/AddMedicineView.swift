@@ -20,13 +20,13 @@ struct AddMedicineView: View {
     private var canAddNew: Bool {
         !(brandName == "" || genericName == "")
     } // canAddNew ここまで
-    
+
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
             // 背景を水色にする
             Color.backgroundSkyBlue
-            // セーフエリア外にも背景を表示
+                // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack(spacing: 30) {
@@ -34,17 +34,17 @@ struct AddMedicineView: View {
                 Spacer()
                 // 追加する薬の名前を入力するようユーザーに促すためのテキスト
                 Text("追加する薬の名前を入力してください")
-                // フォントを.title3に変更
+                    // フォントを.title3に変更
                     .font(.title3)
-                // 太字にする
+                    // 太字にする
                     .bold()
                 // 商品名を入力するためのテキストフィールド
                 TextField("商品名", text: $brandName)
-                // テキストフィールドの背景を指定
+                    // テキストフィールドの背景を指定
                     .textFieldBackground()
                 // 一般名を入力するためのテキストフィールド
                 TextField("一般名", text: $genericName)
-                // テキストフィールドの背景を指定
+                    // テキストフィールドの背景を指定
                     .textFieldBackground()
                 // スペースを空ける
                 Spacer()
@@ -57,17 +57,17 @@ struct AddMedicineView: View {
                 } label: {
                     // ラベル
                     Text("追加")
-                    // 太字にする
+                        // 太字にする
                         .bold()
-                    // 最大幅.infinityに指定
+                        // 最大幅.infinityに指定
                         .frame(maxWidth: .infinity)
-                    // 高さ60に指定
+                        // 高さ60に指定
                         .frame(height: 60)
-                    // 両方のテキストフィールドに文字が入力されている場合、背景色をオレンジに指定。そうでない場合はグレー
+                        // 両方のテキストフィールドに文字が入力されている場合、背景色をオレンジに指定。そうでない場合はグレー
                         .background(canAddNew ? Color.buttonOrange : Color.disabledButtonGray)
-                    // 文字色を白に指定
+                        // 文字色を白に指定
                         .foregroundStyle(Color.white)
-                    // 角を丸くする
+                        // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
                 // 商品名か一般名の少なくとも一方が入力されていなかったら、ボタンを押せなくする
@@ -79,17 +79,17 @@ struct AddMedicineView: View {
                 } label: {
                     // ラベル
                     Text("やめる")
-                    // 太字にする
+                        // 太字にする
                         .bold()
-                    // 文字色を白に指定
+                        // 文字色を白に指定
                         .foregroundStyle(Color.white)
-                    // 最大幅.infinityに指定
+                        // 最大幅.infinityに指定
                         .frame(maxWidth: .infinity)
-                    // 高さ60に指定
+                        // 高さ60に指定
                         .frame(height: 60)
-                    // 背景色をオレンジに指定
+                        // 背景色をオレンジに指定
                         .background(Color.buttonOrange)
-                    // 角を丸くする
+                        // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
                 // スペースを空ける
@@ -99,7 +99,7 @@ struct AddMedicineView: View {
             .padding()
         } // ZStack ここまで
     } // body ここまで
-    
+
     // カスタムの薬を追加するメソッド
     private func addCustomMedicine() {
         // 新しいカスタムの薬データのインスタンスを生成

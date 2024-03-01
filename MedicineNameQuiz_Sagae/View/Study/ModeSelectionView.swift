@@ -16,14 +16,14 @@ struct ModeSelectionView: View {
     @State private var modeSelection: StudyMode = .brandToGeneric
     // ダミーのリスト
     private var dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
-    
+
     var body: some View {
         NavigationStack {
             // 手前から奥にレイアウト
             ZStack {
                 // 背景を水色にする
                 Color.backgroundSkyBlue
-                // セーフエリア外にも背景を表示
+                    // セーフエリア外にも背景を表示
                     .ignoresSafeArea()
                 // 垂直方向にレイアウト
                 VStack {
@@ -31,14 +31,14 @@ struct ModeSelectionView: View {
                     VStack(alignment: .leading) {
                         // スペースを空ける
                         Spacer()
-                        
+
                         // 問題リストの選択を促すテキスト
                         Text("問題リスト選択")
-                        // フォントを.titleに指定
+                            // フォントを.titleに指定
                             .font(.title)
-                        // 太字にする
+                            // 太字にする
                             .bold()
-                        
+
                         // 問題リスト選択用のPicker
                         Picker("問題リスト選択", selection: $questionIndex) {
                             // 要素を繰り返す
@@ -52,17 +52,17 @@ struct ModeSelectionView: View {
                         .pickerStyle(.wheel)
                         // 上下の余白を20減らす
                         .padding([.top, .bottom], -20)
-                        
+
                         // スペースを空ける
                         Spacer()
-                        
+
                         // モード選択を促すテキスト
                         Text("モード選択")
-                        // フォントを.titleに指定
+                            // フォントを.titleに指定
                             .font(.title)
-                        // 太字にする
+                            // 太字にする
                             .bold()
-                        
+
                         // 出題モード選択用のPicker
                         Picker("出題モード選択", selection: $modeSelection) {
                             // 要素を繰り返す
@@ -76,13 +76,13 @@ struct ModeSelectionView: View {
                         .pickerStyle(.segmented)
                         // 上下左右に余白を追加
                         .padding()
-                        
-                        //スペースを空ける
+
+                        // スペースを空ける
                         Spacer()
                     } // VStack ここまで
                     // 上下左右に余白を追加
                     .padding()
-                    
+
                     // スタートボタンを配置
                     Button {
                         // 学習開始
@@ -90,17 +90,17 @@ struct ModeSelectionView: View {
                     } label: {
                         // ラベル
                         Text("スタート")
-                        // フォントを.title2に指定
+                            // フォントを.title2に指定
                             .font(.title2)
-                        // 太字にする
+                            // 太字にする
                             .bold()
-                        // 文字の色を白にする
+                            // 文字の色を白にする
                             .foregroundStyle(Color.white)
-                        // 幅150高さ50に指定
+                            // 幅150高さ50に指定
                             .frame(width: 150, height: 60)
-                        // 背景色をオレンジに指定
+                            // 背景色をオレンジに指定
                             .background(Color.buttonOrange)
-                        // 角を丸くする
+                            // 角を丸くする
                             .clipShape(.buttonBorder)
                     } // Button ここまで
                     .padding(.bottom, 80)
