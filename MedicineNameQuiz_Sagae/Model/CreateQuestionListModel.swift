@@ -9,14 +9,14 @@ import SwiftUI
 
 final class CreateQuestionListModel {
     // 内用薬、注射薬、外用薬のデータをこの配列に格納
-    private var medicineDataArray: [MedicineListItem] = []
+    private var listItems: [MedicineListItem] = []
     
     // 薬データをフェッチ
     func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
         // 内用薬、注射薬、外用薬のデータを取得していなければ、取得する
-        if medicineDataArray.isEmpty {
+        if listItems.isEmpty {
             // 薬のデータを配列に格納
-            medicineDataArray = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
+            listItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
             // カンマ（,）で分割した配列を作成
                 .map({ line in
                     line.components(separatedBy: ",")
@@ -38,6 +38,6 @@ final class CreateQuestionListModel {
                                  genericName: customMedicine.genericName ?? "",
                                  selected: false)
             })
-        return medicineDataArray + customMedicineDataArray
+        return listItems + customMedicineDataArray
     } // fetchMedicineListItems ここまで
 } // CreateQuestionListModel ここまで
