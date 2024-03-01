@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuestionListView: View {
     // リスト名検索テキスト
-    @State private var listNameText: String = ""
+    @State private var listName: String = ""
     
     // ダミーのリスト
     private var dummyList: [QuestionListItem] = [
@@ -62,7 +62,7 @@ struct QuestionListView: View {
                 // 垂直方向にレイアウト
                 VStack {
                     // 問題リストの検索バー
-                    SearchBar(searchText: $listNameText, placeholderText: "リストを検索できます")
+                    SearchBar(searchText: $listName, placeholderText: "リストを検索できます")
                     // 上下に余白を指定
                         .padding(.vertical)
                     // 問題リスト
