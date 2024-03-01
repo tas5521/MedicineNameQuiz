@@ -32,7 +32,7 @@ struct MedicineListView: View {
                 // 垂直方向にレイアウト
                 VStack {
                     // 薬の区分を選択するタブを上に配置
-                    TopTabView(selectTab: $viewModel.medicineClassification)
+                    TopTabView(selectTab: $viewModel.category)
                     // 太字にする
                         .bold()
                     // 薬の検索バー
@@ -53,7 +53,7 @@ struct MedicineListView: View {
                         // スペースを空ける
                         Spacer()
                         // カスタムのタブが選択されている場合、薬名追加ボタンを表示
-                        if viewModel.medicineClassification == .custom {
+                        if viewModel.category == .custom {
                             addMedicineButton
                                 .padding()
                         } // if ここまで
@@ -71,7 +71,7 @@ struct MedicineListView: View {
     private var medicineList: some View {
         Group {
             // カスタムが選択されていたら
-            if viewModel.medicineClassification == .custom {
+            if viewModel.category == .custom {
                 List {
                     ForEach(fetchedCustomMedicines) { medicine in
                         // 垂直方向にレイアウト

@@ -57,14 +57,14 @@ struct CreateQuestionListView: View {
                     } // VStack ここまで
                 } // ZStack ここまで
                 // 薬の区分を選択するタブを配置
-                TopTabView(selectTab: $viewModel.medicineClassification)
+                TopTabView(selectTab: $viewModel.category)
                 // 太字にする
                 .bold()
                 // 薬の検索バーを配置
                 SearchBar(searchText: $viewModel.searchMedicineName, placeholderText: "薬を検索できます")
                     .padding(.top)
                 // 薬リスト
-                switch viewModel.medicineClassification {
+                switch viewModel.category {
                     // 内用薬を表示
                 case .oral:
                     MedicineSelectableList(listItems: $viewModel.internalMedicineList)

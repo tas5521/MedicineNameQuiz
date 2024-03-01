@@ -10,12 +10,12 @@ import Foundation
 @Observable
 final class MedicineListViewModel {
     // 選択されているタブを管理する変数
-    var medicineClassification: MedicineCategory = .oral
+    var category: MedicineCategory = .oral
     // 薬の検索に使う変数
     var searchMedicineName: String = ""
     // Viewに表示する薬名を格納する配列
     var medicineItems: [MedicineItem] {
-        let medicineNameData: [MedicineItem] = medicineClassification.medicineNameData
+        let medicineNameData: [MedicineItem] = category.medicineNameData
         // 検索条件がなければ、検索せずに全てのデータを返す
         guard searchMedicineName.isEmpty == false else {
             return medicineNameData

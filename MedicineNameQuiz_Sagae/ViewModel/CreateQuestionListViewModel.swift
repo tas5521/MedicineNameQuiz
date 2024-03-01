@@ -12,7 +12,7 @@ final class CreateQuestionListViewModel {
     // 問題リストの名前を保持する変数
     var listName: String = ""
     // 選択されているタブを管理する変数
-    var medicineClassification: MedicineCategory = .oral
+    var category: MedicineCategory = .oral
     // 薬の検索に使う変数
     var searchMedicineName: String = ""
     
