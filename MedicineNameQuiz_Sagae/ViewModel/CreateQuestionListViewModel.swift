@@ -12,7 +12,7 @@ final class CreateQuestionListViewModel {
     // 問題リストの名前を保持する変数
     var listName: String = ""
     // 選択されているタブを管理する変数
-    var medicineClassification: MedicineCategory = .internalMedicine
+    var medicineClassification: MedicineCategory = .oral
     // 薬の検索に使う変数
     var searchMedicineName: String = ""
     
@@ -34,7 +34,7 @@ final class CreateQuestionListViewModel {
         let medicineListItems = createQuestionListModel.fetchMedicineListItems(fetchedCustomMedicines: fetchedCustomMedicines)
         // 薬データを配列に格納
         internalMedicineList = medicineListItems.filter({ medicineData in
-            medicineData.category == .internalMedicine
+            medicineData.category == .oral
         }) // internalMedicineList ここまで
         injectionMedicineList = medicineListItems.filter({ medicineData in
             medicineData.category == .injectionMedicine

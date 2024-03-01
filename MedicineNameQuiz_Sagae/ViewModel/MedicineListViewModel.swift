@@ -10,7 +10,7 @@ import Foundation
 @Observable
 final class MedicineListViewModel {
     // 選択されているタブを管理する変数
-    var medicineClassification: MedicineCategory = .internalMedicine
+    var medicineClassification: MedicineCategory = .oral
     // 薬の検索に使う変数
     var searchMedicineName: String = ""
     // Viewに表示する薬名を格納する配列

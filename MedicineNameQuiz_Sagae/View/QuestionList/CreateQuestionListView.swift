@@ -66,7 +66,7 @@ struct CreateQuestionListView: View {
                 // 薬リスト
                 switch viewModel.medicineClassification {
                     // 内用薬を表示
-                case .internalMedicine:
+                case .oral:
                     MedicineSelectableList(medicineArray: $viewModel.internalMedicineList)
                     // 注射薬を表示
                 case .injectionMedicine:
