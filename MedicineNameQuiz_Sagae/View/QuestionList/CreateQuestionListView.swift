@@ -70,7 +70,7 @@ struct CreateQuestionListView: View {
                     MedicineSelectableList(listItems: $viewModel.oralListItems)
                     // 注射薬を表示
                 case .injection:
-                    MedicineSelectableList(listItems: $viewModel.injectionMedicineList)
+                    MedicineSelectableList(listItems: $viewModel.injectionListItems)
                     // 外用薬を表示
                 case .topical:
                     MedicineSelectableList(listItems: $viewModel.externalMedicineList)

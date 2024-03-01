@@ -19,7 +19,7 @@ final class CreateQuestionListViewModel {
     // 内用薬の配列
     var oralListItems: [MedicineListItem] = []
     // 注射薬の配列
-    var injectionMedicineList: [MedicineListItem] = []
+    var injectionListItems: [MedicineListItem] = []
     // 外用薬の配列
     var externalMedicineList: [MedicineListItem] = []
     // カスタム薬の配列
@@ -38,9 +38,9 @@ final class CreateQuestionListViewModel {
         oralListItems = medicineListItems.filter({ medicineData in
             medicineData.category == .oral
         }) // oralListItems ここまで
-        injectionMedicineList = medicineListItems.filter({ medicineData in
+        injectionListItems = medicineListItems.filter({ medicineData in
             medicineData.category == .injection
-        }) // injectionMedicineList ここまで
+        }) // injectionListItems ここまで
         externalMedicineList = medicineListItems.filter({ medicineData in
             medicineData.category == .topical
         }) // externalMedicineList ここまで
