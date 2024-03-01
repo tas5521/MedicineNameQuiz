@@ -12,7 +12,7 @@ final class CreateQuestionListModel {
     private var listItems: [MedicineListItem] = []
     
     // 薬データをフェッチ
-    func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
+    func fetchListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
         // 内用薬、注射薬、外用薬のデータを取得していなければ、取得する
         if listItems.isEmpty {
             // 薬のデータを配列に格納
@@ -39,5 +39,5 @@ final class CreateQuestionListModel {
                                  selected: false)
             })
         return listItems + customMedicineDataArray
-    } // fetchMedicineListItems ここまで
+    } // fetchListItems ここまで
 } // CreateQuestionListModel ここまで

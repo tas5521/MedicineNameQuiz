@@ -29,9 +29,9 @@ final class CreateQuestionListViewModel {
     private let createQuestionListModel = CreateQuestionListModel()
 
     // 薬データをフェッチ
-    func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
+    func fetchListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
         // 薬データを取得
-        let medicineListItems = createQuestionListModel.fetchMedicineListItems(fetchedCustomMedicines: fetchedCustomMedicines)
+        let medicineListItems = createQuestionListModel.fetchListItems(fetchedCustomMedicines: fetchedCustomMedicines)
         // 薬データを配列に格納
         internalMedicineList = medicineListItems.filter({ medicineData in
             medicineData.category == .oral
@@ -45,5 +45,5 @@ final class CreateQuestionListViewModel {
         customMedicineList = medicineListItems.filter({ medicineData in
             medicineData.category == .custom
         }) // customMedicineList ここまで
-    } // fetchMedicineListItems ここまで
+    } // fetchListItems ここまで
 } // CreateQuestionListViewModel ここまで
