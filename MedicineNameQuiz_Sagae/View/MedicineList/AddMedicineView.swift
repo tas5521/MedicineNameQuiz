@@ -105,7 +105,7 @@ struct AddMedicineView: View {
         // 新しいカスタムの薬データのインスタンスを生成
         let newCustomMedicineName = CustomMedicine(context: context)
         // 薬のカテゴリを保持
-        newCustomMedicineName.medicineCategory = "カスタム"
+        newCustomMedicineName.category = "カスタム"
         // 先発品名を保持
         newCustomMedicineName.brandName = brandName
         // 一般名を保持

@@ -80,6 +80,6 @@ struct MedicineSelectableList: View {
 
 #Preview {
     MedicineSelectableList(medicineArray:
-            .constant([MedicineListItem(medicineCategory: .internalMedicine, brandName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
-                       MedicineListItem(medicineCategory: .internalMedicine, brandName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
+            .constant([MedicineListItem(category: .internalMedicine, brandName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
+                       MedicineListItem(category: .internalMedicine, brandName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
 }
