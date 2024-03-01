@@ -12,9 +12,9 @@ struct MedicineSelectableList: View {
     @Binding var listItems: [MedicineListItem]
 
     // 全ての薬が選択されているかどうかを判定
-    private var isAllMedicineSelected: Bool {
+    private var isAllSelected: Bool {
         listItems.allSatisfy( { medicine in medicine.selected } )
-    } // isAllMedicineSelected ここまで
+    } // isAllSelected ここまで
 
     var body: some View {
         // 垂直方向にレイアウト
@@ -29,7 +29,7 @@ struct MedicineSelectableList: View {
                 Spacer()
                     // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
                 if !listItems.isEmpty {
-                    selectAllButton(selectAll: !isAllMedicineSelected)
+                    selectAllButton(selectAll: !isAllSelected)
                 } // if ここまで
             } // HStack ここまで
             // 上下と左に余白を追加
