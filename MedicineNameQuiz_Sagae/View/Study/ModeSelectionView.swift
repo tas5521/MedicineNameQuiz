@@ -11,7 +11,7 @@ struct ModeSelectionView: View {
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
     // 問題を選択するために用いる番号
-    @State private var questionSelectionIndex: Int = 0
+    @State private var questionIndex: Int = 0
     // モード選択を管理する変数
     @State private var modeSelection: StudyMode = .brandToGeneric
     // ダミーのリスト
@@ -40,7 +40,7 @@ struct ModeSelectionView: View {
                             .bold()
                         
                         // 問題リスト選択用のPicker
-                        Picker("問題リスト選択", selection: $questionSelectionIndex) {
+                        Picker("問題リスト選択", selection: $questionIndex) {
                             // 要素を繰り返す
                             ForEach(dummyQuestionNameList.indices, id: \.self) { index in
                                 // 問題名
