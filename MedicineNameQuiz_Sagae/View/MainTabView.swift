@@ -71,7 +71,7 @@ struct MainTabView: View {
                     .tag(TabSelection.medicineList)
                 
                 // 設定画面のViewを配置
-                AppSettingsListView(
+                SettingsListView(
                     // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
                     /*
                      userName: $userName,

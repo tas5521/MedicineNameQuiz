@@ -1,5 +1,5 @@
 //
-//  AppSettingsListView.swift
+//  SettingsListView.swift
 //  MedicineNameQuiz_Sagae
 //
 //  Created by 寒河江彪流 on 2023/09/30.
@@ -10,7 +10,7 @@
 
 import SwiftUI
 
-struct AppSettingsListView: View {
+struct SettingsListView: View {
     // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
     /*
      // ユーザー名を管理する変数
@@ -76,7 +76,7 @@ struct AppSettingsListView: View {
 } // AppSettingsListView ここまで
 
 #Preview {
-    AppSettingsListView(
+    SettingsListView(
         // サインインやユーザー名など、ランキング機能に関連するプロパティをコメントアウト
         /*
          userName: .constant("sagae"), isSignIn: .constant(true), isFirstTimeUserNameSetting: .constant(false)
