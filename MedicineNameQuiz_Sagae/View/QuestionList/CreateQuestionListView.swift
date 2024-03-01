@@ -69,7 +69,7 @@ struct CreateQuestionListView: View {
                 case .oral:
                     MedicineSelectableList(medicineArray: $viewModel.internalMedicineList)
                     // 注射薬を表示
-                case .injectionMedicine:
+                case .injection:
                     MedicineSelectableList(medicineArray: $viewModel.injectionMedicineList)
                     // 外用薬を表示
                 case .externalMedicine:

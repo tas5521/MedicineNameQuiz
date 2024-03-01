@@ -37,7 +37,7 @@ final class CreateQuestionListViewModel {
             medicineData.category == .oral
         }) // internalMedicineList ここまで
         injectionMedicineList = medicineListItems.filter({ medicineData in
-            medicineData.category == .injectionMedicine
+            medicineData.category == .injection
         }) // injectionMedicineList ここまで
         externalMedicineList = medicineListItems.filter({ medicineData in
             medicineData.category == .externalMedicine

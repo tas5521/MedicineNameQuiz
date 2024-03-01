@@ -9,7 +9,7 @@ import Foundation
 
 enum MedicineCategory: String, CaseIterable {
     case oral = "内用薬"
-    case injectionMedicine = "注射薬"
+    case injection = "注射薬"
     case externalMedicine = "外用薬"
     case customMedicine = "カスタム"
 
