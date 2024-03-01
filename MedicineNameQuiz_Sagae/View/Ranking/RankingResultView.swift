@@ -16,7 +16,7 @@ struct RankingResultView: View {
     // ランキングに挑戦中であるかを管理する変数
     @Binding var isChallenging: Bool
     // 問題リストの名前を保持する変数
-    @State private var questionListName: String = ""
+    @State private var listName: String = ""
     
     // View Presentation State
     // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
@@ -73,7 +73,7 @@ struct RankingResultView: View {
         // 間違えた問題をリストに保存するためのポップアップを表示
         .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
             // 問題リストの名前を入力するテキストフィールド
-            TextField("問題リストの名前", text: $questionListName)
+            TextField("問題リストの名前", text: $listName)
             // 保存ボタン
             Button {
                 // 問題リストの作成処理
