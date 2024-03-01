@@ -17,7 +17,7 @@ struct MedicineListView: View {
     
     // カスタムの薬データをフェッチ
     @FetchRequest(entity: CustomMedicine.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.originalName, ascending: true)],
+                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
                   animation: nil
     ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
     
@@ -77,7 +77,7 @@ struct MedicineListView: View {
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
-                            Text(medicine.originalName ?? "")
+                            Text(medicine.brandName ?? "")
                             // 文字の色を青に変更
                                 .foregroundStyle(Color.blue)
                             // 一般名を表示
@@ -100,7 +100,7 @@ struct MedicineListView: View {
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
-                            Text(medicine.originalName)
+                            Text(medicine.brandName)
                             // 文字の色を青に変更
                                 .foregroundStyle(Color.blue)
                             // 一般名を表示
@@ -155,12 +155,12 @@ struct MedicineListView: View {
             fetchedCustomMedicines.nsPredicate = nil
         } else {
             // 検索キーワードがある場合
-            // originalNameに検索キーワードを含むか調べる条件を指定
-            let originalNamePredicate: NSPredicate = NSPredicate(format: "originalName contains %@", viewModel.searchMedicineName)
+            // brandNameに検索キーワードを含むか調べる条件を指定
+            let brandNamePredicate: NSPredicate = NSPredicate(format: "brandName contains %@", viewModel.searchMedicineName)
             // genericNameに検索キーワードを含むか調べる条件を指定
             let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.searchMedicineName)
             // 指定した条件を適用し、検索をかける
-            fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [originalNamePredicate, genericNamePredicate])
+            fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [brandNamePredicate, genericNamePredicate])
         } // if ここまで
     } // searchCustomMedicine ここまで
     

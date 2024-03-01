@@ -42,7 +42,7 @@ struct MedicineSelectableList: View {
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 先発品名を表示
-                            Text(medicineArray[index].originalName)
+                            Text(medicineArray[index].brandName)
                             // 文字の色を青に変更
                                 .foregroundStyle(Color.blue)
                             // 一般名を表示
@@ -80,6 +80,6 @@ struct MedicineSelectableList: View {
 
 #Preview {
     MedicineSelectableList(medicineArray:
-            .constant([MedicineListItem(medicineCategory: .internalMedicine, originalName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
-                       MedicineListItem(medicineCategory: .internalMedicine, originalName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
+            .constant([MedicineListItem(medicineCategory: .internalMedicine, brandName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
+                       MedicineListItem(medicineCategory: .internalMedicine, brandName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
 }

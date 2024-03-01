@@ -29,7 +29,7 @@ enum MedicineClassification: String, CaseIterable {
             // MedicineItem構造体にする
                 .compactMap({ array in
                     MedicineItem(category: MedicineClassification.getCategory(from: array[1]),
-                                 originalName: array[2],
+                                 brandName: array[2],
                                  genericName: array[3])
                 })
         } // if ここまで

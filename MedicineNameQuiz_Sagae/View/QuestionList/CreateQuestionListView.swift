@@ -18,7 +18,7 @@ struct CreateQuestionListView: View {
     @State private var isShowNoListNameAlert = false
     // カスタムの薬データをフェッチ
     @FetchRequest(entity: CustomMedicine.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.originalName, ascending: true)],
+                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
                   animation: nil
     ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
     // 問題リストを作成するか編集するかを管理する変数

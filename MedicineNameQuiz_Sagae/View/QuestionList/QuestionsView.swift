@@ -40,7 +40,7 @@ struct QuestionsView: View {
                             // 垂直方向にレイアウト
                             VStack(alignment: .leading) {
                                 // 先発品名を表示
-                                Text(question.originalName)
+                                Text(question.brandName)
                                 // 文字の色を青に変更
                                     .foregroundStyle(Color.blue)
                                 // 一般名を表示
@@ -82,13 +82,13 @@ struct QuestionsView: View {
 #Preview {
     QuestionsView(listName: "プレビュー薬局",
                   questions: [MedicineItem(category: .internalMedicine,
-                                           originalName: "アムロジン",
+                                           brandName: "アムロジン",
                                            genericName: "アムロジピンべシル酸塩"),
                               MedicineItem(category: .internalMedicine,
-                                           originalName: "エバステル",
+                                           brandName: "エバステル",
                                            genericName: "エバスチン"),
                               MedicineItem(category: .internalMedicine,
-                                           originalName: "オノン",
+                                           brandName: "オノン",
                                            genericName: "プランルカスト水和物")
                   ]
     )
