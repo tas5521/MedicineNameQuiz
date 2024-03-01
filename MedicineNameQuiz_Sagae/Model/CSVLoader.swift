@@ -17,9 +17,9 @@ final class CSVLoader {
         } // guard let ここまで
         do {
             // ファイルが存在していれば、データをString型で読み込み
-            let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            let csvData = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
             // 改行ごとにデータを分割して配列に格納
-            return csvString.components(separatedBy: .newlines)
+            return csvData.components(separatedBy: .newlines)
         } catch let error as NSError {
             // 何らかのエラーが発生した場合は、エラー内容を返却
             return ["エラー: \(error)"]
