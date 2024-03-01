@@ -21,7 +21,7 @@ final class CreateQuestionListViewModel {
     // 注射薬の配列
     var injectionListItems: [MedicineListItem] = []
     // 外用薬の配列
-    var externalMedicineList: [MedicineListItem] = []
+    var topicalListItems: [MedicineListItem] = []
     // カスタム薬の配列
     var customMedicineList: [MedicineListItem] = []
     
@@ -41,9 +41,9 @@ final class CreateQuestionListViewModel {
         injectionListItems = medicineListItems.filter({ medicineData in
             medicineData.category == .injection
         }) // injectionListItems ここまで
-        externalMedicineList = medicineListItems.filter({ medicineData in
+        topicalListItems = medicineListItems.filter({ medicineData in
             medicineData.category == .topical
-        }) // externalMedicineList ここまで
+        }) // topicalListItems ここまで
         customMedicineList = medicineListItems.filter({ medicineData in
             medicineData.category == .custom
         }) // customMedicineList ここまで
