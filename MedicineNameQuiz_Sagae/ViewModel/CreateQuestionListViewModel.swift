@@ -31,9 +31,7 @@ final class CreateQuestionListViewModel {
     // 薬データをフェッチ
     func fetchListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
         // 薬データを取得
-        let fetchedListItems = model.fetchListItems(
-            fetchedCustomMedicines: fetchedCustomMedicines
-        )
+        let fetchedListItems = model.fetchListItems(from: fetchedCustomMedicines)
         // 薬データを配列に格納
         oralListItems = fetchedListItems.filter({ medicineData in
             medicineData.category == .oral
