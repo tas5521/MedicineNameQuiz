@@ -43,6 +43,6 @@ enum MedicineClassification: String, CaseIterable {
     
     // 文字列（内用薬、注射薬、外用薬、カスタム）から列挙子に変換するメソッド
     static func getCategory(from categoryName: String) -> MedicineClassification {
-        MedicineClassification.allCases.first { category in category.rawValue == categoryName } ?? .customMedicine
+        MedicineClassification(rawValue: categoryName) ?? .customMedicine
     } // getCategory ここまで
 } // MedicineClassificationここまで
