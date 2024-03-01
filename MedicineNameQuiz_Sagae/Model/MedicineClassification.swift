@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MedicineClassification: String, CaseIterable {
+enum MedicineCategory: String, CaseIterable {
     case internalMedicine = "内用薬"
     case injectionMedicine = "注射薬"
     case externalMedicine = "外用薬"
@@ -19,22 +19,22 @@ enum MedicineClassification: String, CaseIterable {
     // 薬のデータ
     var medicineNameData: [MedicineItem] {
         // もし薬データを読み込んでいなかったら
-        if MedicineClassification.medicineDataArray.isEmpty {
+        if MedicineCategory.medicineDataArray.isEmpty {
             // 薬のデータを配列に格納
-            MedicineClassification.medicineDataArray = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
+            MedicineCategory.medicineDataArray = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
             // カンマ（,）で分割した配列を作成
                 .map({ line in
                     line.components(separatedBy: ",")
                 })
             // MedicineItem構造体にする
                 .compactMap({ array in
-                    MedicineItem(category: MedicineClassification.getCategory(from: array[1]),
+                    MedicineItem(category: MedicineCategory.getCategory(from: array[1]),
                                  brandName: array[2],
                                  genericName: array[3])
                 })
         } // if ここまで
         // 選択された区分により、データをフィルターする
-        let filteredMedicineDataArray = MedicineClassification.medicineDataArray.filter( { medicineData in
+        let filteredMedicineDataArray = MedicineCategory.medicineDataArray.filter( { medicineData in
             medicineData.category == self
         })
         // 薬の名前の要素の配列を返却
@@ -42,7 +42,7 @@ enum MedicineClassification: String, CaseIterable {
     } // medicineNameData ここまで
     
     // 文字列（内用薬、注射薬、外用薬、カスタム）から列挙子に変換するメソッド
-    static func getCategory(from categoryName: String) -> MedicineClassification {
-        MedicineClassification(rawValue: categoryName) ?? .customMedicine
+    static func getCategory(from categoryName: String) -> MedicineCategory {
+        MedicineCategory(rawValue: categoryName) ?? .customMedicine
     } // getCategory ここまで
-} // MedicineClassificationここまで
+} // MedicineCategory ここまで

@@ -23,7 +23,7 @@ final class CreateQuestionListModel {
                 })
             // MedicineListItem構造体にする
                 .compactMap({ array in
-                    MedicineListItem(category: MedicineClassification.getCategory(from: array[1]),
+                    MedicineListItem(category: MedicineCategory.getCategory(from: array[1]),
                                      brandName: array[2],
                                      genericName: array[3],
                                      selected: false)
@@ -33,7 +33,7 @@ final class CreateQuestionListModel {
         let customMedicineDataArray = fetchedCustomMedicines
         // MedicineListItem構造体にする
             .compactMap({ customMedicine in
-                MedicineListItem(category: MedicineClassification.getCategory(from: customMedicine.category ?? ""),
+                MedicineListItem(category: MedicineCategory.getCategory(from: customMedicine.category ?? ""),
                                  brandName: customMedicine.brandName ?? "",
                                  genericName: customMedicine.genericName ?? "",
                                  selected: false)

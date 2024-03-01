@@ -9,7 +9,7 @@ import Foundation
 
 struct MedicineItem: Identifiable {
     var id: UUID = UUID()
-    var category: MedicineClassification
+    var category: MedicineCategory
     var brandName: String
     var genericName: String
 } // MedicineItem ここまで

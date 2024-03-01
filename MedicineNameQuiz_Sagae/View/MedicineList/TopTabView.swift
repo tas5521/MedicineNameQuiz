@@ -9,13 +9,13 @@ import SwiftUI
 
 struct TopTabView: View {
     // 選択されているタブの変数
-    @Binding var selectTab: MedicineClassification
+    @Binding var selectTab: MedicineCategory
 
     var body: some View {
         // 水平方向にレイアウト
         HStack(spacing: 0) {
             // タブに表示するリストの名前の数だけ繰り返す
-            ForEach(MedicineClassification.allCases, id: \.self) { tab in
+            ForEach(MedicineCategory.allCases, id: \.self) { tab in
                 // タブになるボタンを配置
                 Button {
                     // 選択されたタブの情報を保持
