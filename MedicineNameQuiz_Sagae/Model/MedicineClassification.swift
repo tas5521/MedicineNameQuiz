@@ -28,14 +28,14 @@ enum MedicineClassification: String, CaseIterable {
                 })
             // MedicineItem構造体にする
                 .compactMap({ array in
-                    MedicineItem(medicineCategory: MedicineClassification.getCategory(from: array[1]),
+                    MedicineItem(category: MedicineClassification.getCategory(from: array[1]),
                                  originalName: array[2],
                                  genericName: array[3])
                 })
         } // if ここまで
         // 選択された区分により、データをフィルターする
         let filteredMedicineDataArray = MedicineClassification.medicineDataArray.filter( { medicineData in
-            medicineData.medicineCategory == self
+            medicineData.category == self
         })
         // 薬の名前の要素の配列を返却
         return filteredMedicineDataArray
