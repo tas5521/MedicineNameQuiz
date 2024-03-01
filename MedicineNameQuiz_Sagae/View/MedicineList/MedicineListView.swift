@@ -87,7 +87,7 @@ struct MedicineListView: View {
                         } // VStack ここまで
                     } // ForEach ここまで
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
-                    .onDelete(perform: deleteCustomMedicineData)
+                    .onDelete(perform: deleteCustomMedicine)
                 } // List ここまで
                 .onChange(of: viewModel.medSearchText, initial: true) {
                     // カスタムの薬リストに検索をかける
@@ -165,7 +165,7 @@ struct MedicineListView: View {
     } // searchCustomMedicine ここまで
     
     // Core Dataから指定したカスタムの薬名のデータを削除するメソッド
-    private func deleteCustomMedicineData(offsets: IndexSet) {
+    private func deleteCustomMedicine(offsets: IndexSet) {
         for index in offsets {
             // CoreDataから該当するindexのメモを削除
             context.delete(fetchedCustomMedicines[index])
@@ -179,7 +179,7 @@ struct MedicineListView: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         } // エラーハンドリングここまで
-    } // deleteCustomMedicineData ここまで
+    } // deleteCustomMedicine ここまで
 } // MedicineListView ここまで
 
 #Preview {
