@@ -15,7 +15,7 @@ struct StudyView: View {
     
     // View Presentation State
     // 結果画面の表示を管理する変数
-    @State private var isShowResultView: Bool = false
+    @State private var isShowResult: Bool = false
     
     // カードフリップに関する変数
     // カードがめくられているかを管理する変数
@@ -101,7 +101,7 @@ struct StudyView: View {
             } // VStack ここまで
         } // ZStack ここまで
         // 問題を解く画面へ遷移
-        .navigationDestination(isPresented: $isShowResultView) {
+        .navigationDestination(isPresented: $isShowResult) {
             // 結果画面を表示
             ResultView(isStudying: $isStudying)
         } // navigationDestination ここまで
@@ -179,7 +179,7 @@ struct StudyView: View {
         // もし最後の問題だったら
         if questionNumber == medicineNames.count - 1 {
             // 結果画面を表示
-            isShowResultView.toggle()
+            isShowResult.toggle()
             // もし最後の問題でなかったら
         } else {
             // カードをめくり、指定した時間待機する
