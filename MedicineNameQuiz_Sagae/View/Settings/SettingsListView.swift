@@ -73,7 +73,7 @@ struct SettingsListView: View {
             } // ZStack ここまで
         } // NavigationStack ここまで
     } // body ここまで
-} // AppSettingsListView ここまで
+} // SettingsListView ここまで
 
 #Preview {
     SettingsListView(
