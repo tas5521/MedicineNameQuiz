@@ -56,6 +56,9 @@
 		4AD429782B15A21C00FEE2DD /* AnswerButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */; };
 		4AD680A92B33453D00414F22 /* MedicineListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD680A82B33453D00414F22 /* MedicineListItem.swift */; };
 		4AD680AB2B34868100414F22 /* MedicineSelectableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */; };
+		4AD7AE132B87ABB400D0DBF7 /* CSVLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7AE122B87ABB400D0DBF7 /* CSVLoader.swift */; };
+		4AD7AE162B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7AE152B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift */; };
+		4AD7AE182B87C94D00D0DBF7 /* CreateQuestionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7AE172B87C94D00D0DBF7 /* CreateQuestionListModel.swift */; };
 		4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFA48972B3D61A200FC29B8 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +113,9 @@
 		4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButtonType.swift; sourceTree = "<group>"; };
 		4AD680A82B33453D00414F22 /* MedicineListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListItem.swift; sourceTree = "<group>"; };
 		4AD680AA2B34868100414F22 /* MedicineSelectableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineSelectableList.swift; sourceTree = "<group>"; };
+		4AD7AE122B87ABB400D0DBF7 /* CSVLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVLoader.swift; sourceTree = "<group>"; };
+		4AD7AE152B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionListViewModel.swift; sourceTree = "<group>"; };
+		4AD7AE172B87C94D00D0DBF7 /* CreateQuestionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionListModel.swift; sourceTree = "<group>"; };
 		4AFA48972B3D61A200FC29B8 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +163,8 @@
 				4A99F6502B2F36CE004672AD /* StudyResult.swift */,
 				4A99F6532B2F3BEC004672AD /* StudyResultListItem.swift */,
 				4A20191B2B84D3E5007FE769 /* QuestionListMode.swift */,
+				4AD7AE122B87ABB400D0DBF7 /* CSVLoader.swift */,
+				4AD7AE172B87C94D00D0DBF7 /* CreateQuestionListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9DDA652B66B2B900F65646 /* MedicineListViewModel.swift */,
+				4AD7AE152B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -342,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9671622AC7B77A006F7157 /* RankingView.swift in Sources */,
+				4AD7AE182B87C94D00D0DBF7 /* CreateQuestionListModel.swift in Sources */,
 				4AADB2D62AC5588500C5A40E /* Persistence.swift in Sources */,
 				4AA088362AC96FCB005BD8C2 /* AppSettingsListItem.swift in Sources */,
 				4AA088262AC92CF2005BD8C2 /* AddFriendView.swift in Sources */,
@@ -364,6 +374,7 @@
 				4A96717B2AC85A35006F7157 /* UserNameSettingView.swift in Sources */,
 				4AA088442AC98855005BD8C2 /* HowToUseStudyView.swift in Sources */,
 				4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */,
+				4AD7AE162B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift in Sources */,
 				4AA088482AC98887005BD8C2 /* HowToUseRankingView.swift in Sources */,
 				4A20191C2B84D3E5007FE769 /* QuestionListMode.swift in Sources */,
 				4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */,
@@ -386,6 +397,7 @@
 				4ABE86552B034828003AC69F /* RankingResultView.swift in Sources */,
 				4AB111652B2E091500DD79F2 /* StudyMode.swift in Sources */,
 				4A9671792AC8578E006F7157 /* SignInView.swift in Sources */,
+				4AD7AE132B87ABB400D0DBF7 /* CSVLoader.swift in Sources */,
 				4AA0883E2AC97DFE005BD8C2 /* AccountView.swift in Sources */,
 				4A9671752AC825E4006F7157 /* StudyView.swift in Sources */,
 			);

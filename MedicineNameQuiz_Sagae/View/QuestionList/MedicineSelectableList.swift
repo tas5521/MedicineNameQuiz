@@ -28,7 +28,9 @@ struct MedicineSelectableList: View {
                 // スペースを空ける
                 Spacer()
                     // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
+                if !medicineArray.isEmpty {
                     selectAllButton(selectAll: !isAllMedicineSelected)
+                } // if ここまで
             } // HStack ここまで
             // 上下と左に余白を追加
             .padding([.top, .leading, .trailing])
@@ -78,6 +80,6 @@ struct MedicineSelectableList: View {
 
 #Preview {
     MedicineSelectableList(medicineArray:
-            .constant([MedicineListItem(originalName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
-                       MedicineListItem(originalName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
+            .constant([MedicineListItem(medicineCategory: .internalMedicine, originalName: "内用薬先発品名1", genericName: "内用薬一般名1", selected: false),
+                       MedicineListItem(medicineCategory: .internalMedicine, originalName: "内用薬先発品名2", genericName: "内用薬一般名2", selected: false)]))
 }
