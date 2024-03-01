@@ -34,11 +34,11 @@ enum MedicineCategory: String, CaseIterable {
                 })
         } // if ここまで
         // 選択された区分により、データをフィルターする
-        let filteredMedicineDataArray = MedicineCategory.items.filter( { medicineData in
+        let filteredItems = MedicineCategory.items.filter( { medicineData in
             medicineData.category == self
         })
         // 薬の名前の要素の配列を返却
-        return filteredMedicineDataArray
+        return filteredItems
     } // medicineNameData ここまで
     
     // 文字列（内用薬、注射薬、外用薬、カスタム）から列挙子に変換するメソッド
