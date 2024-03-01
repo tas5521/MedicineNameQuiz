@@ -67,16 +67,16 @@ struct CreateQuestionListView: View {
                 switch viewModel.medicineClassification {
                     // 内用薬を表示
                 case .oral:
-                    MedicineSelectableList(medicineArray: $viewModel.internalMedicineList)
+                    MedicineSelectableList(listItems: $viewModel.internalMedicineList)
                     // 注射薬を表示
                 case .injection:
-                    MedicineSelectableList(medicineArray: $viewModel.injectionMedicineList)
+                    MedicineSelectableList(listItems: $viewModel.injectionMedicineList)
                     // 外用薬を表示
                 case .topical:
-                    MedicineSelectableList(medicineArray: $viewModel.externalMedicineList)
+                    MedicineSelectableList(listItems: $viewModel.externalMedicineList)
                     // カスタムを表示
                 case .custom:
-                    MedicineSelectableList(medicineArray: $viewModel.customMedicineList)
+                    MedicineSelectableList(listItems: $viewModel.customMedicineList)
                 } // switch ここまで
             } // VStack ここまで
         } // ZStack ここまで

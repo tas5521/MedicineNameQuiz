@@ -9,11 +9,11 @@ import SwiftUI
 
 struct MedicineSelectableList: View {
     // 表示する薬の名前を受け取る配列
-    @Binding var medicineArray: [MedicineListItem]
+    @Binding var listItems: [MedicineListItem]
 
     // 全ての薬が選択されているかどうかを判定
     private var isAllMedicineSelected: Bool {
-        medicineArray.allSatisfy( { medicine in medicine.selected } )
+        listItems.allSatisfy( { medicine in medicine.selected } )
     } // isAllMedicineSelected ここまで
 
     var body: some View {
@@ -22,13 +22,13 @@ struct MedicineSelectableList: View {
             // 水平方向にレイアウト
             HStack {
                 // 問題数を表示
-                Text("問題数: \(medicineArray.count)")
+                Text("問題数: \(listItems.count)")
                 // 太字にする
                     .bold()
                 // スペースを空ける
                 Spacer()
                     // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
-                if !medicineArray.isEmpty {
+                if !listItems.isEmpty {
                     selectAllButton(selectAll: !isAllMedicineSelected)
                 } // if ここまで
             } // HStack ここまで
@@ -36,17 +36,17 @@ struct MedicineSelectableList: View {
             .padding([.top, .leading, .trailing])
             // 出題される薬の名前のリスト
             List {
-                ForEach(medicineArray.indices, id: \.self) { index in
+                ForEach(listItems.indices, id: \.self) { index in
                     // Toggleを配置
-                    Toggle(isOn: $medicineArray[index].selected) {
+                    Toggle(isOn: $listItems[index].selected) {
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
                             // 商品名を表示
-                            Text(medicineArray[index].brandName)
+                            Text(listItems[index].brandName)
                             // 文字の色を青に変更
                                 .foregroundStyle(Color.blue)
                             // 一般名を表示
-                            Text(medicineArray[index].genericName)
+                            Text(listItems[index].genericName)
                             // 文字の色を赤に変更
                                 .foregroundStyle(Color.red)
                         } // VStack ここまで
@@ -66,8 +66,8 @@ struct MedicineSelectableList: View {
     private func selectAllButton(selectAll: Bool) -> some View {
         Button {
             // 全て選択する、もしくは、全て選択しない
-            for index in medicineArray.indices {
-                medicineArray[index].selected = selectAll
+            for index in listItems.indices {
+                listItems[index].selected = selectAll
             } // for ここまで
         } label: {
             // ラベル
@@ -79,7 +79,7 @@ struct MedicineSelectableList: View {
 } // MedicineSelectableList ここまで
 
 #Preview {
-    MedicineSelectableList(medicineArray:
+    MedicineSelectableList(listItems:
             .constant([MedicineListItem(category: .oral, brandName: "内用薬商品名1", genericName: "内用薬一般名1", selected: false),
                        MedicineListItem(category: .oral, brandName: "内用薬商品名2", genericName: "内用薬一般名2", selected: false)]))
 }
