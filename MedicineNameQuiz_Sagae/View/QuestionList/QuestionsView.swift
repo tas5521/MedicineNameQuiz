@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuestionsView: View {
     // 薬の名前の検索テキスト
-    @State private var searchMedicineNameText: String = ""
+    @State private var medSearchText: String = ""
     // リストの名前を保持する変数
     let listName: String
     // 問題を保持する変数
@@ -25,7 +25,7 @@ struct QuestionsView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 薬の検索バー
-                SearchBar(searchText: $searchMedicineNameText, placeholderText: "薬を検索できます")
+                SearchBar(searchText: $medSearchText, placeholderText: "薬を検索できます")
                 // 上下に余白を指定
                     .padding(.vertical)
                 // 垂直方向にレイアウト

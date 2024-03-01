@@ -38,7 +38,7 @@ struct MedicineListView: View {
                     // 薬の検索バー
                     SearchBar(searchText: $viewModel.searchMedicineName,
                               placeholderText: "薬を検索できます")
-                    // searchMedicineNameTextが変更されたときに実行
+                    // medSearchTextが変更されたときに実行
                     // 上下に余白を追加
                     .padding(.vertical)
                     // 薬リスト
