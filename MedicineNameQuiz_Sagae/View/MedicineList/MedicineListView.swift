@@ -36,7 +36,7 @@ struct MedicineListView: View {
                     // 太字にする
                         .bold()
                     // 薬の検索バー
-                    SearchBar(searchText: $viewModel.searchMedicineName,
+                    SearchBar(searchText: $viewModel.medSearchText,
                               placeholderText: "薬を検索できます")
                     // medSearchTextが変更されたときに実行
                     // 上下に余白を追加
@@ -89,7 +89,7 @@ struct MedicineListView: View {
                     // カスタムの場合は、リストを左にスライドして項目を削除できるようにする
                     .onDelete(perform: deleteCustomMedicineData)
                 } // List ここまで
-                .onChange(of: viewModel.searchMedicineName, initial: true) {
+                .onChange(of: viewModel.medSearchText, initial: true) {
                     // カスタムの薬リストに検索をかける
                     searchCustomMedicine()
                 } // onChange ここまで
@@ -150,15 +150,15 @@ struct MedicineListView: View {
     // カスタムの薬リストに検索をかけるメソッド
     private func searchCustomMedicine() {
         // 検索キーワードが空の場合
-        if viewModel.searchMedicineName.isEmpty {
+        if viewModel.medSearchText.isEmpty {
             // 検索条件を無し（nil）にする
             fetchedCustomMedicines.nsPredicate = nil
         } else {
             // 検索キーワードがある場合
             // brandNameに検索キーワードを含むか調べる条件を指定
-            let brandNamePredicate: NSPredicate = NSPredicate(format: "brandName contains %@", viewModel.searchMedicineName)
+            let brandNamePredicate: NSPredicate = NSPredicate(format: "brandName contains %@", viewModel.medSearchText)
             // genericNameに検索キーワードを含むか調べる条件を指定
-            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.searchMedicineName)
+            let genericNamePredicate: NSPredicate = NSPredicate(format: "genericName contains %@", viewModel.medSearchText)
             // 指定した条件を適用し、検索をかける
             fetchedCustomMedicines.nsPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [brandNamePredicate, genericNamePredicate])
         } // if ここまで

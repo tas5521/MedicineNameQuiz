@@ -14,7 +14,7 @@ final class CreateQuestionListViewModel {
     // 選択されているタブを管理する変数
     var category: MedicineCategory = .oral
     // 薬の検索に使う変数
-    var searchMedicineName: String = ""
+    var medSearchText: String = ""
     
     // 内用薬の配列
     var internalMedicineList: [MedicineListItem] = []

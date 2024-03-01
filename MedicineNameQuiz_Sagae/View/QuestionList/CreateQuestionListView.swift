@@ -61,7 +61,7 @@ struct CreateQuestionListView: View {
                 // 太字にする
                 .bold()
                 // 薬の検索バーを配置
-                SearchBar(searchText: $viewModel.searchMedicineName, placeholderText: "薬を検索できます")
+                SearchBar(searchText: $viewModel.medSearchText, placeholderText: "薬を検索できます")
                     .padding(.top)
                 // 薬リスト
                 switch viewModel.category {
