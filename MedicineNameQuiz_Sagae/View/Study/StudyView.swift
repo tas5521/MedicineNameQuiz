@@ -70,7 +70,7 @@ struct StudyView: View {
                 // 水平方向にレイアウト
                 HStack(spacing: 20) {
                     // 正解ボタン
-                    AnswerButton(answerButtonType: .correct, action: {
+                    AnswerButton(buttonType: .correct, action: {
                         // TODO: 現在の問題が正解であることを記録する処理を実装
                         Task {
                             // 次の問題へ進むか、結果を表示
@@ -79,7 +79,7 @@ struct StudyView: View {
                     }) // 正解ボタン ここまで
                     
                     // 不正解ボタン
-                    AnswerButton(answerButtonType: .incorrect, action: {
+                    AnswerButton(buttonType: .incorrect, action: {
                         // TODO: 現在の問題が不正解であることを記録する処理を実装
                         Task {
                             // 次の問題へ進むか、結果を表示
@@ -88,7 +88,7 @@ struct StudyView: View {
                     }) // 不正解ボタン ここまで
                     
                     // 一つ前の問題に戻るボタン
-                    AnswerButton(answerButtonType: .back, action: {
+                    AnswerButton(buttonType: .back, action: {
                         Task {
                             // 前の問題に戻る
                             await goBackToPreviousQuestion()

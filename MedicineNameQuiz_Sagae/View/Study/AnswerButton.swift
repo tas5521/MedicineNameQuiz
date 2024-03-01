@@ -10,7 +10,7 @@ import SwiftUI
 // 解答ボタン
 struct AnswerButton: View {
     // ボタンの種類
-    let answerButtonType: AnswerButtonType
+    let buttonType: AnswerButtonType
     // このボタンで行う処理
     let action: () -> Void
 
@@ -20,7 +20,7 @@ struct AnswerButton: View {
             action()
         } label: {
             // ラベル
-            Image(systemName: answerButtonType.systemName)
+            Image(systemName: buttonType.systemName)
             // 幅高さ80に指定
                 .frame(width: 80, height: 80)
             // フォントを.titleに指定
@@ -28,7 +28,7 @@ struct AnswerButton: View {
             // 太字にする
                 .bold()
             // 背景色を指定
-                .background(answerButtonType.buttonColor)
+                .background(buttonType.buttonColor)
             // 角を丸くする
                 .clipShape(.buttonBorder)
             // 文字の色を白に指定
@@ -38,5 +38,5 @@ struct AnswerButton: View {
 } // AnswerButton ここまで
 
 #Preview {
-    AnswerButton(answerButtonType: .correct, action: { print("Correct") })
+    AnswerButton(buttonType: .correct, action: { print("Correct") })
 }
