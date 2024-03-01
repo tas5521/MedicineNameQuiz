@@ -104,7 +104,7 @@ struct ResultView: View {
                 HStack {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
-                        // 先発品名を表示
+                        // 商品名を表示
                         Text(item.brandName)
                             .foregroundStyle(Color.blue)
                         // 一般名を表示

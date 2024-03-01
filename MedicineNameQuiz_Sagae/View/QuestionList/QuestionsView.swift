@@ -39,7 +39,7 @@ struct QuestionsView: View {
                         ForEach(questions) { question in
                             // 垂直方向にレイアウト
                             VStack(alignment: .leading) {
-                                // 先発品名を表示
+                                // 商品名を表示
                                 Text(question.brandName)
                                 // 文字の色を青に変更
                                     .foregroundStyle(Color.blue)

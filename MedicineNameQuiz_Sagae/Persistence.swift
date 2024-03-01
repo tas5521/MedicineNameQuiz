@@ -15,7 +15,7 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let newCustomMedicineName = CustomMedicine(context: viewContext)
-            newCustomMedicineName.brandName = "先発品名"
+            newCustomMedicineName.brandName = "商品名"
             newCustomMedicineName.genericName = "一般名"
         }
         do {

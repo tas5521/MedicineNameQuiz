@@ -6,6 +6,6 @@
 //
 
 enum StudyMode: String, CaseIterable {
-    case brandToGeneric = "先発品名 → 一般名"
-    case genericToBrand = "一般名 → 先発品名"
+    case brandToGeneric = "商品名 → 一般名"
+    case genericToBrand = "一般名 → 商品名"
 } // StudyMode ここまで

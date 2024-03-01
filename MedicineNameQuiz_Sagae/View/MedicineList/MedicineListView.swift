@@ -76,7 +76,7 @@ struct MedicineListView: View {
                     ForEach(fetchedCustomMedicines) { medicine in
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
-                            // 先発品名を表示
+                            // 商品名を表示
                             Text(medicine.brandName ?? "")
                             // 文字の色を青に変更
                                 .foregroundStyle(Color.blue)
@@ -99,7 +99,7 @@ struct MedicineListView: View {
                     ForEach(viewModel.medicineItems) { medicine in
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
-                            // 先発品名を表示
+                            // 商品名を表示
                             Text(medicine.brandName)
                             // 文字の色を青に変更
                                 .foregroundStyle(Color.blue)

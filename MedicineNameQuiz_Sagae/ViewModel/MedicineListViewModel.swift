@@ -20,11 +20,11 @@ final class MedicineListViewModel {
         guard searchMedicineName.isEmpty == false else {
             return medicineNameData
         } // guard ここまで
-        // 検索キーワードを先発品名または一般名に含むデータを探す
+        // 検索キーワードを商品名または一般名に含むデータを探す
         let filteredMedicines = medicineNameData.filter( { medicineName in
             medicineName.brandName.contains(searchMedicineName) || medicineName.genericName.contains(searchMedicineName)
         }) // filteredMedicines ここまで
-        // 検索キーワードを先発品名または一般名に含むデータを表示
+        // 検索キーワードを商品名または一般名に含むデータを表示
         return filteredMedicines
     } // medicineItems ここまで
 } // MedicineListViewModel ここまで

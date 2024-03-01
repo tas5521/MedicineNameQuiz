@@ -12,7 +12,7 @@ struct AddMedicineView: View {
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
-    // 入力された先発品名を管理する変数
+    // 入力された商品名を管理する変数
     @State private var brandName: String = ""
     // 入力された一般名を管理する変数
     @State private var genericName: String = ""
@@ -38,8 +38,8 @@ struct AddMedicineView: View {
                     .font(.title3)
                 // 太字にする
                     .bold()
-                // 先発品名を入力するためのテキストフィールド
-                TextField("先発品名", text: $brandName)
+                // 商品名を入力するためのテキストフィールド
+                TextField("商品名", text: $brandName)
                 // テキストフィールドの背景を指定
                     .textFieldBackground()
                 // 一般名を入力するためのテキストフィールド
@@ -70,7 +70,7 @@ struct AddMedicineView: View {
                     // 角を丸くする
                         .clipShape(.buttonBorder)
                 } // Button ここまで
-                // 先発品名か一般名の少なくとも一方が入力されていなかったら、ボタンを押せなくする
+                // 商品名か一般名の少なくとも一方が入力されていなかったら、ボタンを押せなくする
                 .disabled(!canAddNew)
                 // やめるボタン
                 Button {
@@ -106,7 +106,7 @@ struct AddMedicineView: View {
         let newCustomMedicineName = CustomMedicine(context: context)
         // 薬のカテゴリを保持
         newCustomMedicineName.category = "カスタム"
-        // 先発品名を保持
+        // 商品名を保持
         newCustomMedicineName.brandName = brandName
         // 一般名を保持
         newCustomMedicineName.genericName = genericName
