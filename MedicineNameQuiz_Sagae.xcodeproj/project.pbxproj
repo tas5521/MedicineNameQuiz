@@ -31,7 +31,7 @@
 		4A9DDA662B66B2B900F65646 /* MedicineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9DDA652B66B2B900F65646 /* MedicineListViewModel.swift */; };
 		4AA088262AC92CF2005BD8C2 /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088252AC92CF2005BD8C2 /* AddFriendView.swift */; };
 		4AA088302AC93A3C005BD8C2 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA0882F2AC93A3C005BD8C2 /* QRCodeView.swift */; };
-		4AA088322AC9409D005BD8C2 /* MedicineClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088312AC9409D005BD8C2 /* MedicineClassification.swift */; };
+		4AA088322AC9409D005BD8C2 /* MedicineCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088312AC9409D005BD8C2 /* MedicineCategory.swift */; };
 		4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088332AC94A6B005BD8C2 /* AddMedicineView.swift */; };
 		4AA088362AC96FCB005BD8C2 /* SettingsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088352AC96FCB005BD8C2 /* SettingsListItem.swift */; };
 		4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088372AC97DAD005BD8C2 /* HowToUseView.swift */; };
@@ -87,7 +87,7 @@
 		4A9DDA652B66B2B900F65646 /* MedicineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineListViewModel.swift; sourceTree = "<group>"; };
 		4AA088252AC92CF2005BD8C2 /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
 		4AA0882F2AC93A3C005BD8C2 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
-		4AA088312AC9409D005BD8C2 /* MedicineClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineClassification.swift; sourceTree = "<group>"; };
+		4AA088312AC9409D005BD8C2 /* MedicineCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineCategory.swift; sourceTree = "<group>"; };
 		4AA088332AC94A6B005BD8C2 /* AddMedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineView.swift; sourceTree = "<group>"; };
 		4AA088352AC96FCB005BD8C2 /* SettingsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItem.swift; sourceTree = "<group>"; };
 		4AA088372AC97DAD005BD8C2 /* HowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseView.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 				4A96717D2AC87E55006F7157 /* QuestionListItem.swift */,
 				4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */,
 				4A9671812AC888B7006F7157 /* MedicineItem.swift */,
-				4AA088312AC9409D005BD8C2 /* MedicineClassification.swift */,
+				4AA088312AC9409D005BD8C2 /* MedicineCategory.swift */,
 				4AA088352AC96FCB005BD8C2 /* SettingsListItem.swift */,
 				4AA088412AC98796005BD8C2 /* HowToUse.swift */,
 				4AD429772B15A21C00FEE2DD /* AnswerButtonType.swift */,
@@ -402,7 +402,7 @@
 				4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */,
 				4AA088302AC93A3C005BD8C2 /* QRCodeView.swift in Sources */,
 				4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */,
-				4AA088322AC9409D005BD8C2 /* MedicineClassification.swift in Sources */,
+				4AA088322AC9409D005BD8C2 /* MedicineCategory.swift in Sources */,
 				4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */,
 				4A9671662AC7B795006F7157 /* SettingsListView.swift in Sources */,
 				4A9DDA662B66B2B900F65646 /* MedicineListViewModel.swift in Sources */,
