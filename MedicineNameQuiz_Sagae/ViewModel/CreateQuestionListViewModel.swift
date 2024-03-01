@@ -17,7 +17,7 @@ final class CreateQuestionListViewModel {
     var medSearchText: String = ""
     
     // 内用薬の配列
-    var internalMedicineList: [MedicineListItem] = []
+    var oralListItems: [MedicineListItem] = []
     // 注射薬の配列
     var injectionMedicineList: [MedicineListItem] = []
     // 外用薬の配列
@@ -31,11 +31,13 @@ final class CreateQuestionListViewModel {
     // 薬データをフェッチ
     func fetchListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
         // 薬データを取得
-        let medicineListItems = createQuestionListModel.fetchListItems(fetchedCustomMedicines: fetchedCustomMedicines)
+        let medicineListItems = createQuestionListModel.fetchListItems(
+            fetchedCustomMedicines: fetchedCustomMedicines
+        )
         // 薬データを配列に格納
-        internalMedicineList = medicineListItems.filter({ medicineData in
+        oralListItems = medicineListItems.filter({ medicineData in
             medicineData.category == .oral
-        }) // internalMedicineList ここまで
+        }) // oralListItems ここまで
         injectionMedicineList = medicineListItems.filter({ medicineData in
             medicineData.category == .injection
         }) // injectionMedicineList ここまで

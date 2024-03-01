@@ -67,7 +67,7 @@ struct CreateQuestionListView: View {
                 switch viewModel.category {
                     // 内用薬を表示
                 case .oral:
-                    MedicineSelectableList(listItems: $viewModel.internalMedicineList)
+                    MedicineSelectableList(listItems: $viewModel.oralListItems)
                     // 注射薬を表示
                 case .injection:
                     MedicineSelectableList(listItems: $viewModel.injectionMedicineList)
