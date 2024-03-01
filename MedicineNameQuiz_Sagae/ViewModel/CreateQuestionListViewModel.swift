@@ -23,7 +23,7 @@ final class CreateQuestionListViewModel {
     // 外用薬の配列
     var topicalListItems: [MedicineListItem] = []
     // カスタム薬の配列
-    var customMedicineList: [MedicineListItem] = []
+    var customListItems: [MedicineListItem] = []
     
     // CreateQuestionListModelのインスタンスを生成
     private let createQuestionListModel = CreateQuestionListModel()
@@ -44,8 +44,8 @@ final class CreateQuestionListViewModel {
         topicalListItems = medicineListItems.filter({ medicineData in
             medicineData.category == .topical
         }) // topicalListItems ここまで
-        customMedicineList = medicineListItems.filter({ medicineData in
+        customListItems = medicineListItems.filter({ medicineData in
             medicineData.category == .custom
-        }) // customMedicineList ここまで
+        }) // customListItems ここまで
     } // fetchListItems ここまで
 } // CreateQuestionListViewModel ここまで
