@@ -24,5 +24,5 @@ final class MedicineListViewModel {
         return categorizedItems.filter {
             $0.brandName.contains(medSearchText) || $0.genericName.contains(medSearchText)
         }
-    } // items ここまで
+    } // searchedItems ここまで
 } // MedicineListViewModel ここまで
