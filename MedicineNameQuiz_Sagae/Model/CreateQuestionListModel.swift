@@ -32,12 +32,12 @@ final class CreateQuestionListModel {
         // カスタムの薬データをフェッチ
         let customListItems = fetchedCustomMedicines
             // MedicineListItem構造体にする
-            .compactMap({ customMedicine in
-                MedicineListItem(category: MedicineCategory.getCategory(from: customMedicine.category ?? ""),
-                                 brandName: customMedicine.brandName ?? "",
-                                 genericName: customMedicine.genericName ?? "",
+            .compactMap {
+                MedicineListItem(category: MedicineCategory.getCategory(from: $0.category ?? ""),
+                                 brandName: $0.brandName ?? "",
+                                 genericName: $0.genericName ?? "",
                                  selected: false)
-            })
+            }
         return listItems + customListItems
     } // fetchListItems ここまで
 } // CreateQuestionListModel ここまで
