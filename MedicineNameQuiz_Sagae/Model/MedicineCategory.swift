@@ -14,14 +14,15 @@ enum MedicineCategory: String, CaseIterable {
     case custom = "カスタム"
 
     // 薬のデータをこの配列に格納
-    static private var items: [MedicineItem] = []
+    // CSVをロードしたデータを1度だけ格納して記憶するためにstaticにしている
+    static private var csvItems: [MedicineItem] = []
 
     // 薬のデータ
     var medicineNameData: [MedicineItem] {
         // もし薬データを読み込んでいなかったら
-        if MedicineCategory.items.isEmpty {
+        if MedicineCategory.csvItems.isEmpty {
             // 薬のデータを配列に格納
-            MedicineCategory.items = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
+            MedicineCategory.csvItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
                 // カンマ（,）で分割した配列を作成
                 .map({ line in
                     line.components(separatedBy: ",")
@@ -34,7 +35,7 @@ enum MedicineCategory: String, CaseIterable {
                 })
         } // if ここまで
         // 選択された区分により、データをフィルターする
-        let filteredItems = MedicineCategory.items.filter({ medicineData in
+        let filteredItems = MedicineCategory.csvItems.filter({ medicineData in
             medicineData.category == self
         })
         // 薬の名前の要素の配列を返却
