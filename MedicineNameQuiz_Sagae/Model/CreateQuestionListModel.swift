@@ -18,9 +18,7 @@ final class CreateQuestionListModel {
             // 薬のデータを配列に格納
             listItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
                 // カンマ（,）で分割した配列を作成
-                .map({ line in
-                    line.components(separatedBy: ",")
-                })
+                .map { $0.components(separatedBy: ",") }
                 // MedicineListItem構造体にする
                 .compactMap({ array in
                     MedicineListItem(category: MedicineCategory.getCategory(from: array[1]),
