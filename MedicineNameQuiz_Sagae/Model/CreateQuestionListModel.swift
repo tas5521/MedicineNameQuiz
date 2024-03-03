@@ -20,12 +20,12 @@ final class CreateQuestionListModel {
                 // カンマ（,）で分割した配列を作成
                 .map { $0.components(separatedBy: ",") }
                 // MedicineListItem構造体にする
-                .compactMap({ array in
-                    MedicineListItem(category: MedicineCategory.getCategory(from: array[1]),
-                                     brandName: array[2],
-                                     genericName: array[3],
+                .compactMap {
+                    MedicineListItem(category: MedicineCategory.getCategory(from: $0[1]),
+                                     brandName: $0[2],
+                                     genericName: $0[3],
                                      selected: false)
-                })
+                }
         } // if ここまで
         // カスタムの薬データをフェッチ
         let customListItems = fetchedCustomMedicines
