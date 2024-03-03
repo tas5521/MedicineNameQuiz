@@ -33,17 +33,9 @@ final class CreateQuestionListViewModel {
         // 薬データを取得
         let fetchedListItems = model.fetchListItems(from: fetchedCustomMedicines)
         // 薬データを配列に格納
-        oralListItems = fetchedListItems.filter({ medicineData in
-            medicineData.category == .oral
-        }) // oralListItems ここまで
-        injectionListItems = fetchedListItems.filter({ medicineData in
-            medicineData.category == .injection
-        }) // injectionListItems ここまで
-        topicalListItems = fetchedListItems.filter({ medicineData in
-            medicineData.category == .topical
-        }) // topicalListItems ここまで
-        customListItems = fetchedListItems.filter({ medicineData in
-            medicineData.category == .custom
-        }) // customListItems ここまで
+        oralListItems = fetchedListItems.filter { $0.category == .oral }
+        injectionListItems = fetchedListItems.filter { $0.category == .injection }
+        topicalListItems = fetchedListItems.filter { $0.category == .topical }
+        customListItems = fetchedListItems.filter { $0.category == .custom }
     } // fetchListItems ここまで
 } // CreateQuestionListViewModel ここまで
