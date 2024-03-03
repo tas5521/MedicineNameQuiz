@@ -17,8 +17,8 @@ enum MedicineCategory: String, CaseIterable {
     // CSVをロードしたデータを1度だけ格納して記憶するためにstaticにしている
     static private var csvItems: [MedicineItem] = []
 
-    // 薬のデータ
-    var medicineNameData: [MedicineItem] {
+    // フィルターした薬のデータ
+    var filteredItems: [MedicineItem] {
         // もし薬データを読み込んでいなかったら
         if MedicineCategory.csvItems.isEmpty {
             // 薬のデータを配列に格納
