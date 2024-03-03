@@ -13,18 +13,16 @@ final class MedicineListViewModel {
     var category: MedicineCategory = .oral
     // 薬の検索に使う変数
     var medSearchText: String = ""
-    // Viewに表示する薬名を格納する配列
-    var items: [MedicineItem] {
-        let medicineNameData: [MedicineItem] = category.medicineNameData
+    // Viewに表示する薬名をfilterして格納する配列
+    var searchedItems: [MedicineItem] {
+        let categorizedItems: [MedicineItem] = category.filteredItems
         // 検索条件がなければ、検索せずに全てのデータを返す
         guard medSearchText.isEmpty == false else {
-            return medicineNameData
+            return categorizedItems
         } // guard ここまで
-        // 検索キーワードを商品名または一般名に含むデータを探す
-        let filteredMedicines = medicineNameData.filter({ medicineName in
-            medicineName.brandName.contains(medSearchText) || medicineName.genericName.contains(medSearchText)
-        }) // filteredMedicines ここまで
-        // 検索キーワードを商品名または一般名に含むデータを表示
-        return filteredMedicines
+        // 検索キーワードを商品名または一般名に含むデータを返却
+        return categorizedItems.filter {
+            $0.brandName.contains(medSearchText) || $0.genericName.contains(medSearchText)
+        }
     } // items ここまで
 } // MedicineListViewModel ここまで

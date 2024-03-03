@@ -32,13 +32,9 @@ enum MedicineCategory: String, CaseIterable {
                                  genericName: $0[3])
                 }
         } // if ここまで
-        // 選択された区分により、データをフィルターする
-        let filteredItems = MedicineCategory.csvItems.filter({ medicineData in
-            medicineData.category == self
-        })
-        // 薬の名前の要素の配列を返却
-        return filteredItems
-    } // medicineNameData ここまで
+        // 現在のカテゴリに一致する薬の名前データを返却
+        return MedicineCategory.csvItems.filter { $0.category == self }
+    } // filteredItems ここまで
 
     // 文字列（内用薬、注射薬、外用薬、カスタム）から列挙子に変換するメソッド
     static func getCategory(from categoryName: String) -> MedicineCategory {
