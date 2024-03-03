@@ -24,15 +24,13 @@ enum MedicineCategory: String, CaseIterable {
             // 薬のデータを配列に格納
             MedicineCategory.csvItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
                 // カンマ（,）で分割した配列を作成
-                .map({ line in
-                    line.components(separatedBy: ",")
-                })
+                .map { $0.components(separatedBy: ",") }
                 // MedicineItem構造体にする
-                .compactMap({ array in
-                    MedicineItem(category: MedicineCategory.getCategory(from: array[1]),
-                                 brandName: array[2],
-                                 genericName: array[3])
-                })
+                .compactMap {
+                    MedicineItem(category: MedicineCategory.getCategory(from: $0[1]),
+                                 brandName: $0[2],
+                                 genericName: $0[3])
+                }
         } // if ここまで
         // 選択された区分により、データをフィルターする
         let filteredItems = MedicineCategory.csvItems.filter({ medicineData in
