@@ -84,7 +84,7 @@ struct CreateQuestionListView: View {
             // リスト名を無くす
             viewModel.listName.removeAll()
             // 薬リストをフェッチ
-            viewModel.fetchListItems(fetchedCustomMedicines: fetchedCustomMedicines)
+            viewModel.fetchListItems(from: fetchedCustomMedicines)
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト\(questionListMode.rawValue)", displayMode: .inline)

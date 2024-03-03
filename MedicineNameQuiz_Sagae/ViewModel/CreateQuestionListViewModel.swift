@@ -29,7 +29,7 @@ final class CreateQuestionListViewModel {
     private let model = CreateQuestionListModel()
 
     // 薬データをフェッチ
-    func fetchListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
+    func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
         // 薬データを取得
         let fetchedListItems = model.fetchListItems(from: fetchedCustomMedicines)
         // 薬データを配列に格納
