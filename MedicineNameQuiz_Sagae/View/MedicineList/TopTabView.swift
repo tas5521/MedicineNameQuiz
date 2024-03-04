@@ -9,13 +9,13 @@ import SwiftUI
 
 struct TopTabView: View {
     // 選択されているタブの変数
-    @Binding var selectTab: MedicineClassification
+    @Binding var selectTab: MedicineCategory
 
     var body: some View {
         // 水平方向にレイアウト
         HStack(spacing: 0) {
             // タブに表示するリストの名前の数だけ繰り返す
-            ForEach(MedicineClassification.allCases, id: \.self) { tab in
+            ForEach(MedicineCategory.allCases, id: \.self) { tab in
                 // タブになるボタンを配置
                 Button {
                     // 選択されたタブの情報を保持
@@ -23,7 +23,7 @@ struct TopTabView: View {
                 } label: {
                     // 各タブに名前を表示
                     Text(tab.rawValue)
-                    // 選択されているタブは白に、それ以外は黒にする
+                        // 選択されているタブは白に、それ以外は黒にする
                         .foregroundStyle(selectTab == tab ? Color.white : Color.black)
                 } // Button ここまで
                 // 画面端まで
@@ -34,9 +34,9 @@ struct TopTabView: View {
                 .overlay(
                     // 長方形を配置
                     Rectangle()
-                    // 高さ3に指定
+                        // 高さ3に指定
                         .frame(height: 3)
-                    // 選択されているタブは白に、それ以外は黒にする
+                        // 選択されているタブは白に、それ以外は黒にする
                         .foregroundStyle(selectTab == tab ? Color.white : Color.clear)
                     // 下に配置
                     , alignment: .bottom
@@ -51,5 +51,5 @@ struct TopTabView: View {
 } // TopTabView
 
 #Preview {
-    TopTabView(selectTab: .constant(.customMedicine))
+    TopTabView(selectTab: .constant(.custom))
 }

@@ -28,11 +28,11 @@ enum AnswerButtonType {
     var buttonColor: Color {
         switch self {
         case .correct:
-                .buttonGreen
+            .buttonGreen
         case .incorrect:
-                .buttonRed
+            .buttonRed
         case .back:
-                .gray
+            .gray
         } // switchここまで
     } // buttonColor ここまで
 } // AnswerButtonType ここまで

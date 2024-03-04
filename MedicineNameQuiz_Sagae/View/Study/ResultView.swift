@@ -11,12 +11,12 @@ struct ResultView: View {
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
     // 問題リストの名前を保持する変数
-    @State private var questionListName: String = ""
-    
+    @State private var listName: String = ""
+
     // View Presentation State
     // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
-    
+
     // ダミーの解答結果
     private let dummyResult: [StudyResultListItem] = [
         StudyResultListItem(brandName: "アムロジン", genericName: "アムロジピンベシル酸塩", studyResult: .incorrect),
@@ -25,13 +25,13 @@ struct ResultView: View {
         StudyResultListItem(brandName: "エバステル", genericName: "エバスチン", studyResult: .incorrect),
         StudyResultListItem(brandName: "オノン", genericName: "プランルカスト水和物", studyResult: .correct)
     ]
-    
+
     var body: some View {
         // 手前から奥にレイアウト
         ZStack {
             // 背景を水色にする
             Color.backgroundSkyBlue
-            // セーフエリア外にも背景を表示
+                // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack {
@@ -46,7 +46,7 @@ struct ResultView: View {
                         countResult(of: .incorrect)
                     } // HStack ここまで
                     // 上と左に30ポイント余白をつける
-                    .padding([.leading,.top], 30)
+                    .padding([.leading, .top], 30)
                     // 下に10ポイント余白をつける
                     .padding(.bottom, 15)
                     // 文字の大きさを1.5倍にする
@@ -56,7 +56,7 @@ struct ResultView: View {
                 } // VStack ここまで
                 // 間違えた問題をリストに保存するボタン
                 saveMistakesButton
-                // 上下左右に余白を追加
+                    // 上下左右に余白を追加
                     .padding()
             } // VStack ここまで
             .bold()
@@ -80,20 +80,20 @@ struct ResultView: View {
             } // ToolbarItem ここまで
         } // toolbar ここまで
     } // body ここまで
-    
+
     // 解答結果のカウント
     @ViewBuilder
     private func countResult(of result: StudyResult) -> some View {
         // まるかばつのImageを配置
         Image(systemName: result.rawValue)
-        // 正解なら緑、不正解なら赤にする
+            // 正解なら緑、不正解なら赤にする
             .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
         // 正解または不正解の数をカウント
         let resultCount = dummyResult.filter { $0.studyResult == result }.count
         // 正解または不正解の数を表示
         Text(":  \(resultCount)")
     } // countResult ここまで
-    
+
     // 結果のリスト
     private var resultList: some View {
         // リストを作成
@@ -104,7 +104,7 @@ struct ResultView: View {
                 HStack {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
-                        // 先発品名を表示
+                        // 商品名を表示
                         Text(item.brandName)
                             .foregroundStyle(Color.blue)
                         // 一般名を表示
@@ -117,9 +117,9 @@ struct ResultView: View {
                     let studyResult = item.studyResult
                     // まる、または、ばつのImage
                     Image(systemName: studyResult.rawValue)
-                    // 幅を15に指定
+                        // 幅を15に指定
                         .frame(width: 15)
-                    // 正解なら緑、不正解なら赤にする
+                        // 正解なら緑、不正解なら赤にする
                         .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
                 } // HStack ここまで
             } // ForEach ここまで
@@ -137,21 +137,21 @@ struct ResultView: View {
             isShowPopUp.toggle()
         } label: {
             Text("間違えた問題をリストに保存する")
-            // 太字にする
+                // 太字にする
                 .bold()
-            // 文字の色を白に指定
+                // 文字の色を白に指定
                 .foregroundStyle(Color.white)
-            // 幅150高さ50に指定
+                // 幅150高さ50に指定
                 .frame(width: 300, height: 60)
-            // 背景色をオレンジに指定
+                // 背景色をオレンジに指定
                 .background(Color.buttonOrange)
-            // 角を丸くする
+                // 角を丸くする
                 .clipShape(.buttonBorder)
         } // Button ここまで
         // 間違えた問題をリストに保存するためのポップアップを表示
         .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
             // 問題リストの名前を入力するテキストフィールド
-            TextField("問題リストの名前", text: $questionListName)
+            TextField("問題リストの名前", text: $listName)
             // 保存ボタン
             Button {
                 // 問題リストの作成処理

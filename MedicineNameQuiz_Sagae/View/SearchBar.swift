@@ -12,34 +12,34 @@ struct SearchBar: View {
     @Binding var searchText: String
     // Placeholderを管理する変数
     let placeholderText: String
-    
+
     var body: some View {
         // 奥から手前にレイアウト
         ZStack {
             // 背景
             RoundedRectangle(cornerRadius: 8)
-            // 背景色を指定
+                // 背景色を指定
                 .fill(Color(red: 239 / 255,
                             green: 239 / 255,
                             blue: 241 / 255))
-            // 高さを36に指定
+                // 高さを36に指定
                 .frame(height: 36)
-            
+
             // 水平方向にレイアウト
             HStack(spacing: 6) {
                 // スペースを空ける
                 Spacer()
-                // 幅を0に指定
+                    // 幅を0に指定
                     .frame(width: 0)
-                
+
                 // 虫メガネ
                 Image(systemName: "magnifyingglass")
-                // 色をグレーに指定
+                    // 色をグレーに指定
                     .foregroundStyle(Color.gray)
-                
+
                 // テキストフィールド
                 TextField(placeholderText, text: $searchText)
-                
+
                 // 検索文字が空ではない場合は、クリアボタンを表示
                 if !searchText.isEmpty {
                     // クリアボタン
@@ -49,7 +49,7 @@ struct SearchBar: View {
                     } label: {
                         // ラベル
                         Image(systemName: "xmark.circle.fill")
-                        // 色をグレーにする
+                            // 色をグレーにする
                             .foregroundStyle(.gray)
                     } // Button ここまで
                     // 右に余白を指定

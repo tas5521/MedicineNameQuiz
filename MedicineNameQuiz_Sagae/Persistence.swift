@@ -14,9 +14,9 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newCustomMedicineName = CustomMedicine(context: viewContext)
-            newCustomMedicineName.originalName = "先発品名"
-            newCustomMedicineName.genericName = "一般名"
+            let customMedicine = CustomMedicine(context: viewContext)
+            customMedicine.brandName = "商品名"
+            customMedicine.genericName = "一般名"
         }
         do {
             try viewContext.save()
@@ -36,7 +36,7 @@ struct PersistenceController {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

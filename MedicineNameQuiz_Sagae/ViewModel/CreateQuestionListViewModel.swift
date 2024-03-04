@@ -12,38 +12,30 @@ final class CreateQuestionListViewModel {
     // 問題リストの名前を保持する変数
     var listName: String = ""
     // 選択されているタブを管理する変数
-    var medicineClassification: MedicineClassification = .internalMedicine
+    var category: MedicineCategory = .oral
     // 薬の検索に使う変数
-    var searchMedicineName: String = ""
-    
+    var medSearchText: String = ""
+
     // 内用薬の配列
-    var internalMedicineList: [MedicineListItem] = []
+    var oralListItems: [MedicineListItem] = []
     // 注射薬の配列
-    var injectionMedicineList: [MedicineListItem] = []
+    var injectionListItems: [MedicineListItem] = []
     // 外用薬の配列
-    var externalMedicineList: [MedicineListItem] = []
+    var topicalListItems: [MedicineListItem] = []
     // カスタム薬の配列
-    var customMedicineList: [MedicineListItem] = []
-    
+    var customListItems: [MedicineListItem] = []
+
     // CreateQuestionListModelのインスタンスを生成
-    private let createQuestionListModel = CreateQuestionListModel()
+    private let model = CreateQuestionListModel()
 
     // 薬データをフェッチ
-    func fetchMedicineListItems(fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
+    func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
         // 薬データを取得
-        let medicineListItems = createQuestionListModel.fetchMedicineListItems(fetchedCustomMedicines: fetchedCustomMedicines)
+        let fetchedListItems = model.fetchListItems(from: fetchedCustomMedicines)
         // 薬データを配列に格納
-        internalMedicineList = medicineListItems.filter({ medicineData in
-            medicineData.medicineCategory == .internalMedicine
-        }) // internalMedicineList ここまで
-        injectionMedicineList = medicineListItems.filter({ medicineData in
-            medicineData.medicineCategory == .injectionMedicine
-        }) // injectionMedicineList ここまで
-        externalMedicineList = medicineListItems.filter({ medicineData in
-            medicineData.medicineCategory == .externalMedicine
-        }) // externalMedicineList ここまで
-        customMedicineList = medicineListItems.filter({ medicineData in
-            medicineData.medicineCategory == .customMedicine
-        }) // customMedicineList ここまで
-    } // fetchMedicineListItems ここまで
+        oralListItems = fetchedListItems.filter { $0.category == .oral }
+        injectionListItems = fetchedListItems.filter { $0.category == .injection }
+        topicalListItems = fetchedListItems.filter { $0.category == .topical }
+        customListItems = fetchedListItems.filter { $0.category == .custom }
+    } // fetchListItems ここまで
 } // CreateQuestionListViewModel ここまで

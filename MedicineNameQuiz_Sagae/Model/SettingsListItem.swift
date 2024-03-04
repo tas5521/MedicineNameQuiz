@@ -1,5 +1,5 @@
 //
-//  AppSettingsListItem.swift
+//  SettingsListItem.swift
 //  MedicineNameQuiz_Sagae
 //
 //  Created by 寒河江彪流 on 2023/10/01.
@@ -10,10 +10,10 @@
 
 import Foundation
 
-enum AppSettingsListItem: String, CaseIterable {
+enum SettingsListItem: String, CaseIterable {
     case howToUse = "アプリの使い方"
     case reference = "医薬品名の引用元"
     case advertisement = "広告の表示について"
     // ランキング機能が無ければ、AccountViewは使用しないので、コメントアウト
     // case account = "アカウント"
-} // AppSettingsListItem ここまで
+} // SettingsListItem ここまで
