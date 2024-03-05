@@ -10,7 +10,8 @@ import SwiftUI
 struct MedicineSelectableList: View {
     // 表示する薬の名前を受け取る配列
     @Binding var listItems: [MedicineListItem]
-
+    // 検索条件に合った要素のindexの配列
+    let indicesForSearch: [Int]
     // 全ての薬が選択されているかどうかを判定
     private var isAllSelected: Bool {
         listItems.allSatisfy({ medicine in medicine.selected })
@@ -22,7 +23,7 @@ struct MedicineSelectableList: View {
             // 水平方向にレイアウト
             HStack {
                 // 問題数を表示
-                Text("問題数: \(listItems.count)")
+                Text("問題数: \(indicesForSearch.count)")
                     // 太字にする
                     .bold()
                 // スペースを空ける
@@ -36,7 +37,7 @@ struct MedicineSelectableList: View {
             .padding([.top, .leading, .trailing])
             // 出題される薬の名前のリスト
             List {
-                ForEach(listItems.indices, id: \.self) { index in
+                ForEach(indicesForSearch, id: \.self) { index in
                     // Toggleを配置
                     Toggle(isOn: $listItems[index].selected) {
                         // 垂直方向にレイアウト
@@ -66,7 +67,7 @@ struct MedicineSelectableList: View {
     private func selectAllButton(selectAll: Bool) -> some View {
         Button {
             // 全て選択する、もしくは、全て選択しない
-            for index in listItems.indices {
+            for index in indicesForSearch {
                 listItems[index].selected = selectAll
             } // for ここまで
         } label: {
@@ -81,5 +82,5 @@ struct MedicineSelectableList: View {
 #Preview {
     MedicineSelectableList(listItems:
                             .constant([MedicineListItem(category: .oral, brandName: "内用薬商品名1", genericName: "内用薬一般名1", selected: false),
-                                       MedicineListItem(category: .oral, brandName: "内用薬商品名2", genericName: "内用薬一般名2", selected: false)]))
+                                       MedicineListItem(category: .oral, brandName: "内用薬商品名2", genericName: "内用薬一般名2", selected: false)]), indicesForSearch: [0, 1])
 }
