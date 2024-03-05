@@ -29,7 +29,7 @@ struct MedicineSelectableList: View {
                 // スペースを空ける
                 Spacer()
                 // 「全て選択する」ボタンまたは「全て選択しない」ボタンを表示
-                if !listItems.isEmpty {
+                if !indicesForSearch.isEmpty {
                     selectAllButton(selectAll: !isAllSelected)
                 } // if ここまで
             } // HStack ここまで
