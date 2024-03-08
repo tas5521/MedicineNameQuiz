@@ -25,6 +25,32 @@ final class CreateQuestionListViewModel {
     // カスタム薬の配列
     var customListItems: [MedicineListItem] = []
 
+    // 検索条件に合う要素のindexを取得
+    var indicesForSearch: [Int] {
+        // 選択されている薬リスト
+        var selectedListItems: [MedicineListItem] {
+            switch category {
+            case .oral:
+                oralListItems
+            case .injection:
+                injectionListItems
+            case .topical:
+                topicalListItems
+            case .custom:
+                customListItems
+            } // switch ここまで
+        } // selectedMedicineListItems ここまで
+        // 検索キーワードが無ければ、全てのIndexを返して終了
+        guard medSearchText.isEmpty == false else {
+            return Array(selectedListItems.indices)
+        } // guard ここまで
+        // 検索キーワードがある場合、検索キーワードを商品名もしくは一般名に持つ要素のindexを返す
+        return selectedListItems.indices.filter {
+            selectedListItems[$0].brandName.contains(medSearchText) ||
+                selectedListItems[$0].genericName.contains(medSearchText)
+        } // selectedListItems.indices.filter ここまで
+    } // indicesForSearch ここまで
+
     // CreateQuestionListModelのインスタンスを生成
     private let model = CreateQuestionListModel()
 
