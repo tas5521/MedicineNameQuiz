@@ -10,10 +10,13 @@ import SwiftUI
 struct QuestionsView: View {
     // 薬の名前の検索テキスト
     @State private var medSearchText: String = ""
-    // リストの名前を保持する変数
-    let listName: String
-    // 問題を保持する変数
-    let questions: [MedicineItem]
+    // QuestionsViewModelのインスタンスを格納する変数
+    @State private var viewModel: QuestionsViewModel
+
+    // イニシャライザ
+    init(questionList: QuestionList) {
+        _viewModel = State(initialValue: QuestionsViewModel(questionList: questionList))
+    } // init ここまで
 
     var body: some View {
         // 奥から手前方向にレイアウト
@@ -31,12 +34,12 @@ struct QuestionsView: View {
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 総問題数を表示
-                    Text("総問題数: \(questions.count)")
+                    Text("総問題数: \(viewModel.questionList.numberOfQuestions)")
                         // 左に余白を追加
                         .padding([.top, .leading, .trailing])
                     // 出題される薬の名前のリスト
                     List {
-                        ForEach(questions) { question in
+                        ForEach(viewModel.questions) { question in
                             // 垂直方向にレイアウト
                             VStack(alignment: .leading) {
                                 // 商品名を表示
@@ -60,7 +63,7 @@ struct QuestionsView: View {
             } // VStack ここまで
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle(listName, displayMode: .inline)
+        .navigationBarTitle(viewModel.questionList.listName ?? "", displayMode: .inline)
         // ナビゲーションバーの背景を変更
         .navigationBarBackground()
         // ナビゲーションバーの右側に編集ボタンを配置
@@ -80,16 +83,5 @@ struct QuestionsView: View {
 } // QuestionsView ここまで
 
 #Preview {
-    QuestionsView(listName: "プレビュー薬局",
-                  questions: [MedicineItem(category: .oral,
-                                           brandName: "アムロジン",
-                                           genericName: "アムロジピンべシル酸塩"),
-                              MedicineItem(category: .oral,
-                                           brandName: "エバステル",
-                                           genericName: "エバスチン"),
-                              MedicineItem(category: .oral,
-                                           brandName: "オノン",
-                                           genericName: "プランルカスト水和物")
-                  ]
-    )
+    QuestionsView(questionList: QuestionList())
 }

@@ -16,22 +16,6 @@ struct QuestionListView: View {
     // リスト名検索テキスト
     @State private var listName: String = ""
 
-    // ダミーのリスト
-    private var dummyList: [QuestionListItem] = [
-        QuestionListItem(listName: "さがえ薬局リスト",
-                         date: Date(),
-                         questions: [MedicineItem(category: .oral,
-                                                  brandName: "アムロジン",
-                                                  genericName: "アムロジピンべシル酸塩"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "エバステル",
-                                                  genericName: "エバスチン"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "オノン",
-                                                  genericName: "プランルカスト水和物")]
-        )
-    ] // dummyList ここまで
-
     var body: some View {
         NavigationStack {
             // 手前から奥にレイアウト
@@ -77,7 +61,7 @@ struct QuestionListView: View {
             ForEach(fetchedLists) { list in
                 // 各行に対応した画面へ遷移
                 NavigationLink {
-                    QuestionsView(listName: dummyList[0].listName, questions: dummyList[0].questions)
+                    QuestionsView(questionList: list)
                 } label: {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
