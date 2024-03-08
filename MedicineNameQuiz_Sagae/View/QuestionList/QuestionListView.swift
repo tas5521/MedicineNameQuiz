@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct QuestionListView: View {
+    // 問題リストをフェッチ
+    @FetchRequest(entity: QuestionList.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \QuestionList.createdDate, ascending: false)],
+                  animation: nil
+    ) private var fetchedLists: FetchedResults<QuestionList>
     // リスト名検索テキスト
     @State private var listName: String = ""
 
@@ -24,30 +29,6 @@ struct QuestionListView: View {
                                      MedicineItem(category: .oral,
                                                   brandName: "オノン",
                                                   genericName: "プランルカスト水和物")]
-        ),
-        QuestionListItem(listName: "ながつ薬局リスト",
-                         date: Date(),
-                         questions: [MedicineItem(category: .oral,
-                                                  brandName: "ガスター",
-                                                  genericName: "ファモチジン"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "キプレス",
-                                                  genericName: "モンテルカストナトリウム"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "クラビット",
-                                                  genericName: "レボフロキサシン水和物")]
-        ),
-        QuestionListItem(listName: "こばやし薬局リスト",
-                         date: Date(),
-                         questions: [MedicineItem(category: .oral,
-                                                  brandName: "インフリー",
-                                                  genericName: "インドメタシン　ファルネシル"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "ウリトス",
-                                                  genericName: "イミダフェナシン"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "ケフラール",
-                                                  genericName: "セファクロル")]
         )
     ] // dummyList ここまで
 
@@ -93,23 +74,23 @@ struct QuestionListView: View {
     // 問題リスト
     private var questionList: some View {
         List {
-            ForEach(dummyList) { item in
+            ForEach(fetchedLists) { list in
                 // 各行に対応した画面へ遷移
                 NavigationLink {
-                    QuestionsView(listName: item.listName, questions: item.questions)
+                    QuestionsView(listName: dummyList[0].listName, questions: dummyList[0].questions)
                 } label: {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
                         // リストの名前
-                        Text(item.listName)
+                        Text(list.listName ?? "")
                         // 水平方向にレイアウト
                         HStack {
                             // リスト作成日時
-                            Text("\(item.date.formatted(date: .long, time: .omitted))")
+                            Text("\((list.createdDate ?? Date()).formatted(date: .long, time: .omitted))")
                             // スペースを空ける
                             Spacer()
                             // 問題数を表示
-                            Text("問題数: \(item.questions.count)")
+                            Text("問題数: \(list.numberOfQuestions)")
                         } // HStack ここまで
                     } // VStack ここまで
                     // 太字にする
