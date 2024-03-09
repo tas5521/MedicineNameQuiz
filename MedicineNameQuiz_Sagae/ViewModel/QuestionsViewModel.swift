@@ -9,8 +9,6 @@ import Foundation
 
 @Observable
 final class QuestionsViewModel {
-    // 問題リスト
-    let questionList: QuestionList
     // 問題の配列
     var questions: [MedicineItem] {
         // NSSet型のquestionList.questionsをSet<Question>型にキャスト
@@ -25,6 +23,10 @@ final class QuestionsViewModel {
         }
         .sorted(by: { $0.brandName < $1.brandName })
     } // questions ここまで
+    // 薬の名前の検索テキスト
+    var medSearchText: String = ""
+    // 問題リスト
+    let questionList: QuestionList
 
     // イニシャライザ
     init(questionList: QuestionList) {

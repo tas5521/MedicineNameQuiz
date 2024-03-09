@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct QuestionsView: View {
-    // 薬の名前の検索テキスト
-    @State private var medSearchText: String = ""
     // QuestionsViewModelのインスタンスを格納する変数
     @State private var viewModel: QuestionsViewModel
 
@@ -28,7 +26,7 @@ struct QuestionsView: View {
             // 垂直方向にレイアウト
             VStack {
                 // 薬の検索バー
-                SearchBar(searchText: $medSearchText, placeholderText: "薬を検索できます")
+                SearchBar(searchText: $viewModel.medSearchText, placeholderText: "薬を検索できます")
                     // 上下に余白を指定
                     .padding(.vertical)
                 // 垂直方向にレイアウト
