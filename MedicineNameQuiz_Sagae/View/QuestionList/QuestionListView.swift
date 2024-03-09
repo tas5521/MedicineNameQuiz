@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct QuestionListView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 問題リストをフェッチ
     @FetchRequest(entity: QuestionList.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \QuestionList.createdDate, ascending: false)],
@@ -81,6 +83,8 @@ struct QuestionListView: View {
                     .bold()
                 } // NavigationLink ここまで
             } // ForEach ここまで
+            // リストを左にスライドして削除できるようにする
+            .onDelete(perform: deleteQuestionList)
         } // List ここまで
         // リストのスタイルを.groupedに変更
         .listStyle(.grouped)
@@ -109,6 +113,23 @@ struct QuestionListView: View {
                 .clipShape(Circle())
         } // Button ここまで
     } // addListButton ここまで
+
+    // Core Dataから指定した問題リストを削除するメソッド
+    private func deleteQuestionList(offsets: IndexSet) {
+        for index in offsets {
+            // CoreDataから該当するindexのメモを削除
+            context.delete(fetchedLists[index])
+        } // for ここまで
+        // エラーハンドリング
+        do {
+            // 生成したインスタンスをCoreDataに保持する
+            try context.save()
+        } catch {
+            // このメソッドにより、クラッシュログを残して終了する
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        } // エラーハンドリングここまで
+    } // deleteQuestionList ここまで
 } // QuestionListView ここまで
 
 #Preview {
