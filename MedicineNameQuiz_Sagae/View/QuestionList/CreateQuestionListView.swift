@@ -100,7 +100,7 @@ struct CreateQuestionListView: View {
                         isShowNoListNameAlert.toggle()
                     } else {
                         // 保存処理
-                        viewModel.saveListItemsToCoreData(context: context)
+                        viewModel.saveListItems(context: context)
                         // 画面を閉じる
                         dismiss()
                     } // if ここまで

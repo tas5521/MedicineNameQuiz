@@ -67,7 +67,7 @@ final class CreateQuestionListViewModel {
     } // fetchListItems ここまで
 
     // 問題リストをCore Dataに保存するメソッド
-    func saveListItemsToCoreData(context: NSManagedObjectContext) {
+    func saveListItems(context: NSManagedObjectContext) {
         // 内用薬、注射薬、外用薬、カスタムのデータを連結
         let allListItems = oralListItems + injectionListItems + topicalListItems + customListItems
         // 選択されているものを条件にフィルターする
@@ -102,5 +102,5 @@ final class CreateQuestionListViewModel {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
             print("エラー: \(error)")
         } // do-try-catch ここまで
-    } // saveQuestionListToCoreData ここまで
+    } // saveListItems ここまで
 } // CreateQuestionListViewModel ここまで
