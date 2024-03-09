@@ -13,17 +13,10 @@ final class QuestionsViewModel {
     let questionList: QuestionList
     // 問題の配列
     var questions: [MedicineItem] {
-        self.getQuestionItems(from: questionList.questions as? Set<Question> ?? [])
-    } // questions ここまで
-
-    // イニシャライザ
-    init(questionList: QuestionList) {
-        self.questionList = questionList
-    } // init ここまで
-
-    // [MedicineItem]型の配列を取得するメソッド
-    private func getQuestionItems(from questions: Set<Question>) -> [MedicineItem] {
-        questions.map {
+        // NSSet型のquestionList.questionsをSet<Question>型にキャスト
+        guard let questions = questionList.questions as? Set<Question> else { return [] }
+        // MedicineItem型にして、商品名の昇順にソート
+        return questions.map {
             MedicineItem(
                 category: MedicineCategory(rawValue: $0.category ?? "") ?? .custom,
                 brandName: $0.brandName ?? "",
@@ -31,5 +24,10 @@ final class QuestionsViewModel {
             )
         }
         .sorted(by: { $0.brandName < $1.brandName })
-    } // getQuestionItems ここまで
+    } // questions ここまで
+
+    // イニシャライザ
+    init(questionList: QuestionList) {
+        self.questionList = questionList
+    } // init ここまで
 } // QuestionsViewModel ここまで
