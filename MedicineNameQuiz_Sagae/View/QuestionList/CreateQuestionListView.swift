@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CreateQuestionListView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // CreateQuestionListViewModelのインスタンスを生成
@@ -98,6 +100,7 @@ struct CreateQuestionListView: View {
                         isShowNoListNameAlert.toggle()
                     } else {
                         // 保存処理
+                        viewModel.saveQuestionList(context: context)
                         // 画面を閉じる
                         dismiss()
                     } // if ここまで

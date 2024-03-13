@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @Observable
 final class CreateQuestionListViewModel {
@@ -64,4 +65,42 @@ final class CreateQuestionListViewModel {
         topicalListItems = fetchedListItems.filter { $0.category == .topical }
         customListItems = fetchedListItems.filter { $0.category == .custom }
     } // fetchListItems ここまで
+
+    // 問題リストをCore Dataに保存するメソッド
+    func saveQuestionList(context: NSManagedObjectContext) {
+        // 内用薬、注射薬、外用薬、カスタムのデータを連結
+        let allListItems = oralListItems + injectionListItems + topicalListItems + customListItems
+        // 選択されているものを条件にフィルターする
+        let filteredListItems = allListItems.filter { $0.selected == true }
+        // Question型の空の集合を作成
+        var questionSet: Set<Question> = []
+
+        // questionSetにデータを格納
+        for listItem in filteredListItems {
+            // 問題のインスタンスを生成
+            let question = Question(context: context)
+            // カテゴリ、商品名、一般名を保持
+            question.category = listItem.category.rawValue
+            question.brandName = listItem.brandName
+            question.genericName = listItem.genericName
+            // 集合に格納
+            questionSet.insert(question)
+        } // for ここまで
+
+        // 問題リストのインスタンスを生成
+        let questionList = QuestionList(context: context)
+        // リスト名、作成した日付、問題数を保持
+        questionList.listName = listName
+        questionList.createdDate = Date()
+        questionList.numberOfQuestions = Int16(questionSet.count)
+        // NSSet型にキャストし、questionsに渡す
+        questionList.questions = questionSet as NSSet
+        do {
+            // 問題リストをCore Dataに保存
+            try context.save()
+        } catch {
+            // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
+            print("エラー: \(error)")
+        } // do-try-catch ここまで
+    } // saveQuestionList ここまで
 } // CreateQuestionListViewModel ここまで

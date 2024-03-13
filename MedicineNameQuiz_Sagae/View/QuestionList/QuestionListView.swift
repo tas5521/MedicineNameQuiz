@@ -8,48 +8,15 @@
 import SwiftUI
 
 struct QuestionListView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
+    // 問題リストをフェッチ
+    @FetchRequest(entity: QuestionList.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \QuestionList.createdDate, ascending: false)],
+                  animation: nil
+    ) private var fetchedLists: FetchedResults<QuestionList>
     // リスト名検索テキスト
     @State private var listName: String = ""
-
-    // ダミーのリスト
-    private var dummyList: [QuestionListItem] = [
-        QuestionListItem(listName: "さがえ薬局リスト",
-                         date: Date(),
-                         questions: [MedicineItem(category: .oral,
-                                                  brandName: "アムロジン",
-                                                  genericName: "アムロジピンべシル酸塩"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "エバステル",
-                                                  genericName: "エバスチン"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "オノン",
-                                                  genericName: "プランルカスト水和物")]
-        ),
-        QuestionListItem(listName: "ながつ薬局リスト",
-                         date: Date(),
-                         questions: [MedicineItem(category: .oral,
-                                                  brandName: "ガスター",
-                                                  genericName: "ファモチジン"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "キプレス",
-                                                  genericName: "モンテルカストナトリウム"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "クラビット",
-                                                  genericName: "レボフロキサシン水和物")]
-        ),
-        QuestionListItem(listName: "こばやし薬局リスト",
-                         date: Date(),
-                         questions: [MedicineItem(category: .oral,
-                                                  brandName: "インフリー",
-                                                  genericName: "インドメタシン　ファルネシル"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "ウリトス",
-                                                  genericName: "イミダフェナシン"),
-                                     MedicineItem(category: .oral,
-                                                  brandName: "ケフラール",
-                                                  genericName: "セファクロル")]
-        )
-    ] // dummyList ここまで
 
     var body: some View {
         NavigationStack {
@@ -93,29 +60,31 @@ struct QuestionListView: View {
     // 問題リスト
     private var questionList: some View {
         List {
-            ForEach(dummyList) { item in
+            ForEach(fetchedLists) { list in
                 // 各行に対応した画面へ遷移
                 NavigationLink {
-                    QuestionsView(listName: item.listName, questions: item.questions)
+                    QuestionsView(questionList: list)
                 } label: {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
                         // リストの名前
-                        Text(item.listName)
+                        Text(list.listName ?? "")
                         // 水平方向にレイアウト
                         HStack {
                             // リスト作成日時
-                            Text("\(item.date.formatted(date: .long, time: .omitted))")
+                            Text("\((list.createdDate ?? Date()).formatted(date: .long, time: .omitted))")
                             // スペースを空ける
                             Spacer()
                             // 問題数を表示
-                            Text("問題数: \(item.questions.count)")
+                            Text("問題数: \(list.numberOfQuestions)")
                         } // HStack ここまで
                     } // VStack ここまで
                     // 太字にする
                     .bold()
                 } // NavigationLink ここまで
             } // ForEach ここまで
+            // リストを左にスライドして削除できるようにする
+            .onDelete(perform: deleteQuestionList)
         } // List ここまで
         // リストのスタイルを.groupedに変更
         .listStyle(.grouped)
@@ -144,6 +113,23 @@ struct QuestionListView: View {
                 .clipShape(Circle())
         } // Button ここまで
     } // addListButton ここまで
+
+    // Core Dataから指定した問題リストを削除するメソッド
+    private func deleteQuestionList(offsets: IndexSet) {
+        for index in offsets {
+            // CoreDataから該当するindexのメモを削除
+            context.delete(fetchedLists[index])
+        } // for ここまで
+        // エラーハンドリング
+        do {
+            // 生成したインスタンスをCoreDataに保持する
+            try context.save()
+        } catch {
+            // このメソッドにより、クラッシュログを残して終了する
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        } // エラーハンドリングここまで
+    } // deleteQuestionList ここまで
 } // QuestionListView ここまで
 
 #Preview {
