@@ -30,6 +30,10 @@ struct QuestionListView: View {
                 VStack {
                     // 問題リストの検索バー
                     SearchBar(searchText: $listName, placeholderText: "リストを検索できます")
+                        .onChange(of: listName) {
+                            // 問題リストに検索をかける
+                            searchList()
+                        } // onChange ここまで
                         // 上下に余白を指定
                         .padding(.vertical)
                     // 問題リスト
@@ -113,6 +117,19 @@ struct QuestionListView: View {
                 .clipShape(Circle())
         } // Button ここまで
     } // addListButton ここまで
+
+    // 問題リストに検索をかけるメソッド
+    private func searchList() {
+        // 検索キーワードが空の場合
+        if listName.isEmpty {
+            // 検索条件を無し（nil）にする
+            fetchedLists.nsPredicate = nil
+        } else {
+            // 検索キーワードがある場合
+            // listNameに検索キーワードを含むか調べる条件を指定
+            fetchedLists.nsPredicate = NSPredicate(format: "listName contains %@", listName)
+        } // if ここまで
+    } // searchList ここまで
 
     // Core Dataから指定した問題リストを削除するメソッド
     private func deleteQuestionList(offsets: IndexSet) {
