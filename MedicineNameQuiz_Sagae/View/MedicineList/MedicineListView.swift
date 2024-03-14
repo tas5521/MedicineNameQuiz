@@ -184,4 +184,5 @@ struct MedicineListView: View {
 
 #Preview {
     MedicineListView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

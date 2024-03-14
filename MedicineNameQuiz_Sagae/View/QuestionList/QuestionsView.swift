@@ -81,5 +81,7 @@ struct QuestionsView: View {
 } // QuestionsView ここまで
 
 #Preview {
-    QuestionsView(questionList: QuestionList())
+    let context = PersistenceController.preview.container.viewContext
+    let questionList = QuestionList(context: context)
+    return QuestionsView(questionList: questionList)
 }

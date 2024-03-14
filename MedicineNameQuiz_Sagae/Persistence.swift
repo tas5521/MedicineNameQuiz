@@ -13,10 +13,25 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        for _ in 0..<5 {
+            // カスタムの薬のダミーデータ
             let customMedicine = CustomMedicine(context: viewContext)
             customMedicine.brandName = "商品名"
             customMedicine.genericName = "一般名"
+            // 問題のダミーデータ
+            // Question型の空の集合を作成
+            var questionSet: Set<Question> = []
+            let questions = Question(context: viewContext)
+            questions.brandName = "商品名"
+            questions.genericName = "一般名"
+            questions.category = "内用薬"
+            questionSet.insert(questions)
+
+            let questionList = QuestionList(context: viewContext)
+            questionList.questions = NSSet()
+            questionList.createdDate = Date()
+            questionList.listName = "リスト名"
+            questionList.questions = questionSet as NSSet
         }
         do {
             try viewContext.save()

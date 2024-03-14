@@ -151,4 +151,5 @@ struct QuestionListView: View {
 
 #Preview {
     QuestionListView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
