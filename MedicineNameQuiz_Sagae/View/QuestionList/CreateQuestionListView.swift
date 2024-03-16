@@ -82,6 +82,8 @@ struct CreateQuestionListView: View {
                 } // switch ここまで
             } // VStack ここまで
         } // ZStack ここまで
+        // タブバーを隠す
+        .toolbar(.hidden, for: .tabBar)
         .onAppear {
             // リスト名を無くす
             viewModel.listName.removeAll()
