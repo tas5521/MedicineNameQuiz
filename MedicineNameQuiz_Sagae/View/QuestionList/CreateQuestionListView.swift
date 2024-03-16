@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CreateQuestionListView: View {
+    // 問題リストを作成するか編集するかを管理する変数
+    let questionListMode: QuestionListMode
     // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
@@ -25,8 +27,6 @@ struct CreateQuestionListView: View {
                   sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
                   animation: nil
     ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
-    // 問題リストを作成するか編集するかを管理する変数
-    let questionListMode: QuestionListMode
 
     var body: some View {
         // 奥から手前にレイアウト
