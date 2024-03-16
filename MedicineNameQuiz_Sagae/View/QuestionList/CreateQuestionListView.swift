@@ -55,7 +55,7 @@ struct CreateQuestionListView: View {
                             .padding(.leading)
                         // リスト名編集用テキストフィールド
                         TextField("リストの名前を入力してください", text: $viewModel.listName)
-                        // フォーカスを当てる
+                            // フォーカスを当てる
                             .focused($isFocusActive)
                             // テキストフィールドの背景を指定
                             .textFieldBackground()
