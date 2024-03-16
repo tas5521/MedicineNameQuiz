@@ -18,6 +18,8 @@ struct CreateQuestionListView: View {
     // View Presentation State
     // リストに名前が無い時に表示するアラートを管理する変数
     @State private var isShowNoListNameAlert = false
+    // フォーカス制御を行うための変数
+    @FocusState private var isFocusActive: Bool
     // カスタムの薬データをフェッチ
     @FetchRequest(entity: CustomMedicine.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
@@ -53,6 +55,8 @@ struct CreateQuestionListView: View {
                             .padding(.leading)
                         // リスト名編集用テキストフィールド
                         TextField("リストの名前を入力してください", text: $viewModel.listName)
+                        // フォーカスを当てる
+                            .focused($isFocusActive)
                             // テキストフィールドの背景を指定
                             .textFieldBackground()
                             .padding(.horizontal)
@@ -87,6 +91,10 @@ struct CreateQuestionListView: View {
             viewModel.listName.removeAll()
             // 薬リストをフェッチ
             viewModel.fetchListItems(from: fetchedCustomMedicines)
+            // 問題作成モードだったら、画面を表示した時に名前を入力するテキストフィールドにフォーカスを当てる
+            if questionListMode == .create {
+                isFocusActive = true
+            } // if ここまで
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト\(questionListMode.rawValue)", displayMode: .inline)
