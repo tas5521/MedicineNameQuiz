@@ -18,21 +18,24 @@ struct PersistenceController {
             let customMedicine = CustomMedicine(context: viewContext)
             customMedicine.brandName = "商品名"
             customMedicine.genericName = "一般名"
-            // 問題のダミーデータ
-            // Question型の空の集合を作成
-            var questionSet: Set<Question> = []
-            let questions = Question(context: viewContext)
-            questions.brandName = "商品名"
-            questions.genericName = "一般名"
-            questions.category = "内用薬"
-            questionSet.insert(questions)
-
+        } // for ここまで
+        
+        for i in 0..<5 {
             let questionList = QuestionList(context: viewContext)
-            questionList.questions = NSSet()
             questionList.createdDate = Date()
-            questionList.listName = "リスト名"
-            questionList.questions = questionSet as NSSet
-        }
+            questionList.listName = "リスト名\(i)"
+            
+            for _ in 0..<10 {
+                // 問題のダミーデータ
+                let question = Question(context: viewContext)
+                question.brandName = "商品名"
+                question.genericName = "一般名"
+                question.category = "内用薬"
+                questionList.addToQuestions(question)
+            } // for ここまで
+            
+            questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        } // for ここまで
         do {
             try viewContext.save()
         } catch {
