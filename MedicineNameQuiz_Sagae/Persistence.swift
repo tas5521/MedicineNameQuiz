@@ -13,11 +13,31 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        // カスタムの薬のダミーデータを作成
+        for _ in 0..<5 {
             let customMedicine = CustomMedicine(context: viewContext)
             customMedicine.brandName = "商品名"
             customMedicine.genericName = "一般名"
-        }
+        } // for ここまで
+
+        // 問題リストのダミーデータを作成
+        for i in 0..<5 {
+            let questionList = QuestionList(context: viewContext)
+            questionList.createdDate = Date()
+            questionList.listName = "リスト名\(i)"
+
+            for _ in 0..<10 {
+                // 問題のダミーデータ
+                let question = Question(context: viewContext)
+                question.brandName = "商品名"
+                question.genericName = "一般名"
+                question.category = "内用薬"
+                questionList.addToQuestions(question)
+            } // for ここまで
+
+            questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        } // for ここまで
+
         do {
             try viewContext.save()
         } catch {

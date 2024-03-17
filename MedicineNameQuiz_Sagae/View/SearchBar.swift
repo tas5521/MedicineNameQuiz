@@ -19,9 +19,7 @@ struct SearchBar: View {
             // 背景
             RoundedRectangle(cornerRadius: 8)
                 // 背景色を指定
-                .fill(Color(red: 239 / 255,
-                            green: 239 / 255,
-                            blue: 241 / 255))
+                .fill(Color.white)
                 // 高さを36に指定
                 .frame(height: 36)
 
