@@ -203,5 +203,5 @@ final class CreateQuestionListViewModel {
             listItems[index].selected = true
             break
         } // for ここまで
-    } // setSelectedQuestion ここまで
+    } // updateListItem ここまで
 } // CreateQuestionListViewModel ここまで
