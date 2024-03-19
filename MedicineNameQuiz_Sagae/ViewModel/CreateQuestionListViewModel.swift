@@ -194,7 +194,7 @@ final class CreateQuestionListViewModel {
                 return
             } // if ここまで
             // listItemとquestionの商品名一般名が一致したら通過。一致しなければ次のループへ
-            guard listItems[index].brandName == question.brandName ||
+            guard listItems[index].brandName == question.brandName &&
                     listItems[index].genericName == question.genericName
             else { continue }
             // まだlistItems内の問題が選択されていなかったら通過。選択されていれば、次のループへ
