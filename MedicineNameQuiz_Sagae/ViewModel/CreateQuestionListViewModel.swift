@@ -90,25 +90,51 @@ final class CreateQuestionListViewModel {
         let allListItems = oralListItems + injectionListItems + topicalListItems + customListItems
         // 選択されているものを条件にフィルターする
         let filteredListItems = allListItems.filter { $0.selected == true }
-        // 問題リストのインスタンスを生成
-        let questionList = QuestionList(context: context)
-        // リスト名を保持
-        questionList.listName = listName
-        // 作成した日付を保持
-        questionList.createdDate = Date()
-        // questionSetにデータを格納
-        for listItem in filteredListItems {
-            // 問題のインスタンスを生成
-            let question = Question(context: context)
-            // カテゴリ、商品名、一般名を保持
-            question.category = listItem.category.rawValue
-            question.brandName = listItem.brandName
-            question.genericName = listItem.genericName
-            // 作成した問題を問題リストに追加
-            questionList.addToQuestions(question)
-        } // for ここまで
-        // 問題数を保持
-        questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        // 問題リスト作成モードの場合
+        if questionListMode == .create {
+            // 問題リストのインスタンスを生成
+            let questionList = QuestionList(context: context)
+            // questionListにデータを格納
+            for listItem in filteredListItems {
+                // 問題のインスタンスを生成
+                let question = Question(context: context)
+                // カテゴリ、商品名、一般名を保持
+                question.category = listItem.category.rawValue
+                question.brandName = listItem.brandName
+                question.genericName = listItem.genericName
+                // 作成した問題を問題リストに追加
+                questionList.addToQuestions(question)
+            } // for ここまで
+            // リスト名を保持
+            questionList.listName = listName
+            // 作成した日付を保持
+            questionList.createdDate = Date()
+            // 問題数を保持
+            questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+            // 問題リスト編集モードの場合
+        } else {
+            // 問題型の集合を作成
+            var questionSet: Set<Question> = []
+            // 選択されている問題を集合に格納
+            for item in filteredListItems {
+                // 問題のインスタンスを生成
+                let question = Question(context: context)
+                // カテゴリ、商品名、一般名を保持
+                question.category = item.category.rawValue
+                question.brandName = item.brandName
+                question.genericName = item.genericName
+                // 作成した問題を集合に追加
+                questionSet.insert(question)
+            } // for ここまで
+            // 元の問題リストを上書き
+            self.questionList.questions = questionSet as NSSet
+            // リスト名を保持
+            self.questionList.listName = listName
+            // 作成した日付を保持
+            self.questionList.createdDate = Date()
+            // 問題数を保持
+            self.questionList.numberOfQuestions = Int16(questionSet.count)
+        } // if ここまで
         do {
             // 問題リストをCore Dataに保存
             try context.save()
