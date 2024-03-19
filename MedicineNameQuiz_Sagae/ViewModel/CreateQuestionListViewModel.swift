@@ -164,13 +164,13 @@ final class CreateQuestionListViewModel {
         for question in questions {
             switch question.category {
             case .oral:
-                setSelectedQestion(to: &oralListItems, question: question)
+                setSelectedQuestion(to: &oralListItems, question: question)
             case .injection:
-                setSelectedQestion(to: &injectionListItems, question: question)
+                setSelectedQuestion(to: &injectionListItems, question: question)
             case .topical:
-                setSelectedQestion(to: &topicalListItems, question: question)
+                setSelectedQuestion(to: &topicalListItems, question: question)
             case .custom:
-                setSelectedQestion(to: &customListItems, question: question)
+                setSelectedQuestion(to: &customListItems, question: question)
             } // switch ここまで
         } // for ここまで
         // 全ての配列をソート
@@ -181,7 +181,7 @@ final class CreateQuestionListViewModel {
     } // mergeSelectedQuestions ここまで
 
     // 選択されている問題を該当するカテゴリの配列にセットする
-    private func setSelectedQestion(to listItems: inout [MedicineListItem], question: MedicineItem) {
+    private func setSelectedQuestion(to listItems: inout [MedicineListItem], question: MedicineItem) {
         for index in 0...listItems.count {
             // questionと商品名が一致するlistItemがなかった場合
             if index == listItems.count {
@@ -203,5 +203,5 @@ final class CreateQuestionListViewModel {
             listItems[index].selected = true
             break
         } // for ここまで
-    } // setSelectedQestion ここまで
+    } // setSelectedQuestion ここまで
 } // CreateQuestionListViewModel ここまで
