@@ -33,7 +33,7 @@ final class QuestionsViewModel {
             return questions
         } else {
             // 検索キーワードがあったら、商品名もしくは一般名がキーワードを含むものを表示
-            return questions.filter({ $0.brandName.contains(medSearchText) || $0.genericName.contains(medSearchText)})
+            return questions.filter({ $0.brandName.contains(medSearchText) || $0.genericName.contains(medSearchText) })
         } // if ここまで
     } // searchedQuestions ここまで
     // 問題リスト
