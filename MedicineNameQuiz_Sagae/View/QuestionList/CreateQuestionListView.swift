@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct CreateQuestionListView: View {
-    // 問題リストを作成するか編集するかを管理する変数
-    let questionListMode: QuestionListMode
     // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
     // CreateQuestionListViewModelのインスタンスを生成
-    @State private var viewModel: CreateQuestionListViewModel =  CreateQuestionListViewModel()
+    @State private var viewModel: CreateQuestionListViewModel
 
     // View Presentation State
     // リストに名前が無い時に表示するアラートを管理する変数
@@ -27,6 +25,17 @@ struct CreateQuestionListView: View {
                   sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
                   animation: nil
     ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
+
+    // イニシャライザ
+    init(questionListMode: QuestionListMode) {
+        _viewModel = State(initialValue: CreateQuestionListViewModel(questionListMode: questionListMode))
+    } // init ここまで
+
+    // イニシャライザ
+    init(questionListMode: QuestionListMode, questionList: QuestionList) {
+        _viewModel = State(initialValue: CreateQuestionListViewModel(questionListMode: questionListMode,
+                                                                     questionList: questionList))
+    } // init ここまで
 
     var body: some View {
         // 奥から手前にレイアウト
@@ -89,17 +98,21 @@ struct CreateQuestionListView: View {
         // タブバーを隠す
         .toolbar(.hidden, for: .tabBar)
         .onAppear {
-            // リスト名を無くす
-            viewModel.listName.removeAll()
             // 薬リストをフェッチ
             viewModel.fetchListItems(from: fetchedCustomMedicines)
-            // 問題作成モードだったら、画面を表示した時に名前を入力するテキストフィールドにフォーカスを当てる
-            if questionListMode == .create {
+            // 問題作成モードの場合
+            if viewModel.questionListMode == .create {
+                // リスト名を無くす
+                viewModel.listName.removeAll()
+                // 画面を表示した時に名前を入力するテキストフィールドにフォーカスを当てる
                 isFocusActive = true
+            } else {
+                // 選択されている問題をリストに表示する配列にマージ
+                viewModel.mergeSelectedQuestions()
             } // if ここまで
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定
-        .navigationBarTitle("リスト\(questionListMode.rawValue)", displayMode: .inline)
+        .navigationBarTitle("リスト\(viewModel.questionListMode.rawValue)", displayMode: .inline)
         // ナビゲーションバーの背景を変更
         .navigationBarBackground()
         .toolbar {

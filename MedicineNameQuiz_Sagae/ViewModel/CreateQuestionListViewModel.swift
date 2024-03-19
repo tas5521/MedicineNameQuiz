@@ -52,8 +52,26 @@ final class CreateQuestionListViewModel {
         } // selectedListItems.indices.filter ここまで
     } // indicesForSearch ここまで
 
+    // 問題リストを作成するか編集するかを管理する変数
+    let questionListMode: QuestionListMode
+
+    // 問題リストを保持する変数
+    private var questionList: QuestionList = QuestionList()
+
     // CreateQuestionListModelのインスタンスを生成
     private let model = CreateQuestionListModel()
+
+    // イニシャライザ
+    init(questionListMode: QuestionListMode) {
+        self.questionListMode = questionListMode
+    } // init ここまで
+
+    // イニシャライザ
+    init(questionListMode: QuestionListMode, questionList: QuestionList) {
+        self.questionListMode = questionListMode
+        self.questionList = questionList
+        self.listName = questionList.listName ?? ""
+    } // initここまで
 
     // 薬データをフェッチ
     func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
@@ -99,4 +117,65 @@ final class CreateQuestionListViewModel {
             print("エラー: \(error)")
         } // do-try-catch ここまで
     } // saveQuestionList ここまで
+
+    // 選択されている問題をリストに表示する配列にマージするメソッド
+    /// ＜想定しているデータのマージのルール＞
+    /// CSVから内用薬、注射薬、外用薬のデータを、CoreDataからカスタムのデータを取得し、MeidicineListItem型にして、selectedプロパティを全てfalseにします。ここでは、これを「薬リストのデータ」と呼びます（このデータは可変です。この後の説明でselectedの値がtrueに変わったり、要素が追加されたりします）。
+    /// 「CoreDataに保存されている問題」を取得します。このデータは、既に選択されているものなので、薬リストのデータにマージした後には、これらのデータに該当する項目のselectedプロパティはtrueになります。
+    /// マージの方法について説明します。CoreDataに保存されている問題の薬のカテゴリ（内用薬など）および商品名・一般名の情報を取得します。次に、その薬のカテゴリで絞って、薬リストのデータの中に同じ商品名・一般名のデータがあるかどうか探索します。同じ商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。探索は、1つの問題につき、薬リストのデータ内に該当するデータが1件見つかり次第終了します。この処理を全ての問題について行います。なお、内用薬、注射薬、外用薬では、同じカテゴリのデータに同じ商品名のデータは存在しません。しかし、カスタムではユーザーが同じ商品名・一般名のデータを複数作ることができる（これは許容します）ので、商品名と一般名の両方が一致するものが見つかった場合、selectedプロパティをtrueに変更します。また、商品名と一般名の両方が一致するものが複数見つかる可能性もありますが、ここでも該当するデータが1件見つかり次第終了することで、回避します。
+    /// もし、商品名と一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
+    /// マージされた薬リストのデータをCreateQuestionListViewに表示します。
+    func mergeSelectedQuestions() {
+        // questionListから取り出した問題をMedicineItem型に変換
+        let questions = (questionList.questions as? Set<Question> ?? [])
+            .map({
+                MedicineItem(category: MedicineCategory(rawValue: $0.category ?? "") ?? .custom,
+                             brandName: $0.brandName ?? "",
+                             genericName: $0.genericName ?? ""
+                ) // MedicineItem ここまで
+            }) // map ここまで
+        // 各問題を該当するカテゴリの配列にセットする
+        for question in questions {
+            switch question.category {
+            case .oral:
+                setSelectedQestion(to: &oralListItems, question: question)
+            case .injection:
+                setSelectedQestion(to: &injectionListItems, question: question)
+            case .topical:
+                setSelectedQestion(to: &topicalListItems, question: question)
+            case .custom:
+                setSelectedQestion(to: &customListItems, question: question)
+            } // switch ここまで
+        } // for ここまで
+        // 全ての配列をソート
+        oralListItems.sort(by: { $0.brandName < $1.brandName })
+        injectionListItems.sort(by: { $0.brandName < $1.brandName })
+        topicalListItems.sort(by: { $0.brandName < $1.brandName })
+        customListItems.sort(by: { $0.brandName < $1.brandName })
+    } // mergeSelectedQuestions ここまで
+
+    // 選択されている問題を該当するカテゴリの配列にセットする
+    private func setSelectedQestion(to listItems: inout [MedicineListItem], question: MedicineItem) {
+        for index in 0...listItems.count {
+            // questionと商品名が一致するlistItemがなかった場合
+            if index == listItems.count {
+                // その問題を該当するカテゴリの配列に追加する
+                let additionalQuestion = MedicineListItem(category: question.category,
+                                                          brandName: question.brandName,
+                                                          genericName: question.genericName,
+                                                          selected: true)
+                listItems.append(additionalQuestion)
+                return
+            } // if ここまで
+            // listItemとquestionの商品名一般名が一致したら通過。一致しなければ次のループへ
+            guard listItems[index].brandName == question.brandName ||
+                    listItems[index].genericName == question.genericName
+            else { continue }
+            // まだlistItems内の問題が選択されていなかったら通過。選択されていれば、次のループへ
+            guard listItems[index].selected == false else { continue }
+            // 問題を選択された状態にし、ループを終了
+            listItems[index].selected = true
+            break
+        } // for ここまで
+    } // setSelectedQestion ここまで
 } // CreateQuestionListViewModel ここまで
