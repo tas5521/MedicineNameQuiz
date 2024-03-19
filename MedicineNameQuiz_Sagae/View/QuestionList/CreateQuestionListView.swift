@@ -26,12 +26,12 @@ struct CreateQuestionListView: View {
                   animation: nil
     ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
 
-    // イニシャライザ
+    // イニシャライザ（問題リスト作成の場合）
     init(questionListMode: QuestionListMode) {
         _viewModel = State(initialValue: CreateQuestionListViewModel(questionListMode: questionListMode))
     } // init ここまで
 
-    // イニシャライザ
+    // イニシャライザ（問題リスト編集の場合）
     init(questionListMode: QuestionListMode, questionList: QuestionList) {
         _viewModel = State(initialValue: CreateQuestionListViewModel(questionListMode: questionListMode,
                                                                      questionList: questionList))

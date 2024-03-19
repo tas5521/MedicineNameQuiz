@@ -61,12 +61,12 @@ final class CreateQuestionListViewModel {
     // CreateQuestionListModelのインスタンスを生成
     private let model = CreateQuestionListModel()
 
-    // イニシャライザ
+    // イニシャライザ（問題リスト作成の場合）
     init(questionListMode: QuestionListMode) {
         self.questionListMode = questionListMode
     } // init ここまで
 
-    // イニシャライザ
+    // イニシャライザ（問題リスト編集の場合）
     init(questionListMode: QuestionListMode, questionList: QuestionList) {
         self.questionListMode = questionListMode
         self.questionList = questionList
