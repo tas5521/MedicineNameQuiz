@@ -193,7 +193,7 @@ final class CreateQuestionListViewModel {
                 listItems.append(additionalQuestion)
                 return
             } // if ここまで
-            // listItemとquestionの商品名一般名が一致したら通過。一致しなければ次のループへ
+            // listItemとquestionの商品名と一般名が一致したら通過。一致しなければ次のループへ
             guard listItems[index].brandName == question.brandName &&
                     listItems[index].genericName == question.genericName
             else { continue }
