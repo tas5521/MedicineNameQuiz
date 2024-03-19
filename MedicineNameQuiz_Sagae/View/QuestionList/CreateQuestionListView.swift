@@ -108,7 +108,7 @@ struct CreateQuestionListView: View {
                 isFocusActive = true
             } else {
                 // 選択されている問題をリストに表示する配列にマージ
-                viewModel.mergeSelectedQuestions()
+                viewModel.mergeQuestionLists()
             } // if ここまで
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定

@@ -151,7 +151,7 @@ final class CreateQuestionListViewModel {
     /// マージの方法について説明します。CoreDataに保存されている問題の薬のカテゴリ（内用薬など）および商品名・一般名の情報を取得します。次に、その薬のカテゴリで絞って、薬リストのデータの中に同じ商品名・一般名のデータがあるかどうか探索します。同じ商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。探索は、1つの問題につき、薬リストのデータ内に該当するデータが1件見つかり次第終了します。この処理を全ての問題について行います。なお、内用薬、注射薬、外用薬では、同じカテゴリのデータに同じ商品名のデータは存在しません。しかし、カスタムではユーザーが同じ商品名・一般名のデータを複数作ることができる（これは許容します）ので、商品名と一般名の両方が一致するものが見つかった場合、selectedプロパティをtrueに変更します。また、商品名と一般名の両方が一致するものが複数見つかる可能性もありますが、ここでも該当するデータが1件見つかり次第終了することで、回避します。
     /// もし、商品名と一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
     /// マージされた薬リストのデータをCreateQuestionListViewに表示します。
-    func mergeSelectedQuestions() {
+    func mergeQuestionLists() {
         // questionListから取り出した問題をMedicineItem型に変換
         let questions = (questionList.questions as? Set<Question> ?? [])
             .map({
@@ -164,13 +164,13 @@ final class CreateQuestionListViewModel {
         for question in questions {
             switch question.category {
             case .oral:
-                setSelectedQuestion(to: &oralListItems, question: question)
+                updateListItem(to: &oralListItems, with: question)
             case .injection:
-                setSelectedQuestion(to: &injectionListItems, question: question)
+                updateListItem(to: &injectionListItems, with: question)
             case .topical:
-                setSelectedQuestion(to: &topicalListItems, question: question)
+                updateListItem(to: &topicalListItems, with: question)
             case .custom:
-                setSelectedQuestion(to: &customListItems, question: question)
+                updateListItem(to: &customListItems, with: question)
             } // switch ここまで
         } // for ここまで
         // 全ての配列をソート
@@ -178,10 +178,10 @@ final class CreateQuestionListViewModel {
         injectionListItems.sort(by: { $0.brandName < $1.brandName })
         topicalListItems.sort(by: { $0.brandName < $1.brandName })
         customListItems.sort(by: { $0.brandName < $1.brandName })
-    } // mergeSelectedQuestions ここまで
+    } // mergeQuestionLists ここまで
 
     // 選択されている問題を該当するカテゴリの配列にセットする
-    private func setSelectedQuestion(to listItems: inout [MedicineListItem], question: MedicineItem) {
+    private func updateListItem(to listItems: inout [MedicineListItem], with question: MedicineItem) {
         for index in 0...listItems.count {
             // questionと商品名が一致するlistItemがなかった場合
             if index == listItems.count {
