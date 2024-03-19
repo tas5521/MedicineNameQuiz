@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CreateQuestionListView: View {
+    // 問題リストを作成するか編集するかを管理する変数
+    let questionListMode: QuestionListMode
     // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
@@ -18,13 +20,13 @@ struct CreateQuestionListView: View {
     // View Presentation State
     // リストに名前が無い時に表示するアラートを管理する変数
     @State private var isShowNoListNameAlert = false
+    // フォーカス制御を行うための変数
+    @FocusState private var isFocusActive: Bool
     // カスタムの薬データをフェッチ
     @FetchRequest(entity: CustomMedicine.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
                   animation: nil
     ) private var fetchedCustomMedicines: FetchedResults<CustomMedicine>
-    // 問題リストを作成するか編集するかを管理する変数
-    let questionListMode: QuestionListMode
 
     var body: some View {
         // 奥から手前にレイアウト
@@ -53,6 +55,8 @@ struct CreateQuestionListView: View {
                             .padding(.leading)
                         // リスト名編集用テキストフィールド
                         TextField("リストの名前を入力してください", text: $viewModel.listName)
+                            // フォーカスを当てる
+                            .focused($isFocusActive)
                             // テキストフィールドの背景を指定
                             .textFieldBackground()
                             .padding(.horizontal)
@@ -89,6 +93,10 @@ struct CreateQuestionListView: View {
             viewModel.listName.removeAll()
             // 薬リストをフェッチ
             viewModel.fetchListItems(from: fetchedCustomMedicines)
+            // 問題作成モードだったら、画面を表示した時に名前を入力するテキストフィールドにフォーカスを当てる
+            if questionListMode == .create {
+                isFocusActive = true
+            } // if ここまで
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト\(questionListMode.rawValue)", displayMode: .inline)
