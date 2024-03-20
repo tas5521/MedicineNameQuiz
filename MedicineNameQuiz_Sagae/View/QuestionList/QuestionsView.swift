@@ -37,7 +37,7 @@ struct QuestionsView: View {
                         .padding([.top, .leading, .trailing])
                     // 出題される薬の名前のリスト
                     List {
-                        ForEach(viewModel.questions) { question in
+                        ForEach(viewModel.searchedQuestions) { question in
                             // 垂直方向にレイアウト
                             VStack(alignment: .leading) {
                                 // 商品名を表示

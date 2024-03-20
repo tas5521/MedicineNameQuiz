@@ -40,7 +40,7 @@ final class CreateQuestionListViewModel {
             case .custom:
                 customListItems
             } // switch ここまで
-        } // selectedMedicineListItems ここまで
+        } // selectedListItems ここまで
         // 検索キーワードが無ければ、全てのIndexを返して終了
         guard medSearchText.isEmpty == false else {
             return Array(selectedListItems.indices)
