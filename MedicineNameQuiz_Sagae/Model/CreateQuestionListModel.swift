@@ -8,11 +8,8 @@
 import SwiftUI
 
 final class CreateQuestionListModel {
-    // 薬のデータをこの配列に格納
-    var listItems: [MedicineListItem] = []
-
     // 薬データをフェッチ
-    func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
+    static func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
         // CSVの薬データを取得
         let csvListItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
             // カンマ（,）で分割した配列を作成
@@ -33,19 +30,22 @@ final class CreateQuestionListModel {
                                  genericName: $0.genericName ?? "",
                                  selected: false)
             }
-        // 薬のデータを配列に格納
-        listItems = csvListItems + customListItems
+        // 薬のデータを返却
+        return csvListItems + customListItems
     } // fetchListItems ここまで
 
     // 選択されている問題を該当するカテゴリの配列にマージする
     /// 薬のカテゴリで絞って、薬リストのデータの中に同じ商品名・一般名のデータがあるかどうか探索します。
-    /// 同じカテゴリ・商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
+    /// 同じ商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
     /// 探索は、1つの問題につき、薬リストのデータ内に該当するデータが1件見つかり次第終了します。
-    /// カテゴリ・商品名・一般名の全てが一致するものが複数見つかる可能性もありますが、該当データが1件見つかり次第終了することで、
+    /// 商品名・一般名の両方が一致するものが複数見つかる可能性もありますが、該当データが1件見つかり次第終了することで、
     /// 複数選択されるのを回避します。
-    /// もし、カテゴリ・商品名・一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
+    /// もし、商品名・一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
     /// 今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
-    func mergeQuestionsToListItems(questions: [MedicineItem]) -> [MedicineListItem] {
+    static func mergeQuestions(to listItems: [MedicineListItem], with questions: [MedicineItem]) -> [MedicineListItem] {
+        // 可変のlistItemsを作成
+        var listItems: [MedicineListItem] = listItems
+
         for question in questions {
             for index in 0...listItems.count {
                 // questionとカテゴリ・商品名・一般名が一致するlistItemがなかった場合
@@ -56,10 +56,10 @@ final class CreateQuestionListModel {
                                                               genericName: question.genericName,
                                                               selected: true)
                     listItems.append(additionalQuestion)
+                    // questionとカテゴリ・商品名・一般名が一致するlistItemを探している場合
                 } else {
-                    // listItemとquestionのカテゴリと商品名と一般名が一致したら通過。一致しなければ次のループへ
-                    guard listItems[index].category == question.category &&
-                            listItems[index].brandName == question.brandName &&
+                    // listItemとquestionの商品名と一般名が一致したら通過。一致しなければ次のループへ
+                    guard listItems[index].brandName == question.brandName &&
                             listItems[index].genericName == question.genericName
                     else { continue }
                     // まだlistItems内の問題が選択されていなかったら通過。選択されていれば、次のループへ
@@ -71,5 +71,5 @@ final class CreateQuestionListModel {
             } // for ここまで
         } // for ここまで
         return listItems
-    } // mergeQuestionsToListItems ここまで
+    } // mergeQuestions ここまで
 } // CreateQuestionListModel ここまで
