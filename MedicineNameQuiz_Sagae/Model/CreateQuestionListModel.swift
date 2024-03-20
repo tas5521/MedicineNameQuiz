@@ -8,25 +8,22 @@
 import SwiftUI
 
 final class CreateQuestionListModel {
-    // 内用薬、注射薬、外用薬のデータをこの配列に格納
-    private var listItems: [MedicineListItem] = []
+    // 薬のデータをこの配列に格納
+    var listItems: [MedicineListItem] = []
 
     // 薬データをフェッチ
-    func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
-        // 内用薬、注射薬、外用薬のデータを取得していなければ、取得する
-        if listItems.isEmpty {
-            // 薬のデータを配列に格納
-            listItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
-                // カンマ（,）で分割した配列を作成
-                .map { $0.components(separatedBy: ",") }
-                // MedicineListItem構造体にする
-                .compactMap {
-                    MedicineListItem(category: MedicineCategory.getCategory(from: $0[1]),
-                                     brandName: $0[2],
-                                     genericName: $0[3],
-                                     selected: false)
-                }
-        } // if ここまで
+    func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
+        // 薬のデータを配列に格納
+        let csvListItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
+            // カンマ（,）で分割した配列を作成
+            .map { $0.components(separatedBy: ",") }
+            // MedicineListItem構造体にする
+            .compactMap {
+                MedicineListItem(category: MedicineCategory.getCategory(from: $0[1]),
+                                 brandName: $0[2],
+                                 genericName: $0[3],
+                                 selected: false)
+            }
         // カスタムの薬データをフェッチ
         let customListItems = fetchedCustomMedicines
             // MedicineListItem構造体にする
@@ -36,7 +33,8 @@ final class CreateQuestionListModel {
                                  genericName: $0.genericName ?? "",
                                  selected: false)
             }
-        return listItems + customListItems
+        // 薬のデータを配列に格納
+        listItems = csvListItems + customListItems
     } // fetchListItems ここまで
 
     // 選択されている問題を該当するカテゴリの配列にマージする
@@ -46,9 +44,7 @@ final class CreateQuestionListModel {
     /// 商品名と一般名の両方が一致するものが複数見つかる可能性もありますが、該当データが1件見つかり次第終了することで、複数選択されるのを回避します。
     /// もし、商品名と一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
     /// 今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
-    func mergeQuestions(to listItems: [MedicineListItem], with questions: [MedicineItem]) -> [MedicineListItem] {
-        // 可変のlistItemsを作成
-        var listItems: [MedicineListItem] = listItems
+    func mergeQuestionsToListItems(questions: [MedicineItem]) -> [MedicineListItem] {
         for question in questions {
             for index in 0...listItems.count {
                 // questionと商品名が一致するlistItemがなかった場合
@@ -60,8 +56,9 @@ final class CreateQuestionListModel {
                                                               selected: true)
                     listItems.append(additionalQuestion)
                 } else {
-                    // listItemとquestionの商品名と一般名が一致したら通過。一致しなければ次のループへ
-                    guard listItems[index].brandName == question.brandName &&
+                    // listItemとquestionのカテゴリと商品名と一般名が一致したら通過。一致しなければ次のループへ
+                    guard listItems[index].category == question.category &&
+                            listItems[index].brandName == question.brandName &&
                             listItems[index].genericName == question.genericName
                     else { continue }
                     // まだlistItems内の問題が選択されていなかったら通過。選択されていれば、次のループへ

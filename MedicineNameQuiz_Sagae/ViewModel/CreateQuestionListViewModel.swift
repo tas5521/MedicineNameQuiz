@@ -76,12 +76,12 @@ final class CreateQuestionListViewModel {
     // 薬データをフェッチ
     func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
         // 薬データを取得
-        let fetchedListItems = model.fetchListItems(from: fetchedCustomMedicines)
+        model.fetchListItems(from: fetchedCustomMedicines)
         // 薬データを配列に格納
-        oralListItems = fetchedListItems.filter { $0.category == .oral }
-        injectionListItems = fetchedListItems.filter { $0.category == .injection }
-        topicalListItems = fetchedListItems.filter { $0.category == .topical }
-        customListItems = fetchedListItems.filter { $0.category == .custom }
+        oralListItems = model.listItems.filter { $0.category == .oral }
+        injectionListItems = model.listItems.filter { $0.category == .injection }
+        topicalListItems = model.listItems.filter { $0.category == .topical }
+        customListItems = model.listItems.filter { $0.category == .custom }
     } // fetchListItems ここまで
 
     // 問題リストをCore Dataに保存するメソッド
@@ -155,18 +155,12 @@ final class CreateQuestionListViewModel {
                 ) // MedicineItem ここまで
             }) // map ここまで
         // 各問題を該当するカテゴリの配列にマージする
-        // 内用薬
-        let oralQuestions = questions.filter { $0.category == .oral }
-        oralListItems = model.mergeQuestions(to: oralListItems, with: oralQuestions)
-        // 注射薬
-        let injectionQuestions = questions.filter { $0.category == .injection }
-        injectionListItems = model.mergeQuestions(to: injectionListItems, with: injectionQuestions)
-        // 外用薬
-        let topicalQuestions = questions.filter { $0.category == .topical }
-        topicalListItems = model.mergeQuestions(to: topicalListItems, with: topicalQuestions)
-        // カスタム
-        let customQuestions = questions.filter { $0.category == .custom }
-        customListItems = model.mergeQuestions(to: customListItems, with: customQuestions)
+        let mergedListItems = model.mergeQuestionsToListItems(questions: questions)
+        // マージ後のデータをカテゴリ別に表示するために分配する
+        oralListItems = mergedListItems.filter { $0.category == .oral }
+        injectionListItems = mergedListItems.filter { $0.category == .injection }
+        topicalListItems = mergedListItems.filter { $0.category == .topical }
+        customListItems = mergedListItems.filter { $0.category == .custom }
         // 全ての配列をソート
         oralListItems.sort(by: { $0.brandName < $1.brandName })
         injectionListItems.sort(by: { $0.brandName < $1.brandName })
