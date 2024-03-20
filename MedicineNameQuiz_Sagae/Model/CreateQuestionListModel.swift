@@ -13,7 +13,7 @@ final class CreateQuestionListModel {
 
     // 薬データをフェッチ
     func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
-        // 薬のデータを配列に格納
+        // CSVの薬データを取得
         let csvListItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
             // カンマ（,）で分割した配列を作成
             .map { $0.components(separatedBy: ",") }
@@ -24,7 +24,7 @@ final class CreateQuestionListModel {
                                  genericName: $0[3],
                                  selected: false)
             }
-        // カスタムの薬データをフェッチ
+        // カスタムの薬データを取得
         let customListItems = fetchedCustomMedicines
             // MedicineListItem構造体にする
             .compactMap {
