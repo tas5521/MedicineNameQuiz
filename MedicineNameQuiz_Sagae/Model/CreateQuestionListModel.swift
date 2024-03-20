@@ -39,17 +39,18 @@ final class CreateQuestionListModel {
 
     // 選択されている問題を該当するカテゴリの配列にマージする
     /// 薬のカテゴリで絞って、薬リストのデータの中に同じ商品名・一般名のデータがあるかどうか探索します。
-    /// 同じ商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
+    /// 同じカテゴリ・商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
     /// 探索は、1つの問題につき、薬リストのデータ内に該当するデータが1件見つかり次第終了します。
-    /// 商品名と一般名の両方が一致するものが複数見つかる可能性もありますが、該当データが1件見つかり次第終了することで、複数選択されるのを回避します。
-    /// もし、商品名と一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
+    /// カテゴリ・商品名・一般名の全てが一致するものが複数見つかる可能性もありますが、該当データが1件見つかり次第終了することで、
+    /// 複数選択されるのを回避します。
+    /// もし、カテゴリ・商品名・一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
     /// 今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
     func mergeQuestionsToListItems(questions: [MedicineItem]) -> [MedicineListItem] {
         for question in questions {
             for index in 0...listItems.count {
-                // questionと商品名が一致するlistItemがなかった場合
+                // questionとカテゴリ・商品名・一般名が一致するlistItemがなかった場合
                 if index == listItems.count {
-                    // その問題を該当するカテゴリの配列に追加する
+                    // その問題を配列に追加する
                     let additionalQuestion = MedicineListItem(category: question.category,
                                                               brandName: question.brandName,
                                                               genericName: question.genericName,
@@ -70,5 +71,5 @@ final class CreateQuestionListModel {
             } // for ここまで
         } // for ここまで
         return listItems
-    } // mergeQuestions ここまで
+    } // mergeQuestionsToListItems ここまで
 } // CreateQuestionListModel ここまで
