@@ -144,7 +144,7 @@ final class CreateQuestionListViewModel {
         } // if ここまで
     } // saveQuestionList ここまで
 
-    // 選択されている問題をリストの配列にマージするメソッド
+    // 問題を取得して、リストの配列にマージし、ソートするメソッド
     func mergeQuestionsToListItems() {
         // questionListから取り出した問題をMedicineItem型に変換
         let questions = (questionList.questions as? Set<Question> ?? [])
@@ -154,7 +154,7 @@ final class CreateQuestionListViewModel {
                              genericName: $0.genericName ?? ""
                 ) // MedicineItem ここまで
             }) // map ここまで
-        // 各問題を該当するカテゴリの配列にセットする
+        // 各問題を該当するカテゴリの配列にマージする
         for question in questions {
             switch question.category {
             case .oral:
