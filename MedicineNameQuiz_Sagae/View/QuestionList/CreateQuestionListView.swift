@@ -107,8 +107,8 @@ struct CreateQuestionListView: View {
                 // 画面を表示した時に名前を入力するテキストフィールドにフォーカスを当てる
                 isFocusActive = true
             } else {
-                // 選択されている問題をリストに表示する配列にマージ
-                viewModel.mergeQuestionLists()
+                // 選択されている問題をリストの配列にマージ
+                viewModel.mergeQuestionsToListItems()
             } // if ここまで
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定

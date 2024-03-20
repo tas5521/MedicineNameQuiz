@@ -144,20 +144,8 @@ final class CreateQuestionListViewModel {
         } // if ここまで
     } // saveQuestionList ここまで
 
-    // 選択されている問題をリストに表示する配列にマージするメソッド
-    /// ＜想定しているデータのマージのルール＞
-    /// CoreDataに保存されている問題の薬のカテゴリ（内用薬など）および商品名・一般名の情報を取得します。
-    /// 次に、その薬のカテゴリで絞って、薬リストのデータの中に同じ商品名・一般名のデータがあるかどうか探索します。
-    /// 同じ商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
-    /// 探索は、1つの問題につき、薬リストのデータ内に該当するデータが1件見つかり次第終了します。
-    /// この処理を全ての問題について行います。なお、内用薬、注射薬、外用薬では、同じカテゴリのデータに同じ商品名のデータは存在しません。
-    /// しかし、カスタムではユーザーが同じ商品名・一般名のデータを複数作ることができる（これは許容します）ので、
-    /// 商品名と一般名の両方が一致するものが見つかった場合、selectedプロパティをtrueに変更します。
-    /// また、商品名と一般名の両方が一致するものが複数見つかる可能性もありますが、ここでも該当するデータが1件見つかり次第終了することで、
-    /// 複数選択されていまうのを回避します。
-    /// もし、商品名と一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
-    /// 今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
-    func mergeQuestionLists() {
+    // 選択されている問題をリストの配列にマージするメソッド
+    func mergeQuestionsToListItems() {
         // questionListから取り出した問題をMedicineItem型に変換
         let questions = (questionList.questions as? Set<Question> ?? [])
             .map({
@@ -170,13 +158,13 @@ final class CreateQuestionListViewModel {
         for question in questions {
             switch question.category {
             case .oral:
-                updateListItem(to: &oralListItems, with: question)
+                mergeQuestion(to: &oralListItems, with: question)
             case .injection:
-                updateListItem(to: &injectionListItems, with: question)
+                mergeQuestion(to: &injectionListItems, with: question)
             case .topical:
-                updateListItem(to: &topicalListItems, with: question)
+                mergeQuestion(to: &topicalListItems, with: question)
             case .custom:
-                updateListItem(to: &customListItems, with: question)
+                mergeQuestion(to: &customListItems, with: question)
             } // switch ここまで
         } // for ここまで
         // 全ての配列をソート
@@ -184,10 +172,16 @@ final class CreateQuestionListViewModel {
         injectionListItems.sort(by: { $0.brandName < $1.brandName })
         topicalListItems.sort(by: { $0.brandName < $1.brandName })
         customListItems.sort(by: { $0.brandName < $1.brandName })
-    } // mergeQuestionLists ここまで
+    } // mergeQuestionsToListItems ここまで
 
-    // 選択されている問題を該当するカテゴリの配列にセットする
-    private func updateListItem(to listItems: inout [MedicineListItem], with question: MedicineItem) {
+    // 選択されている問題を該当するカテゴリの配列にマージする
+    /// 薬のカテゴリで絞って、薬リストのデータの中に同じ商品名・一般名のデータがあるかどうか探索します。
+    /// 同じ商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
+    /// 探索は、1つの問題につき、薬リストのデータ内に該当するデータが1件見つかり次第終了します。
+    /// 商品名と一般名の両方が一致するものが複数見つかる可能性もありますが、該当データが1件見つかり次第終了することで、複数選択されるのを回避します。
+    /// もし、商品名と一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
+    /// 今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
+    private func mergeQuestion(to listItems: inout [MedicineListItem], with question: MedicineItem) {
         for index in 0...listItems.count {
             // questionと商品名が一致するlistItemがなかった場合
             if index == listItems.count {
@@ -209,5 +203,5 @@ final class CreateQuestionListViewModel {
             listItems[index].selected = true
             break
         } // for ここまで
-    } // updateListItem ここまで
+    } // mergeQuestion ここまで
 } // CreateQuestionListViewModel ここまで
