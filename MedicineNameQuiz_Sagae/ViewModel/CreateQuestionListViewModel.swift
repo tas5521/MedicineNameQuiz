@@ -111,13 +111,6 @@ final class CreateQuestionListViewModel {
             questionList.createdDate = Date()
             // 問題数を保持
             questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
-            do {
-                // 問題リストをCore Dataに保存
-                try context.save()
-            } catch {
-                // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
-                print("エラー: \(error)")
-            } // do-try-catch ここまで
             // 問題リスト編集モードの場合
         } else {
             // 問題型の集合を作成
@@ -142,6 +135,13 @@ final class CreateQuestionListViewModel {
             // 問題数を保持
             self.questionList.numberOfQuestions = Int16(questionSet.count)
         } // if ここまで
+        do {
+            // 問題リストをCore Dataに保存
+            try context.save()
+        } catch {
+            // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
+            print("エラー: \(error)")
+        } // do-try-catch ここまで
     } // saveQuestionList ここまで
 
     // 問題を取得して、リストの配列にマージし、ソートするメソッド
