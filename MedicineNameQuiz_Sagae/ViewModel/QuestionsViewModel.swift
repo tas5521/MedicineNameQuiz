@@ -25,6 +25,17 @@ final class QuestionsViewModel {
     } // questions ここまで
     // 薬の名前の検索テキスト
     var medSearchText: String = ""
+    // 検索された問題
+    var searchedQuestions: [MedicineItem] {
+        // 検索キーワードがなかったら
+        if medSearchText.isEmpty {
+            // 全ての問題を返却
+            return questions
+        } else {
+            // 検索キーワードがあったら、商品名もしくは一般名がキーワードを含むものを表示
+            return questions.filter({ $0.brandName.contains(medSearchText) || $0.genericName.contains(medSearchText) })
+        } // if ここまで
+    } // searchedQuestions ここまで
     // 問題リスト
     let questionList: QuestionList
 
