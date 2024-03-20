@@ -154,7 +154,7 @@ final class CreateQuestionListViewModel {
                              genericName: $0.genericName ?? ""
                 ) // MedicineItem ここまで
             }) // map ここまで
-        // 各問題を該当するカテゴリの配列にマージする
+        // 各問題を問題を含む配列にマージする
         let mergedListItems = model.mergeQuestionsToListItems(questions: questions)
         // マージ後のデータをカテゴリ別に表示するために分配する
         oralListItems = mergedListItems.filter { $0.category == .oral }
