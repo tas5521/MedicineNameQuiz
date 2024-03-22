@@ -16,7 +16,7 @@ final class ModeSelectionViewModel {
     // 問題を格納する配列
     var questions: [StudyItem] = []
     // ダミーのリスト
-    private let dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
+    let dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
 
     // 問題を作成するメソッド
     // TODO: CoreDataからの問題作成もこのメソッドで行う（CoreDataからの出題を実装する際に、ダミーの問題の部分をCoreDataのデータにする処理を書く）
