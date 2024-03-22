@@ -10,6 +10,9 @@ import SwiftUI
 struct StudyView: View {
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
+    // 出題する問題
+    var questions: [StudyItem]
+
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
 
@@ -27,14 +30,6 @@ struct StudyView: View {
     // カードが半分めくられるまでの時間間隔
     private let duration: CGFloat = 0.1
 
-    // ダミーの問題
-    private let medicineNames: [(front: String, back: String)] = [
-        ("アムロジン", "アムロジピンベシル酸塩"),
-        ("インフリー", "インドメタシン　ファルネシル"),
-        ("ウリトス", "イミダフェナシン"),
-        ("ティーエスワン", "テガフール・ギメラシル・オテラシルカリウム")
-    ] // medicineNames ここまで
-
     var body: some View {
         // 手前から奥にレイアウト
         ZStack {
@@ -47,7 +42,7 @@ struct StudyView: View {
                 // スペースを空ける
                 Spacer()
                 // 問題番号
-                Text("\(questionNumber + 1)/\(medicineNames.count)")
+                Text("\(questionNumber + 1)/\(questions.count)")
                     // フォントを.titleに変更
                     .font(.title)
                 // スペースを空ける
@@ -56,9 +51,9 @@ struct StudyView: View {
                 ZStack {
                     // カードを配置
                     // 裏面
-                    createCardFace(text: medicineNames[questionNumber].back, isFront: false)
+                    createCardFace(text: questions[questionNumber].genericName, isFront: false)
                     // 表面
-                    createCardFace(text: medicineNames[questionNumber].front, isFront: true)
+                    createCardFace(text: questions[questionNumber].brandName, isFront: true)
                 } // ZStack ここまで
                 // タップされたら
                 .onTapGesture {
@@ -177,7 +172,7 @@ struct StudyView: View {
     // 次の問題へ進むか、結果を表示
     private func advanceToNextQuestionOrShowResult() async {
         // もし最後の問題だったら
-        if questionNumber == medicineNames.count - 1 {
+        if questionNumber == questions.count - 1 {
             // 結果画面を表示
             isShowResult.toggle()
             // もし最後の問題でなかったら
@@ -215,5 +210,12 @@ struct StudyView: View {
 } // StudyView ここまで
 
 #Preview {
-    StudyView(isStudying: .constant(true))
+    // ダミーの問題
+    let dummyQuestions: [StudyItem] = [
+        StudyItem(category: .oral,
+                  brandName: "ダミーの商品名",
+                  genericName: "ダミーの一般名",
+                  studyResult: .incorrect)
+    ] // dummyStudyItem ここまで
+    return StudyView(isStudying: .constant(true), questions: dummyQuestions)
 }
