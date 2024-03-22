@@ -10,13 +10,9 @@ import SwiftUI
 struct ModeSelectionView: View {
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
-    // 問題を選択するために用いる番号
-    @State private var questionIndex: Int = 0
-    // モード選択を管理する変数
-    @State private var modeSelection: StudyMode = .brandToGeneric
-    // ダミーのリスト
-    private var dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
-
+    // ModeSelectionViewModelのインスタンス
+    @State private var viewModel: ModeSelectionViewModel = ModeSelectionViewModel()
+    
     var body: some View {
         NavigationStack {
             // 手前から奥にレイアウト
@@ -40,11 +36,11 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 問題リスト選択用のPicker
-                        Picker("問題リスト選択", selection: $questionIndex) {
+                        Picker("問題リスト選択", selection: $viewModel.questionIndex) {
                             // 要素を繰り返す
-                            ForEach(dummyQuestionNameList.indices, id: \.self) { index in
+                            ForEach(viewModel.dummyQuestionNameList.indices, id: \.self) { index in
                                 // 問題名
-                                Text(dummyQuestionNameList[index])
+                                Text(viewModel.dummyQuestionNameList[index])
                                     .tag(index)
                             } // ForEach ここまで
                         } // Picker ここまで
@@ -64,7 +60,7 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 出題モード選択用のPicker
-                        Picker("出題モード選択", selection: $modeSelection) {
+                        Picker("出題モード選択", selection: $viewModel.modeSelection) {
                             // 要素を繰り返す
                             ForEach(StudyMode.allCases, id: \.self) { mode in
                                 // モードの選択肢
