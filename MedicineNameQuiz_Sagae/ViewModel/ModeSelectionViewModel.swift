@@ -13,8 +13,6 @@ final class ModeSelectionViewModel {
     var questionIndex: Int = -1
     // モード選択を管理する変数
     var modeSelection: StudyMode = .brandToGeneric
-    // ダミーのリスト
-    let dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
     // 問題を格納する配列
     var questions: [StudyItem] = []
 
@@ -32,7 +30,7 @@ final class ModeSelectionViewModel {
                               genericName: $0[3],
                               studyResult: .incorrect)
                 } // map ここまで
-            // csvのデータをシャッフルして上位20個を出題
+            // csvのデータをシャッフルして初めの20個を出題
             questions = Array(csvStudyItems.shuffled()[0..<20])
         } else {
             // ダミーの問題を出題
