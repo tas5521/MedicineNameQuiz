@@ -18,12 +18,27 @@ struct ResultView: View {
     @State private var isShowPopUp = false
 
     // ダミーの解答結果
-    private let dummyResult: [StudyResultListItem] = [
-        StudyResultListItem(brandName: "アムロジン", genericName: "アムロジピンベシル酸塩", studyResult: .incorrect),
-        StudyResultListItem(brandName: "インフリー", genericName: "インドメタシン　ファルネシル", studyResult: .correct),
-        StudyResultListItem(brandName: "ウリトス", genericName: "イミダフェナシン", studyResult: .correct),
-        StudyResultListItem(brandName: "エバステル", genericName: "エバスチン", studyResult: .incorrect),
-        StudyResultListItem(brandName: "オノン", genericName: "プランルカスト水和物", studyResult: .correct)
+    private let dummyResult: [StudyItem] = [
+        StudyItem(category: .oral,
+                  brandName: "アムロジン",
+                  genericName: "アムロジピンベシル酸塩",
+                  studyResult: .incorrect),
+        StudyItem(category: .oral,
+                  brandName: "インフリー",
+                  genericName: "インドメタシン　ファルネシル",
+                  studyResult: .correct),
+        StudyItem(category: .oral,
+                  brandName: "ウリトス",
+                  genericName: "イミダフェナシン",
+                  studyResult: .correct),
+        StudyItem(category: .oral,
+                  brandName: "エバステル",
+                  genericName: "エバスチン",
+                  studyResult: .incorrect),
+        StudyItem(category: .oral,
+                  brandName: "オノン",
+                  genericName: "プランルカスト水和物",
+                  studyResult: .correct)
     ]
 
     var body: some View {
