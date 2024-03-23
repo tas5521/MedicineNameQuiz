@@ -37,10 +37,10 @@ struct ModeSelectionView: View {
 
                         // 問題リスト選択用のPicker
                         Picker("問題リスト選択", selection: $viewModel.questionIndex) {
-                            // 問題名
+                            // デフォルトの問題
                             Text("ランダム20問")
                                 .tag(-1)
-                            // 要素を繰り返す
+                            // TODO: 後で問題リストから出題できるようにする
                             ForEach(viewModel.dummyQuestionNameList.indices, id: \.self) { index in
                                 Text(viewModel.dummyQuestionNameList[index])
                                     .tag(index)
