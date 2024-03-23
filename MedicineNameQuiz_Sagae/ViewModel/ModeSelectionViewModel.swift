@@ -22,6 +22,7 @@ final class ModeSelectionViewModel {
     // TODO: CoreDataからの問題作成もこのメソッドで行う（CoreDataからの出題を実装する際に、ダミーの問題の部分をCoreDataのデータにする処理を書く）
     func createQuestions() {
         if questionIndex < 0 {
+            // CSVからデータを取得
             let csvStudyItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
                 // カンマ（,）で分割した配列を作成
                 .map { $0.components(separatedBy: ",") }
