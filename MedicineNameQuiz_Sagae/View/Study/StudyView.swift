@@ -11,7 +11,7 @@ struct StudyView: View {
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
     // 出題する問題
-    var questions: [StudyItem]
+    let questions: [StudyItem]
 
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
