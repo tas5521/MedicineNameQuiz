@@ -33,8 +33,10 @@ final class ModeSelectionViewModel {
                               genericName: $0[3],
                               studyResult: .incorrect)
                 } // map ここまで
-            // csvのデータをシャッフルして初めの20個を出題
-            questions = Array(csvStudyItems.shuffled()[0..<20])
+            // csvStudyItemsの配列の要素数が20未満の場合は、最後のindexの値を要素の数にする。20以上の場合は、20個にする
+            let endIndex = min(20, csvStudyItems.count)
+            // csvのデータをシャッフルして初めの20個（20未満なら要素数分）を出題
+            questions = Array(csvStudyItems.shuffled()[0..<endIndex])
         } else {
             // ダミーの問題を出題
             questions = [
