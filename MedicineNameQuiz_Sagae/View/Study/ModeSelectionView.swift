@@ -116,7 +116,7 @@ struct ModeSelectionView: View {
                     StudyView(isStudying: $isStudying, questions: viewModel.questions)
                 } // navigationDestination ここまで
             } // ZStack ここまで
-            // 画面が表示されたときにPickerの初期値を-1に指定(クラッシュの回避のため)
+            // 画面が表示されたときにPickerの初期値を0に指定(クラッシュの回避のため)
             // PickerでquestionIndex > 0のデータをセットした後で、QuestionListViewで該当データを削除し、
             // この画面に戻ってスタートを押すと、questionIndex番号がないデータにアクセスしてしまい、アプリがクラッシュする
             .onAppear {
