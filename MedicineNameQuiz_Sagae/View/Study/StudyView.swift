@@ -172,7 +172,7 @@ struct StudyView: View {
     // 次の問題へ進むか、結果を表示
     private func advanceToNextQuestionOrShowResult() async {
         // もし最後の問題だったら
-        if questionNumber == questions.count - 1 {
+        if questionNumber >= questions.count - 1 {
             // 結果画面を表示
             isShowResult.toggle()
             // もし最後の問題でなかったら
