@@ -10,12 +10,8 @@ import SwiftUI
 struct ModeSelectionView: View {
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
-    // 問題を選択するために用いる番号
-    @State private var questionIndex: Int = 0
-    // モード選択を管理する変数
-    @State private var modeSelection: StudyMode = .brandToGeneric
-    // ダミーのリスト
-    private var dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
+    // ModeSelectionViewModelのインスタンス
+    @State private var viewModel: ModeSelectionViewModel = ModeSelectionViewModel()
 
     var body: some View {
         NavigationStack {
@@ -40,11 +36,13 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 問題リスト選択用のPicker
-                        Picker("問題リスト選択", selection: $questionIndex) {
-                            // 要素を繰り返す
-                            ForEach(dummyQuestionNameList.indices, id: \.self) { index in
-                                // 問題名
-                                Text(dummyQuestionNameList[index])
+                        Picker("問題リスト選択", selection: $viewModel.questionIndex) {
+                            // デフォルトの問題
+                            Text("ランダム20問")
+                                .tag(-1)
+                            // TODO: 後で問題リストから出題できるようにする
+                            ForEach(viewModel.dummyQuestionNameList.indices, id: \.self) { index in
+                                Text(viewModel.dummyQuestionNameList[index])
                                     .tag(index)
                             } // ForEach ここまで
                         } // Picker ここまで
@@ -64,7 +62,7 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 出題モード選択用のPicker
-                        Picker("出題モード選択", selection: $modeSelection) {
+                        Picker("出題モード選択", selection: $viewModel.modeSelection) {
                             // 要素を繰り返す
                             ForEach(StudyMode.allCases, id: \.self) { mode in
                                 // モードの選択肢
@@ -85,6 +83,8 @@ struct ModeSelectionView: View {
 
                     // スタートボタンを配置
                     Button {
+                        // 問題を作成
+                        viewModel.createQuestions()
                         // 学習開始
                         isStudying.toggle()
                     } label: {
@@ -107,7 +107,7 @@ struct ModeSelectionView: View {
                 } // VStack ここまで
                 // 問題を解く画面へ遷移
                 .navigationDestination(isPresented: $isStudying) {
-                    StudyView(isStudying: $isStudying)
+                    StudyView(isStudying: $isStudying, questions: viewModel.questions)
                 } // navigationDestination ここまで
             } // ZStack ここまで
             // ナビゲーションバーの設定
