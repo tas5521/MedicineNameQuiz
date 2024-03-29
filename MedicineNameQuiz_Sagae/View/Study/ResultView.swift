@@ -18,7 +18,7 @@ struct ResultView: View {
     @State private var listName: String = ""
 
     // View Presentation State
-    // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
+    // 不正解の問題をリストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
 
     var body: some View {
@@ -49,7 +49,7 @@ struct ResultView: View {
                     // 結果のリスト
                     resultList
                 } // VStack ここまで
-                // 間違えた問題をリストに保存するボタン
+                // 不正解の問題をリストに保存するボタン
                 saveMistakesButton
                     // 上下左右に余白を追加
                     .padding()
@@ -126,7 +126,7 @@ struct ResultView: View {
         .scrollContentBackground(.hidden)
     } // resultList ここまで
 
-    // 間違えた問題をリストに保存するボタン
+    // 不正解の問題をリストに保存するボタン
     private var saveMistakesButton: some View {
         // 全ての問題に正解したかどうか
         let isAllCorrect = questions.filter { $0.studyResult == .incorrect }.count == 0
