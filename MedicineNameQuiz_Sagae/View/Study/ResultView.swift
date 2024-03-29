@@ -171,7 +171,7 @@ struct ResultView: View {
 
     // 間違えた問題をCore Dataに保存するメソッド
     func saveIncorrectQuestions() {
-        // 間違えた問題でフィルター
+        // 不正解の問題でフィルター
         let incorrectQuestions = questions.filter { $0.studyResult == .incorrect }
         // 問題リストのインスタンスを生成
         let questionList = QuestionList(context: context)
