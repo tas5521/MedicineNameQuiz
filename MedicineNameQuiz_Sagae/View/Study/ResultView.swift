@@ -19,7 +19,9 @@ struct ResultView: View {
 
     // View Presentation State
     // 不正解の問題をリストに保存するためのポップアップの表示を管理する変数
-    @State private var isShowPopUp = false
+    @State private var isShowPopUp: Bool = false
+    // 不正解の問題をリストに保存したことを伝えるメッセージの表示を管理する変数
+    @State private var isShowSaveMessage: Bool = false
 
     var body: some View {
         // 手前から奥にレイアウト
@@ -155,6 +157,8 @@ struct ResultView: View {
             Button {
                 // 問題リストの作成処理
                 saveIncorrectQuestions()
+                // 不正解の問題をリストに保存したことを伝えるメッセージを表示
+                isShowSaveMessage.toggle()
             } label: {
                 Text("保存")
             } // Button ここまで
@@ -166,6 +170,15 @@ struct ResultView: View {
             } // Button ここまで
         } message: {
             Text("リストに名前をつけてください")
+        } // alert ここまで
+        .alert("不正解の問題をリストに保存しました", isPresented: $isShowSaveMessage) {
+            Button {
+                // 何もしない
+            } label: {
+                Text("OK")
+            } // Button ここまで
+        } message: {
+            Text("もう一度、挑戦しましょう！\n頑張ってください！")
         } // alert ここまで
     } // saveMistakesButton ここまで
 
