@@ -84,7 +84,7 @@ struct StudyView: View {
                             await goBackToPreviousQuestion()
                         } // Task ここまで
                     }) // 一つ前の問題に戻るボタン ここまで
-                    .disabled(questionNumber == 0)
+                    .disabled(questionNumber <= 0)
                 } // HStack ここまで
                 // スペースを空ける
                 Spacer()
