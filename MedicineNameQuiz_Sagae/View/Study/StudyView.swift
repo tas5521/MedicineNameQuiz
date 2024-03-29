@@ -153,7 +153,7 @@ struct StudyView: View {
     private func flipCard() async {
         // カードがめくられているか、めくられていないかを、切り替え
         isCardFlipped.toggle()
-        // カードをめくるアニメーション
+        // カードを半分めくるアニメーション
         withAnimation(.linear(duration: duration)) {
             cardDegree = isCardFlipped ? 90 : 270
         } // withAnimation ここまで
@@ -164,8 +164,11 @@ struct StudyView: View {
             // デバッグエリアにエラーメッセージを表示
             print("Error: \(error)")
         } // do-try-catch ここまで
+        // カードのめくられた角度を一気に180かえて文字の向きを表面に合わせる
         cardDegree = isCardFlipped ? 270 : 90
+        // 表面と裏面を切り替え
         isFront.toggle()
+        // カードを半分めくるアニメーション
         withAnimation(.linear(duration: duration)) {
             cardDegree = isCardFlipped ? 360 : 0
         } // withAnimation ここまで
