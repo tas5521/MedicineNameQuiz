@@ -134,7 +134,7 @@ struct ResultView: View {
             // 警告を表示
             isShowPopUp.toggle()
         } label: {
-            Text("間違えた問題をリストに保存する")
+            Text("不正解の問題をリストに保存する")
                 // 太字にする
                 .bold()
                 // 文字の色を白に指定
@@ -148,7 +148,7 @@ struct ResultView: View {
         } // Button ここまで
         .disabled(isAllCorrect == true)
         // 間違えた問題をリストに保存するためのポップアップを表示
-        .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
+        .alert("不正解の問題をリストに保存", isPresented: $isShowPopUp) {
             // 問題リストの名前を入力するテキストフィールド
             TextField("問題リストの名前", text: $listName)
             // 保存ボタン
@@ -177,7 +177,7 @@ struct ResultView: View {
         let questionList = QuestionList(context: context)
         // リスト名を保持
         if listName.isEmpty {
-            questionList.listName = "間違えた問題"
+            questionList.listName = "不正解の問題"
         } else {
             questionList.listName = listName
         } // if ここまで
