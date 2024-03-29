@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ResultView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
     // 学習結果の配列
@@ -152,6 +154,7 @@ struct ResultView: View {
             // 保存ボタン
             Button {
                 // 問題リストの作成処理
+                saveIncorrectQuestions()
             } label: {
                 Text("保存")
             } // Button ここまで
@@ -165,6 +168,38 @@ struct ResultView: View {
             Text("リストに名前をつけてください")
         } // alert ここまで
     } // saveMistakesButton ここまで
+
+    // 間違えた問題をCore Dataに保存するメソッド
+    func saveIncorrectQuestions() {
+        // 間違えた問題でフィルター
+        let incorrectQuestions = questions.filter { $0.studyResult == .incorrect }
+        // 問題リストのインスタンスを生成
+        let questionList = QuestionList(context: context)
+        // リスト名を保持
+        questionList.listName = listName
+        // 作成した日付を保持
+        questionList.createdDate = Date()
+        // questionSetにデータを格納
+        for studyItem in incorrectQuestions {
+            // 問題のインスタンスを生成
+            let question = Question(context: context)
+            // カテゴリ、商品名、一般名を保持
+            question.category = studyItem.category.rawValue
+            question.brandName = studyItem.brandName
+            question.genericName = studyItem.genericName
+            // 作成した問題を問題リストに追加
+            questionList.addToQuestions(question)
+        } // for ここまで
+        // 問題数を保持
+        questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        do {
+            // 問題リストをCore Dataに保存
+            try context.save()
+        } catch {
+            // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
+            print("エラー: \(error)")
+        } // do-try-catch ここまで
+    } // saveQuestionList ここまで
 } // ResultView ここまで
 
 #Preview {
