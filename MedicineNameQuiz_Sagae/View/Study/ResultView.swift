@@ -176,7 +176,11 @@ struct ResultView: View {
         // 問題リストのインスタンスを生成
         let questionList = QuestionList(context: context)
         // リスト名を保持
-        questionList.listName = listName
+        if listName.isEmpty {
+            questionList.listName = "間違えた問題"
+        } else {
+            questionList.listName = listName
+        } // if ここまで
         // 作成した日付を保持
         questionList.createdDate = Date()
         // questionSetにデータを格納
