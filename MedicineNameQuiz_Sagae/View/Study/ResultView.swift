@@ -147,7 +147,7 @@ struct ResultView: View {
                 .clipShape(.buttonBorder)
         } // Button ここまで
         .disabled(isAllCorrect == true)
-        // 間違えた問題をリストに保存するためのポップアップを表示
+        // 不正解の問題をリストに保存するためのポップアップを表示
         .alert("不正解の問題をリストに保存", isPresented: $isShowPopUp) {
             // 問題リストの名前を入力するテキストフィールド
             TextField("問題リストの名前", text: $listName)
@@ -169,7 +169,7 @@ struct ResultView: View {
         } // alert ここまで
     } // saveMistakesButton ここまで
 
-    // 間違えた問題をCore Dataに保存するメソッド
+    // 不正解の問題をCore Dataに保存するメソッド
     func saveIncorrectQuestions() {
         // 不正解の問題でフィルター
         let incorrectQuestions = questions.filter { $0.studyResult == .incorrect }
