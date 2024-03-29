@@ -126,8 +126,10 @@ struct StudyView: View {
             // 薬の名前のテキスト
             Group {
                 switch modeSelection {
+                    // 出題モードが「商品名 → 一般名」だったら、カードの表面に商品名を、裏面に一般名を表示
                 case .brandToGeneric:
                     Text(isFront ? questions[questionNumber].brandName : questions[questionNumber].genericName)
+                    // 出題モードが「一般名 → 商品名」だったら、カードの表面に一般名を、裏面に商品名を表示
                 case .genericToBrand:
                     Text(isFront ? questions[questionNumber].genericName : questions[questionNumber].brandName)
                 } // switch ここまで
