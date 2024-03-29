@@ -165,7 +165,7 @@ struct StudyView: View {
             // デバッグエリアにエラーメッセージを表示
             print("Error: \(error)")
         } // do-try-catch ここまで
-        // カードのめくられた角度を一気に180かえて文字の向きを表面に合わせる
+        // カードのめくられた角度を一気に180°回して文字の向きを表面に合わせる
         cardDegree = isCardFlipped ? 270 : 90
         // 表面と裏面を切り替え
         isFront.toggle()
