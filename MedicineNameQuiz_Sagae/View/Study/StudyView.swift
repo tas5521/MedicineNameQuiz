@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct StudyView: View {
-    // 出題に関する変数
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
+    
+    // 出題に関する変数
     // 出題する問題
     let questions: [StudyItem]
     // モード選択を管理する変数
