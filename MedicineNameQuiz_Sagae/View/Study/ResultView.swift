@@ -126,7 +126,9 @@ struct ResultView: View {
 
     // 間違えた問題をリストに保存するボタン
     private var saveMistakesButton: some View {
-        Button {
+        // 全ての問題に正解したかどうか
+        let isAllCorrect = questions.filter { $0.studyResult == .incorrect }.count == 0
+        return Button {
             // 警告を表示
             isShowPopUp.toggle()
         } label: {
@@ -138,10 +140,11 @@ struct ResultView: View {
                 // 幅150高さ50に指定
                 .frame(width: 300, height: 60)
                 // 背景色をオレンジに指定
-                .background(Color.buttonOrange)
+                .background(isAllCorrect ? Color.disabledButtonGray : Color.buttonOrange)
                 // 角を丸くする
                 .clipShape(.buttonBorder)
         } // Button ここまで
+        .disabled(isAllCorrect == true)
         // 間違えた問題をリストに保存するためのポップアップを表示
         .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
             // 問題リストの名前を入力するテキストフィールド
