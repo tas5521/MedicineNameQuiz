@@ -11,8 +11,6 @@ import SwiftUI
 final class ModeSelectionViewModel {
     // 問題を選択するために用いる番号
     var questionIndex: Int = 0
-    // モード選択を管理する変数
-    var modeSelection: StudyMode = .brandToGeneric
     // 問題を格納する配列
     var questions: [StudyItem] = []
 

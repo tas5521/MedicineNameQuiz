@@ -10,6 +10,8 @@ import SwiftUI
 struct ModeSelectionView: View {
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
+    // モード選択を管理する変数
+    @State private var modeSelection: StudyMode = .brandToGeneric
     // ModeSelectionViewModelのインスタンス
     @State private var viewModel: ModeSelectionViewModel = ModeSelectionViewModel()
     // 問題リストをフェッチ
@@ -68,7 +70,7 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 出題モード選択用のPicker
-                        Picker("出題モード選択", selection: $viewModel.modeSelection) {
+                        Picker("出題モード選択", selection: $modeSelection) {
                             // 要素を繰り返す
                             ForEach(StudyMode.allCases, id: \.self) { mode in
                                 // モードの選択肢
