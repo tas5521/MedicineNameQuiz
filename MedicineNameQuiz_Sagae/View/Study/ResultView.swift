@@ -170,7 +170,7 @@ struct ResultView: View {
     } // saveMistakesButton ここまで
 
     // 不正解の問題をCore Dataに保存するメソッド
-    func saveIncorrectQuestions() {
+    private func saveIncorrectQuestions() {
         // 不正解の問題でフィルター
         let incorrectQuestions = questions.filter { $0.studyResult == .incorrect }
         // 問題リストのインスタンスを生成
