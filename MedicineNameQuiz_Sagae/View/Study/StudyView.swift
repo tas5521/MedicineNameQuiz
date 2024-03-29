@@ -13,7 +13,7 @@ struct StudyView: View {
 
     // 出題に関する変数
     // 出題する問題
-    let questions: [StudyItem]
+    @Binding var questions: [StudyItem]
     // モード選択を管理する変数
     let modeSelection: StudyMode
     // 問題番号を管理する変数
@@ -61,7 +61,8 @@ struct StudyView: View {
                 HStack(spacing: 20) {
                     // 正解ボタン
                     AnswerButton(buttonType: .correct, action: {
-                        // TODO: 現在の問題が正解であることを記録する処理を実装
+                        // 現在の問題が正解であることを記録する
+                        questions[questionNumber].studyResult = .correct
                         Task {
                             // 次の問題へ進むか、結果を表示
                             await advanceToNextQuestionOrShowResult()
@@ -70,7 +71,8 @@ struct StudyView: View {
 
                     // 不正解ボタン
                     AnswerButton(buttonType: .incorrect, action: {
-                        // TODO: 現在の問題が不正解であることを記録する処理を実装
+                        // 現在の問題が不正解であることを記録する
+                        questions[questionNumber].studyResult = .incorrect
                         Task {
                             // 次の問題へ進むか、結果を表示
                             await advanceToNextQuestionOrShowResult()
@@ -93,7 +95,7 @@ struct StudyView: View {
         // 問題を解く画面へ遷移
         .navigationDestination(isPresented: $isShowResult) {
             // 結果画面を表示
-            ResultView(isStudying: $isStudying)
+            ResultView(isStudying: $isStudying, questions: questions)
         } // navigationDestination ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
@@ -218,5 +220,7 @@ struct StudyView: View {
                   genericName: "ダミーの一般名",
                   studyResult: .incorrect)
     ] // dummyStudyItem ここまで
-    return StudyView(isStudying: .constant(true), questions: dummyQuestions, modeSelection: .brandToGeneric)
+    return StudyView(isStudying: .constant(true),
+                     questions: .constant(dummyQuestions),
+                     modeSelection: .brandToGeneric)
 }
