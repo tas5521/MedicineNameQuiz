@@ -32,7 +32,7 @@ struct ResultView: View {
                 VStack(alignment: .leading) {
                     // 学習結果を表示
                     // 水平方向にレイアウト
-                    HStack {
+                    HStack(spacing: 20) {
                         // 正解の数を表示
                         countResult(of: .correct)
                         // 不正解の数を表示
@@ -75,16 +75,17 @@ struct ResultView: View {
     } // body ここまで
 
     // 解答結果のカウント
-    @ViewBuilder
     private func countResult(of result: StudyResult) -> some View {
-        // まるかばつのImageを配置
-        Image(systemName: result.rawValue)
-            // 正解なら緑、不正解なら赤にする
-            .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
-        // 正解または不正解の数をカウント
-        let resultCount = questions.filter { $0.studyResult == result }.count
-        // 正解または不正解の数を表示
-        Text(":  \(resultCount)")
+        HStack {
+            // まるかばつのImageを配置
+            Image(systemName: result.rawValue)
+                // 正解なら緑、不正解なら赤にする
+                .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
+            // 正解または不正解の数をカウント
+            let resultCount = questions.filter { $0.studyResult == result }.count
+            // 正解または不正解の数を表示
+            Text(":  \(resultCount)")
+        } // HStack ここまで
     } // countResult ここまで
 
     // 結果のリスト
