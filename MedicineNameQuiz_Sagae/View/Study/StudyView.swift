@@ -101,7 +101,7 @@ struct StudyView: View {
         .navigationBarBackground()
     } // body ここまで
 
-    // 薬の名前のテキスト
+    // 薬の名前の変数
     private var medicineName: String {
         switch modeSelection {
         // 出題モードが「商品名 → 一般名」だったら、カードの表面に商品名を、裏面に一般名を表示
