@@ -115,7 +115,7 @@ struct ModeSelectionView: View {
                 } // VStack ここまで
                 // 問題を解く画面へ遷移
                 .navigationDestination(isPresented: $isStudying) {
-                    StudyView(isStudying: $isStudying, 
+                    StudyView(isStudying: $isStudying,
                               questions: $viewModel.questions,
                               modeSelection: modeSelection)
                 } // navigationDestination ここまで
