@@ -10,9 +10,12 @@ import SwiftUI
 struct StudyView: View {
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
+
+    // 出題に関する変数
     // 出題する問題
     let questions: [StudyItem]
-
+    // モード選択を管理する変数
+    let modeSelection: StudyMode
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
 
@@ -23,10 +26,10 @@ struct StudyView: View {
     // カードフリップに関する変数
     // カードがめくられているかを管理する変数
     @State private var isCardFlipped: Bool = false
-    // カードの表面についての、めくられた角度
-    @State private var frontDegree: Double = 0.0
-    // カードの裏面についての、めくられた角度
-    @State private var backDegree: Double = -90.0
+    // カードのめくられた角度
+    @State private var cardDegree: Double = 0.0
+    // カードの面が表か裏か
+    @State private var isFront: Bool = true
     // カードが半分めくられるまでの時間間隔
     private let duration: CGFloat = 0.1
 
@@ -50,16 +53,8 @@ struct StudyView: View {
                 // 奥から手前にレイアウト
                 ZStack {
                     // カードを配置
-                    // 裏面
-                    createCardFace(text: questions[questionNumber].genericName, isFront: false)
-                    // 表面
-                    createCardFace(text: questions[questionNumber].brandName, isFront: true)
+                    flipCardView
                 } // ZStack ここまで
-                // タップされたら
-                .onTapGesture {
-                    // カードをめくる
-                    flipCard()
-                } // onTapGesture ここまで
                 // スペースを空ける
                 Spacer()
                 // 水平方向にレイアウト
@@ -89,7 +84,7 @@ struct StudyView: View {
                             await goBackToPreviousQuestion()
                         } // Task ここまで
                     }) // 一つ前の問題に戻るボタン ここまで
-                    .disabled(questionNumber == 0)
+                    .disabled(questionNumber <= 0)
                 } // HStack ここまで
                 // スペースを空ける
                 Spacer()
@@ -106,8 +101,20 @@ struct StudyView: View {
         .navigationBarBackground()
     } // body ここまで
 
-    // カードの面を生成するメソッド
-    private func createCardFace(text: String, isFront: Bool) -> some View {
+    // 薬の名前の変数
+    private var medicineName: String {
+        switch modeSelection {
+        // 出題モードが「商品名 → 一般名」だったら、カードの表面に商品名を、裏面に一般名を表示
+        case .brandToGeneric:
+            isFront ? questions[questionNumber].brandName : questions[questionNumber].genericName
+        // 出題モードが「一般名 → 商品名」だったら、カードの表面に一般名を、裏面に商品名を表示
+        case .genericToBrand:
+            isFront ? questions[questionNumber].genericName : questions[questionNumber].brandName
+        } // switch ここまで
+    } // medicineName ここまで
+
+    // カードのView
+    private var flipCardView: some View {
         // カードの幅
         let width: CGFloat = 260
         // カードの高さ
@@ -129,7 +136,7 @@ struct StudyView: View {
                 // カードの左上に配置
                 .offset(CGSize(width: -100, height: -60.0))
             // 薬の名前のテキスト
-            Text(text)
+            Text(medicineName)
                 // 太字にする
                 .bold()
                 // 幅高さを指定
@@ -138,35 +145,39 @@ struct StudyView: View {
         // 文字の色を表面では黒、裏面では赤にする
         .foregroundStyle(isFront ? .black : .red)
         // 回転エフェクトをつける
-        .rotation3DEffect(
-            Angle(degrees: isFront ? frontDegree : backDegree), axis: (x: 0, y: 1, z: 0)
-        )
-    } // createCardFace ここまで
+        .rotation3DEffect(Angle(degrees: cardDegree), axis: (x: 0, y: 1, z: 0))
+        // タップされたら
+        .onTapGesture {
+            Task {
+                // カードをめくる
+                await flipCard()
+            } // Task ここまで
+        } // onTapGesture ここまで
+    } // flipCardView ここまで
 
     // カードをめくるメソッド
-    private func flipCard() {
+    private func flipCard() async {
         // カードがめくられているか、めくられていないかを、切り替え
         isCardFlipped.toggle()
-        // もしカードがめくられたら
-        if isCardFlipped {
-            // アニメーションで、カードの表面についての、めくられた角度を90度にする
-            withAnimation(.linear(duration: duration)) {
-                frontDegree = 90
-            } // withAnimation ここまで
-            // アニメーションで、カードの裏面についての、めくられた角度を0度にする
-            withAnimation(.linear(duration: duration).delay(duration)) {
-                backDegree = 0
-            } // withAnimation ここまで
-        } else {
-            // アニメーションで、カードの裏面についての、めくられた角度を-90度にする
-            withAnimation(.linear(duration: duration)) {
-                backDegree = -90
-            } // withAnimation ここまで
-            // アニメーションで、カードの表面についての、めくられた角度を0度にする
-            withAnimation(.linear(duration: duration).delay(duration)) {
-                frontDegree = 0
-            } // withAnimation ここまで
-        } // if ここまで
+        // カードを半分めくるアニメーション
+        withAnimation(.linear(duration: duration)) {
+            cardDegree = isCardFlipped ? 90 : 270
+        } // withAnimation ここまで
+        do {
+            // カードが半分めくられるまで待つ
+            try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+        } catch {
+            // デバッグエリアにエラーメッセージを表示
+            print("Error: \(error)")
+        } // do-try-catch ここまで
+        // カードのめくられた角度を一気に180°回して文字の向きを表面に合わせる
+        cardDegree = isCardFlipped ? 270 : 90
+        // 表面と裏面を切り替え
+        isFront.toggle()
+        // カードを半分めくるアニメーション
+        withAnimation(.linear(duration: duration)) {
+            cardDegree = isCardFlipped ? 360 : 0
+        } // withAnimation ここまで
     } // flipCard ここまで
 
     // 次の問題へ進むか、結果を表示
@@ -197,14 +208,7 @@ struct StudyView: View {
         // カードがめくられていたら
         if isCardFlipped {
             // カードをめくる（元に戻す）
-            flipCard()
-            do {
-                // カードが半分めくられるまで待つ
-                try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
-            } catch {
-                // デバッグエリアにエラーメッセージを表示
-                print("Error: \(error)")
-            } // do-try-catch ここまで
+            await flipCard()
         } // if ここまで
     } // flipCardAndWait ここまで
 } // StudyView ここまで
@@ -217,5 +221,5 @@ struct StudyView: View {
                   genericName: "ダミーの一般名",
                   studyResult: .incorrect)
     ] // dummyStudyItem ここまで
-    return StudyView(isStudying: .constant(true), questions: dummyQuestions)
+    return StudyView(isStudying: .constant(true), questions: dummyQuestions, modeSelection: .brandToGeneric)
 }
