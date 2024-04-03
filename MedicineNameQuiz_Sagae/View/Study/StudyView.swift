@@ -103,6 +103,18 @@ struct StudyView: View {
         .navigationBarBackground()
     } // body ここまで
 
+    // 薬の名前の変数
+    private var medicineName: String {
+        switch modeSelection {
+        // 出題モードが「商品名 → 一般名」だったら、カードの表面に商品名を、裏面に一般名を表示
+        case .brandToGeneric:
+            isFront ? questions[questionNumber].brandName : questions[questionNumber].genericName
+        // 出題モードが「一般名 → 商品名」だったら、カードの表面に一般名を、裏面に商品名を表示
+        case .genericToBrand:
+            isFront ? questions[questionNumber].genericName : questions[questionNumber].brandName
+        } // switch ここまで
+    } // medicineName ここまで
+
     // カードのView
     private var flipCardView: some View {
         // カードの幅
@@ -126,20 +138,11 @@ struct StudyView: View {
                 // カードの左上に配置
                 .offset(CGSize(width: -100, height: -60.0))
             // 薬の名前のテキスト
-            Group {
-                switch modeSelection {
-                // 出題モードが「商品名 → 一般名」だったら、カードの表面に商品名を、裏面に一般名を表示
-                case .brandToGeneric:
-                    Text(isFront ? questions[questionNumber].brandName : questions[questionNumber].genericName)
-                // 出題モードが「一般名 → 商品名」だったら、カードの表面に一般名を、裏面に商品名を表示
-                case .genericToBrand:
-                    Text(isFront ? questions[questionNumber].genericName : questions[questionNumber].brandName)
-                } // switch ここまで
-            } // Group ここまで
-            // 太字にする
-            .bold()
-            // 幅高さを指定
-            .frame(width: width - 50, height: height - 50)
+            Text(medicineName)
+                // 太字にする
+                .bold()
+                // 幅高さを指定
+                .frame(width: width - 50, height: height - 50)
         } // ZStack ここまで
         // 文字の色を表面では黒、裏面では赤にする
         .foregroundStyle(isFront ? .black : .red)
@@ -152,7 +155,7 @@ struct StudyView: View {
                 await flipCard()
             } // Task ここまで
         } // onTapGesture ここまで
-    } // createCardFace ここまで
+    } // flipCardView ここまで
 
     // カードをめくるメソッド
     private func flipCard() async {
