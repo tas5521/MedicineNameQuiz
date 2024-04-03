@@ -115,7 +115,9 @@ struct ModeSelectionView: View {
                 } // VStack ここまで
                 // 問題を解く画面へ遷移
                 .navigationDestination(isPresented: $isStudying) {
-                    StudyView(isStudying: $isStudying, questions: $viewModel.questions, modeSelection: modeSelection)
+                    StudyView(isStudying: $isStudying, 
+                              questions: $viewModel.questions,
+                              modeSelection: modeSelection)
                 } // navigationDestination ここまで
             } // ZStack ここまで
             // 画面が表示されたときにPickerの初期値を0に指定(クラッシュの回避のため)
