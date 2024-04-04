@@ -157,8 +157,6 @@ struct ResultView: View {
             Button {
                 // 問題リストの作成処理
                 saveIncorrectQuestions()
-                // 不正解の問題をリストに保存したことを伝えるメッセージを表示
-                isShowSaveMessage.toggle()
             } label: {
                 Text("保存")
             } // Button ここまで
@@ -214,6 +212,8 @@ struct ResultView: View {
         do {
             // 問題リストをCore Dataに保存
             try context.save()
+            // 不正解の問題をリストに保存したことを伝えるメッセージを表示
+            isShowSaveMessage.toggle()
         } catch {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
             print("エラー: \(error)")
