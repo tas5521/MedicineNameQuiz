@@ -190,8 +190,10 @@ struct ResultView: View {
         let questionList = QuestionList(context: context)
         // リスト名を保持
         if listName.isEmpty {
+            // リストの名前が入力されなかったら、「不正解の問題」という名前にする
             questionList.listName = "不正解の問題"
         } else {
+            // リストの名前が入力されていたら、その名前をリスト名にして保存
             questionList.listName = listName
         } // if ここまで
         // 作成した日付を保持
