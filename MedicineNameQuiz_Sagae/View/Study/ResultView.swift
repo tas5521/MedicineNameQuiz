@@ -10,36 +10,14 @@ import SwiftUI
 struct ResultView: View {
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
+    // 学習結果の配列
+    let questions: [StudyItem]
     // 問題リストの名前を保持する変数
     @State private var listName: String = ""
 
     // View Presentation State
     // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
     @State private var isShowPopUp = false
-
-    // ダミーの解答結果
-    private let dummyResult: [StudyItem] = [
-        StudyItem(category: .oral,
-                  brandName: "アムロジン",
-                  genericName: "アムロジピンベシル酸塩",
-                  studyResult: .incorrect),
-        StudyItem(category: .oral,
-                  brandName: "インフリー",
-                  genericName: "インドメタシン　ファルネシル",
-                  studyResult: .correct),
-        StudyItem(category: .oral,
-                  brandName: "ウリトス",
-                  genericName: "イミダフェナシン",
-                  studyResult: .correct),
-        StudyItem(category: .oral,
-                  brandName: "エバステル",
-                  genericName: "エバスチン",
-                  studyResult: .incorrect),
-        StudyItem(category: .oral,
-                  brandName: "オノン",
-                  genericName: "プランルカスト水和物",
-                  studyResult: .correct)
-    ]
 
     var body: some View {
         // 手前から奥にレイアウト
@@ -54,7 +32,7 @@ struct ResultView: View {
                 VStack(alignment: .leading) {
                     // 学習結果を表示
                     // 水平方向にレイアウト
-                    HStack {
+                    HStack(spacing: 20) {
                         // 正解の数を表示
                         countResult(of: .correct)
                         // 不正解の数を表示
@@ -97,16 +75,17 @@ struct ResultView: View {
     } // body ここまで
 
     // 解答結果のカウント
-    @ViewBuilder
     private func countResult(of result: StudyResult) -> some View {
-        // まるかばつのImageを配置
-        Image(systemName: result.rawValue)
-            // 正解なら緑、不正解なら赤にする
-            .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
-        // 正解または不正解の数をカウント
-        let resultCount = dummyResult.filter { $0.studyResult == result }.count
-        // 正解または不正解の数を表示
-        Text(":  \(resultCount)")
+        HStack {
+            // まるかばつのImageを配置
+            Image(systemName: result.rawValue)
+                // 正解なら緑、不正解なら赤にする
+                .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
+            // 正解または不正解の数をカウント
+            let resultCount = questions.filter { $0.studyResult == result }.count
+            // 正解または不正解の数を表示
+            Text(":  \(resultCount)")
+        } // HStack ここまで
     } // countResult ここまで
 
     // 結果のリスト
@@ -114,22 +93,22 @@ struct ResultView: View {
         // リストを作成
         List {
             // 繰り返し
-            ForEach(dummyResult) { item in
+            ForEach(questions) { question in
                 // 水平方向にレイアウト
                 HStack {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
                         // 商品名を表示
-                        Text(item.brandName)
+                        Text(question.brandName)
                             .foregroundStyle(Color.blue)
                         // 一般名を表示
-                        Text(item.genericName)
+                        Text(question.genericName)
                             .foregroundStyle(Color.red)
                     } // VStack ここまで
                     // スペースを空ける
                     Spacer()
                     // 学習結果（正解か不正解か）を取得
-                    let studyResult = item.studyResult
+                    let studyResult = question.studyResult
                     // まる、または、ばつのImage
                     Image(systemName: studyResult.rawValue)
                         // 幅を15に指定
@@ -186,5 +165,12 @@ struct ResultView: View {
 } // ResultView ここまで
 
 #Preview {
-    ResultView(isStudying: .constant(true))
+    // ダミーの問題
+    let dummyQuestions: [StudyItem] = [
+        StudyItem(category: .oral,
+                  brandName: "ダミーの商品名",
+                  genericName: "ダミーの一般名",
+                  studyResult: .incorrect)
+    ] // dummyStudyItem ここまで
+    return ResultView(isStudying: .constant(true), questions: dummyQuestions)
 }
