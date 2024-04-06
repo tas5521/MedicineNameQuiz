@@ -100,16 +100,18 @@ struct CreateQuestionListView: View {
         .onAppear {
             // 薬リストをフェッチ
             viewModel.fetchListItems(from: fetchedCustomMedicines)
-            // 問題作成モードの場合
-            if viewModel.questionListMode == .create {
+            switch viewModel.questionListMode {
+                // 問題作成モードの場合
+            case .create:
                 // リスト名を無くす
                 viewModel.listName.removeAll()
                 // 画面を表示した時に名前を入力するテキストフィールドにフォーカスを当てる
                 isFocusActive = true
-            } else {
+                // 問題選択モードの場合
+            case .edit:
                 // 選択されている問題をリストの配列にマージ
                 viewModel.mergeQuestionsToListItems()
-            } // if ここまで
+            } // switch ここまで
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト\(viewModel.questionListMode.rawValue)", displayMode: .inline)
