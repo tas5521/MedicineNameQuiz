@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ResultView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
     // 学習結果の配列
@@ -16,8 +18,10 @@ struct ResultView: View {
     @State private var listName: String = ""
 
     // View Presentation State
-    // 間違えた問題をリストに保存するためのポップアップの表示を管理する変数
-    @State private var isShowPopUp = false
+    // 不正解の問題をリストに保存するためのポップアップの表示を管理する変数
+    @State private var isShowPopUp: Bool = false
+    // 不正解の問題をリストに保存したことを伝えるメッセージの表示を管理する変数
+    @State private var isShowSaveMessage: Bool = false
 
     var body: some View {
         // 手前から奥にレイアウト
@@ -47,7 +51,7 @@ struct ResultView: View {
                     // 結果のリスト
                     resultList
                 } // VStack ここまで
-                // 間違えた問題をリストに保存するボタン
+                // 不正解の問題をリストに保存するボタン
                 saveMistakesButton
                     // 上下左右に余白を追加
                     .padding()
@@ -124,13 +128,15 @@ struct ResultView: View {
         .scrollContentBackground(.hidden)
     } // resultList ここまで
 
-    // 間違えた問題をリストに保存するボタン
+    // 不正解の問題をリストに保存するボタン
     private var saveMistakesButton: some View {
-        Button {
+        // 全ての問題に正解したかどうか
+        let isAllCorrect = questions.filter { $0.studyResult == .incorrect }.count == 0
+        return Button {
             // 警告を表示
             isShowPopUp.toggle()
         } label: {
-            Text("間違えた問題をリストに保存する")
+            Text("不正解の問題をリストに保存する")
                 // 太字にする
                 .bold()
                 // 文字の色を白に指定
@@ -138,17 +144,19 @@ struct ResultView: View {
                 // 幅150高さ50に指定
                 .frame(width: 300, height: 60)
                 // 背景色をオレンジに指定
-                .background(Color.buttonOrange)
+                .background(isAllCorrect ? Color.disabledButtonGray : Color.buttonOrange)
                 // 角を丸くする
                 .clipShape(.buttonBorder)
         } // Button ここまで
-        // 間違えた問題をリストに保存するためのポップアップを表示
-        .alert("間違えた問題をリストに保存", isPresented: $isShowPopUp) {
+        .disabled(isAllCorrect)
+        // 不正解の問題をリストに保存するためのポップアップを表示
+        .alert("不正解の問題をリストに保存", isPresented: $isShowPopUp) {
             // 問題リストの名前を入力するテキストフィールド
             TextField("問題リストの名前", text: $listName)
             // 保存ボタン
             Button {
                 // 問題リストの作成処理
+                saveIncorrectQuestions()
             } label: {
                 Text("保存")
             } // Button ここまで
@@ -161,7 +169,56 @@ struct ResultView: View {
         } message: {
             Text("リストに名前をつけてください")
         } // alert ここまで
+        .alert("不正解の問題をリストに保存しました", isPresented: $isShowSaveMessage) {
+            Button {
+                // 何もしない
+            } label: {
+                Text("OK")
+            } // Button ここまで
+        } message: {
+            Text("もう一度、挑戦しましょう！\n頑張ってください！")
+        } // alert ここまで
     } // saveMistakesButton ここまで
+
+    // 不正解の問題をCore Dataに保存するメソッド
+    private func saveIncorrectQuestions() {
+        // 不正解の問題でフィルター
+        let incorrectQuestions = questions.filter { $0.studyResult == .incorrect }
+        // 問題リストのインスタンスを生成
+        let questionList = QuestionList(context: context)
+        // リスト名を保持
+        if listName.isEmpty {
+            // リストの名前が入力されなかったら、「不正解の問題」という名前にする
+            questionList.listName = "不正解の問題"
+        } else {
+            // リストの名前が入力されていたら、その名前をリスト名にして保存
+            questionList.listName = listName
+        } // if ここまで
+        // 作成した日付を保持
+        questionList.createdDate = Date()
+        // questionSetにデータを格納
+        for studyItem in incorrectQuestions {
+            // 問題のインスタンスを生成
+            let question = Question(context: context)
+            // カテゴリ、商品名、一般名を保持
+            question.category = studyItem.category.rawValue
+            question.brandName = studyItem.brandName
+            question.genericName = studyItem.genericName
+            // 作成した問題を問題リストに追加
+            questionList.addToQuestions(question)
+        } // for ここまで
+        // 問題数を保持
+        questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        do {
+            // 問題リストをCore Dataに保存
+            try context.save()
+            // 不正解の問題をリストに保存したことを伝えるメッセージを表示
+            isShowSaveMessage.toggle()
+        } catch {
+            // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
+            print("エラー: \(error)")
+        } // do-try-catch ここまで
+    } // saveQuestionList ここまで
 } // ResultView ここまで
 
 #Preview {
