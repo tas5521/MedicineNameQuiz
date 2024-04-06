@@ -88,7 +88,8 @@ final class CreateQuestionListViewModel {
         // 選択されているものを条件にフィルターする
         let filteredListItems = allListItems.filter { $0.selected == true }
         // 問題リスト作成モードの場合
-        if questionListMode == .create {
+        switch questionListMode {
+        case .create:
             // 問題リストのインスタンスを生成
             let questionList = QuestionList(context: context)
             // questionListにデータを格納
@@ -108,9 +109,9 @@ final class CreateQuestionListViewModel {
             questionList.createdDate = Date()
             // 問題数を保持
             questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
-            // 問題リスト編集モードの場合
-        } else {
-            // 問題型の集合を作成
+        // 問題リスト編集モードの場合
+        case .edit:
+            // Question型の集合を作成
             var questionSet: Set<Question> = []
             // 選択されている問題を集合に格納
             for item in filteredListItems {
@@ -131,7 +132,7 @@ final class CreateQuestionListViewModel {
             self.questionList.createdDate = Date()
             // 問題数を保持
             self.questionList.numberOfQuestions = Int16(questionSet.count)
-        } // if ここまで
+        } // switch ここまで
         do {
             // 問題リストをCore Dataに保存
             try context.save()
@@ -141,7 +142,7 @@ final class CreateQuestionListViewModel {
         } // do-try-catch ここまで
     } // saveQuestionList ここまで
 
-    // 問題を取得して、リストの配列にマージし、ソートするメソッド
+    // 問題を取得して、リストの配列にマージするメソッド
     func mergeQuestionsToListItems() {
         // questionListから取り出した問題をMedicineItem型に変換
         let questions = (questionList.questions as? Set<Question> ?? [])
