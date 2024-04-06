@@ -157,19 +157,19 @@ final class CreateQuestionListViewModel {
         // カテゴリ別にすることで、mergeQuestions内のループ部分でcategoryが一致しないもの同士の比較が行われなくなり、ループ回数を省ける。
         // 内用薬
         let oralQuestions = questions.filter { $0.category == .oral }
-        oralListItems = CreateQuestionListModel.mergeQuestions(to: oralListItems, with: oralQuestions)
+        CreateQuestionListModel.mergeQuestions(to: &oralListItems, with: oralQuestions)
         oralListItems.sort(by: { $0.brandName < $1.brandName })
         // 注射薬
         let injectionQuestions = questions.filter { $0.category == .injection }
-        injectionListItems = CreateQuestionListModel.mergeQuestions(to: injectionListItems, with: injectionQuestions)
+        CreateQuestionListModel.mergeQuestions(to: &injectionListItems, with: injectionQuestions)
         injectionListItems.sort(by: { $0.brandName < $1.brandName })
         // 外用薬
         let topicalQuestions = questions.filter { $0.category == .topical }
-        topicalListItems = CreateQuestionListModel.mergeQuestions(to: topicalListItems, with: topicalQuestions)
+        CreateQuestionListModel.mergeQuestions(to: &topicalListItems, with: topicalQuestions)
         topicalListItems.sort(by: { $0.brandName < $1.brandName })
         // カスタム
         let customQuestions = questions.filter { $0.category == .custom }
-        customListItems = CreateQuestionListModel.mergeQuestions(to: customListItems, with: customQuestions)
+        CreateQuestionListModel.mergeQuestions(to: &customListItems, with: customQuestions)
         customListItems.sort(by: { $0.brandName < $1.brandName })
     } // mergeQuestionsToListItems ここまで
 } // CreateQuestionListViewModel ここまで
