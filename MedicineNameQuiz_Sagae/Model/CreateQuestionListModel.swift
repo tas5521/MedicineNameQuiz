@@ -44,22 +44,28 @@ final class CreateQuestionListModel {
     /// 今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
     static func mergeQuestions(to listItems: inout [MedicineListItem], with questions: [MedicineItem]) {
         for question in questions {
-            // listItemとquestionの商品名と一般名が一致する最初の要素のインデックスを探す
-            if let index = listItems.firstIndex(
-                where: { $0.brandName == question.brandName && $0.genericName == question.genericName }
-            ) {
-                // まだlistItems内の問題が選択されていない場合は選択状態にする
-                if !listItems[index].selected {
+            for index in 0...listItems.count {
+                // questionとカテゴリ・商品名・一般名が一致するlistItemがなかった場合
+                if index == listItems.count {
+                    // その問題を配列に追加する
+                    let additionalQuestion = MedicineListItem(category: question.category,
+                                                              brandName: question.brandName,
+                                                              genericName: question.genericName,
+                                                              selected: true)
+                    listItems.append(additionalQuestion)
+                    // questionとカテゴリ・商品名・一般名が一致するlistItemを探している場合
+                } else {
+                    // listItemとquestionの商品名と一般名が一致したら通過。一致しなければ次のループへ
+                    guard listItems[index].brandName == question.brandName &&
+                            listItems[index].genericName == question.genericName
+                    else { continue }
+                    // まだlistItems内の問題が選択されていなかったら通過。選択されていれば、次のループへ
+                    guard listItems[index].selected == false else { continue }
+                    // 問題を選択された状態にし、ループを終了
                     listItems[index].selected = true
+                    break
                 } // if ここまで
-            } else {
-                // 一致するlistItemがない場合は新しい項目を追加
-                let additionalQuestion = MedicineListItem(category: question.category,
-                                                          brandName: question.brandName,
-                                                          genericName: question.genericName,
-                                                          selected: true)
-                listItems.append(additionalQuestion)
-            } // if let ここまで
+            } // for ここまで
         } // for ここまで
     } // mergeQuestions ここまで
 } // CreateQuestionListModel ここまで
