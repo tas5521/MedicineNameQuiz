@@ -10,12 +10,20 @@ import SwiftUI
 struct ModeSelectionView: View {
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
-    // 問題を選択するために用いる番号
-    @State private var questionIndex: Int = 0
     // モード選択を管理する変数
     @State private var modeSelection: StudyMode = .brandToGeneric
-    // ダミーのリスト
-    private var dummyQuestionNameList: [String] = ["さがえ薬局リスト", "ながつ薬局リスト", "こばやし薬局リスト"]
+    // ModeSelectionViewModelのインスタンス
+    @State private var viewModel: ModeSelectionViewModel = ModeSelectionViewModel()
+    // 問題リストをフェッチ
+    @FetchRequest(entity: QuestionList.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \QuestionList.createdDate, ascending: false)],
+                  predicate: NSPredicate(format: "numberOfQuestions > 0"),
+                  animation: nil
+    ) private var fetchedLists: FetchedResults<QuestionList>
+    // Pickerに表示する問題リスト名の配列
+    private var questionListNames: [String] {
+        ["ランダム20問"] + fetchedLists.map { $0.listName ?? "" }
+    } // questionListNames ここまで
 
     var body: some View {
         NavigationStack {
@@ -40,11 +48,9 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 問題リスト選択用のPicker
-                        Picker("問題リスト選択", selection: $questionIndex) {
-                            // 要素を繰り返す
-                            ForEach(dummyQuestionNameList.indices, id: \.self) { index in
-                                // 問題名
-                                Text(dummyQuestionNameList[index])
+                        Picker("問題リスト選択", selection: $viewModel.questionIndex) {
+                            ForEach(questionListNames.indices, id: \.self) { index in
+                                Text(questionListNames[index])
                                     .tag(index)
                             } // ForEach ここまで
                         } // Picker ここまで
@@ -85,6 +91,8 @@ struct ModeSelectionView: View {
 
                     // スタートボタンを配置
                     Button {
+                        // 問題を作成
+                        viewModel.createQuestions(questionLists: fetchedLists)
                         // 学習開始
                         isStudying.toggle()
                     } label: {
@@ -107,9 +115,17 @@ struct ModeSelectionView: View {
                 } // VStack ここまで
                 // 問題を解く画面へ遷移
                 .navigationDestination(isPresented: $isStudying) {
-                    StudyView(isStudying: $isStudying)
+                    StudyView(isStudying: $isStudying,
+                              questions: $viewModel.questions,
+                              modeSelection: modeSelection)
                 } // navigationDestination ここまで
             } // ZStack ここまで
+            // 画面が表示されたときにPickerの初期値を0に指定(クラッシュの回避のため)
+            // PickerでquestionIndex > 0のデータをセットした後で、QuestionListViewで該当データを削除し、
+            // この画面に戻ってスタートを押すと、questionIndex番号がないデータにアクセスしてしまい、アプリがクラッシュする
+            .onAppear {
+                viewModel.questionIndex = 0
+            } // onAppear ここまで
             // ナビゲーションバーの設定
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("学習", displayMode: .inline)
