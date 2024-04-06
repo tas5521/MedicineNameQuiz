@@ -148,7 +148,7 @@ struct ResultView: View {
                 // 角を丸くする
                 .clipShape(.buttonBorder)
         } // Button ここまで
-        .disabled(isAllCorrect == true)
+        .disabled(isAllCorrect)
         // 不正解の問題をリストに保存するためのポップアップを表示
         .alert("不正解の問題をリストに保存", isPresented: $isShowPopUp) {
             // 問題リストの名前を入力するテキストフィールド
