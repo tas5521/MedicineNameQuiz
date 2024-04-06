@@ -113,11 +113,25 @@ struct CreateQuestionListView: View {
         } // onAppear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("リスト\(viewModel.questionListMode.rawValue)", displayMode: .inline)
+        // デフォルトのバックボタンを隠す
+        .navigationBarBackButtonHidden(true)
         // ナビゲーションバーの背景を変更
         .navigationBarBackground()
         .toolbar {
-            // ボタンの位置を指定
-            ToolbarItem(placement: .navigationBarTrailing) {
+            // ボタンの位置を左に指定
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    // 画面を閉じる
+                    dismiss()
+                } label: {
+                    // ラベル
+                    Text("キャンセル")
+                        // 色を指定
+                        .foregroundColor(Color.white)
+                } // Button ここまで
+            } // ToolbarItem ここまで
+            // ボタンの位置を右に指定
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     if viewModel.listName.isEmpty {
                         isShowNoListNameAlert.toggle()
