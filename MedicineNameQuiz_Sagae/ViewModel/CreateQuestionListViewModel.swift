@@ -172,7 +172,7 @@ final class CreateQuestionListViewModel {
         self.mergeQuestions(to: &customListItems, with: customQuestions)
         customListItems.sort(by: { $0.brandName < $1.brandName })
     } // mergeQuestionsToListItems ここまで
-    
+
     // 選択されている問題を該当するカテゴリの配列にマージする
     /// 薬のカテゴリで絞って、薬リストのデータの中に同じ商品名・一般名のデータがあるかどうか探索します。
     /// 同じ商品名・一般名のデータが見つかった場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
