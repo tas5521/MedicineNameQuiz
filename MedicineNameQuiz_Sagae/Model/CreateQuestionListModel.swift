@@ -8,26 +8,20 @@
 import SwiftUI
 
 final class CreateQuestionListModel {
-    // 内用薬、注射薬、外用薬のデータをこの配列に格納
-    private var listItems: [MedicineListItem] = []
-
     // 薬データをフェッチ
-    func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
-        // 内用薬、注射薬、外用薬のデータを取得していなければ、取得する
-        if listItems.isEmpty {
-            // 薬のデータを配列に格納
-            listItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
-                // カンマ（,）で分割した配列を作成
-                .map { $0.components(separatedBy: ",") }
-                // MedicineListItem構造体にする
-                .compactMap {
-                    MedicineListItem(category: MedicineCategory.getCategory(from: $0[1]),
-                                     brandName: $0[2],
-                                     genericName: $0[3],
-                                     selected: false)
-                }
-        } // if ここまで
-        // カスタムの薬データをフェッチ
+    static func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) -> [MedicineListItem] {
+        // CSVの薬データを取得
+        let csvListItems = CSVLoader.loadCsvFile(resourceName: "MedicineNameList")
+            // カンマ（,）で分割した配列を作成
+            .map { $0.components(separatedBy: ",") }
+            // MedicineListItem構造体にする
+            .compactMap {
+                MedicineListItem(category: MedicineCategory.getCategory(from: $0[1]),
+                                 brandName: $0[2],
+                                 genericName: $0[3],
+                                 selected: false)
+            }
+        // カスタムの薬データを取得
         let customListItems = fetchedCustomMedicines
             // MedicineListItem構造体にする
             .compactMap {
@@ -36,6 +30,7 @@ final class CreateQuestionListModel {
                                  genericName: $0.genericName ?? "",
                                  selected: false)
             }
-        return listItems + customListItems
+        // 薬のデータを返却
+        return csvListItems + customListItems
     } // fetchListItems ここまで
 } // CreateQuestionListModel ここまで

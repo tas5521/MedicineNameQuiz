@@ -65,7 +65,7 @@ struct ResultView: View {
         // ナビゲーションバーの右側に終了ボタンを配置
         .toolbar {
             // ボタンの位置を指定
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     // 保存処理
                     // // ResultViewとStudyViewを閉じる

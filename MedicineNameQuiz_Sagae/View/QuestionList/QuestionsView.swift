@@ -67,10 +67,10 @@ struct QuestionsView: View {
         // ナビゲーションバーの右側に編集ボタンを配置
         .toolbar {
             // ボタンの位置を指定
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
-                    // 問題リスト作成画面へ遷移
-                    CreateQuestionListView(questionListMode: .edit)
+                    // 問題リスト編集画面へ遷移
+                    CreateQuestionListView(questionListMode: .edit, questionList: viewModel.questionList)
                 } label: {
                     // ラベル
                     Text("編集")

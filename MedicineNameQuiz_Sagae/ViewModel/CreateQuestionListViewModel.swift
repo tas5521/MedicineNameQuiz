@@ -52,13 +52,28 @@ final class CreateQuestionListViewModel {
         } // selectedListItems.indices.filter ここまで
     } // indicesForSearch ここまで
 
-    // CreateQuestionListModelのインスタンスを生成
-    private let model = CreateQuestionListModel()
+    // 問題リストを作成するか編集するかを管理する変数
+    let questionListMode: QuestionListMode
+
+    // 問題リストを保持する変数
+    private var questionList: QuestionList = QuestionList()
+
+    // イニシャライザ（問題リスト作成の場合）
+    init(questionListMode: QuestionListMode) {
+        self.questionListMode = questionListMode
+    } // init ここまで
+
+    // イニシャライザ（問題リスト編集の場合）
+    init(questionListMode: QuestionListMode, questionList: QuestionList) {
+        self.questionListMode = questionListMode
+        self.questionList = questionList
+        self.listName = questionList.listName ?? ""
+    } // initここまで
 
     // 薬データをフェッチ
     func fetchListItems(from fetchedCustomMedicines: FetchedResults<CustomMedicine>) {
         // 薬データを取得
-        let fetchedListItems = model.fetchListItems(from: fetchedCustomMedicines)
+        let fetchedListItems = CreateQuestionListModel.fetchListItems(from: fetchedCustomMedicines)
         // 薬データを配列に格納
         oralListItems = fetchedListItems.filter { $0.category == .oral }
         injectionListItems = fetchedListItems.filter { $0.category == .injection }
@@ -72,25 +87,52 @@ final class CreateQuestionListViewModel {
         let allListItems = oralListItems + injectionListItems + topicalListItems + customListItems
         // 選択されているものを条件にフィルターする
         let filteredListItems = allListItems.filter { $0.selected == true }
-        // 問題リストのインスタンスを生成
-        let questionList = QuestionList(context: context)
-        // リスト名を保持
-        questionList.listName = listName
-        // 作成した日付を保持
-        questionList.createdDate = Date()
-        // questionSetにデータを格納
-        for listItem in filteredListItems {
-            // 問題のインスタンスを生成
-            let question = Question(context: context)
-            // カテゴリ、商品名、一般名を保持
-            question.category = listItem.category.rawValue
-            question.brandName = listItem.brandName
-            question.genericName = listItem.genericName
-            // 作成した問題を問題リストに追加
-            questionList.addToQuestions(question)
-        } // for ここまで
-        // 問題数を保持
-        questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        // 問題リスト作成モードの場合
+        switch questionListMode {
+        case .create:
+            // 問題リストのインスタンスを生成
+            let questionList = QuestionList(context: context)
+            // questionListにデータを格納
+            for listItem in filteredListItems {
+                // 問題のインスタンスを生成
+                let question = Question(context: context)
+                // カテゴリ、商品名、一般名を保持
+                question.category = listItem.category.rawValue
+                question.brandName = listItem.brandName
+                question.genericName = listItem.genericName
+                // 作成した問題を問題リストに追加
+                questionList.addToQuestions(question)
+            } // for ここまで
+            // リスト名を保持
+            questionList.listName = listName
+            // 作成した日付を保持
+            questionList.createdDate = Date()
+            // 問題数を保持
+            questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        // 問題リスト編集モードの場合
+        case .edit:
+            // Question型の集合を作成
+            var questionSet: Set<Question> = []
+            // 選択されている問題を集合に格納
+            for item in filteredListItems {
+                // 問題のインスタンスを生成
+                let question = Question(context: context)
+                // カテゴリ、商品名、一般名を保持
+                question.category = item.category.rawValue
+                question.brandName = item.brandName
+                question.genericName = item.genericName
+                // 作成した問題を集合に追加
+                questionSet.insert(question)
+            } // for ここまで
+            // 元の問題リストを上書き
+            self.questionList.questions = questionSet as NSSet
+            // リスト名を保持
+            self.questionList.listName = listName
+            // 作成した日付を保持
+            self.questionList.createdDate = Date()
+            // 問題数を保持
+            self.questionList.numberOfQuestions = Int16(questionSet.count)
+        } // switch ここまで
         do {
             // 問題リストをCore Dataに保存
             try context.save()
@@ -99,4 +141,59 @@ final class CreateQuestionListViewModel {
             print("エラー: \(error)")
         } // do-try-catch ここまで
     } // saveQuestionList ここまで
+
+    // 問題を取得して、リストの配列にマージするメソッド
+    func mergeQuestionsToListItems() {
+        // questionListから取り出した問題をMedicineItem型に変換
+        let questions = (questionList.questions as? Set<Question> ?? [])
+            .map({
+                MedicineItem(category: MedicineCategory(rawValue: $0.category ?? "") ?? .custom,
+                             brandName: $0.brandName ?? "",
+                             genericName: $0.genericName ?? ""
+                ) // MedicineItem ここまで
+            }) // map ここまで
+        // 各問題を該当するカテゴリの配列にマージする
+        // マージ後のデータをカテゴリ別に表示するために分配する
+        // カテゴリ別にすることで、mergeQuestions内のループ部分でcategoryが一致しないもの同士の比較が行われなくなり、ループ回数を省ける。
+        // 内用薬
+        let oralQuestions = questions.filter { $0.category == .oral }
+        self.mergeQuestions(to: &oralListItems, with: oralQuestions)
+        oralListItems.sort(by: { $0.brandName < $1.brandName })
+        // 注射薬
+        let injectionQuestions = questions.filter { $0.category == .injection }
+        self.mergeQuestions(to: &injectionListItems, with: injectionQuestions)
+        injectionListItems.sort(by: { $0.brandName < $1.brandName })
+        // 外用薬
+        let topicalQuestions = questions.filter { $0.category == .topical }
+        self.mergeQuestions(to: &topicalListItems, with: topicalQuestions)
+        topicalListItems.sort(by: { $0.brandName < $1.brandName })
+        // カスタム
+        let customQuestions = questions.filter { $0.category == .custom }
+        self.mergeQuestions(to: &customListItems, with: customQuestions)
+        customListItems.sort(by: { $0.brandName < $1.brandName })
+    } // mergeQuestionsToListItems ここまで
+
+    // 選択されている問題を該当するカテゴリの配列にマージする
+    /// 同じ商品名・一般名のデータが見つかり、かつ、選択されていない場合、薬リストのデータの該当する問題のselectedプロパティをtrueに変更します。
+    /// もし、商品名・一般名が一致するデータが見つからなかった場合、そのデータは、「過去にCoreDataに保存する時には存在したが、
+    /// 今は薬リストのデータに無いデータ」なので、このデータをselectedプロパティをtrueにして薬リストに追加します。
+    private func mergeQuestions(to listItems: inout [MedicineListItem], with questions: [MedicineItem]) {
+        for question in questions {
+            // 条件に一致する最初の要素を取得
+            if let index = listItems.firstIndex(where: {
+                // 商品名・一般名が一致し、かつ、まだ選択されていない要素を探す
+                $0.brandName == question.brandName && $0.genericName == question.genericName && $0.selected == false
+            }) {
+                // 該当する問題のselectedプロパティをtrueに変更
+                listItems[index].selected = true
+            } else {
+                // 商品名・一般名が一致するデータが見つからなかった場合、このデータをselectedプロパティをtrueにして薬リストに追加
+                let newItem = MedicineListItem(category: question.category,
+                                               brandName: question.brandName,
+                                               genericName: question.genericName,
+                                               selected: true)
+                listItems.append(newItem)
+            } // if let ここまで
+        } // for ここまで
+    } // mergeQuestions ここまで
 } // CreateQuestionListViewModel ここまで
