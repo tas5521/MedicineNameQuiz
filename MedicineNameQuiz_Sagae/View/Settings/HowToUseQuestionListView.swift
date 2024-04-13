@@ -35,9 +35,9 @@ struct HowToUseQuestionListView: View {
                 .ignoresSafeArea()
             ScrollView {
                 Text(mainText)
+                    // 上下左右に余白を追加
+                    .padding()
             } // ScrollView ここまで
-            // 上下左右に余白を追加
-            .padding()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
