@@ -10,6 +10,21 @@ import SwiftUI
 struct HowToUseStudyView: View {
     // 項目のタイトル
     let title: String
+    // 本文
+    private var mainText: String {
+        // 読み込み先に、ファイルが存在してるかチェック
+        guard let path = Bundle.main.path(forResource: "HowToUseStudy", ofType: "txt") else {
+            // 存在しなければ、エラーメッセージを返却
+            return "ファイルがありません"
+        } // guard let ここまで
+        do {
+            // ファイルが存在していれば、データをString型で読み込み
+            return try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+            // 何らかのエラーが発生した場合は、エラー内容を返却
+            return "エラー: \(error)"
+        } // do-try-catch ここまで
+    } // mainText ここまで
 
     var body: some View {
         // 奥から手前にレイアウト
@@ -22,11 +37,7 @@ struct HowToUseStudyView: View {
             VStack {
                 // 水平方向にレイアウト
                 HStack {
-                    Text("アプリの使い方\n学習について")
-                        // フォントを.title3に変更
-                        .font(.title3)
-                        // 太字にする
-                        .bold()
+                    Text(mainText)
                         // 上下左右に余白を追加
                         .padding()
                     // スペースを追加
