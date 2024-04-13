@@ -33,19 +33,11 @@ struct HowToUseStudyView: View {
             Color.backgroundSkyBlue
                 // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
-            // 垂直方向にレイアウト
-            VStack {
-                // 水平方向にレイアウト
-                HStack {
-                    Text(mainText)
-                        // 上下左右に余白を追加
-                        .padding()
-                    // スペースを追加
-                    Spacer()
-                } // HStack ここまで
-                // スペースを追加
-                Spacer()
-            } // VStack ここまで
+            ScrollView {
+                Text(mainText)
+            } // ScrollView ここまで
+            // 上下左右に余白を追加
+            .padding()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
