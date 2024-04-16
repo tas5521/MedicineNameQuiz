@@ -209,6 +209,8 @@ struct ResultView: View {
         } // for ここまで
         // 問題数を保持
         questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+        // 問題リストを一意に識別するIDを保持
+        questionList.id = UUID()
         do {
             // 問題リストをCore Dataに保存
             try context.save()

@@ -109,6 +109,8 @@ final class CreateQuestionListViewModel {
             questionList.createdDate = Date()
             // 問題数を保持
             questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
+            // 問題リストを一意に識別するIDを保持
+            questionList.id = UUID()
         // 問題リスト編集モードの場合
         case .edit:
             // Question型の集合を作成
