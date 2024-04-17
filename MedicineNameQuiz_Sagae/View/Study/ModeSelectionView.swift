@@ -20,10 +20,13 @@ struct ModeSelectionView: View {
                   predicate: NSPredicate(format: "numberOfQuestions > 0"),
                   animation: nil
     ) private var fetchedLists: FetchedResults<QuestionList>
-    // Pickerに表示する問題リスト名の配列
-    private var questionListNames: [String] {
-        ["ランダム20問"] + fetchedLists.map { $0.listName ?? "" }
-    } // questionListNames ここまで
+    // Pickerに表示する問題リストの配列
+        private var questionListPikerItems: [QuestionListPickerItem] {
+            fetchedLists.map {
+                QuestionListPickerItem(id: $0.id ?? UUID(), listName: $0.listName ?? "")
+            } + [QuestionListPickerItem(id: UUID(uuidString: "00000000-0000-0000-0000-0000random20") ?? UUID(),
+                                        listName: "ランダム20問")]
+        } // questionListPikerItems ここまで
 
     var body: some View {
         NavigationStack {
@@ -48,10 +51,10 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 問題リスト選択用のPicker
-                        Picker("問題リスト選択", selection: $viewModel.questionIndex) {
-                            ForEach(questionListNames.indices, id: \.self) { index in
-                                Text(questionListNames[index])
-                                    .tag(index)
+                        Picker("問題リスト選択", selection: $viewModel.questionID) {
+                            ForEach(questionListPikerItems) { item in
+                                Text(item.listName)
+                                    .tag(item.id)
                             } // ForEach ここまで
                         } // Picker ここまで
                         // ホイールで表示
@@ -92,7 +95,7 @@ struct ModeSelectionView: View {
                     // スタートボタンを配置
                     Button {
                         // 問題を作成
-                        viewModel.createQuestions(questionLists: fetchedLists)
+                        viewModel.createQuestions(fetchedLists: fetchedLists)
                         // 学習開始
                         isStudying.toggle()
                     } label: {
@@ -120,11 +123,11 @@ struct ModeSelectionView: View {
                               modeSelection: modeSelection)
                 } // navigationDestination ここまで
             } // ZStack ここまで
-            // 画面が表示されたときにPickerの初期値を0に指定(クラッシュの回避のため)
-            // PickerでquestionIndex > 0のデータをセットした後で、QuestionListViewで該当データを削除し、
-            // この画面に戻ってスタートを押すと、questionIndex番号がないデータにアクセスしてしまい、アプリがクラッシュする
             .onAppear {
-                viewModel.questionIndex = 0
+                // もし、現在指定されたIDの問題が問題リスト（fetchedLists）になかったら、問題IDをrandom20にする
+                if !fetchedLists.contains(where: { $0.id == viewModel.questionID}) {
+                    viewModel.questionID = UUID(uuidString: "00000000-0000-0000-0000-0000random20") ?? UUID()
+                } // if ここまで
             } // onAppear ここまで
             // ナビゲーションバーの設定
             // ナビゲーションバーのタイトルを設定
