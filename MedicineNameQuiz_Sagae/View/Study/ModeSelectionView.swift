@@ -21,12 +21,12 @@ struct ModeSelectionView: View {
                   animation: nil
     ) private var fetchedLists: FetchedResults<QuestionList>
     // Pickerに表示する問題リストの配列
-        private var questionListPikerItems: [QuestionListPickerItem] {
-            fetchedLists.map {
-                QuestionListPickerItem(id: $0.id ?? UUID(), listName: $0.listName ?? "")
-            } + [QuestionListPickerItem(id: UUID(uuidString: "00000000-0000-0000-0000-0000random20") ?? UUID(),
-                                        listName: "ランダム20問")]
-        } // questionListPikerItems ここまで
+    private var questionListPikerItems: [QuestionListPickerItem] {
+        fetchedLists.map {
+            QuestionListPickerItem(id: $0.id ?? UUID(), listName: $0.listName ?? "")
+        } + [QuestionListPickerItem(id: UUID(uuidString: "00000000-0000-0000-0000-0000random20") ?? UUID(),
+                                    listName: "ランダム20問")]
+    } // questionListPikerItems ここまで
 
     var body: some View {
         NavigationStack {

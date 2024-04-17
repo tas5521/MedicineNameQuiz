@@ -40,7 +40,7 @@ final class ModeSelectionViewModel {
             } // if let ここまで
         } // if ここまで
     } // createQuestions ここまで
-    
+
     // ランダム20問を作成するメソッド
     private func createRandom20() -> [StudyItem] {
         // CSVからデータを取得
