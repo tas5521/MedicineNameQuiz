@@ -8,5 +8,6 @@
 import Foundation
 
 struct DefaultUUID {
+    // ランダム20のUUID
     static let random20: UUID = UUID(uuidString: "00000000-0000-0000-0000-000000000020") ?? UUID()
 } // DefaultUUID ここまで
