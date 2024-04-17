@@ -24,7 +24,7 @@ struct ModeSelectionView: View {
     private var questionListPikerItems: [QuestionListPickerItem] {
         fetchedLists.map {
             QuestionListPickerItem(id: $0.id ?? UUID(), listName: $0.listName ?? "")
-        } + [QuestionListPickerItem(id: UUID(uuidString: "00000000-0000-0000-0000-0000random20") ?? UUID(),
+        } + [QuestionListPickerItem(id: UUID(uuidString: "00000000-0000-0000-0000-000000000020") ?? UUID(),
                                     listName: "ランダム20問")]
     } // questionListPikerItems ここまで
 
@@ -124,9 +124,9 @@ struct ModeSelectionView: View {
                 } // navigationDestination ここまで
             } // ZStack ここまで
             .onAppear {
-                // もし、現在指定されたIDの問題が問題リスト（fetchedLists）になかったら、問題IDをrandom20にする
+                // もし、現在指定されたIDの問題が問題リスト（fetchedLists）になかったら、問題IDをランダム20のものにする
                 if !fetchedLists.contains(where: { $0.id == viewModel.questionID}) {
-                    viewModel.questionID = UUID(uuidString: "00000000-0000-0000-0000-0000random20") ?? UUID()
+                    viewModel.questionID = UUID(uuidString: "00000000-0000-0000-0000-000000000020") ?? UUID()
                 } // if ここまで
             } // onAppear ここまで
             // ナビゲーションバーの設定
