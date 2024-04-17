@@ -10,14 +10,14 @@ import SwiftUI
 @Observable
 final class ModeSelectionViewModel {
     // 問題を識別するID（初期値はランダム20のものを使用）
-    var questionID: UUID = UUID(uuidString: "00000000-0000-0000-0000-000000000020") ?? UUID()
+    var questionID: UUID = DefaultUUID.random20
     // 問題を格納する配列
     var questions: [StudyItem] = []
 
     // 問題を作成するメソッド
     func createQuestions(fetchedLists: FetchedResults<QuestionList>) {
         // 問題を識別するIDがランダム20のものの場合
-        if questionID == UUID(uuidString: "00000000-0000-0000-0000-000000000020") ?? UUID() {
+        if questionID == DefaultUUID.random20 {
             // ランダム20問を出題
             questions = createRandom20()
         } else {
