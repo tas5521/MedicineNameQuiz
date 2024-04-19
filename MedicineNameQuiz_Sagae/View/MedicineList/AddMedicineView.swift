@@ -16,6 +16,8 @@ struct AddMedicineView: View {
     @State private var brandName: String = ""
     // 入力された一般名を管理する変数
     @State private var genericName: String = ""
+    // フォーカスを管理する変数
+    @FocusState private var focusedField: AddMedicineField?
     // 新しい薬名を追加できるかどうかを管理する変数
     private var canAddNew: Bool {
         !(brandName == "" || genericName == "")
@@ -42,10 +44,30 @@ struct AddMedicineView: View {
                 TextField("商品名", text: $brandName)
                     // テキストフィールドの背景を指定
                     .textFieldBackground()
+                    // フォーカスを指定
+                    .focused($focusedField, equals: .brandName)
+                    // 画面が表示された時に商品名のテキストフィールドにフォーカスを当てる
+                    .onAppear {
+                        focusedField = .brandName
+                    } // onAppear ここまで
+                    // 商品名の入力が完了して、一般名が入力されていない場合、一般名のテキストフィールドにフォーカスを当てる
+                    .onSubmit {
+                        if genericName.isEmpty {
+                            focusedField = .genericName
+                        } // if ここまで
+                    } // onSubmit ここまで
                 // 一般名を入力するためのテキストフィールド
                 TextField("一般名", text: $genericName)
                     // テキストフィールドの背景を指定
                     .textFieldBackground()
+                    // フォーカスを指定
+                    .focused($focusedField, equals: .genericName)
+                    // 一般名の入力が完了して、商品名が入力されていない場合、商品名のテキストフィールドにフォーカスを当てる
+                    .onSubmit {
+                        if brandName.isEmpty {
+                            focusedField = .brandName
+                        } // if ここまで
+                    } // onSubmit ここまで
                 // スペースを空ける
                 Spacer()
                 // 追加ボタン
