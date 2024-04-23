@@ -9,21 +9,21 @@ import SwiftUI
 
 @Observable
 final class ModeSelectionViewModel {
-    // 問題を識別するID（初期値はランダム20のものを使用）
-    var questionID: UUID = DefaultUUID.random20
+    // 問題リストを識別するID（初期値はランダム20のものを使用）
+    var questionListID: UUID = DefaultUUID.random20
     // 問題を格納する配列
     var questions: [StudyItem] = []
 
     // 問題を作成するメソッド
     func createQuestions(fetchedLists: FetchedResults<QuestionList>) {
-        // 問題を識別するIDがランダム20のものの場合
-        if questionID == DefaultUUID.random20 {
+        // 問題リストを識別するIDがランダム20のものの場合
+        if questionListID == DefaultUUID.random20 {
             // ランダム20問を出題
             questions = createRandom20()
         } else {
             // ユーザーが独自に作成した問題リストからの出題の場合（問題を識別するIDがランダム20のものではない場合）
             // CoreDataから、該当するIDを持つ問題を取得
-            if let questionList = fetchedLists.first(where: { $0.id == questionID }) {
+            if let questionList = fetchedLists.first(where: { $0.id == questionListID }) {
                 // StudyItem型に変換
                 let studyItems = (questionList.questions as? Set<Question>)?
                     .map {

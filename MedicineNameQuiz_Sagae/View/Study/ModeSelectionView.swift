@@ -51,7 +51,7 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 問題リスト選択用のPicker
-                        Picker("問題リスト選択", selection: $viewModel.questionID) {
+                        Picker("問題リスト選択", selection: $viewModel.questionListID) {
                             ForEach(questionListPikerItems) { item in
                                 Text(item.listName)
                                     .tag(item.id)
@@ -125,8 +125,8 @@ struct ModeSelectionView: View {
             } // ZStack ここまで
             .onAppear {
                 // もし、現在指定されたIDの問題が問題リスト（fetchedLists）になかったら、問題IDをランダム20のものにする
-                if !fetchedLists.contains(where: { $0.id == viewModel.questionID}) {
-                    viewModel.questionID = DefaultUUID.random20
+                if !fetchedLists.contains(where: { $0.id == viewModel.questionListID }) {
+                    viewModel.questionListID = DefaultUUID.random20
                 } // if ここまで
             } // onAppear ここまで
             // ナビゲーションバーの設定
