@@ -14,8 +14,10 @@
 		4A4DE7F32B667C7100F1B4CB /* MedicineNameList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */; };
 		4A5C58632B9B754C00EB73B0 /* QuestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5C58622B9B754C00EB73B0 /* QuestionsViewModel.swift */; };
 		4A764F082B492AD60052EB60 /* NavigationBarBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A764F072B492AD60052EB60 /* NavigationBarBackground.swift */; };
-		4A81B0FC2BCA5305007FEB0C /* HowToUseMedicineList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */; };
 		4A81B0FA2BCA448E007FEB0C /* HowToUseQuestionList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A81B0F92BCA448E007FEB0C /* HowToUseQuestionList.txt */; };
+		4A81B0FC2BCA5305007FEB0C /* HowToUseMedicineList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */; };
+		4A8DA0752BCEACA100A92CE9 /* QuestionListPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */; };
+		4A8DA0772BCFE36A00A92CE9 /* DefaultUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DA0762BCFE36A00A92CE9 /* DefaultUUID.swift */; };
 		4A9671592AC7B531006F7157 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671582AC7B531006F7157 /* MainTabView.swift */; };
 		4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715D2AC7B73E006F7157 /* QuestionListView.swift */; };
 		4A9671602AC7B768006F7157 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715F2AC7B768006F7157 /* ModeSelectionView.swift */; };
@@ -76,8 +78,10 @@
 		4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = MedicineNameList.csv; sourceTree = SOURCE_ROOT; };
 		4A5C58622B9B754C00EB73B0 /* QuestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewModel.swift; sourceTree = "<group>"; };
 		4A764F072B492AD60052EB60 /* NavigationBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarBackground.swift; sourceTree = "<group>"; };
-		4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HowToUseMedicineList.txt; sourceTree = SOURCE_ROOT; };
 		4A81B0F92BCA448E007FEB0C /* HowToUseQuestionList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HowToUseQuestionList.txt; sourceTree = SOURCE_ROOT; };
+		4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HowToUseMedicineList.txt; sourceTree = SOURCE_ROOT; };
+		4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListPickerItem.swift; sourceTree = "<group>"; };
+		4A8DA0762BCFE36A00A92CE9 /* DefaultUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUUID.swift; sourceTree = "<group>"; };
 		4A9671582AC7B531006F7157 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4A96715D2AC7B73E006F7157 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
 		4A96715F2AC7B768006F7157 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 				4A20191B2B84D3E5007FE769 /* QuestionListMode.swift */,
 				4AD7AE122B87ABB400D0DBF7 /* CSVLoader.swift */,
 				4AD7AE172B87C94D00D0DBF7 /* CreateQuestionListModel.swift */,
+				4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */,
+				4A8DA0762BCFE36A00A92CE9 /* DefaultUUID.swift */,
 				4A4AEB712BC97401003AB218 /* AddMedicineField.swift */,
 			);
 			path = Model;
@@ -275,9 +281,9 @@
 				4AADB2CC2AC5588300C5A40E /* MedicineNameQuiz_SagaeApp.swift */,
 				4AADB2D52AC5588500C5A40E /* Persistence.swift */,
 				4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */,
-        4A4AEB7D2BCA1F93003AB218 /* HowToUseStudy.txt */,
+				4A4AEB7D2BCA1F93003AB218 /* HowToUseStudy.txt */,
 				4A81B0F92BCA448E007FEB0C /* HowToUseQuestionList.txt */,
-        4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */,
+				4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */,
 				4A9671672AC7B810006F7157 /* Model */,
 				4A96715A2AC7B711006F7157 /* View */,
 				4A9DDA642B66B29300F65646 /* ViewModel */,
@@ -360,7 +366,7 @@
 				4A4DE7F32B667C7100F1B4CB /* MedicineNameList.csv in Resources */,
 				4AADB2D42AC5588500C5A40E /* Preview Assets.xcassets in Resources */,
 				4A4AEB7E2BCA1F93003AB218 /* HowToUseStudy.txt in Resources */,
-        4A81B0FC2BCA5305007FEB0C /* HowToUseMedicineList.txt in Resources */,
+				4A81B0FC2BCA5305007FEB0C /* HowToUseMedicineList.txt in Resources */,
 				4AADB2D12AC5588500C5A40E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,11 +438,13 @@
 				4A9DDA662B66B2B900F65646 /* MedicineListViewModel.swift in Sources */,
 				4A9671602AC7B768006F7157 /* ModeSelectionView.swift in Sources */,
 				4AD680AB2B34868100414F22 /* MedicineSelectableList.swift in Sources */,
+				4A8DA0752BCEACA100A92CE9 /* QuestionListPickerItem.swift in Sources */,
 				4AD429762B159B6100FEE2DD /* AnswerButton.swift in Sources */,
 				4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */,
 				4AA0884A2AC9889D005BD8C2 /* HowToUseMedicineListView.swift in Sources */,
 				4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */,
 				4AAD5DF02B5809F9000E62ED /* TextFieldBackground.swift in Sources */,
+				4A8DA0772BCFE36A00A92CE9 /* DefaultUUID.swift in Sources */,
 				4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */,
 				4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */,
 				4AADB2D92AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld in Sources */,
