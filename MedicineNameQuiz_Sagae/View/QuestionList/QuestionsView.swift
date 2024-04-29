@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct QuestionsView: View {
+    let answerPercentage: String
     // QuestionsViewModelのインスタンスを格納する変数
     @State private var viewModel: QuestionsViewModel
 
     // イニシャライザ
-    init(questionList: QuestionList) {
+    init(answerPercentage: String, questionList: QuestionList) {
+        self.answerPercentage = answerPercentage
         _viewModel = State(initialValue: QuestionsViewModel(questionList: questionList))
     } // init ここまで
 
@@ -31,24 +33,46 @@ struct QuestionsView: View {
                     .padding(.vertical)
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
-                    // 総問題数を表示
-                    Text("総問題数: \(viewModel.questionList.numberOfQuestions)")
-                        // 左に余白を追加
-                        .padding([.top, .leading, .trailing])
+                    // 問題数を表示
+                    HStack {
+                        Text("問題数: \(viewModel.questionList.numberOfQuestions)")
+                        Spacer()
+                        if viewModel.questionList.numberOfQuestions != 0 {
+                            Text("正答率: \(answerPercentage)")
+                        } // if ここまで
+                    } // HStack ここまで
+                    // 余白を追加
+                    .padding()
+
                     // 出題される薬の名前のリスト
                     List {
                         ForEach(viewModel.searchedQuestions) { question in
-                            // 垂直方向にレイアウト
-                            VStack(alignment: .leading) {
-                                // 商品名を表示
-                                Text(question.brandName)
-                                    // 文字の色を青に変更
-                                    .foregroundStyle(Color.blue)
-                                // 一般名を表示
-                                Text(question.genericName)
-                                    // 文字の色を赤に変更
-                                    .foregroundStyle(Color.red)
-                            } // VStack ここまで
+                            // 水平方向にレイアウト
+                            HStack {
+                                // 垂直方向にレイアウト
+                                VStack(alignment: .leading) {
+                                    // 商品名を表示
+                                    Text(question.brandName)
+                                        // 文字の色を青に変更
+                                        .foregroundStyle(Color.blue)
+                                    // 一般名を表示
+                                    Text(question.genericName)
+                                        // 文字の色を赤に変更
+                                        .foregroundStyle(Color.red)
+                                } // VStack ここまで
+                                // スペースを空ける
+                                Spacer()
+                                // 学習結果（正解か不正解か）を取得
+                                let studyResult = question.studyResult
+                                if studyResult != .unanswered {
+                                    // まる、または、ばつのImage
+                                    Image(systemName: studyResult.rawValue)
+                                        // 幅を15に指定
+                                        .frame(width: 15)
+                                        // 正解なら緑、不正解なら赤にする
+                                        .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
+                                } // if ここまで
+                            } // HStack ここまで
                         } // ForEach ここまで
                     } // List ここまで
                     // リストのスタイルを.groupedに変更
@@ -83,5 +107,5 @@ struct QuestionsView: View {
 #Preview {
     let context = PersistenceController.preview.container.viewContext
     let questionList = QuestionList(context: context)
-    return QuestionsView(questionList: questionList)
+    return QuestionsView(answerPercentage: "0.0", questionList: questionList)
 }

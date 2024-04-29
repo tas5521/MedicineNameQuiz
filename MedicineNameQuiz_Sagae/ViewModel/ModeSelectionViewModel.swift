@@ -30,7 +30,7 @@ final class ModeSelectionViewModel {
                         StudyItem(category: MedicineCategory.getCategory(from: $0.category ?? ""),
                                   brandName: $0.brandName ?? "",
                                   genericName: $0.genericName ?? "",
-                                  studyResult: .incorrect)
+                                  studyResult: .unanswered)
                     } ?? []
                 // データをシャッフルして出題
                 questions = studyItems.shuffled()
@@ -52,7 +52,7 @@ final class ModeSelectionViewModel {
                 StudyItem(category: MedicineCategory.getCategory(from: $0[1]),
                           brandName: $0[2],
                           genericName: $0[3],
-                          studyResult: .incorrect)
+                          studyResult: .unanswered)
             } // map ここまで
         // csvStudyItemsの配列の要素数が20未満の場合は、最後のindexの値を要素の数にする。20以上の場合は、20個にする
         let endIndex = min(20, csvStudyItems.count)
