@@ -96,10 +96,11 @@ final class CreateQuestionListViewModel {
             for listItem in filteredListItems {
                 // 問題のインスタンスを生成
                 let question = Question(context: context)
-                // カテゴリ、商品名、一般名を保持
+                // カテゴリ、商品名、一般名、IDを保持
                 question.category = listItem.category.rawValue
                 question.brandName = listItem.brandName
                 question.genericName = listItem.genericName
+                question.id = UUID()
                 // 作成した問題を問題リストに追加
                 questionList.addToQuestions(question)
             } // for ここまで
@@ -119,10 +120,11 @@ final class CreateQuestionListViewModel {
             for item in filteredListItems {
                 // 問題のインスタンスを生成
                 let question = Question(context: context)
-                // カテゴリ、商品名、一般名を保持
+                // カテゴリ、商品名、一般名、IDを保持
                 question.category = item.category.rawValue
                 question.brandName = item.brandName
                 question.genericName = item.genericName
+                question.id = item.id
                 // 作成した問題を集合に追加
                 questionSet.insert(question)
             } // for ここまで

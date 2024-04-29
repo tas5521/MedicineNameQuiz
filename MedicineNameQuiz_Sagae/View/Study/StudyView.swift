@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct StudyView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 学習中であるかを管理する変数
     @Binding var isStudying: Bool
+    // 問題リストをフェッチ
+    @FetchRequest(entity: QuestionList.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \QuestionList.createdDate, ascending: false)],
+                  predicate: NSPredicate(format: "numberOfQuestions > 0"),
+                  animation: nil
+    ) private var fetchedLists: FetchedResults<QuestionList>
 
     // 出題に関する変数
     // 出題する問題
     @Binding var questions: [StudyItem]
     // モード選択を管理する変数
     let modeSelection: StudyMode
+    // 問題リストのID
+    let questionListID: UUID
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
 
@@ -186,6 +196,7 @@ struct StudyView: View {
     private func advanceToNextQuestionOrShowResult() async {
         // もし最後の問題だったら
         if questionNumber >= questions.count - 1 {
+            saveStudyResult()
             // 結果画面を表示
             isShowResult.toggle()
             // もし最後の問題でなかったら
@@ -213,6 +224,28 @@ struct StudyView: View {
             await flipCard()
         } // if ここまで
     } // flipCardAndWait ここまで
+
+    private func saveStudyResult() {
+        // 問題リストの配列から該当するUUIDの問題を取得
+        guard let index = fetchedLists.firstIndex(where: { $0.id == questionListID }) else { return }
+        // 該当のIndexの問題リストから問題を取得
+        guard let fetchedQuestions = fetchedLists[index].questions as? Set<Question> else { return }
+        // 学習結果を問題に保持する
+        for studyItem in questions {
+            if let index = fetchedQuestions.firstIndex(where: { $0.id == studyItem.id }) {
+                fetchedQuestions[index].studyResult = studyItem.studyResult.rawValue
+            } // if let ここまで
+        } // for ここまで
+        // 学習結果を保持した問題で、元の問題を上書き
+        fetchedLists[index].questions = fetchedQuestions as NSSet
+        do {
+            // 問題リストをCore Dataに保存
+            try context.save()
+        } catch {
+            // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
+            print("エラー: \(error)")
+        } // do-try-catch ここまで
+    } // saveStudyResult ここまで
 } // StudyView ここまで
 
 #Preview {
@@ -225,5 +258,6 @@ struct StudyView: View {
     ] // dummyStudyItem ここまで
     return StudyView(isStudying: .constant(true),
                      questions: .constant(dummyQuestions),
-                     modeSelection: .brandToGeneric)
+                     modeSelection: .brandToGeneric,
+                     questionListID: UUID())
 }
