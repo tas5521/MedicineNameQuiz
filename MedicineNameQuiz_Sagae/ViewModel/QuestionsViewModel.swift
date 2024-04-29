@@ -13,7 +13,7 @@ final class QuestionsViewModel {
     var questions: [StudyItem] {
         // NSSet型のquestionList.questionsをSet<Question>型にキャスト
         guard let questions = questionList.questions as? Set<Question> else { return [] }
-        // MedicineItem型にして、商品名の昇順にソート
+        // StudyItem型にして、商品名の昇順にソート
         return questions.map {
             StudyItem(
                 category: MedicineCategory(rawValue: $0.category ?? "") ?? .custom,

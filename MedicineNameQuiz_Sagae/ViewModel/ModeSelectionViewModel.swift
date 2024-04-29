@@ -27,7 +27,8 @@ final class ModeSelectionViewModel {
                 // StudyItem型に変換
                 let studyItems = (questionList.questions as? Set<Question>)?
                     .map {
-                        StudyItem(category: MedicineCategory.getCategory(from: $0.category ?? ""),
+                        StudyItem(id: $0.id ?? UUID(),
+                                  category: MedicineCategory.getCategory(from: $0.category ?? ""),
                                   brandName: $0.brandName ?? "",
                                   genericName: $0.genericName ?? "",
                                   studyResult: .unanswered)
