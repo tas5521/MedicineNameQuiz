@@ -66,7 +66,7 @@ struct ModeSelectionView: View {
                         Spacer()
 
                         // モード選択を促すテキスト
-                        Text("モード選択")
+                        Text("問題リストからの出題設定")
                             // フォントを.titleに指定
                             .font(.title)
                             // 太字にする
@@ -98,14 +98,14 @@ struct ModeSelectionView: View {
                         // セグメントで表示
                         .pickerStyle(.segmented)
                         // 上下左右に余白を追加
-                        .padding()
-
-                        // スペースを空ける
-                        Spacer()
+                        .padding(.horizontal)
                     } // VStack ここまで
                     // 上下左右に余白を追加
                     .padding()
-
+                    Text("わからない問題がない場合、全問出題されます")
+                        .padding(.bottom)
+                    // スペースを空ける
+                    Spacer()
                     // スタートボタンを配置
                     Button {
                         // 問題を作成
