@@ -96,11 +96,11 @@ final class CreateQuestionListViewModel {
             for listItem in filteredListItems {
                 // 問題のインスタンスを生成
                 let question = Question(context: context)
-                // カテゴリ、商品名、一般名、IDを保持
+                // カテゴリ、商品名、一般名、問題IDを保持
                 question.category = listItem.category.rawValue
                 question.brandName = listItem.brandName
                 question.genericName = listItem.genericName
-                question.id = UUID()
+                question.id = listItem.id
                 // 作成した問題を問題リストに追加
                 questionList.addToQuestions(question)
             } // for ここまで
@@ -116,6 +116,8 @@ final class CreateQuestionListViewModel {
         case .edit:
             // Question型の集合を作成
             var questionSet: Set<Question> = []
+            // 問題を取得
+            guard let questions = questionList.questions as? Set<Question> else { return }
             // 選択されている問題を集合に格納
             for item in filteredListItems {
                 // 問題のインスタンスを生成
@@ -125,6 +127,18 @@ final class CreateQuestionListViewModel {
                 question.brandName = item.brandName
                 question.genericName = item.genericName
                 question.id = item.id
+                // 該当する問題がある場合
+                if let index = questions.firstIndex(where: {
+                    $0.category == item.category.rawValue &&
+                        $0.brandName == item.brandName &&
+                        $0.genericName == item.genericName
+                }) {
+                    // 学習結果を保持
+                    question.studyResult = questions[index].studyResult
+                } else {
+                    // 該当する問題がない場合、「まだ解いていない」という状態を保持
+                    question.studyResult = StudyResult.unanswered.rawValue
+                } // if let ここまで
                 // 作成した問題を集合に追加
                 questionSet.insert(question)
             } // for ここまで
@@ -185,8 +199,8 @@ final class CreateQuestionListViewModel {
         for question in questions {
             // 条件に一致する最初の要素を取得
             if let index = listItems.firstIndex(where: {
-                // 商品名・一般名が一致し、かつ、まだ選択されていない要素を探す
-                $0.brandName == question.brandName && $0.genericName == question.genericName && $0.selected == false
+                // 商品名・一般名が一致する要素を探す
+                $0.brandName == question.brandName && $0.genericName == question.genericName
             }) {
                 // 該当する問題のselectedプロパティをtrueに変更
                 listItems[index].selected = true
