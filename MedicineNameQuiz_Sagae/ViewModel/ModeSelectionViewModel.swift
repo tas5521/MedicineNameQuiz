@@ -9,6 +9,8 @@ import SwiftUI
 
 @Observable
 final class ModeSelectionViewModel {
+    // 出題設定を管理する変数
+    var questionSelection: QuestionSelectionMode = .all
     // 問題リストを識別するID（初期値はランダム20のものを使用）
     var questionListID: UUID = DefaultUUID.random20
     // 問題を格納する配列
@@ -31,10 +33,25 @@ final class ModeSelectionViewModel {
                                   category: MedicineCategory.getCategory(from: $0.category ?? ""),
                                   brandName: $0.brandName ?? "",
                                   genericName: $0.genericName ?? "",
-                                  studyResult: .unanswered)
+                                  studyResult: StudyResult(rawValue: $0.studyResult ?? "") ?? .unanswered)
                     } ?? []
-                // データをシャッフルして出題
-                questions = studyItems.shuffled()
+                switch questionSelection {
+                // 全ての問題を出題する設定の場合
+                case .all:
+                    // データをシャッフルして出題
+                    questions = studyItems.shuffled()
+                // 未回答もしくは不正解の問題を出題する設定の場合
+                case .unansweredOrIncorrect:
+                    // まだ正解していない問題を取得
+                    let filteredItems = studyItems.filter({ $0.studyResult != .correct })
+                    // 全ての問題に正解している場合、全問をシャッフルして出題
+                    if filteredItems.isEmpty {
+                        questions = studyItems.shuffled()
+                    } else {
+                        // まだ正解していない問題がある場合、シャッフルして出題
+                        questions = filteredItems.shuffled()
+                    } // if ここまで
+                } // switch  ここまで
             } else {
                 // CoreDataから、該当するIDを持つ問題を取得できなかった場合、ランダム20問を出題（クラッシュの回避のため）
                 questions = createRandom20()

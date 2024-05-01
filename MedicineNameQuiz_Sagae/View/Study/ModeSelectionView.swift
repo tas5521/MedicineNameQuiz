@@ -86,6 +86,20 @@ struct ModeSelectionView: View {
                         // 上下左右に余白を追加
                         .padding()
 
+                        // 出題設定用のPicker
+                        Picker("出題設定", selection: $viewModel.questionSelection) {
+                            // 要素を繰り返す
+                            ForEach(QuestionSelectionMode.allCases, id: \.self) { mode in
+                                // モードの選択肢
+                                Text(mode.rawValue)
+                                    .tag(mode)
+                            } // ForEach ここまで
+                        } // Picker ここまで
+                        // セグメントで表示
+                        .pickerStyle(.segmented)
+                        // 上下左右に余白を追加
+                        .padding()
+
                         // スペースを空ける
                         Spacer()
                     } // VStack ここまで
