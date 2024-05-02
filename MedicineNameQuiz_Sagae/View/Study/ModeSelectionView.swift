@@ -46,7 +46,7 @@ struct ModeSelectionView: View {
                         // 問題リストの選択を促すテキスト
                         Text("問題リスト選択")
                             // フォントを.titleに指定
-                            .font(.title)
+                            .font(.title2)
                             // 太字にする
                             .bold()
 
@@ -68,7 +68,7 @@ struct ModeSelectionView: View {
                         // モード選択を促すテキスト
                         Text("問題リストからの出題設定")
                             // フォントを.titleに指定
-                            .font(.title)
+                            .font(.title2)
                             // 太字にする
                             .bold()
 
@@ -102,7 +102,7 @@ struct ModeSelectionView: View {
                     } // VStack ここまで
                     // 上下左右に余白を追加
                     .padding()
-                    Text("わからない問題がない場合、全問出題されます")
+                    Text("リスト内の全ての問題に正解している場合は、\nわからない問題を選択しても、全問出題されます")
                         .padding(.bottom)
                     // スペースを空ける
                     Spacer()
