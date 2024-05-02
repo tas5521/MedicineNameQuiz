@@ -120,48 +120,6 @@ struct ResultView: View {
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // resultList ここまで
-
-    // 不正解の問題をCore Dataに保存するメソッド
-    private func saveIncorrectQuestions() {
-        // 不正解の問題でフィルター
-        let incorrectQuestions = questions.filter { $0.studyResult == .incorrect }
-        // 問題リストのインスタンスを生成
-        let questionList = QuestionList(context: context)
-        // リスト名を保持
-        if listName.isEmpty {
-            // リストの名前が入力されなかったら、「不正解の問題」という名前にする
-            questionList.listName = "不正解の問題"
-        } else {
-            // リストの名前が入力されていたら、その名前をリスト名にして保存
-            questionList.listName = listName
-        } // if ここまで
-        // 作成した日付を保持
-        questionList.createdDate = Date()
-        // questionSetにデータを格納
-        for studyItem in incorrectQuestions {
-            // 問題のインスタンスを生成
-            let question = Question(context: context)
-            // カテゴリ、商品名、一般名を保持
-            question.category = studyItem.category.rawValue
-            question.brandName = studyItem.brandName
-            question.genericName = studyItem.genericName
-            // 作成した問題を問題リストに追加
-            questionList.addToQuestions(question)
-        } // for ここまで
-        // 問題数を保持
-        questionList.numberOfQuestions = Int16(questionList.questions?.count ?? 0)
-        // 問題リストを一意に識別するIDを保持
-        questionList.id = UUID()
-        do {
-            // 問題リストをCore Dataに保存
-            try context.save()
-            // 不正解の問題をリストに保存したことを伝えるメッセージを表示
-            isShowSaveMessage.toggle()
-        } catch {
-            // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
-            print("エラー: \(error)")
-        } // do-try-catch ここまで
-    } // saveQuestionList ここまで
 } // ResultView ここまで
 
 #Preview {
