@@ -102,6 +102,11 @@ struct StudyView: View {
                 Spacer()
             } // VStack ここまで
         } // ZStack ここまで
+        // 画面が閉じられた時
+        .onDisappear {
+            // 学習結果を保存
+            saveStudyResult()
+        } // onDisappear ここまで
         // 問題を解く画面へ遷移
         .navigationDestination(isPresented: $isShowResult) {
             // 結果画面を表示
@@ -196,7 +201,6 @@ struct StudyView: View {
     private func advanceToNextQuestionOrShowResult() async {
         // もし最後の問題だったら
         if questionNumber >= questions.count - 1 {
-            saveStudyResult()
             // 結果画面を表示
             isShowResult.toggle()
             // もし最後の問題でなかったら
