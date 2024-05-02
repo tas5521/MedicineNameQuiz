@@ -231,7 +231,7 @@ struct StudyView: View {
 
     // 学習結果を保存するメソッド
     private func saveStudyResult() {
-        // 問題リストの配列から該当するUUIDの問題を取得
+        // 問題リストの配列から該当するUUIDの問題のindexを取得
         guard let index = fetchedLists.firstIndex(where: { $0.id == questionListID }) else { return }
         // 該当のIndexの問題リストから問題を取得
         guard let fetchedQuestions = fetchedLists[index].questions as? Set<Question> else { return }
