@@ -229,6 +229,7 @@ struct StudyView: View {
         } // if ここまで
     } // flipCardAndWait ここまで
 
+    // 学習結果を保存するメソッド
     private func saveStudyResult() {
         // 問題リストの配列から該当するUUIDの問題を取得
         guard let index = fetchedLists.firstIndex(where: { $0.id == questionListID }) else { return }
