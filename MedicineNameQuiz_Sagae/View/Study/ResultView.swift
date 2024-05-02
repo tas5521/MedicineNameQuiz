@@ -31,30 +31,23 @@ struct ResultView: View {
                 // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
-            VStack {
-                // 垂直方向にレイアウト
-                VStack(alignment: .leading) {
-                    // 学習結果を表示
-                    // 水平方向にレイアウト
-                    HStack(spacing: 20) {
-                        // 正解の数を表示
-                        countResult(of: .correct)
-                        // 不正解の数を表示
-                        countResult(of: .incorrect)
-                    } // HStack ここまで
-                    // 上と左に30ポイント余白をつける
-                    .padding([.leading, .top], 30)
-                    // 下に10ポイント余白をつける
-                    .padding(.bottom, 15)
-                    // 文字の大きさを1.5倍にする
-                    .scaleEffect(1.5)
-                    // 結果のリスト
-                    resultList
-                } // VStack ここまで
-                // 不正解の問題をリストに保存するボタン
-                saveMistakesButton
-                    // 上下左右に余白を追加
-                    .padding()
+            VStack(alignment: .leading) {
+                // 学習結果を表示
+                // 水平方向にレイアウト
+                HStack(spacing: 20) {
+                    // 正解の数を表示
+                    countResult(of: .correct)
+                    // 不正解の数を表示
+                    countResult(of: .incorrect)
+                } // HStack ここまで
+                // 上と左に30ポイント余白をつける
+                .padding([.leading, .top], 30)
+                // 下に10ポイント余白をつける
+                .padding(.bottom, 15)
+                // 文字の大きさを1.5倍にする
+                .scaleEffect(1.5)
+                // 結果のリスト
+                resultList
             } // VStack ここまで
             .bold()
         } // ZStack ここまで
@@ -127,58 +120,6 @@ struct ResultView: View {
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // resultList ここまで
-
-    // 不正解の問題をリストに保存するボタン
-    private var saveMistakesButton: some View {
-        // 全ての問題に正解したかどうか
-        let isAllCorrect = questions.filter { $0.studyResult == .incorrect }.count == 0
-        return Button {
-            // 警告を表示
-            isShowPopUp.toggle()
-        } label: {
-            Text("不正解の問題をリストに保存する")
-                // 太字にする
-                .bold()
-                // 文字の色を白に指定
-                .foregroundStyle(Color.white)
-                // 幅150高さ50に指定
-                .frame(width: 300, height: 60)
-                // 背景色をオレンジに指定
-                .background(isAllCorrect ? Color.disabledButtonGray : Color.buttonOrange)
-                // 角を丸くする
-                .clipShape(.buttonBorder)
-        } // Button ここまで
-        .disabled(isAllCorrect)
-        // 不正解の問題をリストに保存するためのポップアップを表示
-        .alert("不正解の問題をリストに保存", isPresented: $isShowPopUp) {
-            // 問題リストの名前を入力するテキストフィールド
-            TextField("問題リストの名前", text: $listName)
-            // 保存ボタン
-            Button {
-                // 問題リストの作成処理
-                saveIncorrectQuestions()
-            } label: {
-                Text("保存")
-            } // Button ここまで
-            // やめるボタン
-            Button(role: .cancel) {
-                // 何もしない
-            } label: {
-                Text("やめる")
-            } // Button ここまで
-        } message: {
-            Text("リストに名前をつけてください")
-        } // alert ここまで
-        .alert("不正解の問題をリストに保存しました", isPresented: $isShowSaveMessage) {
-            Button {
-                // 何もしない
-            } label: {
-                Text("OK")
-            } // Button ここまで
-        } message: {
-            Text("もう一度、挑戦しましょう！\n頑張ってください！")
-        } // alert ここまで
-    } // saveMistakesButton ここまで
 
     // 不正解の問題をCore Dataに保存するメソッド
     private func saveIncorrectQuestions() {
