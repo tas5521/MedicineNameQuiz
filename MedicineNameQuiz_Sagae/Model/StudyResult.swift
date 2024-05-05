@@ -8,4 +8,5 @@
 enum StudyResult: String {
     case correct = "circle"
     case incorrect = "multiply"
+    case unanswered = "unanswered"
 } // StudyResult ここまで

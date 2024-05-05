@@ -65,24 +65,34 @@ struct QuestionListView: View {
     private var questionList: some View {
         List {
             ForEach(fetchedLists) { list in
+                let correctCount = (list.questions as? Set<Question>)?.filter({
+                    $0.studyResult == StudyResult.correct.rawValue
+                }).count
+                let answerPercentage = String(format: "%.1f%%", Float(correctCount ?? 0) / Float(list.numberOfQuestions) * 100)
                 // 各行に対応した画面へ遷移
                 NavigationLink {
-                    QuestionsView(questionList: list)
+                    QuestionsView(answerPercentage: answerPercentage, questionList: list)
                 } label: {
-                    // 垂直方向にレイアウト
-                    VStack(alignment: .leading) {
-                        // リストの名前
-                        Text(list.listName ?? "")
-                        // 水平方向にレイアウト
-                        HStack {
+                    // 水平方向にレイアウト
+                    HStack {
+                        // 垂直方向にレイアウト
+                        VStack(alignment: .leading) {
+                            // リストの名前
+                            Text(list.listName ?? "")
                             // リスト作成日時
                             Text("\((list.createdDate ?? Date()).formatted(date: .long, time: .omitted))")
-                            // スペースを空ける
-                            Spacer()
+                        } // VStack ここまで
+                        // スペースを空ける
+                        Spacer()
+                        // 垂直方向にレイアウト
+                        VStack(alignment: .leading) {
                             // 問題数を表示
                             Text("問題数: \(list.numberOfQuestions)")
-                        } // HStack ここまで
-                    } // VStack ここまで
+                            if list.numberOfQuestions != 0 {
+                                Text("正答率: \(answerPercentage)")
+                            } // if ここまで
+                        } // VStack ここまで
+                    } // HStack ここまで
                     // 太字にする
                     .bold()
                 } // NavigationLink ここまで

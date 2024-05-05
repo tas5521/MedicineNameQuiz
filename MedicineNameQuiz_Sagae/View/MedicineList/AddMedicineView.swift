@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AddMedicineView: View {
+    // カスタムの薬データをフェッチ
+    let fetchedCustomMedicines: FetchedResults<CustomMedicine>
     // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
@@ -20,7 +22,9 @@ struct AddMedicineView: View {
     @FocusState private var focusedField: AddMedicineField?
     // 新しい薬名を追加できるかどうかを管理する変数
     private var canAddNew: Bool {
-        !(brandName == "" || genericName == "")
+        !(brandName.isEmpty || genericName.isEmpty || fetchedCustomMedicines.contains(where: {
+            $0.brandName == brandName && $0.genericName == genericName
+        }))
     } // canAddNew ここまで
 
     var body: some View {
@@ -143,5 +147,10 @@ struct AddMedicineView: View {
 } // AddMedicineView ここまで
 
 #Preview {
-    AddMedicineView()
+    // カスタムの薬データをフェッチ
+    @FetchRequest(entity: CustomMedicine.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
+                  animation: nil
+    ) var fetchedCustomMedicines: FetchedResults<CustomMedicine>
+    return AddMedicineView(fetchedCustomMedicines: fetchedCustomMedicines)
 }

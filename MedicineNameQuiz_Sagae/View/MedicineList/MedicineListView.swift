@@ -143,7 +143,7 @@ struct MedicineListView: View {
         } // Button ここまで
         // 薬名追加ビューのシート
         .sheet(isPresented: $isShowAddMedicineView) {
-            AddMedicineView()
+            AddMedicineView(fetchedCustomMedicines: fetchedCustomMedicines)
         } // sheet ここまで
     } // addMedicineButton ここまで
 

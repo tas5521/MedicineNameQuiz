@@ -46,7 +46,7 @@ struct ModeSelectionView: View {
                         // 問題リストの選択を促すテキスト
                         Text("問題リスト選択")
                             // フォントを.titleに指定
-                            .font(.title)
+                            .font(.title2)
                             // 太字にする
                             .bold()
 
@@ -66,9 +66,9 @@ struct ModeSelectionView: View {
                         Spacer()
 
                         // モード選択を促すテキスト
-                        Text("モード選択")
+                        Text("問題リストからの出題設定")
                             // フォントを.titleに指定
-                            .font(.title)
+                            .font(.title2)
                             // 太字にする
                             .bold()
 
@@ -86,12 +86,26 @@ struct ModeSelectionView: View {
                         // 上下左右に余白を追加
                         .padding()
 
-                        // スペースを空ける
-                        Spacer()
+                        // 出題設定用のPicker
+                        Picker("出題設定", selection: $viewModel.questionSelection) {
+                            // 要素を繰り返す
+                            ForEach(QuestionSelectionMode.allCases, id: \.self) { mode in
+                                // モードの選択肢
+                                Text(mode.rawValue)
+                                    .tag(mode)
+                            } // ForEach ここまで
+                        } // Picker ここまで
+                        // セグメントで表示
+                        .pickerStyle(.segmented)
+                        // 上下左右に余白を追加
+                        .padding(.horizontal)
                     } // VStack ここまで
                     // 上下左右に余白を追加
                     .padding()
-
+                    Text("リスト内の全ての問題に正解している場合は、\nわからない問題を選択しても、全問出題されます")
+                        .padding(.bottom)
+                    // スペースを空ける
+                    Spacer()
                     // スタートボタンを配置
                     Button {
                         // 問題を作成
@@ -120,7 +134,8 @@ struct ModeSelectionView: View {
                 .navigationDestination(isPresented: $isStudying) {
                     StudyView(isStudying: $isStudying,
                               questions: $viewModel.questions,
-                              modeSelection: modeSelection)
+                              modeSelection: modeSelection,
+                              questionListID: viewModel.questionListID)
                 } // navigationDestination ここまで
             } // ZStack ここまで
             .onAppear {

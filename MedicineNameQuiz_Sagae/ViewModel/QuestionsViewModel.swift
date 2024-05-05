@@ -10,15 +10,16 @@ import Foundation
 @Observable
 final class QuestionsViewModel {
     // 問題の配列
-    var questions: [MedicineItem] {
+    var questions: [StudyItem] {
         // NSSet型のquestionList.questionsをSet<Question>型にキャスト
         guard let questions = questionList.questions as? Set<Question> else { return [] }
-        // MedicineItem型にして、商品名の昇順にソート
+        // StudyItem型にして、商品名の昇順にソート
         return questions.map {
-            MedicineItem(
+            StudyItem(
                 category: MedicineCategory(rawValue: $0.category ?? "") ?? .custom,
                 brandName: $0.brandName ?? "",
-                genericName: $0.genericName ?? ""
+                genericName: $0.genericName ?? "",
+                studyResult: StudyResult(rawValue: $0.studyResult ?? "") ?? .unanswered
             )
         }
         .sorted(by: { $0.brandName < $1.brandName })
@@ -26,7 +27,7 @@ final class QuestionsViewModel {
     // 薬の名前の検索テキスト
     var medSearchText: String = ""
     // 検索された問題
-    var searchedQuestions: [MedicineItem] {
+    var searchedQuestions: [StudyItem] {
         // 検索キーワードがなかったら
         if medSearchText.isEmpty {
             // 全ての問題を返却

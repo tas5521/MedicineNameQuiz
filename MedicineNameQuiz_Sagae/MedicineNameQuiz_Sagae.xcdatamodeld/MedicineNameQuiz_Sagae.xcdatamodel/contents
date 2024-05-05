@@ -9,6 +9,8 @@
         <attribute name="brandName" optional="YES" attributeType="String"/>
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="genericName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="studyResult" optional="YES" attributeType="String"/>
         <relationship name="questionList" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="QuestionList" inverseName="questions" inverseEntity="QuestionList"/>
     </entity>
     <entity name="QuestionList" representedClassName="QuestionList" syncable="YES" codeGenerationType="class">
