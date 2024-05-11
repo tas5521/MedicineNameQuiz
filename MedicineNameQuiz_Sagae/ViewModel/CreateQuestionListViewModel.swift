@@ -171,6 +171,7 @@ final class CreateQuestionListViewModel {
         do {
             // 問題リストをCore Dataに保存
             try context.save()
+            // 保存が正常に完了したら、画面を閉じる
             dismiss()
         } catch {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
