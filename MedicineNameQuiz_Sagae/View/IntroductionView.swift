@@ -50,7 +50,7 @@ struct IntroductionView: View {
                     Spacer()
                     // テキストを表示
                     Text("まずは問題リストを作成しましょう！")
-                        .font(.title2)
+                        .font(.title3)
                     Text("※問題リストは後で編集できます")
                     // スペースを空ける
                     Spacer()
