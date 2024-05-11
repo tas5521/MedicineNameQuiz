@@ -34,7 +34,7 @@ struct MainTabView: View {
     // 問題リストをフェッチ
     @FetchRequest(entity: QuestionList.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \QuestionList.createdDate, ascending: false)],
-                  predicate: NSPredicate(format: "numberOfQuestions > 0"),
+                  predicate: nil,
                   animation: nil
     ) private var fetchedLists: FetchedResults<QuestionList>
 

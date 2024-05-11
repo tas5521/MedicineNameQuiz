@@ -12,14 +12,13 @@ struct CreateQuestionListView: View {
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
+
     // CreateQuestionListViewModelのインスタンスを生成
     @State private var viewModel: CreateQuestionListViewModel
 
-    // View Presentation State
-    // リストに名前が無い時に表示するアラートを管理する変数
-    @State private var isShowNoListNameAlert = false
     // フォーカス制御を行うための変数
     @FocusState private var isFocusActive: Bool
+
     // カスタムの薬データをフェッチ
     @FetchRequest(entity: CustomMedicine.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
@@ -135,14 +134,8 @@ struct CreateQuestionListView: View {
             // ボタンの位置を右に指定
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    if viewModel.listName.isEmpty {
-                        isShowNoListNameAlert.toggle()
-                    } else {
-                        // 保存処理
-                        viewModel.saveQuestionList(context: context)
-                        // 画面を閉じる
-                        dismiss()
-                    } // if ここまで
+                    // 保存処理
+                    viewModel.saveQuestionList(context: context, dismiss: dismiss)
                 } label: {
                     // ラベル
                     Text("保存")
@@ -152,7 +145,7 @@ struct CreateQuestionListView: View {
             } // ToolbarItem ここまで
         } // toolbar ここまで
         // リストの名前が無いことを警告するアラート
-        .alert("リストに名前がありません", isPresented: $isShowNoListNameAlert) {
+        .alert("リストに名前がありません", isPresented: $viewModel.isShowNoListNameAlert) {
             // やめるボタン
             Button {
                 // 何もしない
@@ -162,6 +155,18 @@ struct CreateQuestionListView: View {
             } // Button ここまで
         } message: {
             Text("リストに名前をつけてください")
+        } // alert ここまで
+        // リストの名前が無いことを警告するアラート
+        .alert("問題が一つも選択されていません", isPresented: $viewModel.isShowNoQuestionAlert) {
+            // やめるボタン
+            Button {
+                // 何もしない
+            } label: {
+                // ラベル
+                Text("OK")
+            } // Button ここまで
+        } message: {
+            Text("少なくとも一つの問題を選択してください\nリストの右側のスイッチをOnにすることで、選択できます")
         } // alert ここまで
     } // body ここまで
 } // CreateQuestionListView ここまで
