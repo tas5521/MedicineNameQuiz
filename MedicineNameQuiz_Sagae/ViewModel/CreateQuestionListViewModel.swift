@@ -10,6 +10,9 @@ import CoreData
 
 @Observable
 final class CreateQuestionListViewModel {
+    // 問題リストを作成するか編集するかを管理する変数
+    let questionListMode: QuestionListMode
+
     // 問題リストの名前を保持する変数
     var listName: String = ""
     // 選択されているタブを管理する変数
@@ -52,8 +55,11 @@ final class CreateQuestionListViewModel {
         } // selectedListItems.indices.filter ここまで
     } // indicesForSearch ここまで
 
-    // 問題リストを作成するか編集するかを管理する変数
-    let questionListMode: QuestionListMode
+    // View Presentation State
+    // リストに名前が無い時に表示するアラートを管理する変数
+    var isShowNoListNameAlert: Bool = false
+    // 問題が一つも選択されていない場合に表示するアラートを管理する変数
+    var isShowNoQuestionAlert: Bool = false
 
     // 問題リストを保持する変数
     private var questionList: QuestionList = QuestionList()
@@ -82,11 +88,22 @@ final class CreateQuestionListViewModel {
     } // fetchListItems ここまで
 
     // 問題リストをCore Dataに保存するメソッド
-    func saveQuestionList(context: NSManagedObjectContext) {
+    func saveQuestionList(context: NSManagedObjectContext, dismiss: DismissAction) {
+        // もしリスト名がない場合
+        if listName.isEmpty {
+            // リスト名がない警告を表示
+            isShowNoListNameAlert.toggle()
+            return
+        } // if ここまで
         // 内用薬、注射薬、外用薬、カスタムのデータを連結
         let allListItems = oralListItems + injectionListItems + topicalListItems + customListItems
         // 選択されているものを条件にフィルターする
         let filteredListItems = allListItems.filter { $0.selected == true }
+        // もし選択されている問題がない場合
+        if filteredListItems.isEmpty {
+            isShowNoQuestionAlert.toggle()
+            return
+        } // if ここまで
         // 問題リスト作成モードの場合
         switch questionListMode {
         case .create:
@@ -154,6 +171,8 @@ final class CreateQuestionListViewModel {
         do {
             // 問題リストをCore Dataに保存
             try context.save()
+            // 保存が正常に完了したら、画面を閉じる
+            dismiss()
         } catch {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
             print("エラー: \(error)")

@@ -17,12 +17,6 @@ struct ResultView: View {
     // 問題リストの名前を保持する変数
     @State private var listName: String = ""
 
-    // View Presentation State
-    // 不正解の問題をリストに保存するためのポップアップの表示を管理する変数
-    @State private var isShowPopUp: Bool = false
-    // 不正解の問題をリストに保存したことを伝えるメッセージの表示を管理する変数
-    @State private var isShowSaveMessage: Bool = false
-
     var body: some View {
         // 手前から奥にレイアウト
         ZStack {

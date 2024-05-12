@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4A05C7772BE28C9B00E31191 /* QuestionSelectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05C7762BE28C9B00E31191 /* QuestionSelectionMode.swift */; };
+		4A05C77D2BEF2B6C00E31191 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05C77C2BEF2B6C00E31191 /* IntroductionView.swift */; };
+		4A05C77F2BEF2C5500E31191 /* Introduction.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A05C77E2BEF2C5500E31191 /* Introduction.txt */; };
 		4A20191C2B84D3E5007FE769 /* QuestionListMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20191B2B84D3E5007FE769 /* QuestionListMode.swift */; };
 		4A3937872AD53F8D00BA5CE7 /* TabSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */; };
 		4A4AEB722BC97401003AB218 /* AddMedicineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4AEB712BC97401003AB218 /* AddMedicineField.swift */; };
@@ -18,7 +20,6 @@
 		4A81B0FA2BCA448E007FEB0C /* HowToUseQuestionList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A81B0F92BCA448E007FEB0C /* HowToUseQuestionList.txt */; };
 		4A81B0FC2BCA5305007FEB0C /* HowToUseMedicineList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */; };
 		4A8DA0752BCEACA100A92CE9 /* QuestionListPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */; };
-		4A8DA0772BCFE36A00A92CE9 /* DefaultUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DA0762BCFE36A00A92CE9 /* DefaultUUID.swift */; };
 		4A9671592AC7B531006F7157 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671582AC7B531006F7157 /* MainTabView.swift */; };
 		4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715D2AC7B73E006F7157 /* QuestionListView.swift */; };
 		4A9671602AC7B768006F7157 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715F2AC7B768006F7157 /* ModeSelectionView.swift */; };
@@ -73,6 +74,8 @@
 
 /* Begin PBXFileReference section */
 		4A05C7762BE28C9B00E31191 /* QuestionSelectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectionMode.swift; sourceTree = "<group>"; };
+		4A05C77C2BEF2B6C00E31191 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
+		4A05C77E2BEF2C5500E31191 /* Introduction.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Introduction.txt; sourceTree = SOURCE_ROOT; };
 		4A20191B2B84D3E5007FE769 /* QuestionListMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListMode.swift; sourceTree = "<group>"; };
 		4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSelection.swift; sourceTree = "<group>"; };
 		4A4AEB712BC97401003AB218 /* AddMedicineField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMedicineField.swift; sourceTree = "<group>"; };
@@ -83,7 +86,6 @@
 		4A81B0F92BCA448E007FEB0C /* HowToUseQuestionList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HowToUseQuestionList.txt; sourceTree = SOURCE_ROOT; };
 		4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HowToUseMedicineList.txt; sourceTree = SOURCE_ROOT; };
 		4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListPickerItem.swift; sourceTree = "<group>"; };
-		4A8DA0762BCFE36A00A92CE9 /* DefaultUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUUID.swift; sourceTree = "<group>"; };
 		4A9671582AC7B531006F7157 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4A96715D2AC7B73E006F7157 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
 		4A96715F2AC7B768006F7157 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				4A9671582AC7B531006F7157 /* MainTabView.swift */,
+				4A05C77C2BEF2B6C00E31191 /* IntroductionView.swift */,
 				4A9671782AC8578E006F7157 /* SignInView.swift */,
 				4A96717A2AC85A35006F7157 /* UserNameSettingView.swift */,
 				4AFA48972B3D61A200FC29B8 /* SearchBar.swift */,
@@ -184,7 +187,6 @@
 				4AD7AE122B87ABB400D0DBF7 /* CSVLoader.swift */,
 				4AD7AE172B87C94D00D0DBF7 /* CreateQuestionListModel.swift */,
 				4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */,
-				4A8DA0762BCFE36A00A92CE9 /* DefaultUUID.swift */,
 				4A4AEB712BC97401003AB218 /* AddMedicineField.swift */,
 				4A05C7762BE28C9B00E31191 /* QuestionSelectionMode.swift */,
 			);
@@ -283,6 +285,7 @@
 			children = (
 				4AADB2CC2AC5588300C5A40E /* MedicineNameQuiz_SagaeApp.swift */,
 				4AADB2D52AC5588500C5A40E /* Persistence.swift */,
+				4A05C77E2BEF2C5500E31191 /* Introduction.txt */,
 				4A4DE7F22B667C7100F1B4CB /* MedicineNameList.csv */,
 				4A4AEB7D2BCA1F93003AB218 /* HowToUseStudy.txt */,
 				4A81B0F92BCA448E007FEB0C /* HowToUseQuestionList.txt */,
@@ -365,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A05C77F2BEF2C5500E31191 /* Introduction.txt in Resources */,
 				4A81B0FA2BCA448E007FEB0C /* HowToUseQuestionList.txt in Resources */,
 				4A4DE7F32B667C7100F1B4CB /* MedicineNameList.csv in Resources */,
 				4AADB2D42AC5588500C5A40E /* Preview Assets.xcassets in Resources */,
@@ -412,6 +416,7 @@
 				4A9671802AC886B9006F7157 /* QuestionsView.swift in Sources */,
 				4A9671772AC82CBC006F7157 /* ResultView.swift in Sources */,
 				4AA088422AC98796005BD8C2 /* HowToUse.swift in Sources */,
+				4A05C77D2BEF2B6C00E31191 /* IntroductionView.swift in Sources */,
 				4A9671822AC888B7006F7157 /* MedicineItem.swift in Sources */,
 				4A9671592AC7B531006F7157 /* MainTabView.swift in Sources */,
 				4A99F6542B2F3BEC004672AD /* StudyItem.swift in Sources */,
@@ -448,7 +453,6 @@
 				4AA0884A2AC9889D005BD8C2 /* HowToUseMedicineListView.swift in Sources */,
 				4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */,
 				4AAD5DF02B5809F9000E62ED /* TextFieldBackground.swift in Sources */,
-				4A8DA0772BCFE36A00A92CE9 /* DefaultUUID.swift in Sources */,
 				4A9671642AC7B787006F7157 /* MedicineListView.swift in Sources */,
 				4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */,
 				4AADB2D92AC5588500C5A40E /* MedicineNameQuiz_Sagae.xcdatamodeld in Sources */,
@@ -600,8 +604,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -609,9 +614,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.tsbs11152.MedicineNameQuiz-Sagae240323";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -630,8 +639,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -639,9 +649,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.tsbs11152.MedicineNameQuiz-Sagae240323";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

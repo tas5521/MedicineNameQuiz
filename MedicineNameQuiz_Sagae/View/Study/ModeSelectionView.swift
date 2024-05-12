@@ -17,15 +17,12 @@ struct ModeSelectionView: View {
     // 問題リストをフェッチ
     @FetchRequest(entity: QuestionList.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \QuestionList.createdDate, ascending: false)],
-                  predicate: NSPredicate(format: "numberOfQuestions > 0"),
+                  predicate: nil,
                   animation: nil
     ) private var fetchedLists: FetchedResults<QuestionList>
     // Pickerに表示する問題リストの配列
     private var questionListPickerItems: [QuestionListPickerItem] {
-        fetchedLists.map {
-            QuestionListPickerItem(id: $0.id ?? UUID(), listName: $0.listName ?? "")
-        } + [QuestionListPickerItem(id: DefaultUUID.random20,
-                                    listName: "ランダム20問")]
+        fetchedLists.map { QuestionListPickerItem(id: $0.id ?? UUID(), listName: $0.listName ?? "") }
     } // questionListPickerItems ここまで
 
     var body: some View {
@@ -139,9 +136,9 @@ struct ModeSelectionView: View {
                 } // navigationDestination ここまで
             } // ZStack ここまで
             .onAppear {
-                // もし、現在指定されたIDの問題が問題リスト（fetchedLists）になかったら、問題IDをランダム20のものにする
+                // もし、現在指定されたIDの問題が問題リスト（fetchedLists）になかったら、リストの一番上のものにする
                 if !fetchedLists.contains(where: { $0.id == viewModel.questionListID }) {
-                    viewModel.questionListID = DefaultUUID.random20
+                    viewModel.questionListID = fetchedLists.first?.id ?? UUID()
                 } // if ここまで
             } // onAppear ここまで
             // ナビゲーションバーの設定
