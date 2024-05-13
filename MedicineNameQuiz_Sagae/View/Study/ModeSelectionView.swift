@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ModeSelectionView: View {
     // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
@@ -224,21 +223,21 @@ struct ModeSelectionView: View {
 
     // UserSelectionの要素を全て削除するメソッド（デバッグ用）
     /*
-    private func deleteUserSelection() {
-        // フェッチリクエストを生成
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-        // エンティティにUserSelectionを指定
-        fetchRequest.entity = UserSelection.entity()
-        // UserSelectionの要素を取得
-        if let userSelections = try? context.fetch(fetchRequest) as? [UserSelection] {
-            // 全て削除
-            for userSelection in userSelections {
-                context.delete(userSelection)
-            } // for ここまで
-        } // if let ここまで
-        // 数を確認
-        print(userSelection.count)
-    } // deleteUserSelection
+     private func deleteUserSelection() {
+     // フェッチリクエストを生成
+     let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+     // エンティティにUserSelectionを指定
+     fetchRequest.entity = UserSelection.entity()
+     // UserSelectionの要素を取得
+     if let userSelections = try? context.fetch(fetchRequest) as? [UserSelection] {
+     // 全て削除
+     for userSelection in userSelections {
+     context.delete(userSelection)
+     } // for ここまで
+     } // if let ここまで
+     // 数を確認
+     print(userSelection.count)
+     } // deleteUserSelection
      */
 } // ModeSelectionView ここまで
 
