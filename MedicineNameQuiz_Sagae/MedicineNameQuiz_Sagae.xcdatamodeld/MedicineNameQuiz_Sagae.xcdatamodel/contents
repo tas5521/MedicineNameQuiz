@@ -20,4 +20,9 @@
         <attribute name="numberOfQuestions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Question" inverseName="questionList" inverseEntity="Question"/>
     </entity>
+    <entity name="UserSelection" representedClassName="UserSelection" syncable="YES" codeGenerationType="class">
+        <attribute name="questionSelection" optional="YES" attributeType="String"/>
+        <attribute name="questoinListID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="studyMode" optional="YES" attributeType="String"/>
+    </entity>
 </model>
