@@ -9,10 +9,14 @@ import SwiftUI
 
 @Observable
 final class ModeSelectionViewModel {
-    // 出題設定を管理する変数
-    var questionSelection: QuestionSelectionMode = .all
+    // Pickerの変数
     // 問題リストを識別するID
     var questionListID: UUID = UUID()
+    // 出題設定を管理する変数
+    var questionSelection: QuestionSelectionMode = .all
+    // モード選択を管理する変数
+    var modeSelection: StudyMode = .brandToGeneric
+
     // 問題を格納する配列
     var questions: [StudyItem] = []
 
