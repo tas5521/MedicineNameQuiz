@@ -146,7 +146,7 @@ struct ModeSelectionView: View {
                 .navigationDestination(isPresented: $isStudying) {
                     StudyView(isStudying: $isStudying,
                               questions: $viewModel.questions,
-                              modeSelection: viewModel.studyMode,
+                              studyMode: viewModel.studyMode,
                               questionListID: viewModel.questionListID)
                 } // navigationDestination ここまで
             } // ZStack ここまで
