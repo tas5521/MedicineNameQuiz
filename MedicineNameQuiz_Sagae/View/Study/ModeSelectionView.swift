@@ -186,7 +186,6 @@ struct ModeSelectionView: View {
         do {
             // 問題リストをCore Dataに保存
             try context.save()
-            print("initialized")
         } catch {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
             print("エラー: \(error)")
@@ -204,7 +203,6 @@ struct ModeSelectionView: View {
         do {
             // 問題リストをCore Dataに保存
             try context.save()
-            print("saved")
         } catch {
             // 何らかのエラーが発生した場合は、エラー内容をデバッグエリアに表示
             print("エラー: \(error)")
