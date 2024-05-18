@@ -23,7 +23,7 @@ struct StudyView: View {
     // 出題する問題
     @Binding var questions: [StudyItem]
     // モード選択を管理する変数
-    let modeSelection: StudyMode
+    let studyMode: StudyMode
     // 問題リストのID
     let questionListID: UUID
     // 問題番号を管理する変数
@@ -120,7 +120,7 @@ struct StudyView: View {
 
     // 薬の名前の変数
     private var medicineName: String {
-        switch modeSelection {
+        switch studyMode {
         // 出題モードが「商品名 → 一般名」だったら、カードの表面に商品名を、裏面に一般名を表示
         case .brandToGeneric:
             isFront ? questions[questionNumber].brandName : questions[questionNumber].genericName
@@ -263,6 +263,6 @@ struct StudyView: View {
     ] // dummyStudyItem ここまで
     return StudyView(isStudying: .constant(true),
                      questions: .constant(dummyQuestions),
-                     modeSelection: .brandToGeneric,
+                     studyMode: .brandToGeneric,
                      questionListID: UUID())
 }
