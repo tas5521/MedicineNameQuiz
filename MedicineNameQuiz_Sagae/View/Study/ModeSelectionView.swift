@@ -79,7 +79,7 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 出題モード選択用のPicker
-                        Picker("出題モード選択", selection: $viewModel.modeSelection) {
+                        Picker("出題モード選択", selection: $viewModel.studyMode) {
                             // 要素を繰り返す
                             ForEach(StudyMode.allCases, id: \.self) { mode in
                                 // モードの選択肢
@@ -87,7 +87,7 @@ struct ModeSelectionView: View {
                                     .tag(mode)
                             } // ForEach ここまで
                         } // Picker ここまで
-                        .onChange(of: viewModel.modeSelection) {
+                        .onChange(of: viewModel.studyMode) {
                             saveUserSelection()
                         } // onChange ここまで
                         // セグメントで表示
@@ -146,7 +146,7 @@ struct ModeSelectionView: View {
                 .navigationDestination(isPresented: $isStudying) {
                     StudyView(isStudying: $isStudying,
                               questions: $viewModel.questions,
-                              modeSelection: viewModel.modeSelection,
+                              modeSelection: viewModel.studyMode,
                               questionListID: viewModel.questionListID)
                 } // navigationDestination ここまで
             } // ZStack ここまで
@@ -180,7 +180,7 @@ struct ModeSelectionView: View {
         // 問題リストを識別するIDを保持
         initialUserSelection.questoinListID = viewModel.questionListID
         // 出題モードを保持
-        initialUserSelection.studyMode = viewModel.modeSelection.rawValue
+        initialUserSelection.studyMode = viewModel.studyMode.rawValue
         // 出題設定を保持
         initialUserSelection.questionSelection = viewModel.questionSelection.rawValue
         do {
@@ -198,7 +198,7 @@ struct ModeSelectionView: View {
         // 問題リストを識別するIDを保持
         userSelection.first?.questoinListID = viewModel.questionListID
         // 出題モードを保持
-        userSelection.first?.studyMode = viewModel.modeSelection.rawValue
+        userSelection.first?.studyMode = viewModel.studyMode.rawValue
         // 出題設定を保持
         userSelection.first?.questionSelection = viewModel.questionSelection.rawValue
         do {
@@ -216,7 +216,7 @@ struct ModeSelectionView: View {
         // 問題リストを識別するIDを読み込み
         viewModel.questionListID = userSelection.first?.questoinListID ?? UUID()
         // 出題モードを読み込み
-        viewModel.modeSelection = StudyMode(rawValue: userSelection.first?.studyMode ?? "") ?? .brandToGeneric
+        viewModel.studyMode = StudyMode(rawValue: userSelection.first?.studyMode ?? "") ?? .brandToGeneric
         // 出題設定を読み込み
         viewModel.questionSelection = QuestionSelectionMode(rawValue: userSelection.first?.questionSelection ?? "") ?? .all
     } // loadUserSelection ここまで

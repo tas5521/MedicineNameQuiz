@@ -15,7 +15,7 @@ final class ModeSelectionViewModel {
     // 出題設定を管理する変数
     var questionSelection: QuestionSelectionMode = .all
     // モード選択を管理する変数
-    var modeSelection: StudyMode = .brandToGeneric
+    var studyMode: StudyMode = .brandToGeneric
 
     // 問題を格納する配列
     var questions: [StudyItem] = []
