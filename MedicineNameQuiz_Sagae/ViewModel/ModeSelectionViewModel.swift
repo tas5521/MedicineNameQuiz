@@ -87,7 +87,7 @@ extension ModeSelectionViewModel {
             studyMode: studyMode.rawValue)
 
         let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.keyEncodingStrategy = .useDefaultKeys
         if let data = try? encoder.encode(userSelection) {
             UserDefaults.standard.set(data, forKey: userDefaultsKey)
         }
@@ -98,7 +98,7 @@ extension ModeSelectionViewModel {
         // 参考：https://qiita.com/taro-ken/items/8bdbc86c53452a443c85#%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97
 
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.keyDecodingStrategy = .useDefaultKeys
         if let data = UserDefaults.standard.data(forKey: userDefaultsKey) {
             if let userSelection = try? decoder.decode(UserSelection.self, from: data) {
                 if let questionSelection = userSelection.questionSelection,
