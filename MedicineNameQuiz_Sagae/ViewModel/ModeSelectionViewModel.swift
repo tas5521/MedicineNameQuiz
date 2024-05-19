@@ -72,9 +72,9 @@ final class ModeSelectionViewModel {
 extension ModeSelectionViewModel {
 
     private struct UserSelection: Encodable, Decodable {
-        var questionSelection: String?
+        var questionSelection: QuestionSelectionMode
         var questionListID: String?
-        var studyMode: String?
+        var studyMode: StudyMode
     }
 
     // Pickerの選択の状態を保存するメソッド
@@ -82,9 +82,9 @@ extension ModeSelectionViewModel {
         // 参考：https://qiita.com/taro-ken/items/8bdbc86c53452a443c85#%E4%BF%9D%E5%AD%98
 
         let userSelection = UserSelection(
-            questionSelection: questionSelection.rawValue,
+            questionSelection: questionSelection,
             questionListID: questionListID.uuidString,
-            studyMode: studyMode.rawValue)
+            studyMode: studyMode)
 
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .useDefaultKeys
@@ -101,12 +101,12 @@ extension ModeSelectionViewModel {
         decoder.keyDecodingStrategy = .useDefaultKeys
         if let data = UserDefaults.standard.data(forKey: userDefaultsKey) {
             if let userSelection = try? decoder.decode(UserSelection.self, from: data) {
-                if let questionSelection = userSelection.questionSelection,
-                   let questionListID = userSelection.questionListID,
-                   let studyMode = userSelection.studyMode {
-                    self.questionSelection = .init(rawValue: questionSelection) ?? .all
+                let questionSelection = userSelection.questionSelection
+                let studyMode = userSelection.studyMode
+                if let questionListID = userSelection.questionListID {
+                    self.questionSelection = questionSelection
                     self.questionListID = UUID(uuidString: questionListID) ?? UUID()
-                    self.studyMode = .init(rawValue: studyMode) ?? .brandToGeneric
+                    self.studyMode = studyMode
                 }
             }
         }
