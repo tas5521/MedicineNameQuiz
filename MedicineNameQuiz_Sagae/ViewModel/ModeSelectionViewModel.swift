@@ -35,9 +35,6 @@ final class ModeSelectionViewModel {
     // 問題を格納する配列
     var questions: [StudyItem] = []
 
-    // UserDefaultsの保存と読み出しで使うキー
-    private let userDefaultsKey = "userSelection"
-
     // 問題を作成するメソッド
     func createQuestions(fetchedLists: FetchedResults<QuestionList>) {
         // CoreDataから、該当するIDを持つ問題を取得
@@ -84,7 +81,7 @@ final class ModeSelectionViewModel {
         // userSelectionをバイナリデータに変換
         if let data = try? encoder.encode(userSelection) {
             // UserDefaultsに保存
-            UserDefaults.standard.set(data, forKey: userDefaultsKey)
+            UserDefaults.standard.set(data, forKey: UserDefaultsKeys.userSelection)
         } // if let ここまで
     } // saveUserSelection ここまで
 
@@ -95,7 +92,7 @@ final class ModeSelectionViewModel {
         // JSONのキー名をSwiftの型のプロパティ名にどのようにマッピングするかを指定（JSONのキー名をそのままSwiftのプロパティ名として使用）
         decoder.keyDecodingStrategy = .useDefaultKeys
         // UserDefaultsからデータを取得
-        guard let data = UserDefaults.standard.data(forKey: userDefaultsKey) else { return }
+        guard let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.userSelection) else { return }
         // Userdefaultsから取得したデータをUserSelection構造体に変換
         if let userSelection = try? decoder.decode(UserSelection.self, from: data) {
             // UserSelection構造体から各Pickerの状態を取得
