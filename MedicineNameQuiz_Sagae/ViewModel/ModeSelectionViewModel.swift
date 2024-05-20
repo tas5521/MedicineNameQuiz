@@ -36,7 +36,7 @@ final class ModeSelectionViewModel {
     var questions: [StudyItem] = []
 
     // UserDefaultsの保存と読み出しで使うキー
-    private let userDefaultsKey = "setting"
+    private let userDefaultsKey = "userSelection"
 
     // 問題を作成するメソッド
     func createQuestions(fetchedLists: FetchedResults<QuestionList>) {
