@@ -34,7 +34,7 @@ final class ModeSelectionViewModel {
 
     // 問題を格納する配列
     var questions: [StudyItem] = []
-    
+
     // UserDefaultsの保存と読み出しで使うキー
     private let userDefaultsKey = "setting"
 
@@ -70,7 +70,7 @@ final class ModeSelectionViewModel {
             } // switch  ここまで
         } // if let ここまで
     } // createQuestions ここまで
-    
+
     // Pickerの選択の状態を保存するメソッド
     func saveUserSelection() {
         // UserSelectionのインスタンスを生成
@@ -87,7 +87,7 @@ final class ModeSelectionViewModel {
             UserDefaults.standard.set(data, forKey: userDefaultsKey)
         } // if let ここまで
     } // saveUserSelection ここまで
-    
+
     // Pickerの選択の状態を読み込むメソッド
     func loadUserSelection() {
         // JSONDecoderのインスタンスを生成
