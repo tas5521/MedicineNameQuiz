@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ModeSelectionView: View {
+    // 被管理オブジェクトコンテキスト（ManagedObjectContext）の取得
+    @Environment(\.managedObjectContext) private var context
     // 学習中であるかを管理する変数
     @State private var isStudying: Bool = false
-    // モード選択を管理する変数
-    @State private var modeSelection: StudyMode = .brandToGeneric
     // ModeSelectionViewModelのインスタンス
     @State private var viewModel: ModeSelectionViewModel = ModeSelectionViewModel()
     // 問題リストをフェッチ
@@ -70,7 +70,7 @@ struct ModeSelectionView: View {
                             .bold()
 
                         // 出題モード選択用のPicker
-                        Picker("出題モード選択", selection: $modeSelection) {
+                        Picker("出題モード選択", selection: $viewModel.studyMode) {
                             // 要素を繰り返す
                             ForEach(StudyMode.allCases, id: \.self) { mode in
                                 // モードの選択肢
@@ -131,14 +131,24 @@ struct ModeSelectionView: View {
                 .navigationDestination(isPresented: $isStudying) {
                     StudyView(isStudying: $isStudying,
                               questions: $viewModel.questions,
-                              modeSelection: modeSelection,
+                              studyMode: viewModel.studyMode,
                               questionListID: viewModel.questionListID)
                 } // navigationDestination ここまで
             } // ZStack ここまで
             .onAppear {
+                // Pickerの状態を読み込み
+                viewModel.loadUserSelection()
                 // もし、現在指定されたIDの問題が問題リスト（fetchedLists）になかったら、リストの一番上のものにする
+                /*
+                 この処理は、以下の操作をしたときにクラッシュしてしまうのを避けるために必要
+                 問題リスト選択Pickerで、ある問題リストを選択しているときに、問題リスト画面に移動し、その問題リストを削除し、
+                 学習画面に戻ってスタートを押すと、該当の問題リストがないためにクラッシュしてしまう。
+                 そのため、指定されたIDの問題が問題リスト（fetchedLists）になかったら、リストの一番上の問題リストをセットする。
+                 */
                 if !fetchedLists.contains(where: { $0.id == viewModel.questionListID }) {
                     viewModel.questionListID = fetchedLists.first?.id ?? UUID()
+                    // Pickerの選択状態が変わるので状態を保存する
+                    viewModel.saveUserSelection()
                 } // if ここまで
             } // onAppear ここまで
             // ナビゲーションバーの設定
