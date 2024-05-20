@@ -72,6 +72,23 @@ final class ModeSelectionViewModel {
             UserDefaults.standard.set(data, forKey: userDefaultsKey)
         } // if let ここまで
     } // saveUserSelection ここまで
+    
+    // Pickerの選択の状態を読み込むメソッド
+    func loadUserSelection() {
+        // JSONDecoderのインスタンスを生成
+        let decoder = JSONDecoder()
+        // JSONのキー名をSwiftの型のプロパティ名にどのようにマッピングするかを指定（JSONのキー名をそのままSwiftのプロパティ名として使用）
+        decoder.keyDecodingStrategy = .useDefaultKeys
+        // UserDefaultsからデータを取得
+        guard let data = UserDefaults.standard.data(forKey: userDefaultsKey) else { return }
+        // Userdefaultsから取得したデータをUserSelection構造体に変換
+        if let userSelection = try? decoder.decode(UserSelection.self, from: data) {
+            // UserSelection構造体から各Pickerの状態を取得
+            questionListID = userSelection.questionListID
+            studyMode = userSelection.studyMode
+            questionSelection = userSelection.questionSelection
+        } // if let ここまで
+    } // loadUserSelection ここまで
 } // ModeSelectionViewModel ここまで
 
 extension ModeSelectionViewModel {
