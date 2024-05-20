@@ -19,6 +19,9 @@ final class ModeSelectionViewModel {
 
     // 問題を格納する配列
     var questions: [StudyItem] = []
+    
+    // UserDefaultsの保存と読み出しで使うキー
+    private let userDefaultsKey = "setting"
 
     // 問題を作成するメソッド
     func createQuestions(fetchedLists: FetchedResults<QuestionList>) {
@@ -52,6 +55,23 @@ final class ModeSelectionViewModel {
             } // switch  ここまで
         } // if let ここまで
     } // createQuestions ここまで
+    
+    // Pickerの選択の状態を保存するメソッド
+    func saveUserSelection() {
+        // UserSelectionのインスタンスを生成
+        let userSelection = UserSelection(questionListID: questionListID,
+                                          studyMode: studyMode,
+                                          questionSelection: questionSelection)
+        // JSONEncoderのインスタンスを生成
+        let encoder = JSONEncoder()
+        // プロパティ名をどのようにエンコードするかを指定（ここでは、Swiftのプロパティ名をそのままJSONのキー名として使用）
+        encoder.keyEncodingStrategy = .useDefaultKeys
+        // userSelectionをバイナリデータに変換
+        if let data = try? encoder.encode(userSelection) {
+            // UserDefaultsに保存
+            UserDefaults.standard.set(data, forKey: userDefaultsKey)
+        } // if let ここまで
+    } // saveUserSelection ここまで
 } // ModeSelectionViewModel ここまで
 
 extension ModeSelectionViewModel {
