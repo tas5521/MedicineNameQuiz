@@ -11,11 +11,26 @@ import SwiftUI
 final class ModeSelectionViewModel {
     // Pickerの変数
     // 問題リストを識別するID
-    var questionListID: UUID = UUID()
-    // 出題設定を管理する変数
-    var questionSelection: QuestionSelectionMode = .all
+    var questionListID: UUID = UUID() {
+        // 値が変更されたら、UserDefaultsに保存
+        didSet {
+            saveUserSelection()
+        } // didSet ここまで
+    } // questionListID ここまで
     // モード選択を管理する変数
-    var studyMode: StudyMode = .brandToGeneric
+    var studyMode: StudyMode = .brandToGeneric {
+        // 値が変更されたら、UserDefaultsに保存
+        didSet {
+            saveUserSelection()
+        } // didSet ここまで
+    } // studyMode ここまで
+    // 出題設定を管理する変数
+    var questionSelection: QuestionSelectionMode = .all {
+        // 値が変更されたら、UserDefaultsに保存
+        didSet {
+            saveUserSelection()
+        } // didSet ここまで
+    } // questionSelection ここまで
 
     // 問題を格納する配列
     var questions: [StudyItem] = []
