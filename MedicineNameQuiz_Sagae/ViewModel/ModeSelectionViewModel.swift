@@ -53,3 +53,11 @@ final class ModeSelectionViewModel {
         } // if let ここまで
     } // createQuestions ここまで
 } // ModeSelectionViewModel ここまで
+
+extension ModeSelectionViewModel {
+    private struct UserSelection: Codable {
+        var questionListID: UUID
+        var studyMode: StudyMode
+        var questionSelection: QuestionSelectionMode
+    } // UserSelection ここまで
+} // ModeSelectionViewModel拡張 ここまで
