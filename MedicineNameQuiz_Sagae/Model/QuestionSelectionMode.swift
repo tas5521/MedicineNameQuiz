@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum QuestionSelectionMode: String, CaseIterable {
+enum QuestionSelectionMode: String, CaseIterable, Codable {
     // 全ての問題
     case all = "全ての問題"
     // まだ答えていない問題もしくは間違えた問題
