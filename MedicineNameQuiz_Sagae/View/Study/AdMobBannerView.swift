@@ -13,7 +13,7 @@ struct AdMobBannerView: UIViewRepresentable {
         // GADBannerViewのインスタンスを生成
         let banner = GADBannerView(adSize: GADAdSizeBanner)
         // 設定
-        // 広告ID
+        // テスト専用広告ユニットID
         banner.adUnitID = "ca-app-pub-3940256099942544/2435281174"
         // アプリケーションに接続されているシーンを取得
         let scenes = UIApplication.shared.connectedScenes
