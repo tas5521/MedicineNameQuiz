@@ -15,14 +15,10 @@ struct AdMobBannerView: UIViewRepresentable {
         // 設定
         // テスト専用広告ユニットID
         banner.adUnitID = "ca-app-pub-3940256099942544/2435281174"
-        // アプリケーションに接続されているシーンを取得
-        let scenes = UIApplication.shared.connectedScenes
-        // 最初のシーンをUIWindowScene型にキャスト
-        let windowScene = scenes.first as? UIWindowScene
-        // シーンの最初のウィンドウを取得
-        let window = windowScene?.windows.first
-        // ウィンドウのrootViewControllerをGADBannerViewに設定
-        banner.rootViewController = window?.rootViewController
+        // アプリケーションに接続されているシーンを取得し、最初のシーンをUIWindowScene型にキャスト
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        // シーンの最初のウィンドウのrootViewControllerをGADBannerViewに設定
+        banner.rootViewController = windowScene?.windows.first?.rootViewController
         // GADRequest を使用して広告をロード
         banner.load(GADRequest())
         // インスタンスを返す
