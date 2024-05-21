@@ -64,11 +64,8 @@ struct StudyView: View {
                     .font(.title)
                 // スペースを空ける
                 Spacer()
-                // 奥から手前にレイアウト
-                ZStack {
-                    // カードを配置
-                    flipCardView
-                } // ZStack ここまで
+                // カードを配置
+                flipCardView
                 // スペースを空ける
                 Spacer()
                 // 水平方向にレイアウト
