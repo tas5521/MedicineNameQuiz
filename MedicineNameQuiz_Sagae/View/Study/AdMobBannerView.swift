@@ -30,6 +30,6 @@ struct AdMobBannerView: UIViewRepresentable {
     } // makeUIView ここまで
 
     func updateUIView(_ uiView: GADBannerView, context: Context) {
-      // 特にないのでメソッドだけ用意
+        // 特にないのでメソッドだけ用意
     } // updateUIView ここまで
 } // AdMobBannerView ここまで

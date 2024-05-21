@@ -52,8 +52,12 @@ struct StudyView: View {
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack {
-                // スペースを空ける
-                Spacer()
+                // バナー広告を配置
+                AdMobBannerView()
+                    // 高さを指定
+                    .frame(height: 80)
+                    // 上下に余白を追加
+                    .padding(.vertical)
                 // 問題番号
                 Text("\(questionNumber + 1)/\(questions.count)")
                     // フォントを.titleに変更
