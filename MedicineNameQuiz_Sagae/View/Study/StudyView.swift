@@ -54,8 +54,8 @@ struct StudyView: View {
             VStack {
                 // バナー広告を配置
                 AdMobBannerView()
-                    // 高さを指定
-                    .frame(height: 80)
+                    // 幅高さを指定
+                    .frame(width: 320, height: 50)
                     // 上下に余白を追加
                     .padding(.vertical)
                 // 問題番号
