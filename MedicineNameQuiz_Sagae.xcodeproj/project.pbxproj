@@ -71,9 +71,11 @@
 		4AD7AE162B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7AE152B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift */; };
 		4AD7AE182B87C94D00D0DBF7 /* CreateQuestionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD7AE172B87C94D00D0DBF7 /* CreateQuestionListModel.swift */; };
 		4AFA48982B3D61A200FC29B8 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFA48972B3D61A200FC29B8 /* SearchBar.swift */; };
+		9FEF73E4C38055F14809FBDD /* Pods_MedicineNameQuiz_Sagae.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79ECC806CFB3EF15FE4B6FEE /* Pods_MedicineNameQuiz_Sagae.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40048FABB73FF89F31117435 /* Pods-MedicineNameQuiz_Sagae.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicineNameQuiz_Sagae.release.xcconfig"; path = "Target Support Files/Pods-MedicineNameQuiz_Sagae/Pods-MedicineNameQuiz_Sagae.release.xcconfig"; sourceTree = "<group>"; };
 		4A05C7762BE28C9B00E31191 /* QuestionSelectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSelectionMode.swift; sourceTree = "<group>"; };
 		4A05C77C2BEF2B6C00E31191 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		4A05C77E2BEF2C5500E31191 /* Introduction.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Introduction.txt; sourceTree = SOURCE_ROOT; };
@@ -87,6 +89,7 @@
 		4A764F072B492AD60052EB60 /* NavigationBarBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarBackground.swift; sourceTree = "<group>"; };
 		4A81B0F92BCA448E007FEB0C /* HowToUseQuestionList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HowToUseQuestionList.txt; sourceTree = SOURCE_ROOT; };
 		4A81B0FB2BCA5305007FEB0C /* HowToUseMedicineList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HowToUseMedicineList.txt; sourceTree = SOURCE_ROOT; };
+		4A83A4462BFC4C39008E7E91 /* MedicineNameQuiz-Sagae-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MedicineNameQuiz-Sagae-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListPickerItem.swift; sourceTree = "<group>"; };
 		4A9671582AC7B531006F7157 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4A96715D2AC7B73E006F7157 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 		4AD7AE152B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionListViewModel.swift; sourceTree = "<group>"; };
 		4AD7AE172B87C94D00D0DBF7 /* CreateQuestionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionListModel.swift; sourceTree = "<group>"; };
 		4AFA48972B3D61A200FC29B8 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		79ECC806CFB3EF15FE4B6FEE /* Pods_MedicineNameQuiz_Sagae.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicineNameQuiz_Sagae.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87993683C2CE49939F768075 /* Pods-MedicineNameQuiz_Sagae.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicineNameQuiz_Sagae.debug.xcconfig"; path = "Target Support Files/Pods-MedicineNameQuiz_Sagae/Pods-MedicineNameQuiz_Sagae.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,12 +151,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FEF73E4C38055F14809FBDD /* Pods_MedicineNameQuiz_Sagae.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2220F03A9C9942F2299D9AB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				79ECC806CFB3EF15FE4B6FEE /* Pods_MedicineNameQuiz_Sagae.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4A96715A2AC7B711006F7157 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +286,8 @@
 			children = (
 				4AADB2CB2AC5588300C5A40E /* MedicineNameQuiz_Sagae */,
 				4AADB2CA2AC5588300C5A40E /* Products */,
+				6B03956245CE44214A7FEA83 /* Pods */,
+				2220F03A9C9942F2299D9AB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -286,6 +302,7 @@
 		4AADB2CB2AC5588300C5A40E /* MedicineNameQuiz_Sagae */ = {
 			isa = PBXGroup;
 			children = (
+				4A83A4462BFC4C39008E7E91 /* MedicineNameQuiz-Sagae-Info.plist */,
 				4AADB2CC2AC5588300C5A40E /* MedicineNameQuiz_SagaeApp.swift */,
 				4AADB2D52AC5588500C5A40E /* Persistence.swift */,
 				4A05C77E2BEF2C5500E31191 /* Introduction.txt */,
@@ -311,6 +328,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		6B03956245CE44214A7FEA83 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				87993683C2CE49939F768075 /* Pods-MedicineNameQuiz_Sagae.debug.xcconfig */,
+				40048FABB73FF89F31117435 /* Pods-MedicineNameQuiz_Sagae.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,10 +344,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AADB2DC2AC5588500C5A40E /* Build configuration list for PBXNativeTarget "MedicineNameQuiz_Sagae" */;
 			buildPhases = (
+				3A9A2945C02A4B27A2BA4426 /* [CP] Check Pods Manifest.lock */,
 				4AADB2C52AC5588300C5A40E /* Sources */,
 				4AADB2C62AC5588300C5A40E /* Frameworks */,
 				4AADB2C72AC5588300C5A40E /* Resources */,
 				4AAF5CE52B91E84200CBE6DE /* ShellScript */,
+				85978E2C400169A028D903E1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -384,6 +412,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3A9A2945C02A4B27A2BA4426 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MedicineNameQuiz_Sagae-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4AAF5CE52B91E84200CBE6DE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -401,6 +451,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint; then\n    swiftlint --fix --format\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		85978E2C400169A028D903E1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MedicineNameQuiz_Sagae/Pods-MedicineNameQuiz_Sagae-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MedicineNameQuiz_Sagae/Pods-MedicineNameQuiz_Sagae-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MedicineNameQuiz_Sagae/Pods-MedicineNameQuiz_Sagae-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -595,6 +662,7 @@
 		};
 		4AADB2DD2AC5588500C5A40E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87993683C2CE49939F768075 /* Pods-MedicineNameQuiz_Sagae.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -605,6 +673,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MedicineNameQuiz-Sagae-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -630,6 +699,7 @@
 		};
 		4AADB2DE2AC5588500C5A40E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40048FABB73FF89F31117435 /* Pods-MedicineNameQuiz_Sagae.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -640,6 +710,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MedicineNameQuiz-Sagae-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
