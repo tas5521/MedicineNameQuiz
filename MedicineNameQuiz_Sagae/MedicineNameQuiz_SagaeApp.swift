@@ -6,24 +6,19 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        return true
-    }
-} // AppDelegate ここまで
-
+// アプリのエントリーポイントに指定
 @main
 struct MedicineNameQuiz_SagaeApp: App {
+    // AppDelegateを、本App構造体に統合
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    // PersistenceControllerのインスタンス（シングルトン）を取得
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
-    }
-}
+        } // WindowGroup ここまで
+    } // bodyここまで
+} // MedicineNameQuiz_SagaeApp ここまで
