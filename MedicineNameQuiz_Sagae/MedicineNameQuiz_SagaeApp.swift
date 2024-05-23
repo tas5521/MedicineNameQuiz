@@ -11,9 +11,9 @@ import SwiftUI
 @main
 struct MedicineNameQuiz_SagaeApp: App {
     // AppDelegateを、本App構造体に統合
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     // PersistenceControllerのインスタンス（シングルトン）を取得
-    let persistenceController = PersistenceController.shared
+    private let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {

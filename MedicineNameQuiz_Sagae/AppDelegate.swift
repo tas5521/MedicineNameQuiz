@@ -7,11 +7,11 @@
 
 import GoogleMobileAds
 
-// アプリケーションのライフサイクルイベントを処理するためのデリゲート（広告を表示する準備）
-// UIResponderクラスは、イベント処理の基盤を提供（必須ではないが、AppDelegateの一般的な実装ではUIResponderを継承することが推奨されている）
+// アプリケーションのライフサイクルイベントを処理するためのデリゲート（ここでは、広告を表示する準備をする）
+// UIResponderクラスはイベント処理の基盤を提供
 // UIApplicationDelegateプロトコルに準拠することで、アプリケーションのライフサイクルイベントをハンドリングできるようにする
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    // アプリケーションが起動（ライフサイクルの1つ）した直後に呼び出されるメソッド
+    // アプリケーションが起動した直後に呼び出されるメソッド
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // GADMobileAdsクラスから共有インスタンスを取得し、Google Mobile Ads SDKを初期化
