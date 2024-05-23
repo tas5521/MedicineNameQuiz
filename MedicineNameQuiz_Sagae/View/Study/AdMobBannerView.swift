@@ -19,7 +19,7 @@ struct AdMobBannerView: UIViewRepresentable {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         // シーンの最初のウィンドウのrootViewControllerをGADBannerViewに設定
         banner.rootViewController = windowScene?.windows.first?.rootViewController
-        // GADRequest を使用して広告をロード
+        // GADRequestを使用して広告をロード
         banner.load(GADRequest())
         // インスタンスを返す
         return banner
