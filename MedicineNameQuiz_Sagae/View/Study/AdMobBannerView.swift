@@ -13,8 +13,8 @@ struct AdMobBannerView: UIViewRepresentable {
         // GADBannerViewのインスタンスを生成
         let banner = GADBannerView(adSize: GADAdSizeBanner)
         // 設定
-        // テスト専用広告ユニットID
-        banner.adUnitID = "ca-app-pub-3940256099942544/2435281174"
+        // テスト専用広告ユニットID（固定サイズのバナー）
+        banner.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         // アプリケーションに接続されているシーンを取得し、最初のシーンをUIWindowScene型にキャスト
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         // シーンの最初のウィンドウのrootViewControllerをGADBannerViewに設定
