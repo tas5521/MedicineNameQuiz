@@ -23,6 +23,7 @@
 		4A83A4482BFC4DBF008E7E91 /* AdMobBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83A4472BFC4DBF008E7E91 /* AdMobBannerView.swift */; };
 		4A83A44A2BFE3266008E7E91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83A4492BFE3266008E7E91 /* AppDelegate.swift */; };
 		4A83A44D2C0464A5008E7E91 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 4A83A44C2C0464A5008E7E91 /* GoogleMobileAds */; };
+		4A83A44F2C04E117008E7E91 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83A44E2C04E117008E7E91 /* BannerView.swift */; };
 		4A8DA0752BCEACA100A92CE9 /* QuestionListPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */; };
 		4A9671592AC7B531006F7157 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671582AC7B531006F7157 /* MainTabView.swift */; };
 		4A96715E2AC7B73E006F7157 /* QuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96715D2AC7B73E006F7157 /* QuestionListView.swift */; };
@@ -93,6 +94,7 @@
 		4A83A4462BFC4C39008E7E91 /* MedicineNameQuiz-Sagae-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MedicineNameQuiz-Sagae-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4A83A4472BFC4DBF008E7E91 /* AdMobBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBannerView.swift; sourceTree = "<group>"; };
 		4A83A4492BFE3266008E7E91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4A83A44E2C04E117008E7E91 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		4A8DA0742BCEACA100A92CE9 /* QuestionListPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListPickerItem.swift; sourceTree = "<group>"; };
 		4A9671582AC7B531006F7157 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4A96715D2AC7B73E006F7157 /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				4A9671762AC82CBC006F7157 /* ResultView.swift */,
 				4AD429752B159B6100FEE2DD /* AnswerButton.swift */,
 				4A83A4472BFC4DBF008E7E91 /* AdMobBannerView.swift */,
+				4A83A44E2C04E117008E7E91 /* BannerView.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				4AADB2CD2AC5588300C5A40E /* MedicineNameQuiz_SagaeApp.swift in Sources */,
 				4A764F082B492AD60052EB60 /* NavigationBarBackground.swift in Sources */,
 				4ABE86532B03465B003AC69F /* ChallengeRankingView.swift in Sources */,
+				4A83A44F2C04E117008E7E91 /* BannerView.swift in Sources */,
 				4A4AEB722BC97401003AB218 /* AddMedicineField.swift in Sources */,
 				4AD429782B15A21C00FEE2DD /* AnswerButtonType.swift in Sources */,
 				4AD680A92B33453D00414F22 /* MedicineListItem.swift in Sources */,

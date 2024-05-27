@@ -50,18 +50,25 @@ struct StudyView: View {
             Color.backgroundSkyBlue
                 // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
+            // バナー広告を配置
+            VStack {
+                BannerView()
+                    // バナーの余白を設定
+                    .padding(.top)
+                    // バナーの高さを指定
+                    .frame(height: 50)
+                // 余白を追加
+                Spacer()
+            } // VStack ここまで
             // 垂直方向にレイアウト
             VStack {
-                // バナー広告を配置
-                AdMobBannerView()
-                    // 幅高さを指定
-                    .frame(width: 320, height: 50)
-                    // 上下に余白を追加
-                    .padding(.vertical)
+                // 余白を追加
+                Spacer()
                 // 問題番号
                 Text("\(questionNumber + 1)/\(questions.count)")
                     // フォントを.titleに変更
                     .font(.title)
+                    .padding(.top)
                 // スペースを空ける
                 Spacer()
                 // カードを配置
