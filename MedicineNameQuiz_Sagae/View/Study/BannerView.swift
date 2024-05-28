@@ -20,14 +20,14 @@ final class BannerViewController: UIViewController {
     // weak は循環参照を回避するため
     weak var delegate: BannerViewControllerWidthDelegate?
 
-    // Viewが表示された時に呼び出されるメソッドを上書き
+    // Viewが表示された時に呼び出されるメソッドをオーバーライド
     override func viewDidAppear(_ animated: Bool) {
         // UIViewControllerのviewDidAppearは最初に実行しておく
         super.viewDidAppear(animated)
         // 幅を取得するためのDelegateメソッドの処理を追加
         delegate?.bannerViewController(
             self, didUpdate: view.frame.inset(by: view.safeAreaInsets).size.width)
-    } // viewDidAppear 上書きここまで
+    } // viewDidAppear オーバーライドここまで
 
     // ウィンドウの回転などにより、このコントローラのViewのサイズが変わる時に呼び出されるメソッド
     override func viewWillTransition(
@@ -56,18 +56,18 @@ struct BannerView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> some UIViewController {
         // BannerViewControllerのインスタンスを生成
         let bannerViewController = BannerViewController()
-        // テスト専用広告ユニットIDを指定
+        // バナーViewにテスト専用広告ユニットIDを指定
         bannerView.adUnitID = adUnitID
         // バナーViewに、そのコントローラとして、bannerViewControllerを指定
         bannerView.rootViewController = bannerViewController
         // bannerViewをbannerViewControllerのビュー階層に追加
         bannerViewController.view.addSubview(bannerView)
-        // Constrain GADBannerView to the bottom of the view.
+        // バナーViewを上部の中央に固定
         NSLayoutConstraint.activate([
-            bannerView.topAnchor.constraint(
-                equalTo: bannerViewController.view.safeAreaLayoutGuide.topAnchor),
+            bannerView.topAnchor.constraint(equalTo: bannerViewController.view.safeAreaLayoutGuide.topAnchor),
             bannerView.centerXAnchor.constraint(equalTo: bannerViewController.view.centerXAnchor)
-        ])
+        ]) // NSLayoutConstraint.activate ここまで
+        // バナーViewのコントローラのデリゲートにCoordinatorのインスタンスを指定（デリゲートの具体的な処理の内容は、Coordinator側に記載）
         bannerViewController.delegate = context.coordinator
         // Viewのコントローラを返す
         return bannerViewController
@@ -83,24 +83,30 @@ struct BannerView: UIViewControllerRepresentable {
         bannerView.load(GADRequest())
     } // updateUIViewController ここまで
 
+    // Coordinatorを作成
+    // makeUIViewControllerより先に呼ばれて、contextに渡される
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     } // makeCoordinator ここまで
 
+    // ViewControllerがイベントを処理できるようにするため、Coordinatorを定義（ここでは、デリゲートをハンドリングしたい）
     class Coordinator: NSObject, BannerViewControllerWidthDelegate, GADBannerViewDelegate {
-        let parent: BannerView
+        // このCoordinatorの親として、BannerViewを指定
+        private let parent: BannerView
 
+        // イニシャライザ
         init(_ parent: BannerView) {
+            // このCoordinatorの親として、BannerViewを指定
             self.parent = parent
         } // init ここまで
 
-        // MARK: - BannerViewControllerWidthDelegate methods
+        // BannerViewControllerWidthDelegateのデリゲートメソッド
         func bannerViewController(_ bannerViewController: BannerViewController, didUpdate width: CGFloat) {
-            // Pass the viewWidth from Coordinator to BannerView.
+            // Viewの幅を親（BannerView）に渡す
             parent.viewWidth = width
         } // bannerViewController ここまで
 
-        // MARK: - GADBannerViewDelegate methods
+        // 以降、GADBannerViewDelegateのデリゲートメソッド（各イベントが発生した際に、デバッグエリアに通知する）
         func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
             print("\(#function) called")
         } // bannerViewDidReceiveAd ここまで
