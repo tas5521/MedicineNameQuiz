@@ -52,19 +52,21 @@ struct StudyView: View {
                 .ignoresSafeArea()
             // 垂直方向にレイアウト
             VStack {
-                // スペースを空ける
-                Spacer()
+                // バナー広告を配置
+                BannerView()
+                    // バナーの高さを指定（ここで高さを指定しないと、以降のViewが下に追いやられてしまう）
+                    .frame(height: 50)
+                    // バナーの余白を設定
+                    .padding(.vertical)
                 // 問題番号
                 Text("\(questionNumber + 1)/\(questions.count)")
                     // フォントを.titleに変更
                     .font(.title)
+                    .padding(.top)
                 // スペースを空ける
                 Spacer()
-                // 奥から手前にレイアウト
-                ZStack {
-                    // カードを配置
-                    flipCardView
-                } // ZStack ここまで
+                // カードを配置
+                flipCardView
                 // スペースを空ける
                 Spacer()
                 // 水平方向にレイアウト
