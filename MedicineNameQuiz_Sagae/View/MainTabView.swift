@@ -103,7 +103,7 @@ struct MainTabView: View {
         // IntroductionViewを重ねる
         .overlay {
             IntroductionView()
-            // 問題リストが空の時は、IntroductionViewを表示し、そうでない時は表示しない
+                // 問題リストが空の時は、IntroductionViewを表示し、そうでない時は表示しない
                 .opacity(fetchedLists.isEmpty ? 1 : 0)
         } // overlay ここまで
         // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
