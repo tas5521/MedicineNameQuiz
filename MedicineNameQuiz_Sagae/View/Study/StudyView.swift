@@ -22,10 +22,10 @@ struct StudyView: View {
     // 出題に関する変数
     // 出題する問題
     @Binding var questions: [StudyItem]
-    // モード選択を管理する変数
-    let studyMode: StudyMode
     // 問題リストのID
     let questionListID: UUID
+    // モード選択を管理する変数
+    let studyMode: StudyMode
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
 
@@ -74,7 +74,7 @@ struct StudyView: View {
                     // 正解ボタン
                     AnswerButton(buttonType: .correct, action: {
                         // 現在の問題が正解であることを記録する
-                        questions[questionNumber].studyResult = .correct
+                        keepStudyResult(result: .correct)
                         Task {
                             // 次の問題へ進むか、結果を表示
                             await advanceToNextQuestionOrShowResult()
@@ -84,7 +84,7 @@ struct StudyView: View {
                     // 不正解ボタン
                     AnswerButton(buttonType: .incorrect, action: {
                         // 現在の問題が不正解であることを記録する
-                        questions[questionNumber].studyResult = .incorrect
+                        keepStudyResult(result: .incorrect)
                         Task {
                             // 次の問題へ進むか、結果を表示
                             await advanceToNextQuestionOrShowResult()
@@ -112,7 +112,7 @@ struct StudyView: View {
         // 問題を解く画面へ遷移
         .navigationDestination(isPresented: $isShowResult) {
             // 結果画面を表示
-            ResultView(isStudying: $isStudying, questions: questions)
+            ResultView(isStudying: $isStudying, questions: questions, studyMode: studyMode)
         } // navigationDestination ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
@@ -231,6 +231,20 @@ struct StudyView: View {
         } // if ここまで
     } // flipCardAndWait ここまで
 
+    // 現在の問題の正誤を保持する
+    private func keepStudyResult(result: StudyResult) {
+        switch studyMode {
+        // 学習モードが商品名→一般名の場合
+        case .brandToGeneric:
+            // 正誤を保持
+            questions[questionNumber].brandToGenericResult = result
+        // 学習モードが一般名→商品名の場合
+        case .genericToBrand:
+            // 正誤を保持
+            questions[questionNumber].genericToBrandResult = result
+        } // switch ここまで
+    } // keepCurrentResult ここまで
+
     // 学習結果を保存するメソッド
     private func saveStudyResult() {
         // 問題リストの配列から該当するUUIDの問題のindexを取得
@@ -240,7 +254,12 @@ struct StudyView: View {
         // 学習結果を問題に保持する
         for studyItem in questions {
             if let index = fetchedQuestions.firstIndex(where: { $0.id == studyItem.id }) {
-                fetchedQuestions[index].studyResult = studyItem.studyResult.rawValue
+                switch studyMode {
+                case .brandToGeneric:
+                    fetchedQuestions[index].brandToGenericResult = studyItem.brandToGenericResult.rawValue
+                case .genericToBrand:
+                    fetchedQuestions[index].genericToBrandResult = studyItem.genericToBrandResult.rawValue
+                } // switch ここまで
             } // if let ここまで
         } // for ここまで
         // 学習結果を保持した問題で、元の問題を上書き
@@ -261,10 +280,11 @@ struct StudyView: View {
         StudyItem(category: .oral,
                   brandName: "ダミーの商品名",
                   genericName: "ダミーの一般名",
-                  studyResult: .incorrect)
+                  brandToGenericResult: .incorrect,
+                  genericToBrandResult: .correct)
     ] // dummyStudyItem ここまで
     return StudyView(isStudying: .constant(true),
                      questions: .constant(dummyQuestions),
-                     studyMode: .brandToGeneric,
-                     questionListID: UUID())
+                     questionListID: UUID(),
+                     studyMode: .brandToGeneric)
 }
