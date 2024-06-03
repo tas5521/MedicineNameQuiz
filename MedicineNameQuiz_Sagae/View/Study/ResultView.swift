@@ -14,6 +14,8 @@ struct ResultView: View {
     @Binding var isStudying: Bool
     // 学習結果の配列
     let questions: [StudyItem]
+    // モード選択を管理する変数
+    let studyMode: StudyMode
     // 問題リストの名前を保持する変数
     @State private var listName: String = ""
 
@@ -73,7 +75,14 @@ struct ResultView: View {
                 // 正解なら緑、不正解なら赤にする
                 .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
             // 正解または不正解の数をカウント
-            let resultCount = questions.filter { $0.studyResult == result }.count
+            var resultCount: Int {
+                switch studyMode {
+                case .brandToGeneric:
+                    return questions.filter { $0.brandToGenericResult == result }.count
+                case .genericToBrand:
+                    return questions.filter { $0.genericToBrandResult == result }.count
+                } // switch ここまで
+            } // resultCount ここまで
             // 正解または不正解の数を表示
             Text(":  \(resultCount)")
         } // HStack ここまで
@@ -99,7 +108,14 @@ struct ResultView: View {
                     // スペースを空ける
                     Spacer()
                     // 学習結果（正解か不正解か）を取得
-                    let studyResult = question.studyResult
+                    var studyResult: StudyResult {
+                        switch studyMode {
+                        case .brandToGeneric:
+                            question.brandToGenericResult
+                        case .genericToBrand:
+                            question.genericToBrandResult
+                        } // switch ここまで
+                    } // studyResult ここまで
                     // まる、または、ばつのImage
                     Image(systemName: studyResult.rawValue)
                         // 幅を15に指定
@@ -122,7 +138,8 @@ struct ResultView: View {
         StudyItem(category: .oral,
                   brandName: "ダミーの商品名",
                   genericName: "ダミーの一般名",
-                  studyResult: .incorrect)
+                  brandToGenericResult: .incorrect,
+                  genericToBrandResult: .incorrect)
     ] // dummyStudyItem ここまで
-    return ResultView(isStudying: .constant(true), questions: dummyQuestions)
+    return ResultView(isStudying: .constant(true), questions: dummyQuestions, studyMode: .brandToGeneric)
 }
