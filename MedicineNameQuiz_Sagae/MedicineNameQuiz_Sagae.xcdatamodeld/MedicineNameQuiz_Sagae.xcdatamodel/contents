@@ -10,7 +10,7 @@
         <attribute name="brandToGenericResult" optional="YES" attributeType="String"/>
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="genericName" optional="YES" attributeType="String"/>
-        <attribute name="genericTobrandResult" optional="YES" attributeType="String"/>
+        <attribute name="genericToBrandResult" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="questionList" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="QuestionList" inverseName="questions" inverseEntity="QuestionList"/>
     </entity>
