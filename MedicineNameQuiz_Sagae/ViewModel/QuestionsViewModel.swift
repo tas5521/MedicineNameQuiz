@@ -15,14 +15,12 @@ final class QuestionsViewModel {
         guard let questions = questionList.questions as? Set<Question> else { return [] }
         // StudyItem型にして、商品名の昇順にソート
         return questions.map {
-            StudyItem(
-                category: MedicineCategory(rawValue: $0.category ?? "") ?? .custom,
-                brandName: $0.brandName ?? "",
-                genericName: $0.genericName ?? "",
-                studyResult: StudyResult(rawValue: $0.studyResult ?? "") ?? .unanswered
-            )
-        }
-        .sorted(by: { $0.brandName < $1.brandName })
+            StudyItem(category: MedicineCategory(rawValue: $0.category ?? "") ?? .custom,
+                      brandName: $0.brandName ?? "",
+                      genericName: $0.genericName ?? "",
+                      brandToGenericResult: StudyResult(rawValue: $0.brandToGenericResult ?? "") ?? .unanswered,
+                      genericToBrandResult: StudyResult(rawValue: $0.genericToBrandResult ?? "") ?? .unanswered)
+        }.sorted(by: { $0.brandName < $1.brandName })
     } // questions ここまで
     // 薬の名前の検索テキスト
     var medSearchText: String = ""
