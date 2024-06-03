@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct QuestionsView: View {
-    let answerPercentage: String
+    // 商品名→一般名の正答率
+    let brandToGenericAnswerPercentage: String
+    // 一般名→商品名の正答率
+    let genericToBrandAnswerPercentage: String
     // QuestionsViewModelのインスタンスを格納する変数
     @State private var viewModel: QuestionsViewModel
 
     // イニシャライザ
-    init(answerPercentage: String, questionList: QuestionList) {
-        self.answerPercentage = answerPercentage
+    init(brandToGenericAnswerPercentage: String, genericToBrandAnswerPercentage: String, questionList: QuestionList) {
+        self.brandToGenericAnswerPercentage = brandToGenericAnswerPercentage
+        self.genericToBrandAnswerPercentage = genericToBrandAnswerPercentage
         _viewModel = State(initialValue: QuestionsViewModel(questionList: questionList))
     } // init ここまで
 
@@ -34,12 +38,15 @@ struct QuestionsView: View {
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
                     // 問題数を表示
-                    HStack {
+                    HStack(alignment: .top) {
                         Text("問題数: \(viewModel.questionList.numberOfQuestions)")
                         Spacer()
-                        if viewModel.questionList.numberOfQuestions != 0 {
-                            Text("正答率: \(answerPercentage)")
-                        } // if ここまで
+                        VStack {
+                            // 商品名→一般名の正答率を表示
+                            Text("商 → 般: \(brandToGenericAnswerPercentage)")
+                            // 一般名→商品名の正答率を表示
+                            Text("般 → 商: \(genericToBrandAnswerPercentage)")
+                        } // VStack ここまで
                     } // HStack ここまで
                     // 余白を追加
                     .padding()
@@ -62,16 +69,13 @@ struct QuestionsView: View {
                                 } // VStack ここまで
                                 // スペースを空ける
                                 Spacer()
-                                // 学習結果（正解か不正解か）を取得
-                                let studyResult = question.studyResult
-                                if studyResult != .unanswered {
-                                    // まる、または、ばつのImage
-                                    Image(systemName: studyResult.rawValue)
-                                        // 幅を15に指定
-                                        .frame(width: 15)
-                                        // 正解なら緑、不正解なら赤にする
-                                        .foregroundStyle(studyResult == .correct ? Color.buttonGreen : Color.buttonRed)
-                                } // if ここまで
+                                // 垂直方向にレイアウト
+                                VStack(alignment: .leading) {
+                                    // 商品名→一般名の学習結果を表示
+                                    showStudyResult(studyMode: .brandToGeneric, question: question)
+                                    // 一般名→商品名の学習結果を表示
+                                    showStudyResult(studyMode: .genericToBrand, question: question)
+                                } // VStack ここまで
                             } // HStack ここまで
                         } // ForEach ここまで
                     } // List ここまで
@@ -102,10 +106,42 @@ struct QuestionsView: View {
             } // ToolbarItem ここまで
         } // toolbar ここまで
     } // body ここまで
+
+    // 学習結果（正解か不正解か）を表示
+    private func showStudyResult(studyMode: StudyMode, question: StudyItem) -> some View {
+        // 学習結果（正解か不正解か）を取得
+        HStack {
+            switch studyMode {
+            case .brandToGeneric:
+                Text("商 → 般:")
+                correctOrIncorrectImage(result: question.brandToGenericResult)
+            case .genericToBrand:
+                Text("般 → 商:")
+                correctOrIncorrectImage(result: question.genericToBrandResult)
+            } // switch ここまで
+        } // HStack ここまで
+    } // showStudyResult ここまで
+
+    // まる、または、ばつのImage
+    private func correctOrIncorrectImage(result: StudyResult) -> some View {
+        if result != .unanswered {
+            // まる、または、ばつのImage
+            Image(systemName: result.rawValue)
+                // 幅を15に指定
+                .frame(width: 15)
+                // 正解なら緑、不正解なら赤にする
+                .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed) as? Text
+        } else {
+            // 未解答の場合「未」と表示
+            Text("未")
+        } // if ここまで
+    } // correctOrIncorrectImage ここまで
 } // QuestionsView ここまで
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
     let questionList = QuestionList(context: context)
-    return QuestionsView(answerPercentage: "0.0", questionList: questionList)
+    return QuestionsView(brandToGenericAnswerPercentage: "0.0",
+                         genericToBrandAnswerPercentage: "0.0",
+                         questionList: questionList)
 }
