@@ -65,13 +65,27 @@ struct QuestionListView: View {
     private var questionList: some View {
         List {
             ForEach(fetchedLists) { list in
-                let correctCount = (list.questions as? Set<Question>)?.filter({
-                    $0.studyResult == StudyResult.correct.rawValue
+                // 商品名→一般名の正解数
+                let brandToGenericCorrectCount = (list.questions as? Set<Question>)?.filter({
+                    $0.brandToGenericResult == StudyResult.correct.rawValue
                 }).count
-                let answerPercentage = String(format: "%.1f%%", Float(correctCount ?? 0) / Float(list.numberOfQuestions) * 100)
+                // 商品名→一般名の正答率
+                let brandToGenericAnswerPercentage = String(
+                    format: "%.1f%%", Float(brandToGenericCorrectCount ?? 0) / Float(list.numberOfQuestions) * 100
+                ) // brandToGenericAnswerPercentage ここまで
+                // 一般名→商品名の正解数
+                let genericToBrandCorrectCount = (list.questions as? Set<Question>)?.filter({
+                    $0.genericToBrandResult == StudyResult.correct.rawValue
+                }).count
+                // 一般名→商品名の正答率
+                let genericToBrandAnswerPercentage = String(
+                    format: "%.1f%%", Float(genericToBrandCorrectCount ?? 0) / Float(list.numberOfQuestions) * 100
+                ) // answerPercentage ここまで
                 // 各行に対応した画面へ遷移
                 NavigationLink {
-                    QuestionsView(answerPercentage: answerPercentage, questionList: list)
+                    QuestionsView(brandToGenericAnswerPercentage: brandToGenericAnswerPercentage,
+                                  genericToBrandAnswerPercentage: genericToBrandAnswerPercentage,
+                                  questionList: list)
                 } label: {
                     // 水平方向にレイアウト
                     HStack {
@@ -79,18 +93,17 @@ struct QuestionListView: View {
                         VStack(alignment: .leading) {
                             // リストの名前
                             Text(list.listName ?? "")
-                            // リスト作成日時
-                            Text("\((list.createdDate ?? Date()).formatted(date: .long, time: .omitted))")
+                            // 問題数を表示
+                            Text("問題数: \(list.numberOfQuestions)")
                         } // VStack ここまで
                         // スペースを空ける
                         Spacer()
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
-                            // 問題数を表示
-                            Text("問題数: \(list.numberOfQuestions)")
-                            if list.numberOfQuestions != 0 {
-                                Text("正答率: \(answerPercentage)")
-                            } // if ここまで
+                            // 商品名→一般名の正答率を表示
+                            Text("商 → 般: \(brandToGenericAnswerPercentage)")
+                            // 一般名→商品名の正答率を表示
+                            Text("般 → 商: \(genericToBrandAnswerPercentage)")
                         } // VStack ここまで
                     } // HStack ここまで
                     // 太字にする
