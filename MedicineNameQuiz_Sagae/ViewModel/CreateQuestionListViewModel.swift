@@ -151,10 +151,16 @@ final class CreateQuestionListViewModel {
                         $0.genericName == item.genericName
                 }) {
                     // 学習結果を保持
-                    question.studyResult = questions[index].studyResult
+                    // 商品名→一般名
+                    question.brandToGenericResult = questions[index].brandToGenericResult
+                    // 一般名→商品名
+                    question.genericToBrandResult = questions[index].genericToBrandResult
                 } else {
                     // 該当する問題がない場合、「まだ解いていない」という状態を保持
-                    question.studyResult = StudyResult.unanswered.rawValue
+                    // 商品名→一般名
+                    question.brandToGenericResult = StudyResult.unanswered.rawValue
+                    // 一般名→商品名
+                    question.genericToBrandResult = StudyResult.unanswered.rawValue
                 } // if let ここまで
                 // 作成した問題を集合に追加
                 questionSet.insert(question)
