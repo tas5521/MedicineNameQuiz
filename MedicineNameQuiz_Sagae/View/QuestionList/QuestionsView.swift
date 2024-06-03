@@ -41,7 +41,7 @@ struct QuestionsView: View {
                     HStack(alignment: .top) {
                         Text("問題数: \(viewModel.questionList.numberOfQuestions)")
                         Spacer()
-                        VStack {
+                        VStack(alignment: .leading) {
                             // 商品名→一般名の正答率を表示
                             Text("商 → 般: \(brandToGenericAnswerPercentage)")
                             // 一般名→商品名の正答率を表示
@@ -57,7 +57,7 @@ struct QuestionsView: View {
                             // 水平方向にレイアウト
                             HStack {
                                 // 垂直方向にレイアウト
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 5) {
                                     // 商品名を表示
                                     Text(question.brandName)
                                         // 文字の色を青に変更
@@ -70,7 +70,7 @@ struct QuestionsView: View {
                                 // スペースを空ける
                                 Spacer()
                                 // 垂直方向にレイアウト
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 5) {
                                     // 商品名→一般名の学習結果を表示
                                     showStudyResult(studyMode: .brandToGeneric, question: question)
                                     // 一般名→商品名の学習結果を表示
@@ -124,17 +124,23 @@ struct QuestionsView: View {
 
     // まる、または、ばつのImage
     private func correctOrIncorrectImage(result: StudyResult) -> some View {
-        if result != .unanswered {
-            // まる、または、ばつのImage
-            Image(systemName: result.rawValue)
-                // 幅を15に指定
-                .frame(width: 15)
-                // 正解なら緑、不正解なら赤にする
-                .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed) as? Text
-        } else {
-            // 未解答の場合「未」と表示
-            Text("未")
-        } // if ここまで
+        // 画像の色
+        var color: Color {
+            switch result {
+            case .correct:
+                Color.buttonGreen
+            case .incorrect:
+                Color.buttonRed
+            case .unanswered:
+                Color.black
+            } // switch ここまで
+        } // color ここまで
+        // まる、または、ばつのImage
+        return Image(systemName: result.rawValue)
+            // 幅を15に指定
+            .frame(width: 15)
+            // 正解なら緑、不正解なら赤にする
+            .foregroundStyle(color)
     } // correctOrIncorrectImage ここまで
 } // QuestionsView ここまで
 
