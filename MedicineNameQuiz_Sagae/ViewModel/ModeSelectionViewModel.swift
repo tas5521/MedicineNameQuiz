@@ -37,6 +37,16 @@ final class ModeSelectionViewModel {
 
     // 問題を作成するメソッド
     func createQuestions(fetchedLists: FetchedResults<QuestionList>) {
+
+        // questionListIDは初期値をUUIDで生成しているので、あるように見えるけど、実際はないことがある。questionListIDは、PickerとBindingしているので初期値にnilはつかえない
+        // questionListIDがCoreDataに存在しない場合は、最初のリストをセットする
+        if !fetchedLists.contains(where: { $0.id == questionListID }) {
+            print("fetchedLists don't have questionListID")
+            self.questionListID = fetchedLists.first?.id ?? UUID()
+            // Pickerの選択状態が変わるので状態を保存する
+            saveUserSelection()
+        }
+
         // CoreDataから、該当するIDを持つ問題を取得
         if let questionList = fetchedLists.first(where: { $0.id == questionListID }) {
             // StudyItem型に変換
