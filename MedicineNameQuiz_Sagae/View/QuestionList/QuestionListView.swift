@@ -128,16 +128,16 @@ struct QuestionListView: View {
                 .clipShape(Circle())
         } // Button ここまで
     } // addListButton ここまで
-    
+
     // 正答率を計算するメソッド
     private func answerPercentage(list: QuestionList, studyMode: StudyMode) -> String {
         // 正解数を計算
         let correctCount = (list.questions as? Set<Question>)?.filter({
             switch studyMode {
-                // 商品名→一般名
+            // 商品名→一般名
             case .brandToGeneric:
                 $0.brandToGenericResult == StudyResult.correct.rawValue
-                // 一般名→商品名
+            // 一般名→商品名
             case .genericToBrand:
                 $0.genericToBrandResult == StudyResult.correct.rawValue
             } // switch ここまで
@@ -145,7 +145,7 @@ struct QuestionListView: View {
         // 正答率を計算して返却
         return String(format: "%.1f%%", Float(correctCount ?? 0) / Float(list.numberOfQuestions) * 100)
     } // answerPercentage ここまで
-    
+
     // 問題リストに検索をかけるメソッド
     private func searchList() {
         // 検索キーワードが空の場合

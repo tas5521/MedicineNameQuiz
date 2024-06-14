@@ -120,7 +120,7 @@ struct QuestionsView: View {
         // 画像の色
         var color: Color {
             switch result {
-                // 正解なら緑
+            // 正解なら緑
             case .correct:
                 Color.buttonGreen
             case .incorrect:
