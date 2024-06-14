@@ -37,10 +37,13 @@ struct QuestionsView: View {
                     .padding(.vertical)
                 // 垂直方向にレイアウト
                 VStack(alignment: .leading) {
-                    // 問題数を表示
+                    // 横方向にレイアウト
                     HStack(alignment: .top) {
+                        // 問題数を表示
                         Text("問題数: \(viewModel.questionList.numberOfQuestions)")
+                        // スペースを空ける
                         Spacer()
+                        // 縦方向にレイアウト
                         VStack(alignment: .leading) {
                             // 商品名→一般名の正答率を表示
                             Text("商 → 般: \(brandToGenericAnswerPercentage)")
@@ -71,10 +74,15 @@ struct QuestionsView: View {
                                 Spacer()
                                 // 垂直方向にレイアウト
                                 VStack(alignment: .leading, spacing: 5) {
-                                    // 商品名→一般名の学習結果を表示
-                                    showStudyResult(studyMode: .brandToGeneric, question: question)
-                                    // 一般名→商品名の学習結果を表示
-                                    showStudyResult(studyMode: .genericToBrand, question: question)
+                                    // 学習結果（正解か不正解か）を取得
+                                    HStack {
+                                        Text("商 → 般:")
+                                        resultImage(of: question.brandToGenericResult)
+                                    } // HStack ここまで
+                                    HStack {
+                                        Text("般 → 商:")
+                                        resultImage(of: question.genericToBrandResult)
+                                    } // HStack ここまで
                                 } // VStack ここまで
                             } // HStack ここまで
                         } // ForEach ここまで
@@ -107,41 +115,29 @@ struct QuestionsView: View {
         } // toolbar ここまで
     } // body ここまで
 
-    // 学習結果（正解か不正解か）を表示
-    private func showStudyResult(studyMode: StudyMode, question: StudyItem) -> some View {
-        // 学習結果（正解か不正解か）を取得
-        HStack {
-            switch studyMode {
-            case .brandToGeneric:
-                Text("商 → 般:")
-                correctOrIncorrectImage(result: question.brandToGenericResult)
-            case .genericToBrand:
-                Text("般 → 商:")
-                correctOrIncorrectImage(result: question.genericToBrandResult)
-            } // switch ここまで
-        } // HStack ここまで
-    } // showStudyResult ここまで
-
-    // まる、または、ばつのImage
-    private func correctOrIncorrectImage(result: StudyResult) -> some View {
+    // まる、ばつ、横棒のImage
+    private func resultImage(of result: StudyResult) -> some View {
         // 画像の色
         var color: Color {
             switch result {
+                // 正解なら緑
             case .correct:
                 Color.buttonGreen
             case .incorrect:
+                // 正解なら赤
                 Color.buttonRed
             case .unanswered:
+                // 未解答なら黒
                 Color.black
             } // switch ここまで
         } // color ここまで
-        // まる、または、ばつのImage
+        // まる、ばつ、横棒のImage
         return Image(systemName: result.rawValue)
             // 幅を15に指定
             .frame(width: 15)
-            // 正解なら緑、不正解なら赤にする
+            // 色をセット
             .foregroundStyle(color)
-    } // correctOrIncorrectImage ここまで
+    } // resultImage ここまで
 } // QuestionsView ここまで
 
 #Preview {
