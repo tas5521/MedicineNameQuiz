@@ -47,7 +47,7 @@ struct MainTabView: View {
                     // 問題リストがない場合
                     if fetchedLists.isEmpty {
                         // 導入画面のViewを配置
-                        IntroductionView()
+                        IntroductionView(tabSelection: $tabSelection)
                         // 問題リストがある場合
                     } else {
                         // 学習画面のViewを配置
