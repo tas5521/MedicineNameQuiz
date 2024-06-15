@@ -43,12 +43,21 @@ struct MainTabView: View {
         TabView(selection: $tabSelection) {
             // タブの項目をグループにまとめる
             Group {
-                // 学習画面のViewを配置
-                ModeSelectionView()
-                    .tabItem {
-                        Label(TabSelection.study.rawValue, systemImage: "book.fill")
-                    } // tabItem ここまで
-                    .tag(TabSelection.study)
+                Group {
+                    // 問題リストがない場合
+                    if fetchedLists.isEmpty {
+                        // 導入画面のViewを配置
+                        IntroductionView()
+                        // 問題リストがある場合
+                    } else {
+                        // 学習画面のViewを配置
+                        ModeSelectionView()
+                    } // if ここまで
+                } // Group ここまで
+                .tabItem {
+                    Label(TabSelection.study.rawValue, systemImage: "book.fill")
+                } // tabItem ここまで
+                .tag(TabSelection.study)
 
                 // 問題リスト画面のViewを配置
                 QuestionListView()
@@ -90,7 +99,6 @@ struct MainTabView: View {
                 } // tabItem ここまで
                 .tag(TabSelection.settings)
             } // Group ここまで
-            // タブの設定
             // タブの背景を青色に変更
             .toolbarBackground(.tabBlue, for: .tabBar)
             // タブの背景を表示
@@ -98,14 +106,6 @@ struct MainTabView: View {
             // タブ外観をダークに設定
             .toolbarColorScheme(.dark, for: .tabBar)
         }  // TabView ここまで
-        // 問題リストが空の時は、TabViewを表示せず、そうでない時は表示する
-        .opacity(fetchedLists.isEmpty ? 0 : 1)
-        // IntroductionViewを重ねる
-        .overlay {
-            IntroductionView()
-                // 問題リストが空の時は、IntroductionViewを表示し、そうでない時は表示しない
-                .opacity(fetchedLists.isEmpty ? 1 : 0)
-        } // overlay ここまで
         // 友達追加ボタンは、ランキング機能に関連するので、コメントアウト
         /*
          // ツールバー設定
