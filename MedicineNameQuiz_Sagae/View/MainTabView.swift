@@ -59,7 +59,7 @@ struct MainTabView: View {
                     Label(TabSelection.study.rawValue, systemImage: "book.fill")
                 } // tabItem ここまで
                 .tag(TabSelection.study)
-                
+
                 // 項目をグループにまとめる
                 Group {
                     // 問題リストがない場合
