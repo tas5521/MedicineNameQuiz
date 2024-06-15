@@ -43,6 +43,7 @@ struct MainTabView: View {
         TabView(selection: $tabSelection) {
             // タブの項目をグループにまとめる
             Group {
+                // 項目をグループにまとめる
                 Group {
                     // 問題リストがない場合
                     if fetchedLists.isEmpty {
@@ -58,13 +59,22 @@ struct MainTabView: View {
                     Label(TabSelection.study.rawValue, systemImage: "book.fill")
                 } // tabItem ここまで
                 .tag(TabSelection.study)
-
-                // 問題リスト画面のViewを配置
-                QuestionListView()
-                    .tabItem {
-                        Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
-                    } // tabItem ここまで
-                    .tag(TabSelection.questionList)
+                
+                // 項目をグループにまとめる
+                Group {
+                    // 問題リストがない場合
+                    if fetchedLists.isEmpty {
+                        // 問題リストの作成を促す画面のViewを配置
+                        PromptToCreateQuestionListView()
+                    } else {
+                        // 問題リスト画面のViewを配置
+                        QuestionListView()
+                    } // if ここまで
+                } // Group ここまで
+                .tabItem {
+                    Label(TabSelection.questionList.rawValue, systemImage: "square.and.pencil")
+                } // tabItem ここまで
+                .tag(TabSelection.questionList)
 
                 // ランキング画面のタブを隠す
                 /*

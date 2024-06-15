@@ -49,12 +49,6 @@ struct IntroductionView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     // スペースを空ける
                     Spacer()
-                    // テキストを表示
-                    Text("まずは問題リストを作成しましょう！")
-                        .font(.title3)
-                    Text("※問題リストは後で編集できます")
-                    // スペースを空ける
-                    Spacer()
                     // 問題リスト画面に移動するボタン
                     Button {
                         // 問題リスト画面に移動する
@@ -86,7 +80,8 @@ struct IntroductionView: View {
             .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
-} // InitialViewここまで
+} // IntroductionViewここまで
+
 #Preview {
     IntroductionView(tabSelection: .constant(.study))
 }
