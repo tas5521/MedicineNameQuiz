@@ -65,13 +65,15 @@ struct QuestionListView: View {
     private var questionList: some View {
         List {
             ForEach(fetchedLists) { list in
-                let correctCount = (list.questions as? Set<Question>)?.filter({
-                    $0.studyResult == StudyResult.correct.rawValue
-                }).count
-                let answerPercentage = String(format: "%.1f%%", Float(correctCount ?? 0) / Float(list.numberOfQuestions) * 100)
+                // 商品名→一般名の正答率
+                let brandToGenericAnswerPercentage = answerPercentage(list: list, studyMode: .brandToGeneric)
+                // 一般名→商品名の正答率
+                let genericToBrandAnswerPercentage = answerPercentage(list: list, studyMode: .genericToBrand)
                 // 各行に対応した画面へ遷移
                 NavigationLink {
-                    QuestionsView(answerPercentage: answerPercentage, questionList: list)
+                    QuestionsView(brandToGenericAnswerPercentage: brandToGenericAnswerPercentage,
+                                  genericToBrandAnswerPercentage: genericToBrandAnswerPercentage,
+                                  questionList: list)
                 } label: {
                     // 水平方向にレイアウト
                     HStack {
@@ -79,18 +81,17 @@ struct QuestionListView: View {
                         VStack(alignment: .leading) {
                             // リストの名前
                             Text(list.listName ?? "")
-                            // リスト作成日時
-                            Text("\((list.createdDate ?? Date()).formatted(date: .long, time: .omitted))")
+                            // 問題数を表示
+                            Text("問題数: \(list.numberOfQuestions)")
                         } // VStack ここまで
                         // スペースを空ける
                         Spacer()
                         // 垂直方向にレイアウト
                         VStack(alignment: .leading) {
-                            // 問題数を表示
-                            Text("問題数: \(list.numberOfQuestions)")
-                            if list.numberOfQuestions != 0 {
-                                Text("正答率: \(answerPercentage)")
-                            } // if ここまで
+                            // 商品名→一般名の正答率を表示
+                            Text("商 → 般: \(brandToGenericAnswerPercentage)")
+                            // 一般名→商品名の正答率を表示
+                            Text("般 → 商: \(genericToBrandAnswerPercentage)")
                         } // VStack ここまで
                     } // HStack ここまで
                     // 太字にする
@@ -127,6 +128,23 @@ struct QuestionListView: View {
                 .clipShape(Circle())
         } // Button ここまで
     } // addListButton ここまで
+
+    // 正答率を計算するメソッド
+    private func answerPercentage(list: QuestionList, studyMode: StudyMode) -> String {
+        // 正解数を計算
+        let correctCount = (list.questions as? Set<Question>)?.filter({
+            switch studyMode {
+            // 商品名→一般名
+            case .brandToGeneric:
+                $0.brandToGenericResult == StudyResult.correct.rawValue
+            // 一般名→商品名
+            case .genericToBrand:
+                $0.genericToBrandResult == StudyResult.correct.rawValue
+            } // switch ここまで
+        }).count
+        // 正答率を計算して返却
+        return String(format: "%.1f%%", Float(correctCount ?? 0) / Float(list.numberOfQuestions) * 100)
+    } // answerPercentage ここまで
 
     // 問題リストに検索をかけるメソッド
     private func searchList() {

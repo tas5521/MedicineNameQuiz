@@ -46,7 +46,8 @@ final class ModeSelectionViewModel {
                               category: MedicineCategory.getCategory(from: $0.category ?? ""),
                               brandName: $0.brandName ?? "",
                               genericName: $0.genericName ?? "",
-                              studyResult: StudyResult(rawValue: $0.studyResult ?? "") ?? .unanswered)
+                              brandToGenericResult: StudyResult(rawValue: $0.brandToGenericResult ?? "") ?? .unanswered,
+                              genericToBrandResult: StudyResult(rawValue: $0.genericToBrandResult ?? "") ?? .unanswered)
                 } ?? []
             switch questionSelection {
             // 全ての問題を出題する設定の場合
@@ -56,7 +57,18 @@ final class ModeSelectionViewModel {
             // 未回答もしくは不正解の問題を出題する設定の場合
             case .unansweredOrIncorrect:
                 // まだ正解していない問題を取得
-                let filteredItems = studyItems.filter({ $0.studyResult != .correct })
+                var filteredItems: [StudyItem] {
+                    switch studyMode {
+                    // 学習モードが商品名→一般名の場合
+                    case .brandToGeneric:
+                        // 商品名→一般名の結果が正解でないものでフィルター
+                        studyItems.filter({ $0.brandToGenericResult != .correct })
+                    // 学習モードが商品名→一般名の場合
+                    case .genericToBrand:
+                        // 一般名→商品名の結果が正解でないものでフィルター
+                        studyItems.filter({ $0.genericToBrandResult != .correct })
+                    } // switch ここまで
+                } // filteredItems ここまで
                 // 全ての問題に正解している場合、全問をシャッフルして出題
                 if filteredItems.isEmpty {
                     questions = studyItems.shuffled()

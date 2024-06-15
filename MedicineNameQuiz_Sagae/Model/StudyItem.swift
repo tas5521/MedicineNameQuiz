@@ -12,5 +12,6 @@ struct StudyItem: Identifiable {
     var category: MedicineCategory
     var brandName: String
     var genericName: String
-    var studyResult: StudyResult
+    var brandToGenericResult: StudyResult
+    var genericToBrandResult: StudyResult
 } // StudyItem ここまで
