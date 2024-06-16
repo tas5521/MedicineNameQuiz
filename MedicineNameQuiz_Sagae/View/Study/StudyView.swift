@@ -150,17 +150,25 @@ struct StudyView: View {
                 .shadow(color: .gray, radius: 2, x: 0, y: 0)
             // 左上のテキストを表面ではQ、裏面ではAにする
             Text(isFront ? "Q.":"A.")
-                // 太字にする
-                .bold()
                 // カードの左上に配置
                 .offset(CGSize(width: -100, height: -60.0))
+            Group {
+                switch studyMode {
+                case .brandToGeneric:
+                    Text(isFront ? "商品名":"一般名")
+                case .genericToBrand:
+                    Text(isFront ? "一般名":"商品名")
+                } // switch ここまで
+            } // Group ここまで
+            // カードの左上に配置
+            .offset(CGSize(width: 0, height: -60.0))
             // 薬の名前のテキスト
             Text(medicineName)
-                // 太字にする
-                .bold()
                 // 幅高さを指定
                 .frame(width: width - 50, height: height - 50)
         } // ZStack ここまで
+        // 太字にする
+        .bold()
         // 文字の色を表面では黒、裏面では赤にする
         .foregroundStyle(isFront ? .black : .red)
         // 回転エフェクトをつける
