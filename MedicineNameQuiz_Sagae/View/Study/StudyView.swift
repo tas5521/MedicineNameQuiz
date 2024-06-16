@@ -26,12 +26,22 @@ struct StudyView: View {
     let questionListID: UUID
     // モード選択を管理する変数
     let studyMode: StudyMode
+    // 出題設定を管理する変数
+    let questionSelection: QuestionSelectionMode
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
 
     // View Presentation State
     // 結果画面の表示を管理する変数
     @State private var isShowResult: Bool = false
+
+    // 問題リストの名前
+    private var listName: String {
+        // 問題リストの配列から該当するUUIDの問題のindexを取得
+        guard let index = fetchedLists.firstIndex(where: { $0.id == questionListID }) else { return "" }
+        // 該当のIndexの問題リストから問題を取得
+        return fetchedLists[index].listName ?? ""
+    } // listName ここまで
 
     // カードフリップに関する変数
     // カードがめくられているかを管理する変数
@@ -112,7 +122,11 @@ struct StudyView: View {
         // 問題を解く画面へ遷移
         .navigationDestination(isPresented: $isShowResult) {
             // 結果画面を表示
-            ResultView(isStudying: $isStudying, questions: questions, studyMode: studyMode)
+            ResultView(isStudying: $isStudying,
+                       questions: questions,
+                       studyMode: studyMode,
+                       questionSelection: questionSelection,
+                       listName: listName)
         } // navigationDestination ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
@@ -294,5 +308,6 @@ struct StudyView: View {
     return StudyView(isStudying: .constant(true),
                      questions: .constant(dummyQuestions),
                      questionListID: UUID(),
-                     studyMode: .brandToGeneric)
+                     studyMode: .brandToGeneric,
+                     questionSelection: .all)
 }

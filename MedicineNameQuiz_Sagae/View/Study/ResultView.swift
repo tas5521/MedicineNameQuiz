@@ -16,8 +16,10 @@ struct ResultView: View {
     let questions: [StudyItem]
     // モード選択を管理する変数
     let studyMode: StudyMode
-    // 問題リストの名前を保持する変数
-    @State private var listName: String = ""
+    // 出題設定を管理する変数
+    let questionSelection: QuestionSelectionMode
+    // 問題リストの名前
+    let listName: String
 
     var body: some View {
         // 手前から奥にレイアウト
@@ -26,25 +28,51 @@ struct ResultView: View {
             Color.backgroundSkyBlue
                 // セーフエリア外にも背景を表示
                 .ignoresSafeArea()
+            // 学習結果を表示
             // 垂直方向にレイアウト
             VStack(alignment: .leading) {
-                // 学習結果を表示
-                // 水平方向にレイアウト
-                HStack(spacing: 20) {
-                    // 正解の数を表示
-                    countResult(of: .correct)
-                    // 不正解の数を表示
-                    countResult(of: .incorrect)
-                } // HStack ここまで
-                // 上と左に30ポイント余白をつける
-                .padding([.leading, .top], 30)
-                // 下に10ポイント余白をつける
-                .padding(.bottom, 15)
-                // 文字の大きさを1.5倍にする
-                .scaleEffect(1.5)
+                // 垂直方向にレイアウト
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("問題リスト: \(listName)")
+                    // 垂直方向にレイアウト
+                    VStack(alignment: .leading) {
+                        Text("出題設定")
+                        Group {
+                            Text(studyMode.rawValue)
+                            Text(questionSelection.rawValue)
+                        } // Group ここまで
+                        // 左に余白を追加
+                        .padding(.leading)
+                    } // VStack ここまで
+                    // 垂直方向にレイアウト
+                    VStack(alignment: .leading) {
+                        Text("学習結果")
+                        // 水平方向にレイアウト
+                        HStack(spacing: 20) {
+                            // 正解の数を表示
+                            countResult(of: .correct)
+                            // 不正解の数を表示
+                            countResult(of: .incorrect)
+                        } // HStack ここまで
+                    } // VStack ここまで
+                    // 水平方向にレイアウト
+                    HStack {
+                        // 問題数を表示
+                        Text("問題数:\(questions.count)")
+                        // スペースを空ける
+                        Spacer()
+                        // 正答率を表示
+                        Text("正答率:\(answerPercentage(questions: questions, studyMode: studyMode))")
+                    } // HStack ここまで
+                    // 上に余白を追加
+                    .padding(.top)
+                } // VStack ここまで
+                // 上下左右に余白を追加
+                .padding()
                 // 結果のリスト
                 resultList
             } // VStack ここまで
+            // 太字にする
             .bold()
         } // ZStack ここまで
         // ナビゲーションバータイトルを指定
@@ -130,6 +158,23 @@ struct ResultView: View {
         // リストの背景のグレーの部分を非表示にする
         .scrollContentBackground(.hidden)
     } // resultList ここまで
+
+    // 正答率を計算するメソッド
+    private func answerPercentage(questions: [StudyItem], studyMode: StudyMode) -> String {
+        // 正解数を計算
+        let correctCount = questions.filter({
+            switch studyMode {
+            // 商品名→一般名
+            case .brandToGeneric:
+                $0.brandToGenericResult == .correct
+            // 一般名→商品名
+            case .genericToBrand:
+                $0.genericToBrandResult == .correct
+            } // switch ここまで
+        }).count
+        // 正答率を計算して返却
+        return String(format: "%.1f%%", Float(correctCount) / Float(questions.count) * 100)
+    } // answerPercentage ここまで
 } // ResultView ここまで
 
 #Preview {
@@ -141,5 +186,9 @@ struct ResultView: View {
                   brandToGenericResult: .incorrect,
                   genericToBrandResult: .incorrect)
     ] // dummyStudyItem ここまで
-    return ResultView(isStudying: .constant(true), questions: dummyQuestions, studyMode: .brandToGeneric)
+    return ResultView(isStudying: .constant(true),
+                      questions: dummyQuestions,
+                      studyMode: .brandToGeneric,
+                      questionSelection: .all,
+                      listName: "ダミー薬局")
 }
