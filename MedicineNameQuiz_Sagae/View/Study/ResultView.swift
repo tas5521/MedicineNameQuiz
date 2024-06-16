@@ -122,15 +122,33 @@ struct ResultView: View {
         List {
             // 繰り返し
             ForEach(questions) { question in
+                // 問題側の薬名を取得
+                var questionName: String {
+                    switch studyMode {
+                    case .brandToGeneric:
+                        question.brandName
+                    case .genericToBrand:
+                        question.genericName
+                    } // switch ここまで
+                } // questionName ここまで
+                // 解答側の薬名を取得
+                var answerName: String {
+                    switch studyMode {
+                    case .brandToGeneric:
+                        question.genericName
+                    case .genericToBrand:
+                        question.brandName
+                    } // switch ここまで
+                } // questionName ここまで
                 // 水平方向にレイアウト
                 HStack {
                     // 垂直方向にレイアウト
                     VStack(alignment: .leading) {
-                        // 商品名を表示
-                        Text(question.brandName)
-                            .foregroundStyle(Color.blue)
-                        // 一般名を表示
-                        Text(question.genericName)
+                        // 問題側の薬名を表示
+                        Text(questionName)
+                            .foregroundStyle(Color.black)
+                        // 解答側の薬名を表示
+                        Text(answerName)
                             .foregroundStyle(Color.red)
                     } // VStack ここまで
                     // スペースを空ける
