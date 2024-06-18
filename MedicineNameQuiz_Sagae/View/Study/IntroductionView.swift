@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IntroductionView: View {
+    @Binding var tabSelection: TabSelection
     // Introductionの本文
     private var introductionText: String {
         // 読み込み先に、ファイルが存在してるかチェック
@@ -48,18 +49,12 @@ struct IntroductionView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     // スペースを空ける
                     Spacer()
-                    // テキストを表示
-                    Text("まずは問題リストを作成しましょう！")
-                        .font(.title3)
-                    Text("※問題リストは後で編集できます")
-                    // スペースを空ける
-                    Spacer()
-                    // 画面遷移
-                    NavigationLink {
-                        // 問題リスト作成画面へ遷移
-                        CreateQuestionListView(questionListMode: .create)
+                    // 問題リスト画面に移動するボタン
+                    Button {
+                        // 問題リスト画面に移動する
+                        tabSelection = .questionList
                     } label: {
-                        Text("問題リストを作成する")
+                        Text("問題リスト画面に移動")
                             // 文字色を白に指定
                             .foregroundStyle(Color.white)
                             // 最大幅.infinityに指定
@@ -70,7 +65,7 @@ struct IntroductionView: View {
                             .background(Color.buttonOrange)
                             // 角を丸くする
                             .clipShape(.buttonBorder)
-                    } // NavigationLink ここまで
+                    } // Button ここまで
                     // スペースを空ける
                     Spacer()
                 } // VStack ここまで
@@ -85,7 +80,8 @@ struct IntroductionView: View {
             .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
-} // InitialViewここまで
+} // IntroductionViewここまで
+
 #Preview {
-    IntroductionView()
+    IntroductionView(tabSelection: .constant(.study))
 }
