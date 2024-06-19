@@ -114,6 +114,8 @@ struct StudyView: View {
                 Spacer()
             } // VStack ここまで
         } // ZStack ここまで
+        // タブバーを隠す
+        .toolbar(.hidden, for: .tabBar)
         // 画面が閉じられた時
         .onDisappear {
             // 学習結果を保存
