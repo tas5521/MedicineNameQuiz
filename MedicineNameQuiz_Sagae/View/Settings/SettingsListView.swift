@@ -30,9 +30,6 @@ struct SettingsListView: View {
                             case .reference:
                                 // 医薬品名の引用元画面
                                 ReferenceView(title: title)
-                            case .advertisement:
-                                // 広告の表示について画面
-                                AdvertisementView(title: title)
                             } // switch ここまで
                         } label: {
                             // 項目ごとに異なるテキストを表示

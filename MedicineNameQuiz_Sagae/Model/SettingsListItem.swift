@@ -10,5 +10,4 @@ import Foundation
 enum SettingsListItem: String, CaseIterable {
     case howToUse = "アプリの使い方"
     case reference = "医薬品名の引用元"
-    case advertisement = "広告の表示について"
 } // SettingsListItem ここまで

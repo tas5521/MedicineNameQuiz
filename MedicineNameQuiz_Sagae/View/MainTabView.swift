@@ -65,10 +65,10 @@ struct MainTabView: View {
 
                 // 設定画面のViewを配置
                 SettingsListView()
-                .tabItem {
-                    Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
-                } // tabItem ここまで
-                .tag(TabSelection.settings)
+                    .tabItem {
+                        Label(TabSelection.settings.rawValue, systemImage: "gearshape.fill")
+                    } // tabItem ここまで
+                    .tag(TabSelection.settings)
             } // Group ここまで
             // タブの背景を青色に変更
             .toolbarBackground(.tabBlue, for: .tabBar)

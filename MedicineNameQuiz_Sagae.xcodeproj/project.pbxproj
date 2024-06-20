@@ -46,7 +46,6 @@
 		4AA088362AC96FCB005BD8C2 /* SettingsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088352AC96FCB005BD8C2 /* SettingsListItem.swift */; };
 		4AA088382AC97DAD005BD8C2 /* HowToUseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088372AC97DAD005BD8C2 /* HowToUseView.swift */; };
 		4AA0883A2AC97DCC005BD8C2 /* ReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088392AC97DCC005BD8C2 /* ReferenceView.swift */; };
-		4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA0883B2AC97DEC005BD8C2 /* AdvertisementView.swift */; };
 		4AA088422AC98796005BD8C2 /* HowToUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088412AC98796005BD8C2 /* HowToUse.swift */; };
 		4AA088442AC98855005BD8C2 /* HowToUseStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088432AC98855005BD8C2 /* HowToUseStudyView.swift */; };
 		4AA088462AC9886D005BD8C2 /* HowToUseQuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA088452AC9886D005BD8C2 /* HowToUseQuestionListView.swift */; };
@@ -108,7 +107,6 @@
 		4AA088352AC96FCB005BD8C2 /* SettingsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItem.swift; sourceTree = "<group>"; };
 		4AA088372AC97DAD005BD8C2 /* HowToUseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseView.swift; sourceTree = "<group>"; };
 		4AA088392AC97DCC005BD8C2 /* ReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceView.swift; sourceTree = "<group>"; };
-		4AA0883B2AC97DEC005BD8C2 /* AdvertisementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementView.swift; sourceTree = "<group>"; };
 		4AA088412AC98796005BD8C2 /* HowToUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUse.swift; sourceTree = "<group>"; };
 		4AA088432AC98855005BD8C2 /* HowToUseStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseStudyView.swift; sourceTree = "<group>"; };
 		4AA088452AC9886D005BD8C2 /* HowToUseQuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseQuestionListView.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 				4AA088452AC9886D005BD8C2 /* HowToUseQuestionListView.swift */,
 				4AA088492AC9889D005BD8C2 /* HowToUseMedicineListView.swift */,
 				4AA088392AC97DCC005BD8C2 /* ReferenceView.swift */,
-				4AA0883B2AC97DEC005BD8C2 /* AdvertisementView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -418,7 +415,6 @@
 				4A9C02012BAD853200133775 /* ModeSelectionViewModel.swift in Sources */,
 				4A6B3C3E2BFB359F00A35C1A /* UserDefaultsKeys.swift in Sources */,
 				4AA088442AC98855005BD8C2 /* HowToUseStudyView.swift in Sources */,
-				4AA0883C2AC97DEC005BD8C2 /* AdvertisementView.swift in Sources */,
 				4AD7AE162B87ADAE00D0DBF7 /* CreateQuestionListViewModel.swift in Sources */,
 				4A20191C2B84D3E5007FE769 /* QuestionListMode.swift in Sources */,
 				4AA088342AC94A6B005BD8C2 /* AddMedicineView.swift in Sources */,
