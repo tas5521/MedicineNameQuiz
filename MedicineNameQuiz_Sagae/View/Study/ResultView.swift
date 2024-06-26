@@ -97,20 +97,21 @@ struct ResultView: View {
 
     // 解答結果のカウント
     private func countResult(of result: StudyResult) -> some View {
-        HStack {
+        // 正解または不正解の数をカウント
+        let resultCount = questions.filter {
+            switch studyMode {
+            case .brandToGeneric:
+                return $0.brandToGenericResult == result
+            case .genericToBrand:
+                return $0.genericToBrandResult == result
+            } // switch ここまで
+        }.count // resultCount ここまで
+        
+        return HStack {
             // まるかばつのImageを配置
             Image(systemName: result.rawValue)
                 // 正解なら緑、不正解なら赤にする
                 .foregroundStyle(result == .correct ? Color.buttonGreen : Color.buttonRed)
-            // 正解または不正解の数をカウント
-            var resultCount: Int {
-                switch studyMode {
-                case .brandToGeneric:
-                    return questions.filter { $0.brandToGenericResult == result }.count
-                case .genericToBrand:
-                    return questions.filter { $0.genericToBrandResult == result }.count
-                } // switch ここまで
-            } // resultCount ここまで
             // 正解または不正解の数を表示
             Text(":  \(resultCount)")
         } // HStack ここまで
