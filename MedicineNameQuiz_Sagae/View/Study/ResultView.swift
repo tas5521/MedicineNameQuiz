@@ -101,9 +101,9 @@ struct ResultView: View {
         let resultCount = questions.filter {
             switch studyMode {
             case .brandToGeneric:
-                return $0.brandToGenericResult == result
+                $0.brandToGenericResult == result
             case .genericToBrand:
-                return $0.genericToBrandResult == result
+                $0.genericToBrandResult == result
             } // switch ここまで
         }.count // resultCount ここまで
         
