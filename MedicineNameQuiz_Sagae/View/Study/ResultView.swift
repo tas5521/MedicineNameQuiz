@@ -106,7 +106,7 @@ struct ResultView: View {
                 $0.genericToBrandResult == result
             } // switch ここまで
         }.count // resultCount ここまで
-        
+
         return HStack {
             // まるかばつのImageを配置
             Image(systemName: result.rawValue)
