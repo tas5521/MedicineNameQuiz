@@ -123,6 +123,7 @@ struct ResultView: View {
         List {
             // 繰り返し
             ForEach(questions) { question in
+                // Viewに必要な計算部分
                 // 問題側の薬名を取得
                 var questionName: String {
                     switch studyMode {
@@ -141,6 +142,17 @@ struct ResultView: View {
                         question.brandName
                     } // switch ここまで
                 } // questionName ここまで
+                // 学習結果（正解か不正解か）を取得
+                var studyResult: StudyResult {
+                    switch studyMode {
+                    case .brandToGeneric:
+                        question.brandToGenericResult
+                    case .genericToBrand:
+                        question.genericToBrandResult
+                    } // switch ここまで
+                } // studyResult ここまで
+
+                // Viewの定義部分
                 // 水平方向にレイアウト
                 HStack {
                     // 垂直方向にレイアウト
@@ -154,15 +166,6 @@ struct ResultView: View {
                     } // VStack ここまで
                     // スペースを空ける
                     Spacer()
-                    // 学習結果（正解か不正解か）を取得
-                    var studyResult: StudyResult {
-                        switch studyMode {
-                        case .brandToGeneric:
-                            question.brandToGenericResult
-                        case .genericToBrand:
-                            question.genericToBrandResult
-                        } // switch ここまで
-                    } // studyResult ここまで
                     // まる、または、ばつのImage
                     Image(systemName: studyResult.rawValue)
                         // 幅を15に指定
