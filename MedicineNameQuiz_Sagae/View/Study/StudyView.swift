@@ -150,10 +150,22 @@ struct StudyView: View {
 
     // カードのView
     private var flipCardView: some View {
+        // Viewに必要な値の定義の部分
         // カードの幅
         let width: CGFloat = 260
         // カードの高さ
         let height: CGFloat = 180
+        // 商品名か一般名かを示すテキスト
+        let brandOrGenericLabel: String = {
+            switch studyMode {
+            case .brandToGeneric:
+                isFront ? "商品名":"一般名"
+            case .genericToBrand:
+                isFront ? "一般名":"商品名"
+            } // switch ここまで
+        }() // brandOrGenericLabel ここまで
+
+        // Viewの定義の部分
         // ZStack を返す
         return ZStack {
             // 角の丸い長方形を配置
@@ -168,14 +180,8 @@ struct StudyView: View {
             Text(isFront ? "Q.":"A.")
                 // カードの左上に配置
                 .offset(CGSize(width: -100, height: -60.0))
-            Group {
-                switch studyMode {
-                case .brandToGeneric:
-                    Text(isFront ? "商品名":"一般名")
-                case .genericToBrand:
-                    Text(isFront ? "一般名":"商品名")
-                } // switch ここまで
-            } // Group ここまで
+            // 商品名か一般名かを示すテキストを配置
+            Text(brandOrGenericLabel)
             // カードの左上に配置
             .offset(CGSize(width: 0, height: -60.0))
             // 薬の名前のテキスト
