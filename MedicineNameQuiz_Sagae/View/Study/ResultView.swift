@@ -184,7 +184,7 @@ struct ResultView: View {
     // 正答率を計算するメソッド
     private func answerPercentage(questions: [StudyItem], studyMode: StudyMode) -> String {
         // 正解数を計算
-        let correctCount = questions.filter({
+        let correctCount = questions.filter {
             switch studyMode {
             // 商品名→一般名
             case .brandToGeneric:
@@ -193,7 +193,7 @@ struct ResultView: View {
             case .genericToBrand:
                 $0.genericToBrandResult == .correct
             } // switch ここまで
-        }).count
+        }.count
         // 正答率を計算して返却
         return String(format: "%.1f%%", Float(correctCount) / Float(questions.count) * 100)
     } // answerPercentage ここまで
