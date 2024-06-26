@@ -182,7 +182,7 @@ struct StudyView: View {
                 .offset(CGSize(width: -100, height: -60.0))
             // 商品名か一般名かを示すテキストを配置
             Text(brandOrGenericLabel)
-                // カードの左上に配置
+                // カードの上部に配置
                 .offset(CGSize(width: 0, height: -60.0))
             // 薬の名前のテキスト
             Text(medicineName)
