@@ -26,12 +26,22 @@ struct StudyView: View {
     let questionListID: UUID
     // モード選択を管理する変数
     let studyMode: StudyMode
+    // 出題設定を管理する変数
+    let questionSelection: QuestionSelectionMode
     // 問題番号を管理する変数
     @State private var questionNumber: Int = 0
 
     // View Presentation State
     // 結果画面の表示を管理する変数
     @State private var isShowResult: Bool = false
+
+    // 問題リストの名前
+    private var listName: String {
+        // 問題リストの配列から該当するUUIDの問題のindexを取得
+        guard let index = fetchedLists.firstIndex(where: { $0.id == questionListID }) else { return "" }
+        // 該当のIndexの問題リストから問題を取得
+        return fetchedLists[index].listName ?? ""
+    } // listName ここまで
 
     // カードフリップに関する変数
     // カードがめくられているかを管理する変数
@@ -104,6 +114,8 @@ struct StudyView: View {
                 Spacer()
             } // VStack ここまで
         } // ZStack ここまで
+        // タブバーを隠す
+        .toolbar(.hidden, for: .tabBar)
         // 画面が閉じられた時
         .onDisappear {
             // 学習結果を保存
@@ -112,7 +124,11 @@ struct StudyView: View {
         // 問題を解く画面へ遷移
         .navigationDestination(isPresented: $isShowResult) {
             // 結果画面を表示
-            ResultView(isStudying: $isStudying, questions: questions, studyMode: studyMode)
+            ResultView(isStudying: $isStudying,
+                       questions: questions,
+                       studyMode: studyMode,
+                       questionSelection: questionSelection,
+                       listName: listName)
         } // navigationDestination ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
@@ -134,10 +150,22 @@ struct StudyView: View {
 
     // カードのView
     private var flipCardView: some View {
+        // Viewに必要な値の定義の部分
         // カードの幅
         let width: CGFloat = 260
         // カードの高さ
         let height: CGFloat = 180
+        // 商品名か一般名かを示すテキスト
+        let brandOrGenericLabel: String = {
+            switch studyMode {
+            case .brandToGeneric:
+                isFront ? "商品名":"一般名"
+            case .genericToBrand:
+                isFront ? "一般名":"商品名"
+            } // switch ここまで
+        }() // brandOrGenericLabel ここまで
+
+        // Viewの定義の部分
         // ZStack を返す
         return ZStack {
             // 角の丸い長方形を配置
@@ -150,17 +178,19 @@ struct StudyView: View {
                 .shadow(color: .gray, radius: 2, x: 0, y: 0)
             // 左上のテキストを表面ではQ、裏面ではAにする
             Text(isFront ? "Q.":"A.")
-                // 太字にする
-                .bold()
                 // カードの左上に配置
                 .offset(CGSize(width: -100, height: -60.0))
+            // 商品名か一般名かを示すテキストを配置
+            Text(brandOrGenericLabel)
+                // カードの上部に配置
+                .offset(CGSize(width: 0, height: -60.0))
             // 薬の名前のテキスト
             Text(medicineName)
-                // 太字にする
-                .bold()
                 // 幅高さを指定
                 .frame(width: width - 50, height: height - 50)
         } // ZStack ここまで
+        // 太字にする
+        .bold()
         // 文字の色を表面では黒、裏面では赤にする
         .foregroundStyle(isFront ? .black : .red)
         // 回転エフェクトをつける
@@ -286,5 +316,6 @@ struct StudyView: View {
     return StudyView(isStudying: .constant(true),
                      questions: .constant(dummyQuestions),
                      questionListID: UUID(),
-                     studyMode: .brandToGeneric)
+                     studyMode: .brandToGeneric,
+                     questionSelection: .all)
 }
