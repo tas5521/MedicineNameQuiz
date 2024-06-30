@@ -120,14 +120,14 @@ struct StudyView: View {
         .onAppear {
             // StudyViewが生成するタイミングで、複数のViewを同時に操作できなくする
             // これにより、生成したStudyViewで、複数のViewを同時に操作できなくなる
-            preventTouchingViewsAtTheSameTime()
+            willPreventTouchingViewsAtTheSameTime()
         } // onAppear ここまで
         // 画面が閉じられた時
         .onDisappear {
             // StudyViewが消滅した後に、次に生成するViewで、複数のViewを同時に操作できなくなる
             // 例えば、ResultViewへの遷移が完了してStudyViewが消滅した際、次に生成するViewで、複数のViewを同時に操作できなくなる
             // それにより、BackボタンでResultViewからStudyViewに戻った際、生成するStudyViewでは、複数のViewを同時に操作できなくなる
-            preventTouchingViewsAtTheSameTime()
+            willpreventTouchingViewsAtTheSameTime()
             // 学習結果を保存
             saveStudyResult()
         } // onDisappear ここまで
@@ -314,11 +314,11 @@ struct StudyView: View {
     } // saveStudyResult ここまで
 
     // 複数のViewの同時にタッチすることを不可能にするメソッド
-    private func preventTouchingViewsAtTheSameTime() {
+    private func willPreventTouchingViewsAtTheSameTime() {
         // 1つのビューがタッチを受けている間、他のビューがそのタッチを受け付けないようにする
         // これにより、同時に複数のビューがタッチイベントを処理しようとするのを防ぐ
         UIView.appearance().isExclusiveTouch = true
-    } // preventTouchingViewsAtTheSameTime ここまで
+    } // willPreventTouchingViewsAtTheSameTime ここまで
 } // StudyView ここまで
 
 #Preview {

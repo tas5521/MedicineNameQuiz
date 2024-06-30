@@ -157,7 +157,7 @@ struct ModeSelectionView: View {
                 // StudyViewが表示された後、ModeSelectionViewが消失した時に発火する
                 // これにより、その次に生成されるResultViewでは、複数のViewを同時に操作できるようになる
                 // また、StudyViewからBackボタンでModeSelectionViewに遷移した際にも、複数のViewを同時に操作できるようになる
-                allowViewsToBeTouchedAtTheSameTime()
+                willAllowViewsToBeTouchedAtTheSameTime()
             } // onDisappear ここまで
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("学習", displayMode: .inline)
@@ -167,10 +167,10 @@ struct ModeSelectionView: View {
     } // body ここまで
 
     // 複数のViewの同時にタッチすることを可能にするメソッド
-    private func allowViewsToBeTouchedAtTheSameTime() {
+    private func willAllowViewsToBeTouchedAtTheSameTime() {
         // 同時に複数のビューのタッチを受け付ける
         UIView.appearance().isExclusiveTouch = false
-    } // allowViewsToBeTouchedAtTheSameTime ここまで
+    } // willAllowViewsToBeTouchedAtTheSameTime ここまで
 } // ModeSelectionView ここまで
 
 #Preview {

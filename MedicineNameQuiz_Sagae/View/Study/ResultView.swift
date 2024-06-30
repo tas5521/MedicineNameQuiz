@@ -80,7 +80,7 @@ struct ResultView: View {
             // ResultViewが消滅した後に、次に生成するViewで、複数のViewを同時に操作できるようにする
             // 例えば、BackボタンでResultViewからStudyViewに戻った際、次に生成するViewでは、複数のViewを同時に操作できるようになる
             // それにより、StudyViewへの遷移が完了してResultViewが消滅した際、次に生成するResultViewでは、複数のViewを同時に操作できるようになる
-            allowViewsToBeTouchedAtTheSameTime()
+            willAllowViewsToBeTouchedAtTheSameTime()
         } // onDisappear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習結果", displayMode: .inline)
@@ -93,7 +93,7 @@ struct ResultView: View {
                 Button {
                     // ResultViewとStudyViewを閉じる前に、次に生成するViewでは、複数のViewを同時に操作できるようにする
                     // それにより、次に生成されるModeSelectionViewでは、複数のViewを同時に操作できるようになる
-                    allowViewsToBeTouchedAtTheSameTime()
+                    willAllowViewsToBeTouchedAtTheSameTime()
                     // ResultViewとStudyViewを閉じる
                     isStudying = false
                 } label: {
@@ -208,10 +208,10 @@ struct ResultView: View {
     } // answerPercentage ここまで
 
     // 複数のViewの同時にタッチすることを可能にするメソッド
-    private func allowViewsToBeTouchedAtTheSameTime() {
+    private func willAllowViewsToBeTouchedAtTheSameTime() {
         // 同時に複数のビューのタッチを受け付ける
         UIView.appearance().isExclusiveTouch = false
-    } // allowViewsToBeTouchedAtTheSameTime ここまで
+    } // willAllowViewsToBeTouchedAtTheSameTime ここまで
 } // ResultView ここまで
 
 #Preview {
