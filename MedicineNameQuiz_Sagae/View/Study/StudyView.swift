@@ -127,7 +127,7 @@ struct StudyView: View {
             // StudyViewが消滅した後に、次に生成するViewで、複数のViewを同時に操作できなくなる
             // 例えば、ResultViewへの遷移が完了してStudyViewが消滅した際、次に生成するViewで、複数のViewを同時に操作できなくなる
             // それにより、BackボタンでResultViewからStudyViewに戻った際、生成するStudyViewでは、複数のViewを同時に操作できなくなる
-            willpreventTouchingViewsAtTheSameTime()
+            willPreventTouchingViewsAtTheSameTime()
             // 学習結果を保存
             saveStudyResult()
         } // onDisappear ここまで
