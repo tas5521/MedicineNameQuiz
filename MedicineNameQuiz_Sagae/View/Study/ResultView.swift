@@ -75,6 +75,11 @@ struct ResultView: View {
             // 太字にする
             .bold()
         } // ZStack ここまで
+        // 画面が閉じられた時
+        .onDisappear {
+            // 同時に複数のビューのタッチを受け付ける
+            allowViewsToBeTouchedAtTheSameTime()
+        } // onDisappear ここまで
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習結果", displayMode: .inline)
         // ナビゲーションバーの背景を変更
@@ -84,7 +89,8 @@ struct ResultView: View {
             // ボタンの位置を指定
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    // 保存処理
+                    // 同時に複数のビューのタッチを受け付ける。
+                    allowViewsToBeTouchedAtTheSameTime()
                     // // ResultViewとStudyViewを閉じる
                     isStudying = false
                 } label: {
@@ -197,6 +203,11 @@ struct ResultView: View {
         // 正答率を計算して返却
         return String(format: "%.1f%%", Float(correctCount) / Float(questions.count) * 100)
     } // answerPercentage ここまで
+
+    // 複数のViewの同時にタッチすることを可能にするメソッド
+    private func allowViewsToBeTouchedAtTheSameTime() {
+        UIView.appearance().isExclusiveTouch = false
+    } // allowViewsToBeTouchedAtTheSameTime ここまで
 } // ResultView ここまで
 
 #Preview {

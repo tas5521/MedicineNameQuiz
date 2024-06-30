@@ -116,8 +116,16 @@ struct StudyView: View {
         } // ZStack ここまで
         // タブバーを隠す
         .toolbar(.hidden, for: .tabBar)
+        .onAppear {
+            // 1つのビューがタッチを受けている間、他のビューがそのタッチを受け付けないようにする
+            // これにより、同時に複数のビューがタッチイベントを処理しようとするのを防ぐ
+            preventTouchingViewsAtTheSameTime()
+        } // onAppear ここまで
         // 画面が閉じられた時
         .onDisappear {
+            // 1つのビューがタッチを受けている間、他のビューがそのタッチを受け付けないようにする
+            // これにより、同時に複数のビューがタッチイベントを処理しようとするのを防ぐ
+            preventTouchingViewsAtTheSameTime()
             // 学習結果を保存
             saveStudyResult()
         } // onDisappear ここまで
@@ -302,6 +310,11 @@ struct StudyView: View {
             print("エラー: \(error)")
         } // do-try-catch ここまで
     } // saveStudyResult ここまで
+
+    // 複数のViewの同時にタッチすることを不可能にするメソッド
+    private func preventTouchingViewsAtTheSameTime() {
+        UIView.appearance().isExclusiveTouch = true
+    } // preventTouchingViewsAtTheSameTime ここまで
 } // StudyView ここまで
 
 #Preview {

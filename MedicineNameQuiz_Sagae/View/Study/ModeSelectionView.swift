@@ -152,13 +152,22 @@ struct ModeSelectionView: View {
                     viewModel.saveUserSelection()
                 } // if ここまで
             } // onAppear ここまで
-            // ナビゲーションバーの設定
+            // 画面が閉じられた時
+            .onDisappear {
+                // 同時に複数のビューのタッチを受け付ける
+                allowViewsToBeTouchedAtTheSameTime()
+            } // onDisappear ここまで
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("学習", displayMode: .inline)
             // ナビゲーションバーの背景を変更
             .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
+
+    // 複数のViewの同時にタッチすることを可能にするメソッド
+    private func allowViewsToBeTouchedAtTheSameTime() {
+        UIView.appearance().isExclusiveTouch = false
+    } // allowViewsToBeTouchedAtTheSameTime ここまで
 } // ModeSelectionView ここまで
 
 #Preview {
