@@ -116,15 +116,17 @@ struct StudyView: View {
         } // ZStack ここまで
         // タブバーを隠す
         .toolbar(.hidden, for: .tabBar)
+        // 画面が表示された時
         .onAppear {
-            // 1つのビューがタッチを受けている間、他のビューがそのタッチを受け付けないようにする
-            // これにより、同時に複数のビューがタッチイベントを処理しようとするのを防ぐ
+            // StudyViewが生成するタイミングで、複数のViewを同時に操作できなくする
+            // これにより、生成したStudyViewで、複数のViewを同時に操作できなくなる
             preventTouchingViewsAtTheSameTime()
         } // onAppear ここまで
         // 画面が閉じられた時
         .onDisappear {
-            // 1つのビューがタッチを受けている間、他のビューがそのタッチを受け付けないようにする
-            // これにより、同時に複数のビューがタッチイベントを処理しようとするのを防ぐ
+            // StudyViewが消滅した後に、次に生成するViewで、複数のViewを同時に操作できなくなる
+            // 例えば、ResultViewへの遷移が完了してStudyViewが消滅した際、次に生成するViewで、複数のViewを同時に操作できなくなる
+            // それにより、BackボタンでResultViewからStudyViewに戻った際、生成するStudyViewでは、複数のViewを同時に操作できなくなる
             preventTouchingViewsAtTheSameTime()
             // 学習結果を保存
             saveStudyResult()
@@ -313,6 +315,8 @@ struct StudyView: View {
 
     // 複数のViewの同時にタッチすることを不可能にするメソッド
     private func preventTouchingViewsAtTheSameTime() {
+        // 1つのビューがタッチを受けている間、他のビューがそのタッチを受け付けないようにする
+        // これにより、同時に複数のビューがタッチイベントを処理しようとするのを防ぐ
         UIView.appearance().isExclusiveTouch = true
     } // preventTouchingViewsAtTheSameTime ここまで
 } // StudyView ここまで
