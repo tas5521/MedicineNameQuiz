@@ -84,8 +84,7 @@ struct ResultView: View {
             // ボタンの位置を指定
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    // 保存処理
-                    // // ResultViewとStudyViewを閉じる
+                    // ResultViewとStudyViewを閉じる
                     isStudying = false
                 } label: {
                     // ラベル
