@@ -234,7 +234,7 @@ struct StudyView: View {
         // もし最後の問題だったら
         if questionNumber >= questions.count - 1 {
             // 結果画面を表示
-            isShowResult.toggle()
+            isShowResult = true
             // もし最後の問題でなかったら
         } else {
             // カードをめくり、指定した時間待機する
