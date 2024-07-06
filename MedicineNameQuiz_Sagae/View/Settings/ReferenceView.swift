@@ -10,12 +10,6 @@ import SwiftUI
 struct ReferenceView: View {
     // 項目のタイトル
     let title: String
-    // 薬リストの出典元のURL
-    private let url: String = "https://www.mhlw.go.jp/topics/2024/04/tp20240401-01.html"
-    // 薬リストの出典元の日にち（バージョン）
-    private let oralDate: String = "令和6年7月1日"
-    private let injectionDate: String = "令和6年6月14日"
-    private let topicalDate: String = "令和6年6月14日"
 
     var body: some View {
         // 奥から手前にレイアウト
@@ -29,15 +23,15 @@ struct ReferenceView: View {
                 // 出典元を記載
                 Text("出典：「薬価基準収載品目リスト及び後発医薬品に関する情報について」（厚生労働省）")
                 // リンクを追加
-                Text(.init("\(url)"))
+                Text(.init("\(ReferenceData.url)"))
                 // 説明文
                 Text("本アプリでは、薬価基準収載品目リストから、\n先発品の一部を抜粋して出題しています。")
                     .padding(.vertical)
                 // 各品目のバージョン
                 Text("-薬価基準収載品目リストのバージョン-")
-                Text(" 内用薬: \(oralDate)")
-                Text(" 注射薬: \(injectionDate)")
-                Text(" 外用薬: \(topicalDate)")
+                Text(" 内用薬: \(ReferenceData.oralDate)")
+                Text(" 注射薬: \(ReferenceData.injectionDate)")
+                Text(" 外用薬: \(ReferenceData.topicalDate)")
                 // スペースを空ける
                 Spacer()
             } // VStack ここまで
