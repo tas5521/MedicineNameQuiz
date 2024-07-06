@@ -35,18 +35,16 @@ struct ModeSelectionView: View {
                     .ignoresSafeArea()
                 // 垂直方向にレイアウト
                 VStack {
+                    // 余白を追加
+                    Spacer()
                     // 垂直方向にレイアウト（Viewを左に寄せる）
                     VStack(alignment: .leading) {
-                        // スペースを空ける
-                        Spacer()
-
                         // 問題リストの選択を促すテキスト
                         Text("問題リスト選択")
                             // フォントを.titleに指定
                             .font(.title2)
                             // 太字にする
                             .bold()
-
                         // 問題リスト選択用のPicker
                         Picker("問題リスト選択", selection: $viewModel.questionListID) {
                             ForEach(questionListPickerItems) { item in
@@ -56,19 +54,14 @@ struct ModeSelectionView: View {
                         } // Picker ここまで
                         // ホイールで表示
                         .pickerStyle(.wheel)
-                        // 上下の余白を20減らす
-                        .padding([.top, .bottom], -20)
-
-                        // スペースを空ける
-                        Spacer()
-
+                        // 上下の余白を50減らす
+                        .padding([.top, .bottom], -50)
                         // モード選択を促すテキスト
                         Text("問題リストからの出題設定")
                             // フォントを.titleに指定
                             .font(.title2)
                             // 太字にする
                             .bold()
-
                         // 出題モード選択用のPicker
                         Picker("出題モード選択", selection: $viewModel.studyMode) {
                             // 要素を繰り返す
@@ -100,9 +93,7 @@ struct ModeSelectionView: View {
                     // 上下左右に余白を追加
                     .padding()
                     Text("リスト内の全ての問題に正解している場合は、\nわからない問題を選択しても、全問出題されます")
-                        .padding(.bottom)
-                    // スペースを空ける
-                    Spacer()
+                        .padding(.vertical)
                     // スタートボタンを配置
                     Button {
                         // 問題を作成
@@ -125,8 +116,11 @@ struct ModeSelectionView: View {
                             // 角を丸くする
                             .clipShape(.buttonBorder)
                     } // Button ここまで
-                    .padding(.bottom, 80)
+                    // スペースを空ける
+                    Spacer()
                 } // VStack ここまで
+                // セーフエリアを無視する
+                .edgesIgnoringSafeArea(.all)
                 // 問題を解く画面へ遷移
                 .navigationDestination(isPresented: $isStudying) {
                     StudyView(isStudying: $isStudying,

@@ -12,6 +12,8 @@ struct CreateQuestionListView: View {
     @Environment(\.managedObjectContext) private var context
     // 画面を閉じるために用いる環境変数
     @Environment(\.dismiss) private var dismiss
+    // タブバーの表示を管理する変数
+    @State private var tabVisibility: Visibility = .hidden
 
     // CreateQuestionListViewModelのインスタンスを生成
     @State private var viewModel: CreateQuestionListViewModel
@@ -94,8 +96,9 @@ struct CreateQuestionListView: View {
                 } // switch ここまで
             } // VStack ここまで
         } // ZStack ここまで
-        // タブバーを隠す
-        .toolbar(.hidden, for: .tabBar)
+        // タブバーの表示を管理
+        .toolbar(tabVisibility, for: .tabBar)
+        // 画面が表示された時に実行
         .onAppear {
             // 薬リストをフェッチ
             viewModel.fetchListItems(from: fetchedCustomMedicines)
@@ -122,6 +125,8 @@ struct CreateQuestionListView: View {
             // ボタンの位置を左に指定
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    // 画面を閉じるより前にタブを表示する
+                    tabVisibility = .visible
                     // 画面を閉じる
                     dismiss()
                 } label: {
@@ -134,6 +139,8 @@ struct CreateQuestionListView: View {
             // ボタンの位置を右に指定
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    // 画面を閉じるより前にタブを表示する
+                    tabVisibility = .visible
                     // 保存処理
                     viewModel.saveQuestionList(context: context, dismiss: dismiss)
                 } label: {
