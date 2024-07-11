@@ -50,7 +50,7 @@ struct BannerView: UIViewControllerRepresentable {
     // バナーViewのインスタンスを生成
     private let bannerView: GADBannerView = GADBannerView()
     // テスト専用広告ユニットID
-    private let adUnitID: String = "ca-app-pub-3940256099942544/2934735716"
+    private let adUnitID: String = Bundle.main.object(forInfoDictionaryKey: "BannerUnitID") as? String ?? ""
 
     // Viewのコントローラを生成
     func makeUIViewController(context: Context) -> some UIViewController {
