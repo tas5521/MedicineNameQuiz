@@ -49,14 +49,14 @@ struct BannerView: UIViewControllerRepresentable {
     @State private var viewWidth: CGFloat = .zero
     // バナーViewのインスタンスを生成
     private let bannerView: GADBannerView = GADBannerView()
-    // テスト専用広告ユニットID
-    private let adUnitID: String = "ca-app-pub-3940256099942544/2934735716"
+    // 広告ユニットID
+    private let adUnitID: String = Bundle.main.object(forInfoDictionaryKey: "BannerUnitID") as? String ?? ""
 
     // Viewのコントローラを生成
     func makeUIViewController(context: Context) -> some UIViewController {
         // BannerViewControllerのインスタンスを生成
         let bannerViewController = BannerViewController()
-        // バナーViewにテスト専用広告ユニットIDを指定
+        // バナーViewに広告ユニットIDを指定
         bannerView.adUnitID = adUnitID
         // バナーViewに、そのコントローラとして、bannerViewControllerを指定
         bannerView.rootViewController = bannerViewController
