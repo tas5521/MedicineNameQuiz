@@ -32,7 +32,9 @@ struct ReferenceView: View {
                 Text(.init("\(url)"))
                 // 説明文
                 Text("本アプリでは、薬価基準収載品目リストから、\n先発品の一部を抜粋して出題しています。")
-                    .padding(.vertical)
+                    .padding(.top)
+                Text("出題される薬名は、元のリストの記載から一部加工されています。")
+                    .padding(.bottom)
                 // 各品目のバージョン
                 Text("-薬価基準収載品目リストのバージョン-")
                 Text(" 内用薬: \(oralDate)")
