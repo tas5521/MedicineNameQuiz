@@ -6,6 +6,8 @@
 	<string>$(GAD_APP_ID)</string>
 	<key>BannerUnitID</key>
 	<string>$(GAD_BANNER_UNIT_ID)</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>このアプリでは、広告のパーソナライズのためにトラッキングを使用します</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
