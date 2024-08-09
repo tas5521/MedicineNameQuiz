@@ -153,26 +153,21 @@ struct BannerView: UIViewControllerRepresentable {
 
     // トラッキングが許可されているかを確認するメソッド
     private func isTrackingAuthorized() -> Bool {
-        if #available(iOS 14.5, *) {
-            // トラッキングの許可状態を確認
-            switch ATTrackingManager.trackingAuthorizationStatus {
-            case .authorized:
-                // トラッキングが許可されている場合
-                print("Tracking authorized")
-                return true
-            case .denied, .restricted, .notDetermined:
-                // トラッキングが許可されていない場合、または、まだ決定されていない場合
-                print("Tracking not authorized")
-                return false
-            @unknown default:
-                // 未知のエラー処理
-                print("Unknown tracking status")
-                return false
-            } // switch ここまで
-        } else {
-            // iOS14.5以前ではトラッキングの許可状態を確認する必要がない
+        // トラッキングの許可状態を確認
+        switch ATTrackingManager.trackingAuthorizationStatus {
+        case .authorized:
+            // トラッキングが許可されている場合
+            print("Tracking authorized")
             return true
-        } // if ここまで
+        case .denied, .restricted, .notDetermined:
+            // トラッキングが許可されていない場合、または、まだ決定されていない場合
+            print("Tracking not authorized")
+            return false
+        @unknown default:
+            // 未知のエラー処理
+            print("Unknown tracking status")
+            return false
+        } // switch ここまで
     } // isTrackingAuthorized ここまで
 } // BannerView ここまで
 

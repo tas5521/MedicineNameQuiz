@@ -25,25 +25,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // トラッキングの許可をリクエストするメソッド
     private func requestTrackingAuthorization() {
-        if #available(iOS 14.5, *) {
-            // ポップアップ表示のタイミングを遅らせる為に処理を遅延させる（こうしないとポップアップが表示されない）
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                // ユーザーにトラッキングの許可をリクエスト
-                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                    // デバッグエリアに結果を表示
-                    switch status {
-                    case .authorized:
-                        print("Tracking authorized")
-                    case .denied, .notDetermined, .restricted:
-                        print("Tracking not authorized")
-                    @unknown default:
-                        print("Unknown tracking status")
-                    } // switch ここまで
-                }) // requestTrackingAuthorization ここまで
-            } // DispatchQueue.main.asyncAfter ここまで
-        } else {
-            // iOS14.5以前ではトラッキングの許可リクエストは不要
-            print("Tracking authorization not needed for iOS versions prior to 14.5")
-        } // if ここまで
+        // ポップアップ表示のタイミングを遅らせる為に処理を遅延させる（こうしないとポップアップが表示されない）
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // ユーザーにトラッキングの許可をリクエスト
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                // デバッグエリアに結果を表示
+                switch status {
+                case .authorized:
+                    print("Tracking authorized")
+                case .denied, .notDetermined, .restricted:
+                    print("Tracking not authorized")
+                @unknown default:
+                    print("Unknown tracking status")
+                } // switch ここまで
+            }) // requestTrackingAuthorization ここまで
+        } // DispatchQueue.main.asyncAfter ここまで
     } // requestTrackingAuthorization ここまで
 } // AppDelegate ここまで
