@@ -6,6 +6,7 @@
 //
 
 import GoogleMobileAds
+import AppTrackingTransparency
 
 // アプリケーションのライフサイクルイベントを処理するためのデリゲート（ここでは、広告を表示する準備をする）
 // UIResponderクラスはイベント処理の基盤を提供
@@ -16,7 +17,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // GADMobileAdsクラスから共有インスタンスを取得し、Google Mobile Ads SDKを初期化
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        // トラッキングの許可をリクエスト
+        requestTrackingAuthorization()
         // trueを返すことで、アプリケーションの起動が正常に完了したことを示す
         return true
     } // application ここまで
+
+    // トラッキングの許可をリクエストするメソッド
+    private func requestTrackingAuthorization() {
+        // ポップアップ表示のタイミングを遅らせる為に処理を遅延させる（こうしないとポップアップが表示されない）
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // ユーザーにトラッキングの許可をリクエスト
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                // デバッグエリアに結果を表示
+                switch status {
+                case .authorized:
+                    print("Tracking authorized")
+                case .denied, .notDetermined, .restricted:
+                    print("Tracking not authorized")
+                @unknown default:
+                    print("Unknown tracking status")
+                } // switch ここまで
+            }) // requestTrackingAuthorization ここまで
+        } // DispatchQueue.main.asyncAfter ここまで
+    } // requestTrackingAuthorization ここまで
 } // AppDelegate ここまで

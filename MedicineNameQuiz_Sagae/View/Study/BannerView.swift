@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GoogleMobileAds
+import AppTrackingTransparency
 
 // バナーViewのコントローラが画面の幅を取得するためのDelegateメソッドを定義するプロトコル
 protocol BannerViewControllerWidthDelegate: AnyObject {
@@ -79,8 +80,26 @@ struct BannerView: UIViewControllerRepresentable {
         guard viewWidth != .zero else { return }
         // 幅が更新されたら、その値をバナーの広告の幅に指定
         bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+        // リクエストを取得
+        let request = GADRequest()
+        // トラッキングが許可されているか確認する。
+        // 許可されていたら、デフォルトのまま（パーソナライズド広告のリクエストを設定）
+        // 許可されていない場合、ノンパーソナライズド広告のリクエストを設定
+        if isTrackingAuthorized() {
+            // トラッキングの許可の状態をデバッグエリアに表示
+            print("トラッキングは許可されています：パーソナライズド広告を指定")
+        } else {
+            // トラッキングの許可の状態をデバッグエリアに表示
+            print("トラッキングは許可されていません：ノンパーソナライズド広告を指定")
+            // 広告リクエストに追加のパラメータを追加するためのクラスのインスタンスを生成
+            let extras = GADExtras()
+            // ノンパーソナライズド広告を表示するよう指定
+            extras.additionalParameters = ["npa": "1"]
+            // 広告リクエストに追加の設定を反映
+            request.register(extras)
+        } // if ここまで
         // バナーを読み込み
-        bannerView.load(GADRequest())
+        bannerView.load(request)
     } // updateUIViewController ここまで
 
     // Coordinatorを作成
@@ -131,6 +150,25 @@ struct BannerView: UIViewControllerRepresentable {
             print("\(#function) called")
         } // bannerViewDidDismissScreen ここまで
     } // Coordinator ここまで
+
+    // トラッキングが許可されているかを確認するメソッド
+    private func isTrackingAuthorized() -> Bool {
+        // トラッキングの許可状態を確認
+        switch ATTrackingManager.trackingAuthorizationStatus {
+        case .authorized:
+            // トラッキングが許可されている場合
+            print("Tracking authorized")
+            return true
+        case .denied, .restricted, .notDetermined:
+            // トラッキングが許可されていない場合、または、まだ決定されていない場合
+            print("Tracking not authorized")
+            return false
+        @unknown default:
+            // 未知のエラー処理
+            print("Unknown tracking status")
+            return false
+        } // switch ここまで
+    } // isTrackingAuthorized ここまで
 } // BannerView ここまで
 
 #Preview {
