@@ -29,6 +29,7 @@
 ## 9. 工夫したコード
 
 ## 10. その他リンク
-アプリ紹介ホームページ<br>
-作成者のXアカウント<br>
+[アプリ紹介ホームページ](https://tas5521.github.io/MedicineNameQuiz/index.html)<br>
+[作成者のXアカウント](https://x.com/ta_s11152)<br>
 薬名のリスト作成のためにPythonで作成したツール<br>
+[作成中の他のアプリ（数独ソルバー）](https://github.com/tas5521/SudokuSolver)
