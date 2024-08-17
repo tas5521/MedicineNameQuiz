@@ -17,8 +17,9 @@
 <img width="200" src="ScreenShots/Simulator%20Screenshot%20-%20iPhone%2015%20Pro_2.png">
 
 - 暗記カードを使って学習できます。
-<img width="200" src="ScreenShots/Simulator%20Screen%20Recording%20-%20iPhone%2015%20Pro_1.gif">
-
+<div style="width:200px; overflow:hidden;">
+    <img src="ScreenShots/Simulator%20Screen%20Recording%20-%20iPhone%2015%20Pro_1.gif" style="width:100%; object-fit:cover;" alt="Sample GIF">
+</div>
 
 - 学習結果は記録されるため、知識の定着具合を確認できます。
 <img width="200" src="ScreenShots/Simulator%20Screenshot%20-%20iPhone%2015%20Pro_3.png">
