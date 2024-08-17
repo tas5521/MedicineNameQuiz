@@ -13,18 +13,14 @@
 商品名と一般名の対応関係を確認できます。<br>
 <img width="250" src="ScreenShots/Explanation_1.gif"><br>
 
-
 薬局や病院によって扱っている薬は様々なので、ユーザー個別の問題リストを作成できるようにしました。<br>
 <img width="250" src="ScreenShots/Explanation_2.gif"><br>
-
 
 暗記カードを使って学習できます。<br>
 <img width="250" src="ScreenShots/Explanation_3.gif"><br>
 
-
 学習結果は記録されるため、知識の定着具合を確認できます。<br>
 <img width="250" src="ScreenShots/Explanation_4.gif"><br>
-
 
 まだ覚えていない薬名だけに絞って出題できるため、効率よく学習できます。<br>
 <img width="250" src="ScreenShots/Explanation_5.gif"><br>
