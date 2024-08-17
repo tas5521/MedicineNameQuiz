@@ -10,9 +10,12 @@
 [![App_Store_Badge_JP](https://user-images.githubusercontent.com/68992872/204145956-f5cc0fa8-d4c9-4f2c-b1d4-3c3b1d2e2aba.png)](https://apps.apple.com/jp/app/%E8%96%AC%E5%90%8D%E6%9A%97%E8%A8%98%E3%82%AB%E3%83%BC%E3%83%89/id6502452243)
 
 ## 3. アプリの機能
-商品名と一般名の対応関係を確認できます。<br>
+本アプリで扱うことのできる薬の商品名と一般名を確認できるようにするため、薬リストを作成しました。<br>
+薬は沢山あるので、検索できるようにしました。<br>
 <img width="250" src="ScreenShots/Explanation_1.gif"><br>
 
+解決したい課題
+アプリが解決する手法
 薬局や病院によって扱っている薬は様々なので、ユーザー個別の問題リストを作成できるようにしました。<br>
 <img width="250" src="ScreenShots/Explanation_2.gif"><br>
 
