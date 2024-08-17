@@ -10,19 +10,19 @@
 [![App_Store_Badge_JP](https://user-images.githubusercontent.com/68992872/204145956-f5cc0fa8-d4c9-4f2c-b1d4-3c3b1d2e2aba.png)](https://apps.apple.com/jp/app/%E8%96%AC%E5%90%8D%E6%9A%97%E8%A8%98%E3%82%AB%E3%83%BC%E3%83%89/id6502452243)
 
 ## 3. アプリの機能
-商品名と一般名の対応関係を確認できます。<br>
+### 商品名と一般名の対応関係を確認できます。<br>
 <img width="250" src="ScreenShots/Explanation_1.gif"><br>
 
-薬局や病院によって扱っている薬は様々なので、ユーザー個別の問題リストを作成できるようにしました。<br>
+### 薬局や病院によって扱っている薬は様々なので、ユーザー個別の問題リストを作成できるようにしました。<br>
 <img width="250" src="ScreenShots/Explanation_2.gif"><br>
 
-暗記カードを使って学習できます。<br>
+### 暗記カードを使って学習できます。<br>
 <img width="250" src="ScreenShots/Explanation_3.gif"><br>
 
-学習結果は記録されるため、知識の定着具合を確認できます。<br>
+### 学習結果は記録されるため、知識の定着具合を確認できます。<br>
 <img width="250" src="ScreenShots/Explanation_4.gif"><br>
 
-まだ覚えていない薬名だけに絞って出題できるため、効率よく学習できます。<br>
+### まだ覚えていない薬名だけに絞って出題できるため、効率よく学習できます。<br>
 <img width="250" src="ScreenShots/Explanation_5.gif"><br>
 
 ## 4. アプリの設計
