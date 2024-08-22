@@ -124,7 +124,7 @@
 
 ## 9. 工夫したコード
 ### Concurrencyを利用して、カードがめくられる動作を実装しました。
-カードがめくられる様子
+カードがめくられる様子<br>
 <img width="250" src="ScreenShots/Explanation_6.gif"><br>
 
 めくられるカードを実装したコード
