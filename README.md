@@ -125,7 +125,7 @@
 ## 9. 工夫したコード
 ### Concurrencyを利用して、カードがめくられる動作を実装しました。
 カードがめくられる様子
-ScreenShots/Explanation_6.gif
+<img width="250" src="ScreenShots/Explanation_6.gif"><br>
 
 めくられるカードを実装したコード
 https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/c900f9256685f46a0dbc441c500abddc7078ac06/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L151-L230
