@@ -131,10 +131,113 @@
 
 めくられるカードを実装したコード
 https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/ab7f0e6466e8ee29618a42fa0331f17ac3346b8f/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L46-L54
+https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/edda771fe3d11a5ab7f84d152883e25e4e2811d6/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L139-L149
 https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/c900f9256685f46a0dbc441c500abddc7078ac06/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L151-L230
 
-解説
+### 解説
+カードがタップされると、横方向に回転し、裏面の答えが表示されます。<br>
+まず、カードのViewを作成しました。<br>
+```swift
+ // カードのView 
+ private var flipCardView: some View {
+     // Viewに必要な値の定義の部分 
+     // カードの幅 
+     let width: CGFloat = 260 
+     // カードの高さ 
+     let height: CGFloat = 180 
+     // 商品名か一般名かを示すテキスト 
+     let brandOrGenericLabel: String = { 
+         switch studyMode { 
+         case .brandToGeneric: 
+             isFront ? "商品名":"一般名" 
+         case .genericToBrand: 
+             isFront ? "一般名":"商品名" 
+         } // switch ここまで 
+     }() // brandOrGenericLabel ここまで 
+  
+     // Viewの定義の部分 
+     // ZStack を返す 
+     return ZStack { 
+         // 角の丸い長方形を配置 
+         RoundedRectangle(cornerRadius: 20) 
+             // 白で塗る 
+             .fill(.white) 
+             // 幅高さを指定 
+             .frame(width: width, height: height) 
+             // 影をつける 
+             .shadow(color: .gray, radius: 2, x: 0, y: 0) 
+         // 左上のテキストを表面ではQ、裏面ではAにする 
+         Text(isFront ? "Q.":"A.") 
+             // カードの左上に配置 
+             .offset(CGSize(width: -100, height: -60.0)) 
+         // 商品名か一般名かを示すテキストを配置 
+         Text(brandOrGenericLabel) 
+             // カードの上部に配置 
+             .offset(CGSize(width: 0, height: -60.0)) 
+         // 薬の名前のテキスト 
+         Text(medicineName) 
+             // 幅高さを指定 
+             .frame(width: width - 50, height: height - 50) 
+     } // ZStack ここまで 
+```
+<br>
 
+
+カードの回転エフェクトは.rotation3DEffectにより実装しました。<br>
+cardDegree変数の値を変更することで、カードの回転の角度を指定します。<br>
+カードはy軸（縦軸）の周りに回転します。<br>
+```swift
+     // 回転エフェクトをつける 
+     .rotation3DEffect(Angle(degrees: cardDegree), axis: (x: 0, y: 1, z: 0)) 
+```
+<br>
+
+カードがタップされたかどうかは.onTapGestureで検知しました。<br>
+ここでは、カードに表示されている文字とその色を適切なタイミングで変更するため、Concurrencyの機能を使っています。<br>
+```swift
+     // カードがタップされたら 
+     .onTapGesture { 
+         Task { 
+             // カードをめくる
+             await flipCard() 
+         } // Task ここまで 
+     } // onTapGesture ここまで 
+```
+<br>
+
+まず、isCardFlipped.toggle()により、カードがめくられているかどうかを切り替えます。<br>
+isCardFlippedがtrueになると、0.1秒（duration）かけてカードが90°回転します。その間を、Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000)) により、待機します。<br>
+カードが90°回転したら、一瞬のうちにカードをさらに180°回転し、回転の角度を270°にします。これにより、文字の向きを合わせます。<br>
+さらにこの瞬間に、isFront.toggle()により、カードの表と裏を切り替えます。これにより、カードに表示される商品名と一般名の文字が切り替わります（文字の色も黒と赤で切り替わります）。<br>
+さらに、0.1秒（duration）かけてカードが90°回転します。<br>
+このようにして、一方の面に問題が、もう一方の面に答えが表示されているカードの回転を実装しています。<br>
+```swift
+ // カードをめくるメソッド 
+ private func flipCard() async { 
+     // カードがめくられているか、めくられていないかを、切り替え 
+     isCardFlipped.toggle() 
+     // カードを半分めくるアニメーション 
+     withAnimation(.linear(duration: duration)) { 
+         cardDegree = isCardFlipped ? 90 : 270 
+     } // withAnimation ここまで 
+     do { 
+         // カードが半分めくられるまで待つ 
+         try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000)) 
+     } catch { 
+         // デバッグエリアにエラーメッセージを表示 
+         print("Error: \(error)") 
+     } // do-try-catch ここまで 
+     // カードのめくられた角度を一気に180°回して文字の向きを表面に合わせる 
+     cardDegree = isCardFlipped ? 270 : 90 
+     // 表面と裏面を切り替え 
+     isFront.toggle() 
+     // カードを半分めくるアニメーション 
+     withAnimation(.linear(duration: duration)) { 
+         cardDegree = isCardFlipped ? 360 : 0 
+     } // withAnimation ここまで 
+ } // flipCard ここまで 
+```
+<br>
 
 ## 10. その他リンク
 - [アプリ紹介ホームページ](https://tas5521.github.io/MedicineNameQuiz/index.html)<br>
