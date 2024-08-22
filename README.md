@@ -123,6 +123,10 @@
 ## 8. E-R図
 
 ## 9. 工夫したコード
+### Concurrencyを利用して、カードがめくられる動作を実装しました。
+https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/c900f9256685f46a0dbc441c500abddc7078ac06/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L151-L230
+
+
 
 ## 10. その他リンク
 - [アプリ紹介ホームページ](https://tas5521.github.io/MedicineNameQuiz/index.html)<br>
