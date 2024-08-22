@@ -125,7 +125,7 @@
 ## 8. E-R図
 
 ## 9. 工夫したコード
-### Concurrencyを利用して、カードがめくられる動作を実装しました。
+### Concurrencyを利用して、両面に文字が記載されているカードがめくられる動作を実装しました。
 カードがめくられる様子<br>
 <img width="250" src="ScreenShots/Explanation_6.gif"><br>
 
