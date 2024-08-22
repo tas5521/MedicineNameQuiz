@@ -128,6 +128,7 @@
 <img width="250" src="ScreenShots/Explanation_6.gif"><br>
 
 めくられるカードを実装したコード
+https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/ab7f0e6466e8ee29618a42fa0331f17ac3346b8f/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L46-L54
 https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/c900f9256685f46a0dbc441c500abddc7078ac06/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L151-L230
 
 解説
