@@ -198,6 +198,30 @@ sequenceDiagram
 
 
 ## 8. E-R図
+### 問題リストと問題のリレーション
+```mermaid
+erDiagram
+    問題リスト |--|{ 問題: contains
+    問題リスト {
+    	UUID リストID PK
+    	String リスト名
+    	Date 作成日
+    	Int16 問題数
+    }
+    問題 {
+    	UUID 問題ID PK
+    	UUID リストID FK
+    	String 商品名
+    	String 商品名→一般名の学習結果
+    	String 一般名
+    	String 一般名→商品名の学習結果
+    	String カテゴリ
+    }
+```
+<br>
+
+上の図はJavaScriptライブラリ Mermaidを利用して作図しています。<br>
+[Mermaidについて詳細はこちらから確認できます。](https://mermaid-js.github.io/mermaid/#/)<br>
 
 ## 9. 工夫したコード
 ### 両面に文字が記載されているカードがめくられるアニメーションを実装しました。
