@@ -193,8 +193,8 @@ sequenceDiagram
 ```
 <br>
 
-上の図はJavaScriptライブラリ Mermaidを利用して作図しています。
-[Mermaidについて詳細はこちらから確認できます。](https://mermaid-js.github.io/mermaid/#/)
+上の図はJavaScriptライブラリ Mermaidを利用して作図しています。<br>
+[Mermaidについて詳細はこちらから確認できます。](https://mermaid-js.github.io/mermaid/#/)<br>
 
 
 ## 8. E-R図
