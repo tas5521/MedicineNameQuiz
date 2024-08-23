@@ -31,7 +31,7 @@
 最後に、学習結果を確認できます。<br>
 <img width="250" src="ScreenShots/Explanation_3.gif"><br>
 
-正解できていない問題だけを出題できるので、まだ覚えていない薬名だけに絞って効率よく復習できます。<br>
+わからない問題（正解できていない問題）だけを出題できるので、まだ覚えていない薬名だけに絞って効率よく復習できます。<br>
 <img width="250" src="ScreenShots/Explanation_5.gif"><br>
 
 ### ② 問題リスト
