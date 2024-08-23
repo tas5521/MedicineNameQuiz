@@ -11,10 +11,13 @@
 
 ## 3. アプリの機能
 ### ① 学習機能
+<img width="250" src="ScreenShots/Explanation_7.gif"><br>
 
 ### ② 問題リスト作成機能
+<img width="250" src="ScreenShots/Explanation_8.gif"><br>
 
 ### ③ 薬リスト表示機能
+<img width="250" src="ScreenShots/Explanation_9.gif"><br>
 
 ## 4. アプリの動作
 ### ① 学習
