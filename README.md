@@ -201,7 +201,7 @@ sequenceDiagram
 ### 問題リストと問題のリレーション
 ```mermaid
 erDiagram
-    QuestionList ||--|{ Question : contains
+    QuestionList |--|{ Question : contains
     QuestionList {
     	UUID ListID PK
     	String ListName
