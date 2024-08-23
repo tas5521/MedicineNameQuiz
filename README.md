@@ -138,7 +138,7 @@
 
 ## 7. シーケンス図
 <img width="500" src="ScreenShots/Sequence_1.png"><br>
-<img width="500" src="ScreenShots/Sequence_2.png"><br>
+<img width="700" src="ScreenShots/Sequence_2.png"><br>
 
 ## 8. E-R図
 
