@@ -201,21 +201,21 @@ sequenceDiagram
 ### 問題リストと問題のリレーション
 ```mermaid
 erDiagram
-    問題リスト |--|{ 問題: contains
-    問題リスト {
-    	UUID リストID PK
-    	String リスト名
-    	Date 作成日
-    	Int16 問題数
+    QuestionList ||--|{ Question : contains
+    QuestionList {
+    	UUID ListID PK
+    	String ListName
+    	Date CreatedDate
+    	Int16 NumberOfQuestions
     }
-    問題 {
-    	UUID 問題ID PK
-    	UUID リストID FK
-    	String 商品名
-    	String 商品名→一般名の学習結果
-    	String 一般名
-    	String 一般名→商品名の学習結果
-    	String カテゴリ
+    Question {
+    	UUID QuestionID PK
+    	UUID ListID FK
+    	String BrandName
+    	String BrandToGenericResult
+    	String GenericName
+    	String GenericToBrandResult
+    	String Category
     }
 ```
 <br>
