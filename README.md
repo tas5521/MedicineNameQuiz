@@ -24,15 +24,15 @@
 最後に、学習結果を確認できます。<br>
 <img width="250" src="ScreenShots/Explanation_3.gif"><br>
 
-知識の定着具合を後から確認することができるようにするため、学習結果を問題リストに記録するようにしました。<br>
-<img width="250" src="ScreenShots/Explanation_4.gif"><br>
-
 まだ覚えていない薬名だけに絞って効率よく復習できるようにするため、正解できていない問題だけを出題できるようにしました。<br>
 <img width="250" src="ScreenShots/Explanation_5.gif"><br>
 
 ### ② 問題リストの作成
 薬局や病院によって扱っている薬は様々なので、ユーザー個別の問題リストを作成できるようにしました。<br>
 <img width="250" src="ScreenShots/Explanation_2.gif"><br>
+
+知識の定着具合を後から確認することができるようにするため、学習結果を問題リストに記録するようにしました。<br>
+<img width="250" src="ScreenShots/Explanation_4.gif"><br>
 
 ### ③ 薬リストの表示
 本アプリで扱うことのできる薬の商品名と一般名を確認できるようにするため、薬リストを作成しました。<br>
