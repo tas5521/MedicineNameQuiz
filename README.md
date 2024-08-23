@@ -137,7 +137,7 @@
 |Persistence|CoreDataで使用するPersistentControllerの構造体を定義する。|
 
 ## 7. シーケンス図
-<img width="350" src="ScreenShots/Sequence_1.png"><br>
+<img width="500" src="ScreenShots/Sequence_1.png"><br>
 
 ## 8. E-R図
 
