@@ -39,6 +39,7 @@
 <img width="250" src="ScreenShots/Explanation_2.gif"><br>
 
 学習結果は問題リストに記録されるので、知識の定着具合を後から確認することができます。<br>
+学習結果は、商品名から一般名を答える方向（商 → 般）と一般名から商品名を答える方向（般 → 商）の両方が記録されます。<br>
 <img width="250" src="ScreenShots/Explanation_4.gif"><br>
 
 ### ③ 薬リスト
