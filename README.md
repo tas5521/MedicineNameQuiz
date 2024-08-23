@@ -168,7 +168,7 @@ sequenceDiagram
     Model->>ViewModel: 薬名データを取得
     ViewModel->>View: 薬名データを表示
     View->>ViewModel: 問題リストに追加する薬名を選択
-    ViewModel->>CoreData: 薬名データをリクエスト
+    ViewModel->>CoreData: 薬名データを保存
     CoreData->>ViewModel: 薬名データを取得
     ViewModel->>View: 薬名データを表示
 ```
