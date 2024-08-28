@@ -191,9 +191,9 @@ sequenceDiagram
     CoreData->>Model: 薬名データ：カスタムの商品名および一般名
     Model->>Model: 取得した薬名データを統合
     Model->>ViewModel: 統合した薬名データ
-    ViewModel->>CoreData: 問題リストの作成で保存した薬名データをリクエスト
+    ViewModel->>CoreData: 「問題リストの作成」で保存した薬名データをリクエスト
     CoreData->>ViewModel: 薬名データ：分類（内用薬・注射薬・外用薬）、商品名、一般名、商品名→一般名の学習結果、一般名→商品名の学習結果、問題ID
-    ViewModel->>ViewModel: 統合した薬名データのうち、「問題リストの作成」で保存した薬名データと一致するデータ（ユーザーが既に選択していたデータ）はToggleスイッチをオンにする
+    ViewModel->>ViewModel: 統合した薬名データのうち、「問題リストの作成」で保存した薬名データと一致するデータ（ユーザーが既に選択していたデータ）は既に選択された状態にする
     ViewModel->>View: 薬名データを表示
     View->>ViewModel: 問題リスト編集（問題の追加、もしくは、削除）
     ViewModel->>CoreData: 薬名データを保存
