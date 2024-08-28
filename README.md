@@ -145,7 +145,7 @@ sequenceDiagram
     participant CoreData
     View->>ViewModel: 出題設定を指定
     ViewModel->>CoreData: 指定された薬名データをリクエスト
-    CoreData->>ViewModel: 薬名データを取得
+    CoreData->>ViewModel: 薬名データ：分類（内用薬・注射薬・外用薬）、商品名、一般名、商品名→一般名の学習結果、一般名→商品名の学習結果
     ViewModel->>View: 薬名データを表示
     View->>CoreData: 学習結果を保存
 ```
@@ -162,15 +162,15 @@ sequenceDiagram
     View->>ViewModel: 問題リスト作成画面に表示する薬名データをリクエスト
     ViewModel->>Model: 薬名データをリクエスト
     Model->>CSV File: 薬名データをリクエスト
-    CSV File->>Model: 薬名データを取得
+    CSV File->>Model: 薬名データ：内用薬・注射薬・外用薬の商品名および一般名
     Model->>CoreData: 薬名データをリクエスト
-    CoreData->>Model: 薬名データを取得
-    Model->>Model: 取得したデータを統合
-    Model->>ViewModel: 薬名データを取得
+    CoreData->>Model: 薬名データ：カスタムの商品名および一般名
+    Model->>Model: 取得した薬名データを統合
+    Model->>ViewModel: 統合した薬名データ
     ViewModel->>View: 薬名データを表示
     View->>ViewModel: 問題リストに追加する薬名を選択
     ViewModel->>CoreData: 薬名データを保存
-    CoreData->>ViewModel: 薬名データを取得
+    CoreData->>ViewModel: 薬名データ：分類（内用薬・注射薬・外用薬）、商品名、一般名、商品名→一般名の学習結果、一般名→商品名の学習結果
     ViewModel->>View: 薬名データを表示
 ```
 <br>
@@ -186,8 +186,8 @@ sequenceDiagram
     View->>ViewModel: 薬リスト画面に表示する薬名データをリクエスト
     ViewModel->>Model: 薬名データをリクエスト
     Model->>CSV File: 薬名データをリクエスト
-    CSV File->>Model: 薬名データを取得
-    Model->>ViewModel: 薬名データを取得
+    CSV File->>Model: 薬名データ：内用薬・注射薬・外用薬の商品名および一般名
+    Model->>ViewModel: 薬名データ：内用薬・注射薬・外用薬の商品名および一般名
     ViewModel->>View: 薬名データを表示
     View->>CoreData: ユーザー独自の薬名データを追加
     CoreData->>View: 追加された薬名データを薬リストに表示
