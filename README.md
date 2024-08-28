@@ -35,7 +35,7 @@
 <img width="250" src="ScreenShots/Explanation_5.gif"><br>
 
 ### ② 問題リスト
-問題リスト作成画面では、スイッチのONとOFFを切り替えるだけで、追加・削除ができます。<br>
+問題リスト作成画面では、スイッチのONとOFFを切り替える操作で、追加・削除ができます。<br>
 <img width="250" src="ScreenShots/Explanation_2.gif"><br>
 
 学習結果は問題リストに記録されるので、知識の定着具合を後から確認することができます。<br>
