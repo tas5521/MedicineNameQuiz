@@ -165,6 +165,7 @@ sequenceDiagram
     CSV File->>Model: 薬名データを取得
     Model->>CoreData: 薬名データをリクエスト
     CoreData->>Model: 薬名データを取得
+    Model->>Model: 取得したデータを統合
     Model->>ViewModel: 薬名データを取得
     ViewModel->>View: 薬名データを表示
     View->>ViewModel: 問題リストに追加する薬名を選択
