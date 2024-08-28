@@ -221,9 +221,6 @@ erDiagram
 ```
 <br>
 
-上の図はJavaScriptライブラリ Mermaidを利用して作図しています。<br>
-[Mermaidについて詳細はこちらから確認できます。](https://mermaid-js.github.io/mermaid/#/)<br>
-
 ## 9. 工夫したコード
 ### 両面に文字が記載されているカードがめくられるアニメーションを実装しました。
 カードがめくられる様子<br>
