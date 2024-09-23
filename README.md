@@ -254,9 +254,9 @@ erDiagram
 <img width="250" src="ScreenShots/Explanation_6.gif"><br>
 
 めくられるカードを実装したコード
-https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/ab7f0e6466e8ee29618a42fa0331f17ac3346b8f/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L46-L54
-https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/edda771fe3d11a5ab7f84d152883e25e4e2811d6/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L139-L149
-https://github.com/CodeCandySchool/MedicineNameQuiz_Sagae/blob/c900f9256685f46a0dbc441c500abddc7078ac06/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L151-L230
+https://github.com/tas5521/MedicineNameQuiz/blob/a1da25e645e4eeb0f7455e1c69b70c3d0c2890a3/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L46-L54
+https://github.com/tas5521/MedicineNameQuiz/blob/a1da25e645e4eeb0f7455e1c69b70c3d0c2890a3/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L139-L149
+https://github.com/tas5521/MedicineNameQuiz/blob/a1da25e645e4eeb0f7455e1c69b70c3d0c2890a3/MedicineNameQuiz_Sagae/View/Study/StudyView.swift#L151-L230
 
 ### 解説
 カードがタップされると、横方向に回転し、裏面の答えが表示されます。<br>
