@@ -34,7 +34,6 @@
 		4A9671732AC80BDD006F7157 /* TopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671722AC80BDD006F7157 /* TopTabView.swift */; };
 		4A9671752AC825E4006F7157 /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671742AC825E4006F7157 /* StudyView.swift */; };
 		4A9671772AC82CBC006F7157 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671762AC82CBC006F7157 /* ResultView.swift */; };
-		4A96717E2AC87E55006F7157 /* QuestionListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96717D2AC87E55006F7157 /* QuestionListItem.swift */; };
 		4A9671802AC886B9006F7157 /* QuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A96717F2AC886B9006F7157 /* QuestionsView.swift */; };
 		4A9671822AC888B7006F7157 /* MedicineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671812AC888B7006F7157 /* MedicineItem.swift */; };
 		4A9671842AC890B7006F7157 /* CreateQuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9671832AC890B7006F7157 /* CreateQuestionListView.swift */; };
@@ -96,7 +95,6 @@
 		4A9671722AC80BDD006F7157 /* TopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabView.swift; sourceTree = "<group>"; };
 		4A9671742AC825E4006F7157 /* StudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyView.swift; sourceTree = "<group>"; };
 		4A9671762AC82CBC006F7157 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
-		4A96717D2AC87E55006F7157 /* QuestionListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListItem.swift; sourceTree = "<group>"; };
 		4A96717F2AC886B9006F7157 /* QuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsView.swift; sourceTree = "<group>"; };
 		4A9671812AC888B7006F7157 /* MedicineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineItem.swift; sourceTree = "<group>"; };
 		4A9671832AC890B7006F7157 /* CreateQuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionListView.swift; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 		4A9671672AC7B810006F7157 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4A96717D2AC87E55006F7157 /* QuestionListItem.swift */,
 				4A3937862AD53F8D00BA5CE7 /* TabSelection.swift */,
 				4A9671812AC888B7006F7157 /* MedicineItem.swift */,
 				4AA088312AC9409D005BD8C2 /* MedicineCategory.swift */,
@@ -407,7 +404,6 @@
 				4A2C82D22C1DA79000B22CB3 /* PromptToCreateQuestionListView.swift in Sources */,
 				4AA088362AC96FCB005BD8C2 /* SettingsListItem.swift in Sources */,
 				4A3937872AD53F8D00BA5CE7 /* TabSelection.swift in Sources */,
-				4A96717E2AC87E55006F7157 /* QuestionListItem.swift in Sources */,
 				4A9671802AC886B9006F7157 /* QuestionsView.swift in Sources */,
 				4A9671772AC82CBC006F7157 /* ResultView.swift in Sources */,
 				4AA088422AC98796005BD8C2 /* HowToUse.swift in Sources */,
