@@ -148,9 +148,9 @@ struct AddMedicineView: View {
 
 #Preview {
     // カスタムの薬データをフェッチ
-    @FetchRequest(entity: CustomMedicine.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
-                  animation: nil
+    @Previewable @FetchRequest(entity: CustomMedicine.entity(),
+                               sortDescriptors: [NSSortDescriptor(keyPath: \CustomMedicine.brandName, ascending: true)],
+                               animation: nil
     ) var fetchedCustomMedicines: FetchedResults<CustomMedicine>
     return AddMedicineView(fetchedCustomMedicines: fetchedCustomMedicines)
 }
