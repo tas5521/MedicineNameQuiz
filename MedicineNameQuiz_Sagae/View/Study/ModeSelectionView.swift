@@ -150,7 +150,7 @@ struct ModeSelectionView: View {
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("学習", displayMode: .inline)
             // ナビゲーションバーの背景を変更
-            .navigationBarBackground()
+            // .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
 } // ModeSelectionView ここまで

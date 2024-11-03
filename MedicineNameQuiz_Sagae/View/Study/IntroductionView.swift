@@ -77,7 +77,7 @@ struct IntroductionView: View {
             // ナビゲーションバーのタイトルを設定
             .navigationBarTitle("はじめに", displayMode: .inline)
             // ナビゲーションバーの背景を変更
-            .navigationBarBackground()
+            // .navigationBarBackground()
         } // NavigationStack ここまで
     } // body ここまで
 } // IntroductionViewここまで

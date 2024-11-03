@@ -78,7 +78,7 @@ struct ResultView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習結果", displayMode: .inline)
         // ナビゲーションバーの背景を変更
-        .navigationBarBackground()
+        // .navigationBarBackground()
         // ナビゲーションバーの右側に終了ボタンを配置
         .toolbar {
             // ボタンの位置を指定

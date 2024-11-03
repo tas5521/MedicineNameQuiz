@@ -133,7 +133,8 @@ struct StudyView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle("学習中", displayMode: .inline)
         // ナビゲーションバーの背景を変更
-        .navigationBarBackground()
+        // .navigationBarBackground()
+        .tint(.white)
     } // body ここまで
 
     // 薬の名前の変数

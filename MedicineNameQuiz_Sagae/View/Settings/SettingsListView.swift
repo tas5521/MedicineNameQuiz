@@ -44,7 +44,7 @@ struct SettingsListView: View {
                 // ナビゲーションバーのタイトルを設定
                 .navigationBarTitle("設定", displayMode: .inline)
                 // ナビゲーションバーの背景を変更
-                .navigationBarBackground()
+                // .navigationBarBackground()
             } // ZStack ここまで
         } // NavigationStack ここまで
     } // body ここまで

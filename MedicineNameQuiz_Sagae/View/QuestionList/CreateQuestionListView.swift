@@ -120,7 +120,7 @@ struct CreateQuestionListView: View {
         // デフォルトのバックボタンを隠す
         .navigationBarBackButtonHidden(true)
         // ナビゲーションバーの背景を変更
-        .navigationBarBackground()
+        // .navigationBarBackground()
         .toolbar {
             // ボタンの位置を左に指定
             ToolbarItem(placement: .topBarLeading) {

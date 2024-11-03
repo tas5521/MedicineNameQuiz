@@ -49,7 +49,7 @@ struct HowToUseView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
         // ナビゲーションバーの背景を変更
-        .navigationBarBackground()
+        // .navigationBarBackground()
     } // body ここまで
 } // HowToUseView ここまで
 

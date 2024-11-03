@@ -18,6 +18,20 @@ struct MainTabView: View {
                   animation: nil
     ) private var fetchedLists: FetchedResults<QuestionList>
 
+    init() {
+        // ナビゲーションバーの外観を指定するためのインスタンスを生成
+        let navigationBarAppearance = UINavigationBarAppearance()
+        // navigationBarAppearance.configureWithOpaqueBackground()
+        // 背景を青色に指定
+        navigationBarAppearance.backgroundColor = UIColor.navigationBarBlue
+        // タイトルの文字の色を白に指定
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        // 各外観に適用
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+    } // init ここまで
+
     var body: some View {
         // タブを配置
         TabView(selection: $tabSelection) {

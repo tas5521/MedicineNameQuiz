@@ -42,7 +42,7 @@ struct HowToUseQuestionListView: View {
         // ナビゲーションバータイトルを指定
         .navigationBarTitle(title, displayMode: .inline)
         // ナビゲーションバーの背景を変更
-        .navigationBarBackground()
+        // .navigationBarBackground()
     } // bodyここまで
 } // HowToUseQuestionListView ここまで
 
