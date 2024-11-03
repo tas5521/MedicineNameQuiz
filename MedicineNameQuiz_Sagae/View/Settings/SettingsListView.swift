@@ -47,6 +47,8 @@ struct SettingsListView: View {
                 // .navigationBarBackground()
             } // ZStack ここまで
         } // NavigationStack ここまで
+        // NavigationBarのボタンの色を白にする
+        .tint(.white)
     } // body ここまで
 } // SettingsListView ここまで
 

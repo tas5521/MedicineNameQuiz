@@ -59,6 +59,8 @@ struct QuestionListView: View {
             // ナビゲーションバーの背景を変更
             // .navigationBarBackground()
         } // NavigationStack ここまで
+        // NavigationBarのボタンの色を白にする
+        .tint(.white)
     } // body ここまで
 
     // 問題リスト
