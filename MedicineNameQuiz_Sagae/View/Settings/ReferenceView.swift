@@ -29,7 +29,9 @@ struct ReferenceView: View {
                 // 出典元を記載
                 Text("出典：「薬価基準収載品目リスト及び後発医薬品に関する情報について」（厚生労働省）")
                 // リンクを追加
-                Text(.init("\(url)"))
+                Link("\(url)", destination: URL(string: url) ?? URL(fileURLWithPath: ""))
+                    // リンクの色を青に指定
+                    .foregroundColor(.blue)
                 // 説明文
                 Text("本アプリでは、薬価基準収載品目リストから、\n先発品の一部を抜粋して出題しています。")
                     .padding(.top)
