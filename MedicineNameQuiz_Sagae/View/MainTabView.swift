@@ -21,7 +21,6 @@ struct MainTabView: View {
     init() {
         // ナビゲーションバーの外観を指定するためのインスタンスを生成
         let navigationBarAppearance = UINavigationBarAppearance()
-        // navigationBarAppearance.configureWithOpaqueBackground()
         // 背景を青色に指定
         navigationBarAppearance.backgroundColor = UIColor.navigationBarBlue
         // タイトルの文字の色を白に指定
